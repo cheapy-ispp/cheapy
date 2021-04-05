@@ -4,7 +4,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.springframework.samples</groupId>
-  <artifactId>spring-petclinic</artifactId>
+  <artifactId>spring-cheapy</artifactId>
   <version>2.4.2</version>
 
   <parent>
@@ -12,7 +12,7 @@
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>2.4.2</version>
   </parent>
-  <name>petclinic</name>
+  <name>cheapy</name>
 
   <properties>
 
@@ -28,6 +28,11 @@
     <wro4j.version>1.8.0</wro4j.version>
 
     <jacoco.version>0.8.5</jacoco.version>
+    <jacoco.utreportpath>${project.build.directory}/jacoco</jacoco.utreportpath>
+	<jacoco.utreportfile>${project.build.directory}/jacoco.exec</jacoco.utreportfile>
+
+	<jacoco.itreportpath>${project.build.directory}/jacoco</jacoco.itreportpath>
+	<jacoco.itreportfile>${jacoco.itreportpath}/jacoco-it.exec</jacoco.itreportfile>
     <nohttp-checkstyle.version>0.0.4.RELEASE</nohttp-checkstyle.version>
     <spring-format.version>0.0.25</spring-format.version>
   </properties>
@@ -56,10 +61,6 @@
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-thymeleaf</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
         <exclusions>
@@ -69,6 +70,31 @@
             </exclusion>
         </exclusions>
     </dependency>
+    <dependency>  
+        <groupId>org.springframework.security</groupId>  
+    	<artifactId>spring-security-taglibs</artifactId>  
+    </dependency>
+    <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-test</artifactId>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+    	<groupId>org.springframework.boot</groupId>
+    	<artifactId>spring-boot-starter-security</artifactId>
+    	<version>2.4.4</version>
+	</dependency>
+    
+    <!-- Jsp -->
+    <dependency>
+        <groupId>javax.servlet</groupId>
+    	<artifactId>jstl</artifactId>
+    </dependency>
+    <dependency>
+    	<groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-jasper</artifactId>
+     	<scope>provided</scope>
+     </dependency>
 
     <!-- Databases - Uses H2 by default -->
     <dependency>
@@ -119,57 +145,18 @@
       <artifactId>spring-boot-devtools</artifactId>
       <optional>true</optional>
     </dependency>
+    <dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <scope>runtime</scope>
+</dependency>
   </dependencies>
+  
+  
 
   <build>
     <plugins>
-      <plugin>
-        <groupId>io.spring.javaformat</groupId>
-        <artifactId>spring-javaformat-maven-plugin</artifactId>
-        <version>${spring-format.version}</version>
-        <executions>
-          <execution>
-            <phase>validate</phase>
-            <goals>
-              <goal>validate</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>3.1.1</version>
-        <dependencies>
-          <dependency>
-            <groupId>com.puppycrawl.tools</groupId>
-            <artifactId>checkstyle</artifactId>
-            <version>8.32</version>
-          </dependency>
-          <dependency>
-            <groupId>io.spring.nohttp</groupId>
-            <artifactId>nohttp-checkstyle</artifactId>
-            <version>${nohttp-checkstyle.version}</version>
-          </dependency>
-        </dependencies>
-        <executions>
-          <execution>
-            <id>nohttp-checkstyle-validation</id>
-            <phase>validate</phase>
-            <configuration>
-              <configLocation>src/checkstyle/nohttp-checkstyle.xml</configLocation>
-              <suppressionsLocation>src/checkstyle/nohttp-checkstyle-suppressions.xml</suppressionsLocation>
-              <encoding>UTF-8</encoding>
-              <sourceDirectories>${basedir}</sourceDirectories>
-              <includes>**/*</includes>
-              <excludes>**/.git/**/*,**/.idea/**/*,**/target/**/,**/.flattened-pom.xml,**/*.class</excludes>
-            </configuration>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
+      
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
@@ -200,6 +187,7 @@
             <goals>
               <goal>prepare-agent</goal>
             </goals>
+
           </execution>
           <execution>
             <id>report</id>
@@ -207,6 +195,21 @@
             <goals>
               <goal>report</goal>
             </goals>
+            <configuration>
+				<outputDirectory>${jacoco.utreportpath}</outputDirectory>
+				<dataFile>${jacoco.utreportfile}</dataFile>
+			</configuration>
+          </execution>
+          <execution>
+            <id>test</id>
+            <phase>test</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+            <configuration>
+				<outputDirectory>${jacoco.utreportpath}</outputDirectory>
+				<dataFile>${jacoco.utreportfile}</dataFile>
+			</configuration>
           </execution>
         </executions>
       </plugin>
