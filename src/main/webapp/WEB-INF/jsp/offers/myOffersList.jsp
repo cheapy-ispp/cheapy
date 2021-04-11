@@ -12,6 +12,16 @@
 		<p id="vacio" >No hay ninguna oferta por plato específico creada.</p>
 	</c:if>
 	<c:if test="${not empty foodOfferLs }">
+	<script type="text/javascript">
+		function estadoOferta(estado) {
+			if(estado=="hidden")
+				document.write("Oculto <br />");
+			if(estado=="active")
+				document.write("Activo <br />");
+			if(estado=="inactive")
+				document.write("Inactivo <br />");
+			}
+	</script>
 		<div class="table-responsive">
 		    <table id="foodOfferTable" class="table table-striped">
 		        <thead>
@@ -39,7 +49,11 @@
 		                    <c:out value="${localDateTimeFormat.format(foodOffer.end)}"/>
 		                </td>
 		                <td>
-		                    <c:out value="${foodOffer.status}"/>
+		                	<script type="text/javascript">
+			          
+			                	estadoOferta("${foodOffer.status}");
+								
+							</script>
 		                </td>
 		                <td>
 			                <spring:url value="/offers/food/{foodOfferId}" var="foodOfferUrl">
@@ -88,7 +102,11 @@
 		                    <c:out value="${localDateTimeFormat.format(nuOffer.end)}"/>
 		                </td>
 		                <td>
-		                    <c:out value="${nuOffer.status}"/>
+		                	<script type="text/javascript">
+			          
+			                	estadoOferta("${nuOffer.status}");
+								
+							</script>
 		                </td>
 		                <td>
 			                <spring:url value="/offers/nu/{nuOfferId}" var="nuOfferUrl">
@@ -137,7 +155,11 @@
 		                    <c:out value="${localDateTimeFormat.format(speedOffer.end)}"/>
 		                </td>
 		                <td>
-		                    <c:out value="${speedOffer.status}"/>
+		                	<script type="text/javascript">
+			          
+			                	estadoOferta("${speedOffer.status}");
+								
+							</script>
 		                </td>
 		                <td>
 		                    <spring:url value="/offers/speed/{speedOfferId}" var="speedOfferUrl">
@@ -186,7 +208,11 @@
 		                    <c:out value="${localDateTimeFormat.format(timeOffer.end)}"/>
 		                </td>
 		                <td>
-		                    <c:out value="${timeOffer.status}"/>
+		                	<script type="text/javascript">
+			          
+			                	estadoOferta("${timeOffer.status}");
+								
+							</script>
 		                </td>
 		                <td>
 		                	<spring:url value="/offers/time/{timeOfferId}" var="timeOfferUrl">
