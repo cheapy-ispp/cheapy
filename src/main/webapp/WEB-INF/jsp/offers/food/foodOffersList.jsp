@@ -6,9 +6,16 @@
 <%@ taglib prefix="cheapy" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <cheapy:layout pageName="ofertas de plato especifico">
-	
+	<script>
+		$(document).ready(function(){
+		  $('[data-toggle="desplegable"]').popover();   
+		});
+	</script>
 	<div class="text-center">
 		<div class="btn-filter-max">
 			<spring:url value="/offers/foodOfferList/{page}" var="foodOfferListUrl">
@@ -17,7 +24,7 @@
 		    
 			    <button type="button" role="link" class="btn-filter-active" onclick="window.location='${fn:escapeXml(foodOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 				<span class="glyphicon 	glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
-				Ofertas de plato específico</button>
+				Ofertas de plato específico </button>
 			
 			<spring:url value="/offers/nuOfferList/{page}" var="nuOfferListUrl">
 				<spring:param name="page" value="0"/>
@@ -42,7 +49,10 @@
 		</div>
 	</div>
 	
-    <h2 style="text-align:center;padding:5px"><fmt:message key="foodOffers"/></h2>
+    <h2 style="text-align:center;padding:5px"><fmt:message key="foodOffers"/>
+    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir el plato indicado en la oferta">
+    	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
+    </h2>
     
 	<c:if test="${empty foodOfferLs }">
 		<p id="vacio" >No hay ninguna oferta por plato espec�fico activa.</p>

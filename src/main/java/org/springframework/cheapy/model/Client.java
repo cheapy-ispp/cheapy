@@ -105,14 +105,6 @@ public class Client extends BaseEntity {
 		this.address = address;
 	}
 
-	public Municipio getMunicipio() {
-		return this.municipio;
-	}
-
-	public void setMunicipio(final Municipio municipio) {
-		this.municipio = municipio;
-	}
-
 	public LocalTime getInit() {
 		return this.init;
 	}

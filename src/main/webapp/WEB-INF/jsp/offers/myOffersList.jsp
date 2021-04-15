@@ -5,9 +5,20 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="cheapy" tagdir="/WEB-INF/tags" %>
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <cheapy:layout pageName="ofertasM">
-    <h2 style="text-align:center;padding:5px"><fmt:message key="foodOffers"/></h2>
+	<script>
+		$(document).ready(function(){
+		  $('[data-toggle="desplegable"]').popover();   
+		});
+	</script>
+    <h2 style="text-align:center;padding:5px"><fmt:message key="foodOffers"/>
+    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir el plato indicado en la oferta">
+    	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
+    </h2>
 	<c:if test="${empty foodOfferLs }">
 		<p id="vacio" >No hay ninguna oferta por plato específico creada.</p>
 	</c:if>
@@ -72,7 +83,10 @@
 		    </table>
 		</div>
     </c:if>
-    <h2 style="text-align:center;padding:5px"><fmt:message key="nuOffers"/></h2>
+    <h2 style="text-align:center;padding:5px"><fmt:message key="nuOffers"/>
+    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir con más comensales que alguno de los tres posibles objetivos">
+    	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
+    </h2>
 	<c:if test="${empty nuOfferLs }">
 		<p id="vacio" >No hay ninguna oferta por número de comensales creada.</p>
 	</c:if>
@@ -125,7 +139,10 @@
     	</div>
     </c:if>
     
-    <h2 style="text-align:center;padding:5px"><fmt:message key="speedOffers"/></h2>
+    <h2 style="text-align:center;padding:5px"><fmt:message key="speedOffers"/>
+    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir en menos de alguno de los tres posibles tiempos">
+    	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
+    </h2>
 	<c:if test="${empty speedOfferLs }">
 		<p id="vacio" >No hay ninguna oferta por tiempo empleado en comer creada.</p>
 	</c:if>
@@ -179,7 +196,10 @@
     	</div>
     </c:if>
     
-    <h2 style="text-align:center;padding:5px"><fmt:message key="timeOffers"/></h2>
+    <h2 style="text-align:center;padding:5px"><fmt:message key="timeOffers"/>
+    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir en el local durante el intervalo indicado">
+    	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
+    </h2>
 	<c:if test="${empty timeOfferLs }">
 		<p id="vacio" >No hay ninguna oferta por franja horaria creada.</p>
 	</c:if>
