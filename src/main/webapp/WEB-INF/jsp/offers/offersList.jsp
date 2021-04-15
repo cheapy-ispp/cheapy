@@ -13,9 +13,18 @@
 
 <cheapy:layout pageName="ofertas">
 	<script>
-	$(document).ready(function(){
-	  $('[data-toggle="desplegable"]').popover();   
-	});
+		function selectMunicipio(municipio) {
+
+		  if (municipio == 'Dos_Hermanas') {
+			  $('#municipio').append("<option value='" + municipio + "'>" + "Dos Hermanas" + "</option>");
+		  
+		  } else {
+			  $('#municipio').append("<option value='" + municipio + "'>" + municipio + "</option>");
+		  }
+		}
+		$(document).ready(function(){
+		  $('[data-toggle="desplegable"]').popover();   
+		});
 	</script>
 	
 	<div class="text-center">
@@ -75,10 +84,12 @@
 	</form>
 	
 	<form class="example" action="/offersByPlace">
-		<select name="municipio">
+		<select name="municipio" id="municipio">
 		<option value="">Escoge municipio</option>
 		<c:forEach items="${municipios}" var="entry">
-			<option value="${entry}">${entry}</option>
+			<script>
+				municipio("${entry}");
+			</script>
 		</c:forEach>
 		</select>
 		<button type="submit">Buscar por municipio</button>

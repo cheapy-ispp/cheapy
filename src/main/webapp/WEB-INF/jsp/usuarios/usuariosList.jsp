@@ -37,7 +37,12 @@
                     <c:out value="${usuario.usuar.username}"/>
                 </td>
                 <td>
-                    <c:out value="${usuario.usuar.enabled}"/>
+                	<c:if test="${usuario.usuar.enabled == 'true'}">
+		            	<c:out value="Si"/>
+		            </c:if>	
+		            <c:if test="${usuario.usuar.enabled == 'false'}">
+		                 <c:out value="No"/>
+		             </c:if>
                 </td>
                 <td>
 	                <spring:url value="/administrators/usuarios/{username}" var="usuarioUrl">

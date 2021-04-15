@@ -272,7 +272,7 @@
 	}
 
 </style>
-<cheapy:layout pageName="singUp">
+<cheapy:layout pageName="singUpClient">
     <h2 style="text-align:center;padding:5px">
         <fmt:message key="new"/><fmt:message key="client"/>
     </h2>

@@ -6,7 +6,7 @@
 <%@ taglib prefix="cheapy" tagdir="/WEB-INF/tags" %>
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
-<cheapy:layout pageName="ofertasM">
+<cheapy:layout pageName="registroOfertas">
     <h2 style="text-align:center;padding:5px">Registro de Ofertas</h2>
 	<c:if test="${empty datos }">
 		<p id="vacio" >No hay ninguna oferta creada.</p>

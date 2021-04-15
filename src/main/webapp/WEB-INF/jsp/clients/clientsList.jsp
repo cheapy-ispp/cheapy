@@ -35,7 +35,12 @@
                     <c:out value="${client.usuar.username}"/>
                 </td>
                 <td>
-                    <c:out value="${client.usuar.enabled}"/>
+                	<c:if test="${client.usuar.enabled == 'true'}">
+		            	<c:out value="Si"/>
+		            </c:if>	
+		            <c:if test="${client.usuar.enabled == 'false'}">
+		                 <c:out value="No"/>
+		             </c:if>
                 </td>
                 <td>
 	                <spring:url value="/administrators/clients/{username}" var="clientUrl">

@@ -15,6 +15,9 @@
 		  $('[data-toggle="desplegable"]').popover();   
 		});
 	</script>
+	<script type="text/javascript">
+		
+	</script>
     <h2 style="text-align:center;padding:5px"><fmt:message key="foodOffers"/>
     	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir el plato indicado en la oferta">
     	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
@@ -23,16 +26,6 @@
 		<p id="vacio" >No hay ninguna oferta por plato específico creada.</p>
 	</c:if>
 	<c:if test="${not empty foodOfferLs }">
-	<script type="text/javascript">
-		function estadoOferta(estado) {
-			if(estado=="hidden")
-				document.write("Oculto <br />");
-			if(estado=="active")
-				document.write("Activo <br />");
-			if(estado=="inactive")
-				document.write("Inactivo <br />");
-			}
-	</script>
 		<div class="table-responsive">
 		    <table id="foodOfferTable" class="table table-striped">
 		        <thead>
@@ -60,11 +53,15 @@
 		                    <c:out value="${localDateTimeFormat.format(foodOffer.end)}"/>
 		                </td>
 		                <td>
-		                	<script type="text/javascript">
-			          
-			                	estadoOferta("${foodOffer.status}");
-								
-							</script>
+		                	<c:if test="${foodOffer.status == 'active'}">
+		                    	<c:out value="Activa"/>
+		                    </c:if>	
+		                    <c:if test="${foodOffer.status == 'hidden'}">
+		                    	<c:out value="Oculta"/>
+		                    </c:if>	
+		                    <c:if test="${foodOffer.status == 'inactive'}">
+		                    	<c:out value="Inactiva"/>
+		                    </c:if>	
 		                </td>
 		                <td>
 			                <spring:url value="/offers/food/{foodOfferId}" var="foodOfferUrl">
@@ -116,11 +113,15 @@
 		                    <c:out value="${localDateTimeFormat.format(nuOffer.end)}"/>
 		                </td>
 		                <td>
-		                	<script type="text/javascript">
-			          
-			                	estadoOferta("${nuOffer.status}");
-								
-							</script>
+		                	<c:if test="${nuOffer.status == 'active'}">
+		                    	<c:out value="Activa"/>
+		                    </c:if>	
+		                    <c:if test="${nuOffer.status == 'hidden'}">
+		                    	<c:out value="Oculta"/>
+		                    </c:if>	
+		                    <c:if test="${nuOffer.status == 'inactive'}">
+		                    	<c:out value="Inactiva"/>
+		                    </c:if>	
 		                </td>
 		                <td>
 			                <spring:url value="/offers/nu/{nuOfferId}" var="nuOfferUrl">
@@ -172,11 +173,15 @@
 		                    <c:out value="${localDateTimeFormat.format(speedOffer.end)}"/>
 		                </td>
 		                <td>
-		                	<script type="text/javascript">
-			          
-			                	estadoOferta("${speedOffer.status}");
-								
-							</script>
+		                	<c:if test="${speedOffer.status == 'active'}">
+		                    	<c:out value="Activa"/>
+		                    </c:if>	
+		                    <c:if test="${speedOffer.status == 'hidden'}">
+		                    	<c:out value="Oculta"/>
+		                    </c:if>	
+		                    <c:if test="${speedOffer.status == 'inactive'}">
+		                    	<c:out value="Inactiva"/>
+		                    </c:if>	
 		                </td>
 		                <td>
 		                    <spring:url value="/offers/speed/{speedOfferId}" var="speedOfferUrl">
@@ -228,11 +233,15 @@
 		                    <c:out value="${localDateTimeFormat.format(timeOffer.end)}"/>
 		                </td>
 		                <td>
-		                	<script type="text/javascript">
-			          
-			                	estadoOferta("${timeOffer.status}");
-								
-							</script>
+		                	<c:if test="${timeOffer.status == 'active'}">
+		                    	<c:out value="Activa"/>
+		                    </c:if>	
+		                    <c:if test="${timeOffer.status == 'hidden'}">
+		                    	<c:out value="Oculta"/>
+		                    </c:if>	
+		                    <c:if test="${timeOffer.status == 'inactive'}">
+		                    	<c:out value="Inactiva"/>
+		                    </c:if>	
 		                </td>
 		                <td>
 		                	<spring:url value="/offers/time/{timeOfferId}" var="timeOfferUrl">

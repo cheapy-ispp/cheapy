@@ -7,7 +7,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
-<cheapy:layout pageName="client">
+<cheapy:layout pageName="miPerfil">
 
     <h2 style="text-align:center;padding:5px"><fmt:message key="client"/></h2>
 
