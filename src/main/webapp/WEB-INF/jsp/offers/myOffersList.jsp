@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="cheapy" tagdir="/WEB-INF/tags" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -18,12 +19,12 @@
 	<script type="text/javascript">
 		
 	</script>
-    <h2 style="text-align:center;padding:5px"><fmt:message key="foodOffers"/>
+    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="foodOffers"/>
     	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir el plato indicado en la oferta">
     	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
     </h2>
 	<c:if test="${empty foodOfferLs }">
-		<p id="vacio" >No hay ninguna oferta por plato específico creada.</p>
+		<p id="vacio" >No hay ninguna oferta por plato especÃ­fico creada.</p>
 	</c:if>
 	<c:if test="${not empty foodOfferLs }">
 		<div class="table-responsive">
@@ -35,6 +36,7 @@
 		            <th><fmt:message key="startDate"/></th>
 		            <th><fmt:message key="endDate"/></th>
 		            <th><fmt:message key="status"/></th>
+		            <th><fmt:message key="municipio"/></th>
 		            <th> <spring:url value="/offers/food/new" var="newFoodUrl">
 		    </spring:url>
 		    <!--  <a href="${fn:escapeXml(newFoodUrl)}" class="btn btn-default">Nueva oferta</a></th>-->
@@ -64,6 +66,9 @@
 		                    </c:if>	
 		                </td>
 		                <td>
+		                    <c:out value="${foodOffer.client.municipio}"/>
+		                </td>
+		                <td>
 			                <spring:url value="/offers/food/{foodOfferId}" var="foodOfferUrl">
 			                        <spring:param name="foodOfferId" value="${foodOffer.id}"/>
 			                </spring:url>
@@ -80,12 +85,12 @@
 		    </table>
 		</div>
     </c:if>
-    <h2 style="text-align:center;padding:5px"><fmt:message key="nuOffers"/>
-    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir con más comensales que alguno de los tres posibles objetivos">
+    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="nuOffers"/>
+    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir con mï¿½s comensales que alguno de los tres posibles objetivos">
     	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
     </h2>
 	<c:if test="${empty nuOfferLs }">
-		<p id="vacio" >No hay ninguna oferta por número de comensales creada.</p>
+		<p id="vacio" >No hay ninguna oferta por nÃºmero de comensales creada.</p>
 	</c:if>
 	<c:if test="${not empty nuOfferLs }">
 		<div class="table-responsive">
@@ -96,6 +101,7 @@
 		            <th><fmt:message key="startDate"/></th>
 		            <th><fmt:message key="endDate"/></th>
 		            <th><fmt:message key="status"/></th>
+		            <th><fmt:message key="municipio"/></th>
 		            <th> <spring:url value="/offers/nu/new" var="newNuUrl">
 		    </spring:url>
 		    <!--  <a href="${fn:escapeXml(newNuUrl)}" class="btn btn-default">Nueva oferta</a></th>-->
@@ -124,6 +130,9 @@
 		                    </c:if>	
 		                </td>
 		                <td>
+		                    <c:out value="${nuOffer.client.municipio}"/>
+		                </td>
+		                <td>
 			                <spring:url value="/offers/nu/{nuOfferId}" var="nuOfferUrl">
 			                        <spring:param name="nuOfferId" value="${nuOffer.id}"/>
 			                </spring:url>
@@ -140,7 +149,7 @@
     	</div>
     </c:if>
     
-    <h2 style="text-align:center;padding:5px"><fmt:message key="speedOffers"/>
+    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="speedOffers"/>
     	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir en menos de alguno de los tres posibles tiempos">
     	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
     </h2>
@@ -156,6 +165,7 @@
 		            <th><fmt:message key="startDate"/></th>
 		            <th><fmt:message key="endDate"/></th>
 		            <th><fmt:message key="status"/></th>
+		            <th><fmt:message key="municipio"/></th>
 		            <th> <spring:url value="/offers/speed/new" var="newSpeedUrl">
 		    </spring:url>
 		   <!-- <a href="${fn:escapeXml(newSpeedUrl)}" class="btn btn-default">Nueva oferta</a></th>-->
@@ -184,6 +194,9 @@
 		                    </c:if>	
 		                </td>
 		                <td>
+		                    <c:out value="${speedOffer.client.municipio}"/>
+		                </td>
+		                <td>
 		                    <spring:url value="/offers/speed/{speedOfferId}" var="speedOfferUrl">
 		                        <spring:param name="speedOfferId" value="${speedOffer.id}"/>
 		                    </spring:url>
@@ -201,7 +214,7 @@
     	</div>
     </c:if>
     
-    <h2 style="text-align:center;padding:5px"><fmt:message key="timeOffers"/>
+    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="timeOffers"/>
     	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir en el local durante el intervalo indicado">
     	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
     </h2>
@@ -217,6 +230,7 @@
 		            <th><fmt:message key="startDate"/></th>
 		            <th><fmt:message key="endDate"/></th>
 		            <th><fmt:message key="status"/></th>
+		            <th><fmt:message key="municipio"/></th>
 		            <th><spring:url value="/offers/time/new" var="newTimeUrl">
 		    </spring:url>
 		    <!--<a href="${fn:escapeXml(newTimeUrl)}" class="btn btn-default">Nueva oferta</a> </th>-->
@@ -242,6 +256,9 @@
 		                    <c:if test="${timeOffer.status == 'inactive'}">
 		                    	<c:out value="Inactiva"/>
 		                    </c:if>	
+		                </td>
+		                <td>
+		                    <c:out value="${timeOffer.client.municipio}"/>
 		                </td>
 		                <td>
 		                	<spring:url value="/offers/time/{timeOfferId}" var="timeOfferUrl">

@@ -6,6 +6,7 @@
 <%@ taglib prefix="cheapy" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -24,7 +25,7 @@
     </h2>
     
 	<c:if test="${empty foodOfferLs }">
-		<p id="vacio" >No hay ninguna oferta por plato específico activa.</p>
+		<p id="vacio" >No hay ninguna oferta por plato especÃ­fico activa.</p>
 	</c:if>
 	<c:if test="${not empty foodOfferLs }">
 
