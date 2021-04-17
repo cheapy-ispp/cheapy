@@ -102,8 +102,8 @@ class SpeedOfferControllerTest {
 	void testProcessCreationFormSuccess() throws Exception {
 		mockMvc.perform(post("/offers/speed/new")
 					.with(csrf())
-					.param("start", "23/12/2021 12:30")
-					.param("end", "23/12/2022 12:30")
+					.param("start", "2021-12-23T12:30")
+					.param("end", "2022-12-23T12:30")
 					.param("gold", "5")
 					.param("discountGold", "15")
 					.param("silver", "10")

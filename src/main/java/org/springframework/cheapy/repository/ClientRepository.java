@@ -2,7 +2,6 @@
 package org.springframework.cheapy.repository;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.cheapy.model.Client;
 import org.springframework.data.domain.Pageable;
@@ -17,7 +16,7 @@ public interface ClientRepository extends PagingAndSortingRepository<Client, Int
 	Client findByUsername(String username);
 
 	@Override
-	Optional<Client> findById(Integer id);
+	Client findById(Integer id);
 
 	//	void save(Client client);
 
