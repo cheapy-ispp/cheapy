@@ -86,16 +86,7 @@ class ClientControllerTest {
 		client1.setUsuar(user1);
 		BDDMockito.given(this.clientService.getCurrentClient()).willReturn(client1);
 		
-		List<FoodOffer> foodOffer = new ArrayList<FoodOffer>();
-		List<SpeedOffer> speedOffer = new ArrayList<SpeedOffer>();
-		List<NuOffer> nuOffer = new ArrayList<NuOffer>();
-		List<TimeOffer> timeOffer = new ArrayList<TimeOffer>();
-		
-		
-		BDDMockito.given(this.foodOfferService.findFoodOfferByUserId(client1.getId())).willReturn(foodOffer);
-		BDDMockito.given(this.speedOfferService.findSpeedOfferByUserId(client1.getId())).willReturn(speedOffer);
-		BDDMockito.given(this.nuOfferService.findNuOfferByUserId(client1.getId())).willReturn(nuOffer);
-		BDDMockito.given(this.timeOfferService.findTimeOfferByUserId(client1.getId())).willReturn(timeOffer);
+
 		
 		
 		
