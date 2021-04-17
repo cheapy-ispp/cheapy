@@ -2,10 +2,8 @@ package org.springframework.cheapy.web;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -34,7 +32,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class AdministratorController {
 
-	private static final String VIEWS_USUARIO_CREATE_OR_UPDATE_FORM = "usuarios/createOrUpdateUsuarioForm";
 
 	private final UsuarioService usuarioService;
 	private final ClientService clientService;
