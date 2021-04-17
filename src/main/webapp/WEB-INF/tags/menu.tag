@@ -41,21 +41,21 @@
 				</sec:authorize>
 				
 				<sec:authorize access="hasAnyAuthority('admin')">
-				<cheapy:menuItem active="${name eq 'clients'}" url="/administrators/clients" title="clients">
+				<cheapy:menuItem active="${name eq 'clientes'}" url="/administrators/clients0" title="clients">
 					<span class="glyphicon " aria-hidden="true"></span>
 					<span>Clientes</span>
 				</cheapy:menuItem>
 				</sec:authorize>
 				
 				<sec:authorize access="hasAnyAuthority('admin')">
-				<cheapy:menuItem active="${name eq 'usuarios'}" url="/administrators/usuarios" title="usuarios">
+				<cheapy:menuItem active="${name eq 'usuarios'}" url="/administrators/usuarios0" title="usuarios">
 					<span class="glyphicon " aria-hidden="true"></span>
 					<span>Usuarios</span>
 				</cheapy:menuItem>
 				</sec:authorize>
 				
 				<sec:authorize access="hasAnyAuthority('admin')">
-				<cheapy:menuItem active="${name eq 'registroOfertas'}" url="/offersRecord" title="offersRecord">
+				<cheapy:menuItem active="${name eq 'registro'}" url="/administrators/offersRecord" title="offersRecord">
 					<span class="glyphicon " aria-hidden="true"></span>
 					<span>Historial de ofertas</span>
 				</cheapy:menuItem>
@@ -70,11 +70,11 @@
 				<sec:authorize access="isAuthenticated()">
 					<cheapy:menuItem active="${name eq 'reviews'}" url="/reviewsList/0" title="opiniones">
 						<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-						<span>Reseñas</span>
+						<span>Reseï¿½as</span>
 					</cheapy:menuItem>
-					<cheapy:menuItem active="${name eq 'reviewsN'}" url="/reviews/new" title="valóranos">
+					<cheapy:menuItem active="${name eq 'reviewsN'}" url="/reviews/new" title="valï¿½ranos">
 						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-						<span>Valóranos</span>
+						<span>Valï¿½ranos</span>
 					</cheapy:menuItem>
 				</sec:authorize>
 			</ul>
@@ -95,9 +95,9 @@
 		        </sec:authorize>
 				<sec:authorize access="!isAuthenticated()">
 					<cheapy:menuItem active="${name eq 'login'}" url="/login" title="login">
-						<span>Iniciar sesión</span>
+						<span>Iniciar sesiï¿½n</span>
 					</cheapy:menuItem> 	
-					<!--<li><a href="<c:url value="/login" />">Iniciar sesión</a></li>-->
+					<!--<li><a href="<c:url value="/login" />">Iniciar sesiï¿½n</a></li>-->
 				</sec:authorize>
 				<sec:authorize access="!isAuthenticated()">
 					<cheapy:menuItem active="${name eq 'singUpUser'}" url="/users/new" title="singUpUser">

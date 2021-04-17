@@ -57,5 +57,32 @@
         </c:forEach>
         </tbody>
     </table>
+    <div class="text-center">
+    	<c:out value='Página ${page}'></c:out>
+    </div>
+    <div>
+    <c:if test='${page!=0}'>
+   	<div class="text-left">
+    	<spring:url value="/administrators/clients{page}" var="clientListUrl">
+    		<spring:param name="page" value="${page-1}"/>
+    	</spring:url>
+    	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(clientListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+		<span class="glyphicon 	glyphicon glyphicon-arrow-left" aria-hidden="true" style="padding: 5px"> </span>
+		Pág. anterior</button>
+	</div>	
+    </c:if>
+    
+    <c:if test="${fn:length(clientoLs) == 10 && nextPage > 0}">
+    <div class="text-right">
+    	
+    	<spring:url value="/administrators/clients{page}" var="clientListUrl">
+    		<spring:param name="page" value="${page+1}"/>
+    	</spring:url>
+    	<button type="button" class="btn-pag"  role="link" onclick="window.location='${fn:escapeXml(clientListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+		<span class="glyphicon 	glyphicon glyphicon-arrow-right" aria-hidden="true" style="padding: 5px"> </span>
+		Pág. siguiente</button>
+	</div>	
+	</c:if>
+	</div>
     </c:if>
 </cheapy:layout>
