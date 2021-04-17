@@ -111,7 +111,7 @@ class AdministratorControllerTest {
 	@WithMockUser(value = "spring", authorities = "administrator")
 	@Test
 	void testListClients() throws Exception {
-		mockMvc.perform(get("/administrators/clients"))
+		mockMvc.perform(get("/administrators/clients0"))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("clientLs"))
 				.andExpect(view().name("clients/clientsList"));
@@ -130,7 +130,7 @@ class AdministratorControllerTest {
 	@WithMockUser(value = "spring", authorities = "administrator")
 	@Test
   void testListUsuarios() throws Exception {
-		mockMvc.perform(get("/administrators/usuarios"))
+		mockMvc.perform(get("/administrators/usuarios0"))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("usuarioLs"))
 				.andExpect(view().name("usuarios/usuariosList"));
