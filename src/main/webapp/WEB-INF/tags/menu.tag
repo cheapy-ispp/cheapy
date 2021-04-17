@@ -41,14 +41,14 @@
 				</sec:authorize>
 				
 				<sec:authorize access="hasAnyAuthority('admin')">
-				<cheapy:menuItem active="${name eq 'clientes'}" url="/administrators/clients" title="clients">
+				<cheapy:menuItem active="${name eq 'clientes'}" url="/administrators/clients0" title="clients">
 					<span class="glyphicon " aria-hidden="true"></span>
 					<span>Clientes</span>
 				</cheapy:menuItem>
 				</sec:authorize>
 				
 				<sec:authorize access="hasAnyAuthority('admin')">
-				<cheapy:menuItem active="${name eq 'usuarios'}" url="/administrators/usuarios" title="usuarios">
+				<cheapy:menuItem active="${name eq 'usuarios'}" url="/administrators/usuarios0" title="usuarios">
 					<span class="glyphicon " aria-hidden="true"></span>
 					<span>Usuarios</span>
 				</cheapy:menuItem>
