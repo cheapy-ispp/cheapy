@@ -43,9 +43,6 @@ class UsuarioControllerTest {
 	@BeforeEach
 	void setup() {
 		User user = new User();
-		Code code = new Code();
-		code.setActivo(true);
-		code.setCode("codeTest");
 		user.setUsername("user");
 		user.setPassword("user");
 		Usuario usuario = new Usuario();
