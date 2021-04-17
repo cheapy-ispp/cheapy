@@ -4,25 +4,25 @@ package org.springframework.cheapy.repository;
 import java.util.List;
 
 import org.springframework.cheapy.model.Usuario;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.Repository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-public interface UsuarioRepository extends Repository<Usuario, String> {
+public interface UsuarioRepository extends PagingAndSortingRepository<Usuario, String> {
 
 	@Query("SELECT usuario FROM Usuario usuario WHERE username =:username")
 	@Transactional(readOnly = true)
 	Usuario findByUsername(String username);
-	
+
 	@Query("SELECT usuario FROM Usuario usuario")
 	@Transactional(readOnly = true)
 	List<Usuario> findAllUsuario();
-	
+
 	@Query("SELECT usuario FROM Usuario usuario WHERE usuario.usuar.enabled = true")
 	@Transactional(readOnly = true)
-	List<Usuario> findUsuarioEnabled();
-	
-	void save(Usuario usuario);
-	
+	List<Usuario> findUsuarioEnabled(Pageable page);
+
+	//void save(Usuario usuario);
 
 }
