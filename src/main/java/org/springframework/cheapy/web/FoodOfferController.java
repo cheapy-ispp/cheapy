@@ -67,9 +67,13 @@ public class FoodOfferController {
 	@GetMapping("/offers/foodOfferList/{page}")
 	public String processFindForm(@PathVariable("page") final int page, final Map<String, Object> model) {
 		Pageable elements = PageRequest.of(page, 5);
+		Pageable nextPage = PageRequest.of(page+1, 5);
 
 		List<FoodOffer> foodOfferLs = this.foodOfferService.findActiveFoodOffer(elements);
+		Integer next = this.foodOfferService.findActiveFoodOffer(nextPage).size();
+		
 		model.put("foodOfferLs", foodOfferLs);
+		model.put("nextPage", next);
 		model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 		return "offers/food/foodOffersList";
 

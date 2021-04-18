@@ -51,17 +51,17 @@ public class SpeedOfferService {
 		return this.speedOfferRepository.findSpeedOfferActOclByUserId(id);
 	}
 
-	public List<SpeedOffer> findSpeedOfferByClientName(final String name) {
+	public List<SpeedOffer> findSpeedOfferByClientName(final String name, final Pageable p) {
 		String nameEdit = "%" + name + "%";
-		return this.speedOfferRepository.findSpeedOfferByClientName(nameEdit);
+		return this.speedOfferRepository.findSpeedOfferByClientName(nameEdit, p);
 	}
 
-	public List<SpeedOffer> findSpeedOfferByClientFood(final String name) {
+	public List<SpeedOffer> findSpeedOfferByClientFood(final String name, final Pageable p) {
 		String nameEdit = "%" + name + "%";
-		return this.speedOfferRepository.findSpeedOfferByClientFood(nameEdit);
+		return this.speedOfferRepository.findSpeedOfferByClientFood(nameEdit, p);
 	}
 
-	public List<SpeedOffer> findSpeedOfferByClientPlace(final Municipio mun) {
-		return this.speedOfferRepository.findSpeedOfferByClientPlace(mun);
+	public List<SpeedOffer> findSpeedOfferByClientPlace(final Municipio mun, final Pageable p) {
+		return this.speedOfferRepository.findSpeedOfferByClientPlace(mun, p);
 	}
 }

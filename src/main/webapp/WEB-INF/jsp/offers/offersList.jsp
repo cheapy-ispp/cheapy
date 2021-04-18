@@ -46,7 +46,10 @@
 		</div>
 	</div>		
 	
-	<form class="example" action="/offersByName">
+	<spring:url value="/offersByName/{page}" var="SearchNameOfferListUrl">
+				<spring:param name="page" value="0"/>
+	</spring:url>
+	<form class="example" action="${fn:escapeXml(SearchNameOfferListUrl)}">
 		<h2 class="text-center" style="font-family: 'Lobster'; text-align:center; font-size:150%;  color: rgb(0, 64, 128); padding:10px;" >Búsqueda por nombre del bar/restaurante: </h2>
 		<div class="text-center">
 	  		<input type="text" placeholder="Búsqueda por nombre" name="name" style="border:solid; border-color: rgb(0, 64, 128);">
@@ -56,7 +59,10 @@
   		</div>
 	</form>
 	
-	<form class="example" action="/offersByFood">
+	<spring:url value="/offersByFood/{page}" var="SearchFoodOfferListUrl">
+				<spring:param name="page" value="0"/>
+	</spring:url>
+	<form class="example" action="${fn:escapeXml(SearchFoodOfferListUrl)}">
 		<h2 class="text-center" style="font-family: 'Lobster'; text-align:center; font-size:150%;  color: rgb(0, 64, 128); padding:10px;" >Búsqueda por tipo de comida: </h2>
 		<div class="text-center">
 	  		<input type="text" placeholder="Búsqueda por tipo comida (Ej: americana)" name="name" style="border:solid; border-color: rgb(0, 64, 128);">
@@ -66,7 +72,10 @@
   		</div>
 	</form>
 	
-	<form class="example" action="/offersByPlace">
+	<spring:url value="/offersByPlace/{page}" var="SearchPlaceOfferListUrl">
+				<spring:param name="page" value="0"/>
+	</spring:url>
+	<form class="example" action="${fn:escapeXml(SearchPlaceOfferListUrl)}">
 		<div class="text-center">
 			<select name="municipio" class="select-municipio" >
 			

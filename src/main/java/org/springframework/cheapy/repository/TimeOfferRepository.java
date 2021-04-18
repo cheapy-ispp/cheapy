@@ -3,7 +3,6 @@ package org.springframework.cheapy.repository;
 
 import java.util.List;
 
-import org.springframework.cheapy.model.FoodOffer;
 import org.springframework.cheapy.model.Municipio;
 
 import org.springframework.cheapy.model.StatusOffer;
@@ -41,13 +40,13 @@ public interface TimeOfferRepository extends PagingAndSortingRepository<TimeOffe
 
 	@Query("SELECT timeOffer FROM TimeOffer timeOffer WHERE timeOffer.client.name LIKE :name AND timeOffer.status= 'active'")
 	@Transactional(readOnly = true)
-	List<TimeOffer> findTimeOfferByClientName(String name);
+	List<TimeOffer> findTimeOfferByClientName(String name, Pageable p);
 
 	@Query("SELECT timeOffer FROM TimeOffer timeOffer WHERE timeOffer.client.food LIKE :name AND timeOffer.status= 'active'")
 	@Transactional(readOnly = true)
-	List<TimeOffer> findTimeOfferByClientFood(String name);
+	List<TimeOffer> findTimeOfferByClientFood(String name, Pageable p);
 
 	@Query("SELECT timeOffer FROM TimeOffer timeOffer WHERE timeOffer.client.municipio =:municipio AND timeOffer.status= 'active'")
 	@Transactional(readOnly = true)
-	List<TimeOffer> findTimeOfferByClientPlace(Municipio municipio);
+	List<TimeOffer> findTimeOfferByClientPlace(Municipio municipio, Pageable p);
 }

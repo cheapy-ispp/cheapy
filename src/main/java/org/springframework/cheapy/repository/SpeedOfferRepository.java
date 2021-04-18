@@ -38,13 +38,13 @@ public interface SpeedOfferRepository extends PagingAndSortingRepository<SpeedOf
 
 	@Query("SELECT speedOffer FROM SpeedOffer speedOffer WHERE speedOffer.client.name LIKE :name AND speedOffer.status= 'active'")
 	@Transactional(readOnly = true)
-	List<SpeedOffer> findSpeedOfferByClientName(String name);
+	List<SpeedOffer> findSpeedOfferByClientName(String name, Pageable p);
 
 	@Query("SELECT speedOffer FROM SpeedOffer speedOffer WHERE speedOffer.client.food LIKE :name AND speedOffer.status= 'active'")
 	@Transactional(readOnly = true)
-	List<SpeedOffer> findSpeedOfferByClientFood(String name);
+	List<SpeedOffer> findSpeedOfferByClientFood(String name, Pageable p);
 
 	@Query("SELECT speedOffer FROM SpeedOffer speedOffer WHERE speedOffer.client.municipio =:municipio AND speedOffer.status= 'active'")
 	@Transactional(readOnly = true)
-	List<SpeedOffer> findSpeedOfferByClientPlace(Municipio municipio);
+	List<SpeedOffer> findSpeedOfferByClientPlace(Municipio municipio, Pageable p);
 }

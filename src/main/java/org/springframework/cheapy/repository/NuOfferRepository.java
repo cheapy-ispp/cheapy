@@ -36,13 +36,13 @@ public interface NuOfferRepository extends PagingAndSortingRepository<NuOffer, I
 
 	@Query("SELECT nuOffer FROM NuOffer nuOffer WHERE nuOffer.client.name LIKE :name AND nuOffer.status= 'active'")
 	@Transactional(readOnly = true)
-	List<NuOffer> findNuOfferByClientName(String name);
+	List<NuOffer> findNuOfferByClientName(String name, Pageable p);
 
 	@Query("SELECT nuOffer FROM NuOffer nuOffer WHERE nuOffer.client.food LIKE :name AND nuOffer.status= 'active'")
 	@Transactional(readOnly = true)
-	List<NuOffer> findNuOfferByClientFood(String name);
+	List<NuOffer> findNuOfferByClientFood(String name, Pageable p);
 
 	@Query("SELECT nuOffer FROM NuOffer nuOffer WHERE nuOffer.client.municipio =:municipio AND nuOffer.status= 'active'")
 	@Transactional(readOnly = true)
-	List<NuOffer> findNuOfferByClientPlace(Municipio municipio);
+	List<NuOffer> findNuOfferByClientPlace(Municipio municipio, Pageable p);
 }

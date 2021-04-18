@@ -47,17 +47,17 @@ public class TimeOfferService {
 		return this.timeOfferRepository.findTimeOfferActOclByUserId(id);
 	}
 
-	public List<TimeOffer> findTimeOfferByClientName(final String name) {
+	public List<TimeOffer> findTimeOfferByClientName(final String name, final Pageable p) {
 		String nameEdit = "%" + name + "%";
-		return this.timeOfferRepository.findTimeOfferByClientName(nameEdit);
+		return this.timeOfferRepository.findTimeOfferByClientName(nameEdit, p);
 	}
 
-	public List<TimeOffer> findTimeOfferByClientFood(final String name) {
+	public List<TimeOffer> findTimeOfferByClientFood(final String name, final Pageable p) {
 		String nameEdit = "%" + name + "%";
-		return this.timeOfferRepository.findTimeOfferByClientFood(nameEdit);
+		return this.timeOfferRepository.findTimeOfferByClientFood(nameEdit, p);
 	}
 
-	public List<TimeOffer> findTimeOfferByClientPlace(final Municipio mun) {
-		return this.timeOfferRepository.findTimeOfferByClientPlace(mun);
+	public List<TimeOffer> findTimeOfferByClientPlace(final Municipio mun, final Pageable p) {
+		return this.timeOfferRepository.findTimeOfferByClientPlace(mun, p);
 	}
 }

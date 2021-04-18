@@ -56,17 +56,17 @@ public class NuOfferService {
 		return this.nuOfferRepository.findNuOfferActOclByUserId(id);
 	}
 
-	public List<NuOffer> findNuOfferByClientName(final String name) {
+	public List<NuOffer> findNuOfferByClientName(final String name, final Pageable p) {
 		String nameEdit = "%" + name + "%";
-		return this.nuOfferRepository.findNuOfferByClientName(nameEdit);
+		return this.nuOfferRepository.findNuOfferByClientName(nameEdit, p);
 	}
 
-	public List<NuOffer> findNuOfferByClientFood(final String name) {
+	public List<NuOffer> findNuOfferByClientFood(final String name, final Pageable p) {
 		String nameEdit = "%" + name + "%";
-		return this.nuOfferRepository.findNuOfferByClientFood(nameEdit);
+		return this.nuOfferRepository.findNuOfferByClientFood(nameEdit, p);
 	}
 
-	public List<NuOffer> findNuOfferByClientPlace(final Municipio mun) {
-		return this.nuOfferRepository.findNuOfferByClientPlace(mun);
+	public List<NuOffer> findNuOfferByClientPlace(final Municipio mun, final Pageable p) {
+		return this.nuOfferRepository.findNuOfferByClientPlace(mun, p);
 	}
 }
