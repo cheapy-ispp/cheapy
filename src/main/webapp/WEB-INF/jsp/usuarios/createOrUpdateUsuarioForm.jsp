@@ -17,13 +17,15 @@
         <div class="form-group has-feedback">
             <cheapy:inputField label="Nombre" name="nombre"/>
             <cheapy:inputField label="Apellidos" name="apellidos"/>
-	<div class="form-group">                   
-            <label>Municipio: </label>
-			<select name="municipio">
-				<c:forEach items="${municipio}" var="entry">
-					<option value="${entry}">${entry}</option>
-				</c:forEach>
-			</select>
+			<div class="form-group">                   
+	            <label class="col-sm-2 control-label">Municipio: </label>
+	            <div class="col-sm-10">
+					<select name="municipio" class="select-municipio" style="width:80%;text-align-last:center;">
+						<c:forEach items="${municipio}" var="entry">
+							<option value="${entry}">${entry.toString()}</option>
+						</c:forEach>
+					</select>
+				</div>
 			</div>
             <cheapy:inputField label="Direccion" name="direccion"/>
             <cheapy:inputField label="Email" name="email"/>

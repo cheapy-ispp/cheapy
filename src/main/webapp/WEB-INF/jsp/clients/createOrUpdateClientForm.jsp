@@ -23,10 +23,10 @@
             <cheapy:inputField label="Email" placeholder="" name="email"/>
             <cheapy:inputField label="Dirección" placeholder="" name="address"/>           
             <cheapy:inputField label="Teléfono" placeholder="" name="telephone"/>
-            <cheapy:inputField label="descripción" placeholder="" name="description"/>
+            <cheapy:inputField label="Descripción" placeholder="" name="description"/>
             <cheapy:inputField label="Comida" placeholder="food" name="food"/>
             <div class="form-group">                   
-	            <label class="col-sm-2 control-label">Municipio: </label>
+	            <label class="col-sm-2 control-label">Municipio </label>
 	            <div class="col-sm-10">
 					<select name="municipio" class="select-municipio" style="width:80%;text-align-last:center;">
 						<c:forEach items="${municipio}" var="entry">

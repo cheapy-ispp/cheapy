@@ -13,20 +13,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <cheapy:layout pageName="ofertas">
-	<script>
-		function selectMunicipio(municipio) {
-
-		  if (municipio == 'Dos_Hermanas') {
-			  $('#municipio').append("<option value='" + municipio + "'>" + "Dos Hermanas" + "</option>");
-		  
-		  } else {
-			  $('#municipio').append("<option value='" + municipio + "'>" + municipio + "</option>");
-		  }
-		}
-		$(document).ready(function(){
-		  $('[data-toggle="desplegable"]').popover();   
-		});
-	</script>
 	
 	<div class="text-center">
 		<div class="btn-filter-max">
@@ -87,6 +73,7 @@
 	<form class="example" action="/offersByPlace">
 		<div class="text-center">
 			<select name="municipio" class="select-municipio" >
+				<option value="">Seleccione una de las opciones</option>
 			
 			<c:forEach items="${municipios}" var="entry">
 				<option value="${entry}">${entry.toString()}</option>

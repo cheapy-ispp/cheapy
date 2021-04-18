@@ -273,7 +273,7 @@
 	}
 
 </style>
-<cheapy:layout pageName="singUp">
+<cheapy:layout pageName="singUpClient">
 <div class="text-center">
     <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px">
         <fmt:message key="new"/><fmt:message key="client"/>
@@ -308,6 +308,7 @@
 	            <label class="col-sm-2 control-label">Municipio: </label>
 	            <div class="col-sm-10">
 				<select name="municipio" class="select-municipio" style="width:80%;text-align-last:center;">
+					<option value="">Seleccione una de las opciones</option>
 					<c:forEach items="${municipio}" var="entry">
 						<option value="${entry}">${entry.toString()}</option>
 					</c:forEach>

@@ -39,6 +39,7 @@
         	<th><fmt:message key="discount"/></th>
             <th><fmt:message key="startDate"/></th>
             <th><fmt:message key="endDate"/></th>
+            <th><fmt:message key="municipio"/></th>
             
             <th> </th>
         </tr>
@@ -63,6 +64,10 @@
                 </td>
                 
                 <td>
+                    <c:out value="${foodOffer.client.municipio}"/>
+                </td>
+                
+                <td>
 	                <spring:url value="/offers/food/{foodOfferId}" var="foodOfferUrl">
 	                        <spring:param name="foodOfferId" value="${foodOffer.id}"/>
 	                </spring:url>
@@ -81,7 +86,7 @@
     
     </c:if>
     <h2 style="text-align:center;padding:5px"><fmt:message key="nuOffers"/>
-    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir con más comensales que alguno de los tres posibles objetivos">
+    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir con mï¿½s comensales que alguno de los tres posibles objetivos">
     	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
     </h2>
 	<c:if test="${empty nuOfferLs }">
@@ -99,6 +104,7 @@
             <th><fmt:message key="endDate"/></th>
             <th><fmt:message key="goldGoal"/></th>
             <th><fmt:message key="goldDiscount"/></th>
+            <th><fmt:message key="municipio"/></th>
             <th> </th>
             
         </tr>
@@ -121,6 +127,11 @@
                 <td>
                     <c:out value="${nuOffer.discountGold}%"/>
                 </td>
+                
+                <td>
+                    <c:out value="${nuOffer.client.municipio}"/>
+                </td>
+                
                 <td>
 	                <spring:url value="/offers/nu/{nuOfferId}" var="nuOfferUrl">
 	                        <spring:param name="nuOfferId" value="${nuOffer.id}"/>
@@ -158,6 +169,7 @@
 		            <th><fmt:message key="endDate"/></th>
 		            <th><fmt:message key="goldGoal"/></th>
 		            <th><fmt:message key="goldDiscount"/></th>
+		            <th><fmt:message key="municipio"/></th>
 		            <th> </th>
 		            
 		        </tr>
@@ -180,6 +192,11 @@
 		                <td>
 		                    <c:out value="${speedOffer.discountGold}%"/>
 		                </td>
+		                
+		                <td>
+		                    <c:out value="${speedOffer.client.municipio}"/>
+		                </td>
+		                
 		                <td>
 		                    <spring:url value="/offers/speed/{speedOfferId}" var="speedOfferUrl">
 		                        <spring:param name="speedOfferId" value="${speedOffer.id}"/>
@@ -218,6 +235,7 @@
 		            <th><fmt:message key="endDate"/></th>
 		            <th><fmt:message key="init"/></th>
 		            <th><fmt:message key="finishOffer"/></th>
+		            <th><fmt:message key="municipio"/></th>
 		            <th> </th>
 		        </tr>
 		        </thead>
@@ -238,6 +256,10 @@
 		                </td>
 		                <td>
 		                    <c:out value="${timeOffer.finish}h"/>
+		                </td>
+		                
+		                <td>
+		                    <c:out value="${timeOffer.client.municipio}"/>
 		                </td>
 		                
 		                <td>

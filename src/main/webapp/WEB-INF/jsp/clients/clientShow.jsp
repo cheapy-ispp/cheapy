@@ -10,18 +10,18 @@
 
 <cheapy:layout pageName="miPerfil">
 
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="client"/></h2>
+    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px; text-transform: uppercase;"><c:out value="${client.name}"/></h2>
 
 
 	
     <table class="table table-striped" id="clientTable">
     	<thead>
         <tr>
-            <th><fmt:message key="init"/></th>
+            <th><fmt:message key="clientInit"/></th>
             <td><c:out value="${client.init}h"/></td>
         </tr>
         <tr>
-            <th><fmt:message key="finishOffer"/></th>
+            <th><fmt:message key="clientFinish"/></th>
             <td><c:out value="${client.finish}h"/></td>
         </tr>
 		<tr>

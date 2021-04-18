@@ -70,11 +70,11 @@
 				<sec:authorize access="isAuthenticated()">
 					<cheapy:menuItem active="${name eq 'reviews'}" url="/reviewsList/0" title="opiniones">
 						<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-						<span>Reseï¿½as</span>
+						<span>Reseñas</span>
 					</cheapy:menuItem>
 					<cheapy:menuItem active="${name eq 'reviewsN'}" url="/reviews/new" title="valï¿½ranos">
 						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-						<span>Valï¿½ranos</span>
+						<span>Valóranos</span>
 					</cheapy:menuItem>
 				</sec:authorize>
 			</ul>
@@ -95,7 +95,7 @@
 		        </sec:authorize>
 				<sec:authorize access="!isAuthenticated()">
 					<cheapy:menuItem active="${name eq 'login'}" url="/login" title="login">
-						<span>Iniciar sesiï¿½n</span>
+						<span>Iniciar sesión</span>
 					</cheapy:menuItem> 	
 					<!--<li><a href="<c:url value="/login" />">Iniciar sesiï¿½n</a></li>-->
 				</sec:authorize>
