@@ -111,7 +111,7 @@ class AdministratorControllerTest {
 	@WithMockUser(value = "spring", authorities = "administrator")
 	@Test
 	void testListClients() throws Exception {
-		mockMvc.perform(get("/administrators/clients0"))
+		mockMvc.perform(get("/administrators/clients/page/0"))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("clientLs"))
 				.andExpect(view().name("clients/clientsList"));
@@ -130,7 +130,7 @@ class AdministratorControllerTest {
 	@WithMockUser(value = "spring", authorities = "administrator")
 	@Test
   void testListUsuarios() throws Exception {
-		mockMvc.perform(get("/administrators/usuarios0"))
+		mockMvc.perform(get("/administrators/usuarios/page/0"))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("usuarioLs"))
 				.andExpect(view().name("usuarios/usuariosList"));
@@ -161,7 +161,7 @@ class AdministratorControllerTest {
 		mockMvc.perform(post("/administrators/clients/"+TEST_CLIENT_USERNAME+"/disable")
 				.with(csrf()))
 				.andExpect(status().is3xxRedirection())
-				.andExpect(view().name("redirect:/administrators/clients"));
+				.andExpect(view().name("redirect:/administrators/clients/page/0"));
 	}
 
 	@WithMockUser(value = "spring", authorities = "administrator")
@@ -180,7 +180,7 @@ class AdministratorControllerTest {
 		mockMvc.perform(post("/administrators/usuarios/{username}/disable", TEST_USUARIO_USERNAME)
 				.with(csrf()))
 				.andExpect(status().is3xxRedirection())
-				.andExpect(view().name("redirect:/administrators/usuarios"));
+				.andExpect(view().name("redirect:/administrators/usuarios/page/0"));
 	}
   
   @WithMockUser(value = "spring", authorities = "administrator")
@@ -198,7 +198,7 @@ class AdministratorControllerTest {
 		mockMvc.perform(post("/administrators/clients/"+TEST_CLIENT_USERNAME+"/activate")
 				.with(csrf()))
 				.andExpect(status().is3xxRedirection())
-				.andExpect(view().name("redirect:/administrators/clients"));
+				.andExpect(view().name("redirect:/administrators/clients/page/0"));
 	}
 	
 
