@@ -86,7 +86,7 @@
     
     </c:if>
     <h2 style="text-align:center;padding:5px"><fmt:message key="nuOffers"/>
-    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir con m�s comensales que alguno de los tres posibles objetivos">
+    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir con más comensales que alguno de los tres posibles objetivos">
     	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
     </h2>
 	<c:if test="${empty nuOfferLs }">

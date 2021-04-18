@@ -57,51 +57,58 @@
 		<p id="vacio" >No hay ninguna oferta por franja horaria activa.</p>
 	</c:if>
 	<c:if test="${not empty timeOfferLs }">
-    <table id="timeOfferTable" class="table table-striped">
-        <thead>
-        <tr>
-        	<!-- <th style="width: 150px;">Restaurante</th> -->
-            <th><fmt:message key="name"/></th>
-            <th><fmt:message key="startDate"/></th>
-            <th><fmt:message key="endDate"/></th>
-            <th><fmt:message key="init"/></th>
-            <th><fmt:message key="finishOffer"/></th>
-            <th> </th>
-        </tr>
-        </thead>
-        <tbody>
-        	<c:forEach items="${timeOfferLs}" var="timeOffer">
-            <tr>
-                <td>
-                    <c:out value="${timeOffer.client.name}"/>
-                </td>
-                <td>
-                    <c:out value="${localDateTimeFormat.format(timeOffer.start)}"/>
-                </td>
-                <td>
-                    <c:out value="${localDateTimeFormat.format(timeOffer.end)}"/>
-                </td>
-                <td>
-                    <c:out value="${timeOffer.init}h"/>
-                </td>
-                <td>
-                    <c:out value="${timeOffer.finish}h"/>
-                </td>
-                
-                <td>
-                	<spring:url value="/offers/time/{timeOfferId}" var="timeOfferUrl">
-                        <spring:param name="timeOfferId" value="${timeOffer.id}"/>
-                    </spring:url>
-                    <div class="btn-detalles">
-	                    <button type="button" role="link" onclick="window.location='${fn:escapeXml(timeOfferUrl)}'" class="btn-detalles" style="font-family: 'Lobster'; font-size: 20px;">
-	                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true" style="padding: 5px"> </span>
-	                    <fmt:message key="details"/> </button>
-	                </div>
-                </td> 
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+	<div class="table-responsive">
+	    <table id="timeOfferTable" class="table table-striped">
+	        <thead>
+	        <tr>
+	        	<!-- <th style="width: 150px;">Restaurante</th> -->
+	            <th><fmt:message key="name"/></th>
+	            <th><fmt:message key="startDate"/></th>
+	            <th><fmt:message key="endDate"/></th>
+	            <th><fmt:message key="init"/></th>
+	            <th><fmt:message key="finishOffer"/></th>
+	            <th><fmt:message key="municipio"/></th>
+	            <th> </th>
+	        </tr>
+	        </thead>
+	        <tbody>
+	        	<c:forEach items="${timeOfferLs}" var="timeOffer">
+	            <tr>
+	                <td>
+	                    <c:out value="${timeOffer.client.name}"/>
+	                </td>
+	                <td>
+	                    <c:out value="${localDateTimeFormat.format(timeOffer.start)}"/>
+	                </td>
+	                <td>
+	                    <c:out value="${localDateTimeFormat.format(timeOffer.end)}"/>
+	                </td>
+	                <td>
+	                    <c:out value="${timeOffer.init}h"/>
+	                </td>
+	                <td>
+	                    <c:out value="${timeOffer.finish}h"/>
+	                </td>
+	                
+	                <td>
+	                    <c:out value="${timeOffer.client.municipio}"/>
+	                </td>
+	                
+	                <td>
+	                	<spring:url value="/offers/time/{timeOfferId}" var="timeOfferUrl">
+	                        <spring:param name="timeOfferId" value="${timeOffer.id}"/>
+	                    </spring:url>
+	                    <div class="btn-detalles">
+		                    <button type="button" role="link" onclick="window.location='${fn:escapeXml(timeOfferUrl)}'" class="btn-detalles" style="font-family: 'Lobster'; font-size: 20px;">
+		                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true" style="padding: 5px"> </span>
+		                    <fmt:message key="details"/> </button>
+		                </div>
+	                </td> 
+	            </tr>
+	        </c:forEach>
+	        </tbody>
+	    </table>
+	</div>    
     <div class="text-center">
     	<c:out value='Página ${page}'></c:out>
     </div>

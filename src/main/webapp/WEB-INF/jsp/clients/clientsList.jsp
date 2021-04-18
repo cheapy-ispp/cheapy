@@ -15,48 +15,50 @@
 		<p id="vacio" >No hay ningun Cliente.</p>
 	</c:if>
 	<c:if test="${not empty clientLs }">
-    <table id="clientTable" class="table table-striped">
-        <thead>
-        <tr>
-
-        	<th><fmt:message key="name"/></th>
-        	<th><fmt:message key="user"/></th>
-        	<th><fmt:message key="enabled"/></th>   
-            <th> </th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${clientLs}" var="client">
-            <tr>
-
-                <td>
-                    <c:out value="${client.name}"/>
-                </td>
-                <td>
-                    <c:out value="${client.usuar.username}"/>
-                </td>
-                <td>
-                	<c:if test="${client.usuar.enabled == 'true'}">
-		            	<c:out value="Si"/>
-		            </c:if>	
-		            <c:if test="${client.usuar.enabled == 'false'}">
-		                 <c:out value="No"/>
-		             </c:if>
-                </td>
-                <td>
-	                <spring:url value="/administrators/clients/{username}" var="clientUrl">
-	                        <spring:param name="username" value="${client.usuar.username}"/>
-	                </spring:url>
-	                <div class="btn-detalles">
-                		<button type="button" role="link" onclick="window.location='${fn:escapeXml(clientUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-                		<span class="glyphicon glyphicon-info-sign" aria-hidden="true" style="padding: 5px"> </span>
-	                	<fmt:message key="details"/></button>
-            		</div>
-                </td>     
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+	<div class="table-responsive">
+	    <table id="clientTable" class="table table-striped">
+	        <thead>
+	        <tr>
+	
+	        	<th><fmt:message key="name"/></th>
+	        	<th><fmt:message key="user"/></th>
+	        	<th><fmt:message key="enabled"/></th>   
+	            <th> </th>
+	        </tr>
+	        </thead>
+	        <tbody>
+	        <c:forEach items="${clientLs}" var="client">
+	            <tr>
+	
+	                <td>
+	                    <c:out value="${client.name}"/>
+	                </td>
+	                <td>
+	                    <c:out value="${client.usuar.username}"/>
+	                </td>
+	                <td>
+	                	<c:if test="${client.usuar.enabled == 'true'}">
+			            	<c:out value="Si"/>
+			            </c:if>	
+			            <c:if test="${client.usuar.enabled == 'false'}">
+			                 <c:out value="No"/>
+			             </c:if>
+	                </td>
+	                <td>
+		                <spring:url value="/administrators/clients/{username}" var="clientUrl">
+		                        <spring:param name="username" value="${client.usuar.username}"/>
+		                </spring:url>
+		                <div class="btn-detalles">
+	                		<button type="button" role="link" onclick="window.location='${fn:escapeXml(clientUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+	                		<span class="glyphicon glyphicon-info-sign" aria-hidden="true" style="padding: 5px"> </span>
+		                	<fmt:message key="details"/></button>
+	            		</div>
+	                </td>     
+	            </tr>
+	        </c:forEach>
+	        </tbody>
+	    </table>
+    </div>
     <div class="text-center">
     	<c:out value='Página ${page}'></c:out>
     </div>

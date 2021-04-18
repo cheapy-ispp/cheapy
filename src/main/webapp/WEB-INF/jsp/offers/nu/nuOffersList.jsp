@@ -50,58 +50,66 @@
 	</div>
 
     <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="nuOffers"/>
-    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir con m�s comensales que alguno de los tres posibles objetivos">
+    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir con más comensales que alguno de los tres posibles objetivos">
     	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
     </h2>
 	<c:if test="${empty nuOfferLs }">
 		<p id="vacio" >No hay ninguna oferta por número de comensales activa.</p>
 	</c:if>
 	<c:if test="${not empty nuOfferLs }">
-    <table id="nuOfferTable" class="table table-striped">
-        <thead>
-        <tr>
-        	<!-- <th style="width: 150px;">Restaurante</th> -->
-            <th><fmt:message key="name"/></th>
-            <th><fmt:message key="startDate"/></th>
-            <th><fmt:message key="endDate"/></th>
-            <th><fmt:message key="goldGoal"/></th>
-            <th><fmt:message key="goldDiscount"/></th>
-            <th> </th>
-            
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${nuOfferLs}" var="nuOffer">
-            <tr>
-                <td>
-                    <c:out value="${nuOffer.client.name}"/>
-                </td>
-                <td>
-                    <c:out value="${localDateTimeFormat.format(nuOffer.start)}"/>
-                </td>
-                <td>
-                    <c:out value="${localDateTimeFormat.format(nuOffer.end)}"/>
-                </td>
-                <td>
-                    <c:out value="${nuOffer.gold} comensales"/>
-                </td>
-                <td>
-                    <c:out value="${nuOffer.discountGold}%"/>
-                </td>
-                <td>
-	                <spring:url value="/offers/nu/{nuOfferId}" var="nuOfferUrl">
-	                        <spring:param name="nuOfferId" value="${nuOffer.id}"/>
-	                </spring:url>
-	                <div class="btn-detalles">
-		                <button type="button" role="link" onclick="window.location='${fn:escapeXml(nuOfferUrl)}'" class="btn-detalles" style="font-family: 'Lobster'; font-size: 20px;">
-		                <span class="glyphicon glyphicon-info-sign" aria-hidden="true" style="padding: 5px"> </span>
-		                <fmt:message key="details"/> </button>
-		            </div>
-                </td>  
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+	<div class="table-responsive">
+	    <table id="nuOfferTable" class="table table-striped">
+	        <thead>
+	        <tr>
+	        	<!-- <th style="width: 150px;">Restaurante</th> -->
+	            <th><fmt:message key="name"/></th>
+	            <th><fmt:message key="startDate"/></th>
+	            <th><fmt:message key="endDate"/></th>
+	            <th><fmt:message key="goldGoal"/></th>
+	            <th><fmt:message key="goldDiscount"/></th>
+	            <th><fmt:message key="municipio"/></th>
+	            <th> </th>
+	            
+	        </tr>
+	        </thead>
+	        <tbody>
+	        <c:forEach items="${nuOfferLs}" var="nuOffer">
+	            <tr>
+	                <td>
+	                    <c:out value="${nuOffer.client.name}"/>
+	                </td>
+	                <td>
+	                    <c:out value="${localDateTimeFormat.format(nuOffer.start)}"/>
+	                </td>
+	                <td>
+	                    <c:out value="${localDateTimeFormat.format(nuOffer.end)}"/>
+	                </td>
+	                <td>
+	                    <c:out value="${nuOffer.gold} comensales"/>
+	                </td>
+	                <td>
+	                    <c:out value="${nuOffer.discountGold}%"/>
+	                </td>
+	                
+	                <td>
+	                    <c:out value="${nuOffer.client.municipio}"/>
+	                </td>
+	                
+	                <td>
+		                <spring:url value="/offers/nu/{nuOfferId}" var="nuOfferUrl">
+		                        <spring:param name="nuOfferId" value="${nuOffer.id}"/>
+		                </spring:url>
+		                <div class="btn-detalles">
+			                <button type="button" role="link" onclick="window.location='${fn:escapeXml(nuOfferUrl)}'" class="btn-detalles" style="font-family: 'Lobster'; font-size: 20px;">
+			                <span class="glyphicon glyphicon-info-sign" aria-hidden="true" style="padding: 5px"> </span>
+			                <fmt:message key="details"/> </button>
+			            </div>
+	                </td>  
+	            </tr>
+	        </c:forEach>
+	        </tbody>
+	    </table>
+    </div>
     <div class="text-center">
     	<c:out value='Página ${page}'></c:out>
     </div>

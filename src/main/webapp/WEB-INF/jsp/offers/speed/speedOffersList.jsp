@@ -57,52 +57,60 @@
 		<p id="vacio" >No hay ninguna oferta por tiempo empleado en comer activa.</p>
 	</c:if>
 	<c:if test="${not empty speedOfferLs }">
-    <table id="speedOfferTable" class="table table-striped">
-        <thead>
-        <tr>
-        	<!-- <th style="width: 150px;">Restaurante</th> -->
-            <th><fmt:message key="name"/></th>
-            <th><fmt:message key="startDate"/></th>
-            <th><fmt:message key="endDate"/></th>
-            <th><fmt:message key="goldGoal"/></th>
-            <th><fmt:message key="goldDiscount"/></th>
-            <th> </th>
-            
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${speedOfferLs}" var="speedOffer">
-            <tr>
-                <td>
-                    <c:out value="${speedOffer.client.name}"/>
-                </td>
-                <td>
-                    <c:out value="${localDateTimeFormat.format(speedOffer.start)}"/>
-                </td>
-                <td>
-                    <c:out value="${localDateTimeFormat.format(speedOffer.end)}"/>
-                </td>
-                <td>
-                    <c:out value="${speedOffer.gold} minutos"/>
-                </td>
-                <td>
-                    <c:out value="${speedOffer.discountGold}%"/>
-                </td>
-                <td>
-                    <spring:url value="/offers/speed/{speedOfferId}" var="speedOfferUrl">
-                        <spring:param name="speedOfferId" value="${speedOffer.id}"/>
-                    </spring:url>
-                    <div class="btn-detalles">
-	                    <button type="button" role="link" onclick="window.location='${fn:escapeXml(speedOfferUrl)}'" class="btn-detalles" style="font-family: 'Lobster'; font-size: 20px;">
-	                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true" style="padding: 5px"> </span>
-	                    <fmt:message key="details"/> </button>
-	                </div>
-                </td>
-                  
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+	<div class="table-responsive">
+	    <table id="speedOfferTable" class="table table-striped">
+	        <thead>
+	        <tr>
+	        	<!-- <th style="width: 150px;">Restaurante</th> -->
+	            <th><fmt:message key="name"/></th>
+	            <th><fmt:message key="startDate"/></th>
+	            <th><fmt:message key="endDate"/></th>
+	            <th><fmt:message key="goldGoal"/></th>
+	            <th><fmt:message key="goldDiscount"/></th>
+	            <th><fmt:message key="municipio"/></th>
+	            <th> </th>
+	            
+	        </tr>
+	        </thead>
+	        <tbody>
+	        <c:forEach items="${speedOfferLs}" var="speedOffer">
+	            <tr>
+	                <td>
+	                    <c:out value="${speedOffer.client.name}"/>
+	                </td>
+	                <td>
+	                    <c:out value="${localDateTimeFormat.format(speedOffer.start)}"/>
+	                </td>
+	                <td>
+	                    <c:out value="${localDateTimeFormat.format(speedOffer.end)}"/>
+	                </td>
+	                <td>
+	                    <c:out value="${speedOffer.gold} minutos"/>
+	                </td>
+	                <td>
+	                    <c:out value="${speedOffer.discountGold}%"/>
+	                </td>
+	                
+	                <td>
+	                    <c:out value="${speedOffer.client.municipio}"/>
+	                </td>
+	                
+	                <td>
+	                    <spring:url value="/offers/speed/{speedOfferId}" var="speedOfferUrl">
+	                        <spring:param name="speedOfferId" value="${speedOffer.id}"/>
+	                    </spring:url>
+	                    <div class="btn-detalles">
+		                    <button type="button" role="link" onclick="window.location='${fn:escapeXml(speedOfferUrl)}'" class="btn-detalles" style="font-family: 'Lobster'; font-size: 20px;">
+		                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true" style="padding: 5px"> </span>
+		                    <fmt:message key="details"/> </button>
+		                </div>
+	                </td>
+	                  
+	            </tr>
+	        </c:forEach>
+	        </tbody>
+	    </table>
+    </div>
     <div class="text-center">
     	<c:out value='Página ${page}'></c:out>
     </div>
