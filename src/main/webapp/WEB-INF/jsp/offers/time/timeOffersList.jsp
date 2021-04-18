@@ -105,7 +105,7 @@
 	</div>
     </c:if>
     
-    <c:if test="${fn:length(timeOfferLs) == 5}">
+    <c:if test="${fn:length(timeOfferLs) == 5 && nextPage > 0}">
     <div class="text-right">
     	<spring:url value="/offers/timeOfferList/{page}" var="timeOfferListUrl">
     		<spring:param name="page" value="${page+1}"/>

@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.cheapy.model.Client;
-import org.springframework.cheapy.model.Review;
 import org.springframework.cheapy.model.ReviewClient;
 import org.springframework.cheapy.model.User;
 import org.springframework.cheapy.service.ClientService;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import net.bytebuddy.asm.Advice.This;
 
 @Controller
 public class ReviewClientController {
@@ -93,9 +91,12 @@ public class ReviewClientController {
 	@GetMapping("/reviewsClientList/{idClient}/{page}")
 	public String processFindForm(@PathVariable("page") final int page, @PathVariable("idClient") final String idClient, final Map<String, Object> model) {
 		Pageable elements = PageRequest.of(page, 6);
+		Pageable nextPage = PageRequest.of(page+1, 6);
 		Client client = this.clientService.findByUsername(idClient);
 
 		List<ReviewClient> reviewsLs = this.reviewService.findAllReviewsByBar(elements,client);
+		Integer next = this.reviewService.findAllReviewsByBar(nextPage,client).size();
+		model.put("nextPage", next);
 		model.put("reviewsLs", reviewsLs);
 		model.put("client", idClient);
 

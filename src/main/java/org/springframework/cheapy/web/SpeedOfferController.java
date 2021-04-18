@@ -86,9 +86,13 @@ public class SpeedOfferController {
 	@GetMapping("/offers/speedOfferList/{page}")
 	public String processFindForm(@PathVariable("page") final int page, final Map<String, Object> model) {
 		Pageable elements = PageRequest.of(page, 5);
-
+		Pageable nextPage = PageRequest.of(page+1, 5);
+		
 		List<SpeedOffer> speedOfferLs = this.speedOfferService.findActiveSpeedOffer(elements);
+		Integer next = this.speedOfferService.findActiveSpeedOffer(nextPage).size();
+		
 		model.put("speedOfferLs", speedOfferLs);
+		model.put("nextPage", next);
 		model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 		return "offers/speed/speedOffersList";
 

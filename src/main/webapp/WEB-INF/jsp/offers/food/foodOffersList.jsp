@@ -16,9 +16,9 @@
 				<spring:param name="page" value="0"/>
 		    </spring:url>
 		    
-			    <button type="button" role="link" class="btn-filter-active" onclick="window.location='${fn:escapeXml(foodOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-				<span class="glyphicon 	glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
-				Ofertas de plato específico</button>
+			<button type="button" role="link" class="btn-filter-active" onclick="window.location='${fn:escapeXml(foodOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+			<span class="glyphicon 	glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
+			Ofertas de plato específico</button>
 			
 			<spring:url value="/offers/nuOfferList/{page}" var="nuOfferListUrl">
 				<spring:param name="page" value="0"/>
@@ -115,7 +115,7 @@
 	</div>	
     </c:if>
     
-    <c:if test="${fn:length(foodOfferLs) == 5}">
+    <c:if test="${fn:length(foodOfferLs) == 5 && nextPage > 0}">
     <div class="text-right">
     	
     	<spring:url value="/offers/foodOfferList/{page}" var="foodOfferListUrl">

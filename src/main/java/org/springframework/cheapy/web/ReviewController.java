@@ -44,8 +44,11 @@ public class ReviewController {
 	@GetMapping("/reviewsList/{page}")
 	public String processFindForm(@PathVariable("page") final int page, final Map<String, Object> model) {
 		Pageable elements = PageRequest.of(page, 6);
+		Pageable nextPage = PageRequest.of(page+1, 6);
 
 		List<Review> reviewsLs = this.reviewService.findAllReviews(elements);
+		Integer next = this.reviewService.findAllReviews(nextPage).size();
+		model.put("nextPage", next);
 		model.put("reviewsLs", reviewsLs);
 
 		return "reviews/reviewsList";

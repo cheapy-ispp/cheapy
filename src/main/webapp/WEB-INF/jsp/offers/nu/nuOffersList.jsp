@@ -107,7 +107,7 @@
     </c:if>
     
     
-    <c:if test="${fn:length(nuOfferLs) == 5}">
+    <c:if test="${fn:length(nuOfferLs) == 5 && nextPage > 0}">
     <div class="text-right">
     	<spring:url value="/offers/nuOfferList/{page}" var="nuOfferListUrl">
     		<spring:param name="page" value="${page+1}"/>

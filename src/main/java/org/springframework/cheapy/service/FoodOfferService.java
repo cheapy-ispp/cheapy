@@ -47,17 +47,17 @@ public class FoodOfferService {
 		return this.foodOfferRepository.findFoodOfferActOclByUserId(id);
 	}
 
-	public List<FoodOffer> findFoodOfferByClientName(final String name) {
+	public List<FoodOffer> findFoodOfferByClientName(final String name, final Pageable p) {
 		String nameEdit = "%" + name + "%";
-		return this.foodOfferRepository.findFoodOfferByClientName(nameEdit);
+		return this.foodOfferRepository.findFoodOfferByClientName(nameEdit, p);
 	}
 
-	public List<FoodOffer> findFoodOfferByClientFood(final String name) {
+	public List<FoodOffer> findFoodOfferByClientFood(final String name, final Pageable p) {
 		String nameEdit = "%" + name + "%";
-		return this.foodOfferRepository.findFoodOfferByClientFood(nameEdit);
+		return this.foodOfferRepository.findFoodOfferByClientFood(nameEdit, p);
 	}
 
-	public List<FoodOffer> findFoodOfferByClientPlace(final Municipio municip) {
-		return this.foodOfferRepository.findFoodOfferByClientPlace(municip);
+	public List<FoodOffer> findFoodOfferByClientPlace(final Municipio municip, final Pageable p) {
+		return this.foodOfferRepository.findFoodOfferByClientPlace(municip, p);
 	}
 }
