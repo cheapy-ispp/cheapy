@@ -16,7 +16,7 @@ public interface FoodOfferRepository extends PagingAndSortingRepository<FoodOffe
 
 	@Query("SELECT foodOffer FROM FoodOffer foodOffer")
 	@Transactional(readOnly = true)
-	List<FoodOffer> findAllFoodOffer();
+	List<FoodOffer> findAllFoodOffer(Pageable p);
 
 	@Query("SELECT foodOffer FROM FoodOffer foodOffer WHERE id =:id")
 	@Transactional(readOnly = true)

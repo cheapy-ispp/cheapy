@@ -28,7 +28,7 @@ public class FoodOfferService {
 	}
 	
 	public List<FoodOffer> findAllFoodOffer(final Pageable p) { //
-		return this.foodOfferRepository.findAllFoodOffer();
+		return this.foodOfferRepository.findAllFoodOffer(p);
 	}
 
 	public void saveFoodOffer(final FoodOffer foodOffer) throws DataAccessException {

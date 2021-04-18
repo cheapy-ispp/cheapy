@@ -117,8 +117,6 @@ public class OfertaController {
 			datosNext.add(ti);
 		}
 		Integer next = datosNext.size();
-		Integer now = datos.size();
-		model.put("now", now);
 		model.put("nextPage", next);
 		model.put("datos", datos);
 		model.put("name", name);

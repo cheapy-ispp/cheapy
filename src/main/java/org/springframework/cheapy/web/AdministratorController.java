@@ -154,33 +154,57 @@ public class AdministratorController {
 		return "redirect:/administrators/clients";
 	}
 	
-	@GetMapping("/administrators/offersRecord")
-	public String processOffersRecordForm(final Map<String, Object> model) {
-		
-		Pageable p = PageRequest.of(0, 3);
+	@GetMapping("/administrators/offersRecord{page}")
+	public String processOffersRecordForm(@PathVariable("page") final int page, final Map<String, Object> model) {
+		Pageable elements = PageRequest.of(page, 2);
+		Pageable nextPage = PageRequest.of(page+1, 2);
 		
 		List<Object[]> datos = new ArrayList<Object[]>();
 		
-		for(Offer of:this.foodOfferService.findAllFoodOffer(p)) {
+		for(Offer of:this.foodOfferService.findAllFoodOffer(elements)) {
 			Object[] fo = {of, "food"};
 			datos.add(fo);
 		}
 		
-		for(Offer of:this.nuOfferService.findAllNuOffer(p)) {
+		for(Offer of:this.nuOfferService.findAllNuOffer(elements)) {
 			Object[] nu = {of, "nu"};
 			datos.add(nu);
 		}
 		
-		for(Offer of:this.speedOfferService.findAllSpeedOffer(p)) {
+		for(Offer of:this.speedOfferService.findAllSpeedOffer(elements)) {
 			Object[] sp = {of, "speed"};
 			datos.add(sp);
 		}
 		
-		for(Offer of:this.timeOfferService.findAllTimeOffer(p)) {
+		for(Offer of:this.timeOfferService.findAllTimeOffer(elements)) {
 			Object[] ti = {of, "time"};
 			datos.add(ti);
 		}
 		
+		List<Object[]> datosNext = new ArrayList<Object[]>();
+		
+		for(Offer of:this.foodOfferService.findAllFoodOffer(nextPage)) {
+			Object[] fo = {of, "food"};
+			datosNext.add(fo);
+		}
+		
+		for(Offer of:this.nuOfferService.findAllNuOffer(nextPage)) {
+			Object[] nu = {of, "nu"};
+			datosNext.add(nu);
+		}
+		
+		for(Offer of:this.speedOfferService.findAllSpeedOffer(nextPage)) {
+			Object[] sp = {of, "speed"};
+			datosNext.add(sp);
+		}
+		
+		for(Offer of:this.timeOfferService.findAllTimeOffer(nextPage)) {
+			Object[] ti = {of, "time"};
+			datosNext.add(ti);
+		}
+		
+		Integer next = datosNext.size();
+		model.put("nextPage", next);
 		model.put("datos", datos);
 
 		//Se añade formateador de fecha al modelo
