@@ -72,11 +72,19 @@
 						<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 						<span>Reseñas</span>
 					</cheapy:menuItem>
+				</sec:authorize>
+				<sec:authorize access="hasAnyAuthority('client')">
 					<cheapy:menuItem active="${name eq 'reviewsN'}" url="/reviews/new" title="valï¿½ranos">
 						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 						<span>Valóranos</span>
-					</cheapy:menuItem>
-				</sec:authorize>
+					</cheapy:menuItem>		           		            
+		        </sec:authorize>
+				<sec:authorize access="hasAnyAuthority('usuario')">
+					<cheapy:menuItem active="${name eq 'reviewsN'}" url="/reviews/new" title="valï¿½ranos">
+						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+						<span>Valóranos</span>
+					</cheapy:menuItem> 		           		            
+		        </sec:authorize>
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">

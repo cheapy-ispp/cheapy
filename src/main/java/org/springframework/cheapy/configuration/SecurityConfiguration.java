@@ -58,7 +58,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/offersCreate").hasAuthority("client")
 
 
-		.antMatchers("/reviews/**").authenticated()
+		.antMatchers("/reviews/new").hasAnyAuthority("usuario","client")
 
 		.and().formLogin()
 			.loginPage("/login")
