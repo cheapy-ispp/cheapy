@@ -25,6 +25,11 @@
     </h2>
 	<c:if test="${empty foodOfferLs }">
 		<p id="vacio" >No hay ninguna oferta por plato específico creada.</p>
+		<div class="createOffer">
+            <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
+            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
+            <fmt:message key="createOffers"/> </button>
+        </div>
 	</c:if>
 	<c:if test="${not empty foodOfferLs }">
 		<div class="table-responsive">
@@ -91,6 +96,11 @@
     </h2>
 	<c:if test="${empty nuOfferLs }">
 		<p id="vacio" >No hay ninguna oferta por número de comensales creada.</p>
+		<div class="createOffer">
+            <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
+            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
+            <fmt:message key="createOffers"/> </button>
+        </div>
 	</c:if>
 	<c:if test="${not empty nuOfferLs }">
 		<div class="table-responsive">
@@ -155,6 +165,11 @@
     </h2>
 	<c:if test="${empty speedOfferLs }">
 		<p id="vacio" >No hay ninguna oferta por tiempo empleado en comer creada.</p>
+		<div class="createOffer">
+            <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
+            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
+            <fmt:message key="createOffers"/> </button>
+        </div>
 	</c:if>
 	<c:if test="${not empty speedOfferLs }">
 		<div class="table-responsive">
@@ -220,6 +235,11 @@
     </h2>
 	<c:if test="${empty timeOfferLs }">
 		<p id="vacio" >No hay ninguna oferta por franja horaria creada.</p>
+		<div class="createOffer">
+            <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
+            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
+            <fmt:message key="createOffers"/> </button>
+        </div>
 	</c:if>
 	<c:if test="${not empty timeOfferLs }">
 		<div class="table-responsive">
