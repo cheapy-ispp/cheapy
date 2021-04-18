@@ -33,7 +33,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class AdministratorController {
 
-	private static final String		VIEWS_USUARIO_CREATE_OR_UPDATE_FORM	= "usuarios/createOrUpdateUsuarioForm";
 
 	private final UsuarioService	usuarioService;
 	private final ClientService		clientService;
@@ -54,7 +53,7 @@ public class AdministratorController {
 		this.timeOfferService = timeOfferService;
 	}
 
-	@GetMapping("/administrators/usuarios{page}")
+	@GetMapping("/administrators/usuarios/page/{page}")
 	public String processFindUsuariosForm(@PathVariable("page") final int page, final Map<String, Object> model) {
 		Pageable elements = PageRequest.of(page, 10);
 		Pageable nextPage = PageRequest.of(page + 1, 10);
@@ -66,7 +65,7 @@ public class AdministratorController {
 		return "usuarios/usuariosList";
 	}
 
-	@GetMapping("/administrators/clients{page}")
+	@GetMapping("/administrators/clients/page/{page}")
 	public String processFindClientesForm(@PathVariable("page") final int page, final Map<String, Object> model) {
 		Pageable elements = PageRequest.of(page, 10);
 		Pageable nextPage = PageRequest.of(page + 1, 10);
@@ -105,7 +104,7 @@ public class AdministratorController {
 		Usuario usuario = this.usuarioService.findByUsername(username);
 		usuario.getUsuar().setEnabled(false);
 		this.usuarioService.saveUsuario(usuario);
-		return "redirect:/administrators/usuarios";
+		return "redirect:/administrators/usuarios/page/0";
 	}
 
 	@GetMapping(value = "/administrators/clients/{username}/disable")
@@ -135,7 +134,7 @@ public class AdministratorController {
 		timeOffers.stream().forEach(t -> t.setStatus(StatusOffer.inactive));
 
 		this.clientService.saveClient(client);
-		return "redirect:/administrators/clients";
+		return "redirect:/administrators/clients/page/0";
 	}
 
 	@GetMapping(value = "/administrators/clients/{username}/activate")
@@ -151,7 +150,7 @@ public class AdministratorController {
 		Client client = this.clientService.findByUsername(username);
 		client.getUsuar().setEnabled(true);
 		this.clientService.saveClient(client);
-		return "redirect:/administrators/clients";
+		return "redirect:/administrators/clients/page/0";
 	}
 	
 	@GetMapping("/administrators/offersRecord{page}")
