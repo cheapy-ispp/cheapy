@@ -304,17 +304,8 @@
 				name="usuar.password" />
 			<cheapy:inputField label="Código de activación" placeholder="Ponga aqui el código que se le suministro al firmar el contrato"
 				name="code.code" />
-			<div class="form-group">                   
-	            <label class="col-sm-2 control-label">Municipio: </label>
-	            <div class="col-sm-10">
-				<select name="municipio" class="select-municipio" style="width:80%;text-align-last:center;">
-					<option value="">Seleccione una de las opciones</option>
-					<c:forEach items="${municipio}" var="entry">
-						<option value="${entry}">${entry.toString()}</option>
-					</c:forEach>
-				</select>
-				</div>
-			</div>	
+			<cheapy:selectMunicipio label="Municipio" name="municipio" size="1" items="${municipios}" ></cheapy:selectMunicipio>
+				
 			<div class="text-center">
 				<input type="submit" class="fadeIn fourth" value="Registrarse">
 			</div>

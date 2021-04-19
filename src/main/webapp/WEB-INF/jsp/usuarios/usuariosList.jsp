@@ -10,6 +10,12 @@
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
 <cheapy:layout pageName="usuarios">
+	<script>
+		function pagNum(pagina) {
+			paginaAct = pagina + 1;
+			document.write("Página " + paginaAct + " <br />");
+		}
+	</script>
     <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="users"/></h2>
     
 	<c:if test="${empty usuarioLs }">
@@ -63,7 +69,11 @@
 	    </table>
     </div>
     <div class="text-center">
-    	<c:out value='Página ${page}'></c:out>
+    	<script type="text/javascript">
+			          
+    		pagNum(${page});
+								
+		</script>
     </div>
     <div>
     <c:if test='${page!=0}'>

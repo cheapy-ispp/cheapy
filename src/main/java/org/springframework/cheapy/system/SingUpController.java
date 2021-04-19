@@ -1,5 +1,10 @@
 package org.springframework.cheapy.system;
 
+import java.io.Console;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -65,13 +70,23 @@ public class SingUpController {
 
 	@GetMapping("/users/new")
 	public String singUpUserForm(Map<String, Object> model) {
+		Map<Object, String> municipios = new HashMap<Object, String>();
+		
+		Municipio[] a = Municipio.values();
+		int cont = 0;
+		for (Municipio i : Municipio.values()) {
+		    municipios.put(a[cont], i.toString());
+		    cont++;
+		}
+		
+		municipios.put("null", "Seleccione uno de los municipios");
 		Usuario usuario = new Usuario();
 		
 		User user=new User();
 		
 		usuario.setUsuar(user);
-		model.put("municipio", Municipio.values());
 		model.put("usuario", usuario);
+		model.put("municipios", municipios);
 		//model.put("user", user);
 		return "singup/singUpUser";
 	}
@@ -100,12 +115,22 @@ public class SingUpController {
 
 	@GetMapping("/clients/new")
 	public String singUpClientForm(Map<String, Object> model) {
+		Map<Object, String> municipios = new HashMap<Object, String>();
+		
+		Municipio[] a = Municipio.values();
+		int cont = 0;
+		for (Municipio i : Municipio.values()) {
+		    municipios.put(a[cont], i.toString());
+		    cont++;
+		}
+		
+		municipios.put("null", "Seleccione uno de los municipios");
 		Client cliente = new Client();
 		
 		User user=new User();
 		
 		cliente.setUsuar(user);
-		model.put("municipio", Municipio.values());
+		model.put("municipios", municipios);
 		model.put("cliente", cliente);
 		//model.put("user", user);
 		return "singup/singUpClient";
