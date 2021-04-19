@@ -8,8 +8,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,10 +18,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cheapy.configuration.SecurityConfiguration;
 import org.springframework.cheapy.model.Client;
 import org.springframework.cheapy.model.Code;
-import org.springframework.cheapy.model.FoodOffer;
-import org.springframework.cheapy.model.NuOffer;
-import org.springframework.cheapy.model.SpeedOffer;
-import org.springframework.cheapy.model.TimeOffer;
 import org.springframework.cheapy.model.User;
 import org.springframework.cheapy.service.ClientService;
 import org.springframework.cheapy.service.FoodOfferService;

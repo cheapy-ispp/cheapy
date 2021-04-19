@@ -79,6 +79,9 @@ public class AdministratorController {
 	@GetMapping("/administrators/usuarios/{username}")
 	public String processUsuarioShowForm(@PathVariable("username") final String username, final Map<String, Object> model) {
 		Usuario usuario = this.usuarioService.findByUsername(username);
+		if (usuario==null) {
+			return "error";
+		}
 		model.put("usuario", usuario);
 		return "usuarios/usuariosShow";
 	}
@@ -86,6 +89,9 @@ public class AdministratorController {
 	@GetMapping("/administrators/clients/{username}")
 	public String processClientShowForm(@PathVariable("username") final String username, final Map<String, Object> model) {
 		Client client = this.clientService.findByUsername(username);
+		if (client==null) {
+			return "error";
+		}
 		model.put("client", client);
 		return "clients/clientShow";
 	}
