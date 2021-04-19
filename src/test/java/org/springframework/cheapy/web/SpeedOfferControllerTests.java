@@ -152,4 +152,42 @@ class SpeedOfferControllerTest {
 		mockMvc.perform(get("/offers/speed/{speedOfferId}/activate", TEST_SPEEDOFFER_ID+1))
 				.andExpect(view().name("exception"));
 	}
+	
+	@WithMockUser(value = "user1", authorities = "client")
+	@Test
+	void testDisableInitSuccess() throws Exception {
+		this.mockMvc.perform(get("/offers/speed/{speedOfferId}/disable", TEST_SPEEDOFFER_ID))
+					.andExpect(status().isOk())
+					.andExpect(view().name("offers/speed/speedOffersDisable"));
+	}
+	
+	@WithMockUser(value = "user1", authorities = "client")
+    @Test
+    void testDisableFormSuccess() throws Exception {
+        this.mockMvc.perform(post("/offers/speed/{speedOfferId}/disable", TEST_SPEEDOFFER_ID)
+                    .with(csrf()))
+                    .andExpect(status().is3xxRedirection())
+                    .andExpect(view().name("redirect:/myOffers"));
+    }
+
+	@WithMockUser(value = "user1", authorities = "client")
+	@Test
+	void testDisableInitHasErrors() throws Exception {
+		Client c = new Client();
+        c.setId(2);
+        sp1.setClient(c);
+		mockMvc.perform(get("/offers/speed/{speedOfferId}/disable", TEST_SPEEDOFFER_ID))
+				.andExpect(view().name("error"));
+	}
+	
+	@WithMockUser(value = "user1", authorities = "client")
+	@Test
+	void testDisableFormHasErrors() throws Exception {
+		Client c = new Client();
+        c.setId(2);
+        sp1.setClient(c);
+		mockMvc.perform(post("/offers/speed/{speedOfferId}/disable", TEST_SPEEDOFFER_ID)
+				.with(csrf()))
+				.andExpect(view().name("error"));
+	}
 }
