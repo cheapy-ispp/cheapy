@@ -40,13 +40,13 @@
 		                    	<c:out value="Por franja horaria"/>
 		                    </c:if>
 		                    <c:if test="${datos[1] == 'nu'}">
-		                    	<c:out value="Por numero de comensales"/>
+		                    	<c:out value="Por número de comensales"/>
 		                    </c:if>
 		                    <c:if test="${datos[1] == 'speed'}">
 		                    	<c:out value="Por rapidez"/>
 		                    </c:if>
 		                    <c:if test="${datos[1] == 'food'}">
-		                    	<c:out value="Por plato especifico"/>
+		                    	<c:out value="Por plato específico"/>
 		                    </c:if>
 		                </td>
 		                

@@ -30,8 +30,8 @@
                       <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
                       <fmt:message key="myOffers"/> </button>
                   </div>
-                <div class="createOffer">
-                      <button type="button" class="createOffer" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
+                <div class="btn-home">
+                      <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
                       <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
                       <fmt:message key="createOffers"/> </button>
                   </div>
