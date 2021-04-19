@@ -1,6 +1,5 @@
 package org.springframework.cheapy.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -14,10 +13,10 @@ public class User {
 	
 
 	@Id
-	@NotBlank
+	@NotBlank(message="No debe estar vacío")
 	private String username;
 
-	@NotBlank
+	@NotBlank(message="No debe estar vacío")
 	private String password;
 	
 	
