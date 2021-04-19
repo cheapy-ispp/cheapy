@@ -9,15 +9,23 @@
 
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
-<cheapy:layout pageName="reviews">
+<cheapy:layout pageName="reviewsClient">
+   	<script>
+		function pagNum(pagina) {
+			paginaAct = pagina + 1;
+			document.write("Página " + paginaAct + " <br />");
+		}
+	
+	</script>
     <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="reviews"/></h2>
-
+	
+	<div class="table-responsive">
     <table id="reviewTable" class="table table-striped">
         <thead>
 	        <tr>
 	        	<!-- <th style="width: 150px;">Restaurante</th> -->
 	        	<th><fmt:message key="user"/></th>
-	        	<th><fmt:message key="stars"/></th>
+	        	<th style="text-align:left"><fmt:message key="stars"/></th>
 	            <th><fmt:message key="opinion"/></th>
 	            <th> </th>
 	        </tr>
@@ -64,8 +72,13 @@
         </c:choose>
         </tbody>
     </table>
+    </div>
     <div class="text-center">
-    	<c:out value='Página ${page}'></c:out>
+    	<script type="text/javascript">
+			          
+    		pagNum(${page});
+								
+		</script>
     </div>
     <c:if test='${page!=0}'>
     <div class="text-left">

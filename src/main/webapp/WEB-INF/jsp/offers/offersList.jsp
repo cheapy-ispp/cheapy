@@ -60,7 +60,7 @@
 	<form class="example" action="${fn:escapeXml(SearchNameOfferListUrl)}">
 		<h2 class="text-center" style="font-family: 'Lobster'; text-align:center; font-size:150%;  color: rgb(0, 64, 128); padding:10px;" >Búsqueda por nombre del bar/restaurante: </h2>
 		<div class="text-center">
-	  		<input type="text" placeholder="Búsqueda por nombre" name="name" style="border:solid; border-color: rgb(0, 64, 128);">
+	  		<input type="text" placeholder="Búsqueda por nombre" name="name" style="border:solid; width:80%; border-color: rgb(0, 64, 128);">
 	  		<button type="submit" class="btn-search"><i class="fa fa-search"></i>
 	  		<span class="glyphicon 	glyphicon glyphicon-search" aria-hidden="true" style="padding: 5px"> </span>
 	  		</button>
@@ -73,7 +73,7 @@
 	<form class="example" action="${fn:escapeXml(SearchFoodOfferListUrl)}">
 		<h2 class="text-center" style="font-family: 'Lobster'; text-align:center; font-size:150%;  color: rgb(0, 64, 128); padding:10px;" >Búsqueda por tipo de comida: </h2>
 		<div class="text-center">
-	  		<input type="text" placeholder="Búsqueda por tipo comida (Ej: americana)" name="name" style="border:solid; border-color: rgb(0, 64, 128);">
+	  		<input type="text" placeholder="Búsqueda por tipo comida (Ej: americana)" name="name" style="border:solid; width:80%; border-color: rgb(0, 64, 128);">
 	  		<button type="submit" class="btn-search"><i class="fa fa-search"></i>
 	  		<span class="glyphicon 	glyphicon glyphicon-search" aria-hidden="true" style="padding: 5px"> </span>
 	  		</button>

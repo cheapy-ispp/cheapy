@@ -58,14 +58,21 @@ public class UsuarioController {
 		
 		Usuario usuario = this.usuarioService.getCurrentUsuario();
 		
-		if(usuario.getUsuar().getPassword().equals("")) {
+		if(usuarioEdit.getUsuar().getPassword().equals("")) {
 			result.rejectValue("usuar.password","" ,"La contraseña no puede estar vacía");
 			
 		}
 		
 		if (result.hasErrors()) {
 			model.addAttribute("usuario", usuarioEdit);
-			model.put("municipio", Municipio.values());
+			Map<Object, String> municipios = new HashMap<Object, String>();
+			Municipio[] a = Municipio.values();
+			int cont = 0;
+			for (Municipio i : Municipio.values()) {
+			    municipios.put(a[cont], i.toString());
+			    cont++;
+			}
+			model.put("municipios", municipios);
 			return UsuarioController.VIEWS_USUARIO_CREATE_OR_UPDATE_FORM;
 		}
 

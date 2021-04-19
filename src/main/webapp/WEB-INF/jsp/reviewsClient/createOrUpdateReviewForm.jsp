@@ -8,7 +8,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
-<cheapy:layout pageName="reviewsN">
+<cheapy:layout pageName="reviewsClientN">
     <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px">
     	<c:if test="${review['new']}">Nueva </c:if> Reseña
     </h2>

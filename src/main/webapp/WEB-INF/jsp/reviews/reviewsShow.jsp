@@ -17,7 +17,7 @@
     <form:form modelAttribute="review" class="form-horizontal" id="add-review-form">
 
 
-
+	<div class="table-responsive">
     <table class="table table-striped" id="review-table">
         <tr>
             <th><fmt:message key="stars"/></th>
@@ -30,7 +30,7 @@
         </tr>
     
     </table>
-    
+    </div>
     </form:form>
 
 	<sec:authentication var="principal" property="principal" />
