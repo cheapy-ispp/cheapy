@@ -38,7 +38,7 @@ public class Client extends BaseEntity {
 	@NotEmpty(message="No debe estar vacío")
 	private String				address;
 
-	@NotNull
+	@NotNull(message="No debe estar vacío")
 	@Enumerated(value = EnumType.STRING)
 	private Municipio			municipio;
 
@@ -52,14 +52,14 @@ public class Client extends BaseEntity {
 	@NotNull(message = "Debe introducir una hora de cierre")
 	private LocalTime			finish;
 
-	@NotEmpty
+	@NotEmpty(message="No debe estar vacío")
 	@Pattern(regexp="\\d{9}",message="Debe tener 9 dígitos")
 	private String				telephone;
 
-	@NotEmpty
+	@NotEmpty(message="No debe estar vacía")
 	private String				description;
 
-	@NotEmpty
+	@NotEmpty(message="No debe estar vacío")
 	private String				food;
 
 	@OneToOne(cascade = CascadeType.ALL)

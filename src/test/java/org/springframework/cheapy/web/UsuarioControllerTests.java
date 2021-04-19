@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cheapy.configuration.SecurityConfiguration;
-import org.springframework.cheapy.model.Code;
 import org.springframework.cheapy.model.Municipio;
 import org.springframework.cheapy.model.User;
 import org.springframework.cheapy.model.Usuario;
@@ -32,7 +31,6 @@ excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classe
 excludeAutoConfiguration = SecurityConfiguration.class)
 class UsuarioControllerTest {
 
-	private static final int TEST_USUARIO_ID = 1;
 
 	@Autowired
 	private MockMvc mockMvc;

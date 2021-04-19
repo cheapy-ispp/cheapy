@@ -26,7 +26,7 @@ public class TimeOffer extends Offer {
 	private LocalTime finish;
 
 	@NotNull(message = "Debe rellenar el descuento")
-	@Range(min = 0, max = 100, message = "El descuento debe estar entre 0 y 100 %")
+	@Range(min = 1, max = 100, message = "El descuento debe estar entre 1 y 100 %")
 	private Integer discount;
 
 	public LocalTime getInit() {

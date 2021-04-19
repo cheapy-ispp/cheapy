@@ -58,24 +58,24 @@ public class ReviewClientController {
 			return "error";
 		}
 		
-		ReviewClient review = new ReviewClient();
+		ReviewClient reviewClient = new ReviewClient();
 
-		model.put("review", review);
+		model.put("reviewClient", reviewClient);
 		return ReviewClientController.VIEWS_REVIEWS_CREATE_OR_UPDATE_FORM;
 	}
 
 	@PostMapping("/reviewsClient/new/{idClient}")
-	public String processCreationForm(@Valid final ReviewClient review, @PathVariable("idClient") final String idClient,final BindingResult result) {
+	public String processCreationForm(@PathVariable("idClient") final String idClient ,@Valid final ReviewClient reviewClient ,final BindingResult result) {
 		if (result.hasErrors()) {
 			return ReviewClientController.VIEWS_REVIEWS_CREATE_OR_UPDATE_FORM;
 		} else {
 			User escritor = this.userService.getCurrentUser();
-			review.setEscritor(escritor);
+			reviewClient.setEscritor(escritor);
 			Client bar = this.clientService.findByUsername(idClient);
-			review.setBar(bar);
+			reviewClient.setBar(bar);
 		
-			this.reviewService.saveReview(review);
-			return "redirect:/reviewsClient/" + review.getId();
+			this.reviewService.saveReview(reviewClient);
+			return "redirect:/reviewsClient/" + reviewClient.getId();
 		}
 	}
 	
@@ -109,9 +109,9 @@ public class ReviewClientController {
 		if (!this.checkIdentity(reviewId)) {
 			return "error";
 		}
-		ReviewClient review = this.reviewService.findReviewById(reviewId);
+		ReviewClient reviewClient = this.reviewService.findReviewById(reviewId);
 		
-		model.addAttribute("review", review);
+		model.addAttribute("reviewClient", reviewClient);
 		return ReviewClientController.VIEWS_REVIEWS_CREATE_OR_UPDATE_FORM;
 	}
 	
@@ -121,7 +121,7 @@ public class ReviewClientController {
 			return "error";
 		}
 		if (result.hasErrors()) {
-			model.addAttribute("review", reviewEdit);
+			model.addAttribute("reviewClient", reviewEdit);
 			return ReviewClientController.VIEWS_REVIEWS_CREATE_OR_UPDATE_FORM;
 
 		} else {

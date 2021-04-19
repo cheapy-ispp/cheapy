@@ -2,6 +2,7 @@
 package org.springframework.cheapy.web;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +32,6 @@ public class NuOfferController {
 
 	private final NuOfferService	nuOfferService;
 	private final ClientService		clientService;
-
 
 	public NuOfferController(final NuOfferService nuOfferService, final ClientService clientService) {
 		this.nuOfferService = nuOfferService;
@@ -119,6 +119,11 @@ public class NuOfferController {
 		}
 		if (!this.checkDiscounts(nuOffer)) {
 			result.rejectValue("discountGold", "", "El descuento de Oro debe ser mayor o igual que el de plata, y el de plata mayor o igual que el de bronce");
+
+		}
+		
+		if (nuOffer.getStart()==null || nuOffer.getStart().isBefore(LocalDateTime.now())) {
+			result.rejectValue("start", "", "La fecha de inicio debe ser futura");
 
 		}
 
@@ -215,7 +220,7 @@ public class NuOfferController {
 			return NuOfferController.VIEWS_NU_OFFER_CREATE_OR_UPDATE_FORM;
 
 		}
-		BeanUtils.copyProperties(this.nuOfferService.findNuOfferById(nuOfferEdit.getId()), nuOfferEdit, "start", "end", "gold", "discount_gold", "silver", "discount_silver", "bronze", "discount_bronze");
+		BeanUtils.copyProperties(this.nuOfferService.findNuOfferById(nuOfferEdit.getId()), nuOfferEdit, "start", "end", "gold", "discountGold", "silver", "discountSilver", "bronze", "discountBronze");
 		this.nuOfferService.saveNuOffer(nuOfferEdit);
 		return "redirect:/offers/nu/" + nuOfferEdit.getId();
 

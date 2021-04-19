@@ -21,7 +21,7 @@ public class SpeedOffer extends Offer {
 
 	@Column(name = "discount_gold")
 	@NotNull(message = "Debe rellenar el descuento del rango oro")
-	@Range(min = 0, max = 100, message = "El descuento debe estar entre 0 y 100 %")
+	@Range(min = 1, max = 100, message = "El descuento debe estar entre 1 y 100 %")
 	private Integer discountGold;
 
 	@NotNull(message = "Debe rellenar el tiempo del rango plata")
@@ -30,7 +30,7 @@ public class SpeedOffer extends Offer {
 
 	@Column(name = "discount_silver")
 	@NotNull(message = "Debe rellenar el descuento del rango plata")
-	@Range(min = 0, max = 100, message = "El descuento debe estar entre 0 y 100 %")
+	@Range(min = 1, max = 100, message = "El descuento debe estar entre 1 y 100 %")
 	private Integer discountSilver;
 
 	@NotNull(message = "Debe rellenar el tiempo del rango bronce")
@@ -39,7 +39,7 @@ public class SpeedOffer extends Offer {
 
 	@Column(name = "discount_bronze")
 	@NotNull(message = "Debe rellenar el descuento del rango bronce")
-	@Range(min = 0, max = 100, message = "El descuento debe estar entre 0 y 100 %")
+	@Range(min = 1, max = 100, message = "El descuento debe estar entre 1 y 100 %")
 	private Integer discountBronze;
 
 	public Integer getGold() {
