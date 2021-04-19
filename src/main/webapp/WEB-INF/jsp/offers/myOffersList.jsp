@@ -6,14 +6,30 @@
 <%@ taglib prefix="cheapy" tagdir="/WEB-INF/tags" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <cheapy:layout pageName="ofertasM">
-
-	
-
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="foodOffers"/>:</h2>
+	<script>
+		$(document).ready(function(){
+		  $('[data-toggle="desplegable"]').popover();   
+		});
+	</script>
+	<script type="text/javascript">
+		
+	</script>
+    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="foodOffers"/>
+    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir el plato indicado en la oferta">
+    	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
+    </h2>
 	<c:if test="${empty foodOfferLs }">
 		<p id="vacio" >No hay ninguna oferta por plato específico creada.</p>
+		<div class="createOffer">
+            <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
+            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
+            <fmt:message key="createOffers"/> </button>
+        </div>
 	</c:if>
 	<c:if test="${not empty foodOfferLs }">
 		<div class="table-responsive">
@@ -44,7 +60,15 @@
 		                    <c:out value="${localDateTimeFormat.format(foodOffer.end)}"/>
 		                </td>
 		                <td>
-		                    <c:out value="${foodOffer.status}"/>
+		                	<c:if test="${foodOffer.status == 'active'}">
+		                    	<c:out value="Activa"/>
+		                    </c:if>	
+		                    <c:if test="${foodOffer.status == 'hidden'}">
+		                    	<c:out value="Oculta"/>
+		                    </c:if>	
+		                    <c:if test="${foodOffer.status == 'inactive'}">
+		                    	<c:out value="Inactiva"/>
+		                    </c:if>	
 		                </td>
 		                <td>
 		                    <c:out value="${foodOffer.client.municipio}"/>
@@ -66,9 +90,17 @@
 		    </table>
 		</div>
     </c:if>
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="nuOffers"/>:</h2>
+    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="nuOffers"/>
+    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir con más comensales que alguno de los tres posibles objetivos">
+    	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
+    </h2>
 	<c:if test="${empty nuOfferLs }">
 		<p id="vacio" >No hay ninguna oferta por número de comensales creada.</p>
+		<div class="createOffer">
+            <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
+            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
+            <fmt:message key="createOffers"/> </button>
+        </div>
 	</c:if>
 	<c:if test="${not empty nuOfferLs }">
 		<div class="table-responsive">
@@ -97,7 +129,15 @@
 		                    <c:out value="${localDateTimeFormat.format(nuOffer.end)}"/>
 		                </td>
 		                <td>
-		                    <c:out value="${nuOffer.status}"/>
+		                	<c:if test="${nuOffer.status == 'active'}">
+		                    	<c:out value="Activa"/>
+		                    </c:if>	
+		                    <c:if test="${nuOffer.status == 'hidden'}">
+		                    	<c:out value="Oculta"/>
+		                    </c:if>	
+		                    <c:if test="${nuOffer.status == 'inactive'}">
+		                    	<c:out value="Inactiva"/>
+		                    </c:if>	
 		                </td>
 		                <td>
 		                    <c:out value="${nuOffer.client.municipio}"/>
@@ -119,9 +159,17 @@
     	</div>
     </c:if>
     
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="speedOffers"/>:</h2>
+    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="speedOffers"/>
+    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir en menos de alguno de los tres posibles tiempos">
+    	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
+    </h2>
 	<c:if test="${empty speedOfferLs }">
 		<p id="vacio" >No hay ninguna oferta por tiempo empleado en comer creada.</p>
+		<div class="createOffer">
+            <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
+            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
+            <fmt:message key="createOffers"/> </button>
+        </div>
 	</c:if>
 	<c:if test="${not empty speedOfferLs }">
 		<div class="table-responsive">
@@ -150,7 +198,15 @@
 		                    <c:out value="${localDateTimeFormat.format(speedOffer.end)}"/>
 		                </td>
 		                <td>
-		                    <c:out value="${speedOffer.status}"/>
+		                	<c:if test="${speedOffer.status == 'active'}">
+		                    	<c:out value="Activa"/>
+		                    </c:if>	
+		                    <c:if test="${speedOffer.status == 'hidden'}">
+		                    	<c:out value="Oculta"/>
+		                    </c:if>	
+		                    <c:if test="${speedOffer.status == 'inactive'}">
+		                    	<c:out value="Inactiva"/>
+		                    </c:if>	
 		                </td>
 		                <td>
 		                    <c:out value="${speedOffer.client.municipio}"/>
@@ -173,9 +229,17 @@
     	</div>
     </c:if>
     
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="timeOffers"/>:</h2>
+    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="timeOffers"/>
+    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir en el local durante el intervalo indicado">
+    	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
+    </h2>
 	<c:if test="${empty timeOfferLs }">
 		<p id="vacio" >No hay ninguna oferta por franja horaria creada.</p>
+		<div class="createOffer">
+            <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
+            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
+            <fmt:message key="createOffers"/> </button>
+        </div>
 	</c:if>
 	<c:if test="${not empty timeOfferLs }">
 		<div class="table-responsive">
@@ -203,7 +267,15 @@
 		                    <c:out value="${localDateTimeFormat.format(timeOffer.end)}"/>
 		                </td>
 		                <td>
-		                    <c:out value="${timeOffer.status}"/>
+		                	<c:if test="${timeOffer.status == 'active'}">
+		                    	<c:out value="Activa"/>
+		                    </c:if>	
+		                    <c:if test="${timeOffer.status == 'hidden'}">
+		                    	<c:out value="Oculta"/>
+		                    </c:if>	
+		                    <c:if test="${timeOffer.status == 'inactive'}">
+		                    	<c:out value="Inactiva"/>
+		                    </c:if>	
 		                </td>
 		                <td>
 		                    <c:out value="${timeOffer.client.municipio}"/>

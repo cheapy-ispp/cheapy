@@ -23,18 +23,44 @@
             <cheapy:inputField label="Email" placeholder="" name="email"/>
             <cheapy:inputField label="Dirección" placeholder="" name="address"/>           
             <cheapy:inputField label="Teléfono" placeholder="" name="telephone"/>
-            <cheapy:inputField label="descripción" placeholder="" name="description"/>
+            <cheapy:inputField label="Descripción" placeholder="" name="description"/>
             <cheapy:inputField label="Comida" placeholder="food" name="food"/>
-            <div class="form-group">                   
-	            <label class="col-sm-2 control-label">Municipio: </label>
-	            <div class="col-sm-10">
-					<select name="municipio" class="select-municipio" style="width:80%;text-align-last:center;">
-						<c:forEach items="${municipio}" var="entry">
-							<option value="${entry}">${entry.toString()}</option>
-						</c:forEach>
-					</select>
-				</div>
-			</div>
+            <cheapy:selectMunicipio label="Municipio" name="municipio" size="1" items="${municipios}" ></cheapy:selectMunicipio>
+            
+					<script>
+
+						function setSelectedIndex(s, valsearch)
+						
+						{
+						
+							// Loop through all the items in drop down list
+							
+							for (i = 0; i< s.options.length; i++)
+							
+							{ 
+							
+								if (s.options[i].value == valsearch)
+								
+								{
+								
+								// Item is found. Set its property and exit
+								
+								s.options[i].selected = true;
+								
+								break;
+								
+								}
+							
+							}
+						
+						return;
+						
+						}
+						
+						setSelectedIndex(document.getElementById("selectMunicipio"),"${municipio}");
+						
+					</script>
+	
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

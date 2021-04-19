@@ -1,6 +1,7 @@
 
 package org.springframework.cheapy.web;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -79,11 +80,19 @@ public class ClientController {
 
 	@GetMapping(value = "/clients/edit")
 	public String updateClient( final ModelMap model, HttpServletRequest request) {
-
+		Map<Object, String> municipios = new HashMap<Object, String>();
+		
+		Municipio[] a = Municipio.values();
+		int cont = 0;
+		for (Municipio i : Municipio.values()) {
+		    municipios.put(a[cont], i.toString());
+		    cont++;
+		}
 		Client client = this.clientService.getCurrentClient();
 		
-		model.put("municipio", Municipio.values());
+		model.put("municipios", municipios);
 		model.addAttribute("client", client);
+		model.addAttribute("municipio", client.getMunicipio());
 
 		return ClientController.VIEWS_CREATE_OR_UPDATE_CLIENT;
 	}

@@ -8,8 +8,16 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <cheapy:layout pageName="ofertas">
+	<script>
+		$(document).ready(function(){
+		  $('[data-toggle="desplegable"]').popover();   
+		});
+	</script>
 	<div class="text-center">
 		<div class="btn-filter-max">
 			<spring:url value="/offers/foodOfferList/{page}" var="foodOfferListUrl">
@@ -78,6 +86,7 @@
 	<form class="example" action="${fn:escapeXml(SearchPlaceOfferListUrl)}">
 		<div class="text-center">
 			<select name="municipio" class="select-municipio" >
+				<option value="">Seleccione una de las opciones</option>
 			
 			<c:forEach items="${municipios}" var="entry">
 				<option value="${entry}">${entry.toString()}</option>
@@ -87,7 +96,10 @@
 		</div>
 	</form>
 
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="foodOffers"/>:</h2>
+    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="foodOffers"/>
+    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir el plato indicado en la oferta">
+    	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
+    </h2>
     
 	<c:if test="${empty foodOfferLs }">
 		<p id="vacio" >No hay ninguna oferta por plato específico activa.</p>
@@ -146,15 +158,19 @@
         </c:forEach>
         </tbody>
     </table>
+    
+    </div>
     <div class="text-center">
 	    <button type="button" class="btn-mas" role="link" onclick="window.location='${fn:escapeXml(foodOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 		<span class="glyphicon 	glyphicon glyphicon-plus" aria-hidden="true" style="padding: 5px"> </span>
 		Ver más</button>
 	</div>
-    </div>
     
     </c:if>
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="nuOffers"/>:</h2>
+    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="nuOffers"/>
+    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir con más comensales que alguno de los tres posibles objetivos">
+    	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
+    </h2>
 	<c:if test="${empty nuOfferLs }">
 		<p id="vacio" >No hay ninguna oferta por número de comensales activa.</p>
 	</c:if>
@@ -210,16 +226,20 @@
         </c:forEach>
         </tbody>
     </table>
+    
+    </div>
     <div class="text-center">
 	    <button type="button" class="btn-mas" role="link" onclick="window.location='${fn:escapeXml(nuOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 		<span class="glyphicon 	glyphicon glyphicon-plus" aria-hidden="true" style="padding: 5px"> </span>
 		Ver más</button>
 	</div>
-    </div>
 
     </c:if>
     
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="speedOffers"/>:</h2>
+    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="speedOffers"/>
+    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir en menos de alguno de los tres posibles tiempos">
+    	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
+    </h2>
 	<c:if test="${empty speedOfferLs }">
 		<p id="vacio" >No hay ninguna oferta por tiempo empleado en comer activa.</p>
 	</c:if>
@@ -276,17 +296,21 @@
 		        </c:forEach>
 		        </tbody>
 		    </table>
-		    <div class="text-center">
-			  	<spring:url value="/offers/speedOfferList" var="speedOfferUrl"></spring:url>
-	   			<button type="button" class="btn-mas" role="link" onclick="window.location='${fn:escapeXml(speedOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-				<span class="glyphicon 	glyphicon glyphicon-plus" aria-hidden="true" style="padding: 5px"> </span>
-				Ver más</button>
-			</div>
+		    
 	    </div>
+	    <div class="text-center">
+			<spring:url value="/offers/speedOfferList" var="speedOfferUrl"></spring:url>
+	   		<button type="button" class="btn-mas" role="link" onclick="window.location='${fn:escapeXml(speedOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+			<span class="glyphicon 	glyphicon glyphicon-plus" aria-hidden="true" style="padding: 5px"> </span>
+			Ver más</button>
+		</div>
 
     </c:if>
     
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="timeOffers"/>:</h2>
+    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="timeOffers"/> 
+    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir en el local durante el intervalo indicado">
+    	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
+    </h2>
 	<c:if test="${empty timeOfferLs }">
 		<p id="vacio" >No hay ninguna oferta por franja horaria activa.</p>
 	</c:if>
@@ -341,13 +365,14 @@
 		            </tr>
 		        </c:forEach>
 		    </table>
-		    <div class="text-center">
-			    <spring:url value="/offers/timeOfferList" var="timeOfferUrl"></spring:url>
-	    		<button type="button" class="btn-mas" role="link" onclick="window.location='${fn:escapeXml(timeOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-				<span class="glyphicon 	glyphicon glyphicon-plus" aria-hidden="true" style="padding: 5px"> </span>
-				Ver más</button>
-			</div>
+		    
   	  </div>
+  	  <div class="text-center">
+			<spring:url value="/offers/timeOfferList" var="timeOfferUrl"></spring:url>
+	    	<button type="button" class="btn-mas" role="link" onclick="window.location='${fn:escapeXml(timeOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+			<span class="glyphicon 	glyphicon glyphicon-plus" aria-hidden="true" style="padding: 5px"> </span>
+			Ver más</button>
+	</div>
     </c:if>
   
 	

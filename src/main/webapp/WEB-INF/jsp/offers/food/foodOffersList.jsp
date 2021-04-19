@@ -7,9 +7,21 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <cheapy:layout pageName="ofertas de plato especifico">
+	<script>
+		function pagNum(pagina) {
+			paginaAct = pagina + 1;
+			document.write("Página " + paginaAct + " <br />");
+		}
 	
+		$(document).ready(function(){
+		  $('[data-toggle="desplegable"]').popover();   
+		});
+	</script>
 	<div class="text-center">
 		<div class="btn-filter-max">
 			<spring:url value="/offers/foodOfferList/{page}" var="foodOfferListUrl">
@@ -43,89 +55,98 @@
 		</div>
 	</div>
 	
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="foodOffers"/>:</h2>
+    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="foodOffers"/>
+    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir el plato indicado en la oferta">
+    	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
+    </h2>
     
 	<c:if test="${empty foodOfferLs }">
 		<p id="vacio" >No hay ninguna oferta por plato específico activa.</p>
 	</c:if>
 	<c:if test="${not empty foodOfferLs }">
-    <table id="foodOfferTable" class="table table-striped">
-        <thead>
-        <tr>
-        	<!-- <th style="width: 150px;">Restaurante</th> -->
-        	<th><fmt:message key="name"/></th>
-        	<th><fmt:message key="food"/></th>
-        	<th><fmt:message key="discount"/></th>
-            <th><fmt:message key="startDate"/></th>
-            <th><fmt:message key="endDate"/></th>
-            <th><fmt:message key="municipio"/></th>
-            
-            <th> </th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${foodOfferLs}" var="foodOffer">
-            <tr>
-            	<td>
-                     <a href="/restaurant/${foodOffer.client.id}"><c:out value="${foodOffer.client.name}"/></a>
-                </td>
-                <td>
-                    <c:out value="${foodOffer.food}"/>
-                </td>
-                <td>
-                    <c:out value="${foodOffer.discount}%"/>
-                </td>
-                <td>
-                    <c:out value="${localDateTimeFormat.format(foodOffer.start)}"/>
-                </td>
-                <td>
-                    <c:out value="${localDateTimeFormat.format(foodOffer.end)}"/>
-                </td>
-                <td>
-                    <c:out value="${foodOffer.client.municipio}"/>
-                </td>
-                
-                <td>
-	                <spring:url value="/offers/food/{foodOfferId}" var="foodOfferUrl">
-	                        <spring:param name="foodOfferId" value="${foodOffer.id}"/>
-	                </spring:url>
-	                <div class="btn-detalles">
-                		<button type="button" role="link" onclick="window.location='${fn:escapeXml(foodOfferUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-                		<span class="glyphicon glyphicon-info-sign" aria-hidden="true" style="padding: 5px"> </span>
-	                	<fmt:message key="details"/></button>
-            		</div>
-                </td> 
-                  
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+	<div class="table-responsive">
+	    <table id="foodOfferTable" class="table table-striped">
+	        <thead>
+	        <tr>
+	        	<!-- <th style="width: 150px;">Restaurante</th> -->
+	        	<th><fmt:message key="name"/></th>
+	        	<th><fmt:message key="food"/></th>
+	        	<th><fmt:message key="discount"/></th>
+	            <th><fmt:message key="startDate"/></th>
+	            <th><fmt:message key="endDate"/></th>
+	            <th><fmt:message key="municipio"/></th>
+	            
+	            <th> </th>
+	        </tr>
+	        </thead>
+	        <tbody>
+	        <c:forEach items="${foodOfferLs}" var="foodOffer">
+	            <tr>
+	            	<td>
+	                    <c:out value="${foodOffer.client.name}"/>
+	                </td>
+	                <td>
+	                    <c:out value="${foodOffer.food}"/>
+	                </td>
+	                <td>
+	                    <c:out value="${foodOffer.discount}%"/>
+	                </td>
+	                <td>
+	                    <c:out value="${localDateTimeFormat.format(foodOffer.start)}"/>
+	                </td>
+	                <td>
+	                    <c:out value="${localDateTimeFormat.format(foodOffer.end)}"/>
+	                </td>
+	                <td>
+	                    <c:out value="${foodOffer.client.municipio}"/>
+	                </td>
+	                
+	                <td>
+		                <spring:url value="/offers/food/{foodOfferId}" var="foodOfferUrl">
+		                        <spring:param name="foodOfferId" value="${foodOffer.id}"/>
+		                </spring:url>
+		                <div class="btn-detalles">
+	                		<button type="button" role="link" onclick="window.location='${fn:escapeXml(foodOfferUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+	                		<span class="glyphicon glyphicon-info-sign" aria-hidden="true" style="padding: 5px"> </span>
+		                	<fmt:message key="details"/></button>
+	            		</div>
+	                </td> 
+	                  
+	            </tr>
+	        </c:forEach>
+	        </tbody>
+	    </table>
+	</div>
     <div class="text-center">
-    	<c:out value='Página ${page}'></c:out>
+    	<script type="text/javascript">
+			          
+    		pagNum(${page});
+								
+		</script>
     </div>
     <div>
-    <c:if test='${page!=0}'>
-   	<div class="text-left">
-    	<spring:url value="/offers/foodOfferList/{page}" var="foodOfferListUrl">
-    		<spring:param name="page" value="${page-1}"/>
-    	</spring:url>
-    	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(foodOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-		<span class="glyphicon 	glyphicon glyphicon-arrow-left" aria-hidden="true" style="padding: 5px"> </span>
-		Pág. anterior</button>
-	</div>	
-    </c:if>
-    
-    <c:if test="${fn:length(foodOfferLs) == 5 && nextPage > 0}">
-    <div class="text-right">
-    	
-    	<spring:url value="/offers/foodOfferList/{page}" var="foodOfferListUrl">
-    		<spring:param name="page" value="${page+1}"/>
-    	</spring:url>
-    	<button type="button" class="btn-pag"  role="link" onclick="window.location='${fn:escapeXml(foodOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-		<span class="glyphicon 	glyphicon glyphicon-arrow-right" aria-hidden="true" style="padding: 5px"> </span>
-		Pág. siguiente</button>
-	</div>	
-	</c:if>
+	    <c:if test='${page!=0}'>
+		   	<div class="text-left">
+		    	<spring:url value="/offers/foodOfferList/{page}" var="foodOfferListUrl">
+		    		<spring:param name="page" value="${page-1}"/>
+		    	</spring:url>
+		    	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(foodOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+				<span class="glyphicon 	glyphicon glyphicon-arrow-left" aria-hidden="true" style="padding: 5px"> </span>
+				Pág. anterior</button>
+			</div>	
+	    </c:if>
+	    
+	    <c:if test="${fn:length(foodOfferLs) == 5}">
+		    <div class="text-right">
+		    	
+		    	<spring:url value="/offers/foodOfferList/{page}" var="foodOfferListUrl">
+		    		<spring:param name="page" value="${page+1}"/>
+		    	</spring:url>
+		    	<button type="button" class="btn-pag"  role="link" onclick="window.location='${fn:escapeXml(foodOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+				Pág. siguiente
+				<span class="glyphicon 	glyphicon glyphicon-arrow-right" aria-hidden="true" style="padding: 5px"> </span></button>
+			</div>	
+		</c:if>
 	</div>
     </c:if>
 	

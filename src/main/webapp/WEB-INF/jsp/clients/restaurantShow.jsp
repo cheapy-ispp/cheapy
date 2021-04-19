@@ -10,7 +10,7 @@
 
 <cheapy:layout pageName="client">
 
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="client"/></h2>
+    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px; text-transform: uppercase;"><c:out value="${client.name}"/></h2>
 
 
 	
@@ -18,33 +18,33 @@
     	<thead>
         <tr>
             <th><fmt:message key="clientInit"/></th>
-            <td><c:out value="${client.init}"/></td>
+            <td><c:out value="${client.init}h"/></td>
         </tr>
         <tr>
             <th><fmt:message key="clientFinish"/></th>
-            <td><c:out value="${client.finish}"/></td>
+            <td><c:out value="${client.finish}h"/></td>
         </tr>
 		<tr>
-            <th><fmt:message key="nameClient"/></th>
+            <th><fmt:message key="name"/></th>
             <td><c:out value="${client.name}"/></td>
         </tr>
         <tr>
-            <th><fmt:message key="emailClient"/></th>
-            <td><c:out value="${client.email}%"/> </td>
+            <th><fmt:message key="email"/></th>
+            <td><c:out value="${client.email}"/> </td>
         </tr>
         
         <tr>
             <th><fmt:message key="addressClient"/></th>
-            <td><c:out value="${client.address}%"/> </td>
+            <td><c:out value="${client.address}"/> </td>
         </tr><tr>
-            <th><fmt:message key="telephoneClient"/></th>
-            <td><c:out value="${client.telephone}%"/> </td>
+            <th><fmt:message key="telephone"/></th>
+            <td><c:out value="${client.telephone}"/> </td>
         </tr><tr>
             <th><fmt:message key="descriptionClient"/></th>
-            <td><c:out value="${client.description}%"/> </td>
+            <td><c:out value="${client.description}"/> </td>
         </tr><tr>
             <th><fmt:message key="foodClient"/></th>
-            <td><c:out value="${client.food}%"/> </td>
+            <td><c:out value="${client.food}"/> </td>
    
         
         
@@ -52,8 +52,10 @@
         </thead>
     </table>
     <div style="font-size: 150%" >
-    <fmt:message key="reviews"/>
-		<cheapy:showStars  value="${reviews}"></cheapy:showStars> 
+	    <sec:authorize access="hasAnyAuthority('usuario')">
+		    <fmt:message key="reviews"/>
+				<cheapy:showStars  value="${reviews}"></cheapy:showStars> 
+		</sec:authorize>
 	</div>
     <div class="btn-menu">
   

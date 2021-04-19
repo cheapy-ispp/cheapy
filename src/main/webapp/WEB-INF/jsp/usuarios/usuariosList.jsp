@@ -10,53 +10,70 @@
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
 <cheapy:layout pageName="usuarios">
+	<script>
+		function pagNum(pagina) {
+			paginaAct = pagina + 1;
+			document.write("Página " + paginaAct + " <br />");
+		}
+	</script>
     <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="users"/></h2>
     
 	<c:if test="${empty usuarioLs }">
 		<p id="vacio" >No hay ningún usuario.</p>
 	</c:if>
 	<c:if test="${not empty usuarioLs }">
-    <table id="usuarioTable" class="table table-striped">
-        <thead>
-        <tr>
-        	<th><fmt:message key="nameUser"/></th>
-        	<th><fmt:message key="surname"/></th>
-        	<th><fmt:message key="user"/></th>
-        	<th><fmt:message key="enabled"/></th>   
-            <th> </th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${usuarioLs}" var="usuario">
-            <tr>
-            	<td>
-                    <c:out value="${usuario.nombre}"/>
-                </td>
-                <td>
-                    <c:out value="${usuario.apellidos}"/>
-                </td>
-                <td>
-                    <c:out value="${usuario.usuar.username}"/>
-                </td>
-                <td>
-                    <c:out value="${usuario.usuar.enabled}"/>
-                </td>
-                <td>
-	                <spring:url value="/administrators/usuarios/{username}" var="usuarioUrl">
-	                        <spring:param name="username" value="${usuario.usuar.username}"/>
-	                </spring:url>
-	                <div class="btn-detalles">
-                		<button type="button" role="link" onclick="window.location='${fn:escapeXml(usuarioUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-                		<span class="glyphicon glyphicon-info-sign" aria-hidden="true" style="padding: 5px"> </span>
-	                	<fmt:message key="details"/></button>
-            		</div>
-                </td>     
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+	<div class="table-responsive">
+	    <table id="usuarioTable" class="table table-striped">
+	        <thead>
+	        <tr>
+	        	<th><fmt:message key="nameUser"/></th>
+	        	<th><fmt:message key="surname"/></th>
+	        	<th><fmt:message key="user"/></th>
+	        	<th><fmt:message key="enabled"/></th>   
+	            <th> </th>
+	        </tr>
+	        </thead>
+	        <tbody>
+	        <c:forEach items="${usuarioLs}" var="usuario">
+	            <tr>
+	            	<td>
+	                    <c:out value="${usuario.nombre}"/>
+	                </td>
+	                <td>
+	                    <c:out value="${usuario.apellidos}"/>
+	                </td>
+	                <td>
+	                    <c:out value="${usuario.usuar.username}"/>
+	                </td>
+	                <td>
+	                	<c:if test="${usuario.usuar.enabled == 'true'}">
+			            	<c:out value="Si"/>
+			            </c:if>	
+			            <c:if test="${usuario.usuar.enabled == 'false'}">
+			                 <c:out value="No"/>
+			             </c:if>
+	                </td>
+	                <td>
+		                <spring:url value="/administrators/usuarios/{username}" var="usuarioUrl">
+		                        <spring:param name="username" value="${usuario.usuar.username}"/>
+		                </spring:url>
+		                <div class="btn-detalles">
+	                		<button type="button" role="link" onclick="window.location='${fn:escapeXml(usuarioUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+	                		<span class="glyphicon glyphicon-info-sign" aria-hidden="true" style="padding: 5px"> </span>
+		                	<fmt:message key="details"/></button>
+	            		</div>
+	                </td>     
+	            </tr>
+	        </c:forEach>
+	        </tbody>
+	    </table>
+    </div>
     <div class="text-center">
-    	<c:out value='Página ${page}'></c:out>
+    	<script type="text/javascript">
+			          
+    		pagNum(${page});
+								
+		</script>
     </div>
     <div>
     <c:if test='${page!=0}'>

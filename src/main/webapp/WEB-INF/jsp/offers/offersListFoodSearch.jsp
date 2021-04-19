@@ -10,8 +10,15 @@
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
 <cheapy:layout pageName="busqueda de ofertas">
+	<script>
+		function pagNum(pagina) {
+			paginaAct = pagina + 1;
+			document.write("Página " + paginaAct + " <br />");
+		}
+	
+	</script>
 
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px">Busqueda de Ofertas</h2>
+    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px">Búsqueda de Ofertas</h2>
 	<c:if test="${empty datos }">
 		<p id="vacio" >No hay ninguna oferta creada.</p>
 	</c:if>
@@ -39,13 +46,13 @@
 		                    	<c:out value="Por franja horaria"/>
 		                    </c:if>
 		                    <c:if test="${datos[1] == 'nu'}">
-		                    	<c:out value="Por numero de comensales"/>
+		                    	<c:out value="Por número de comensales"/>
 		                    </c:if>
 		                    <c:if test="${datos[1] == 'speed'}">
 		                    	<c:out value="Por rapidez"/>
 		                    </c:if>
 		                    <c:if test="${datos[1] == 'food'}">
-		                    	<c:out value="Por plato especifico"/>
+		                    	<c:out value="Por plato específico"/>
 		                    </c:if>
 		                </td>
 		                <td>
@@ -69,9 +76,16 @@
 		        </tbody>
 		    </table>
 		    </div>
-	<div>
+	<div class="text-center">
+    	<script type="text/javascript">
+			          
+    		pagNum(${page});
+								
+		</script>
+    </div>
+	<div style="display:inline">
 	<c:if test='${page!=0}'>
-   	<div class="text-left">
+
     	<spring:url value="/offersByFood/{page}?name={name}" var="SearchOfferListUrl">
     		<spring:param name="page" value="${page-1}"/>
     		<spring:param name="name" value="${name}"/>
@@ -79,11 +93,11 @@
     	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(SearchOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 		<span class="glyphicon 	glyphicon glyphicon-arrow-left" aria-hidden="true" style="padding: 5px"> </span>
 		Pág. anterior</button>
-	</div>	
+
     </c:if>
     
     <c:if test="${nextPage > 0}">
-    <div class="text-right">
+
     	<spring:url value="/offersByFood/{page}?name={name}" var="SearchOfferListUrl">
     		<spring:param name="page" value="${page+1}"/>
     		<spring:param name="name" value="${name}"/>
@@ -91,7 +105,7 @@
     	<button type="button" class="btn-pag"  role="link" onclick="window.location='${fn:escapeXml(SearchOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 		<span class="glyphicon 	glyphicon glyphicon-arrow-right" aria-hidden="true" style="padding: 5px"> </span>
 		Pág. siguiente</button>
-	</div>	
+
 	</c:if>
 	</div>
     </c:if>

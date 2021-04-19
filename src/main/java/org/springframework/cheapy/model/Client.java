@@ -82,7 +82,7 @@ public class Client extends BaseEntity {
 	@OneToMany
 	private List<TimeOffer>		timeOffers;
 
-
+	
 	public String getName() {
 		return this.name;
 	}
@@ -106,7 +106,7 @@ public class Client extends BaseEntity {
 	public void setAddress(final String address) {
 		this.address = address;
 	}
-
+	
 	public Municipio getMunicipio() {
 		return this.municipio;
 	}

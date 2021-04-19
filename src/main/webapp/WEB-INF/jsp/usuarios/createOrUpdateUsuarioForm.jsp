@@ -17,14 +17,42 @@
         <div class="form-group has-feedback">
             <cheapy:inputField label="Nombre" name="nombre"/>
             <cheapy:inputField label="Apellidos" name="apellidos"/>
-	<div class="form-group">                   
-            <label>Municipio: </label>
-			<select name="municipio">
-				<c:forEach items="${municipio}" var="entry">
-					<option value="${entry}">${entry}</option>
-				</c:forEach>
-			</select>
-			</div>
+			<cheapy:selectMunicipio label="Municipio" name="municipio" size="1" items="${municipios}" ></cheapy:selectMunicipio>
+            
+					<script>
+
+						function setSelectedIndex(s, valsearch)
+						
+						{
+						
+							// Loop through all the items in drop down list
+							
+							for (i = 0; i< s.options.length; i++)
+							
+							{ 
+							
+								if (s.options[i].value == valsearch)
+								
+								{
+								
+								// Item is found. Set its property and exit
+								
+								s.options[i].selected = true;
+								
+								break;
+								
+								}
+							
+							}
+						
+						return;
+						
+						}
+						
+						setSelectedIndex(document.getElementById("selectMunicipio"),"${municipio}");
+						
+					</script>
+	
             <cheapy:inputField label="Direccion" name="direccion"/>
             <cheapy:inputField label="Email" name="email"/>
             <cheapy:passwordField label="Password" name="usuar.password"/>

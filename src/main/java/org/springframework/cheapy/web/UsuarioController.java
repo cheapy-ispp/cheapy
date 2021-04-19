@@ -1,5 +1,6 @@
 package org.springframework.cheapy.web;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -36,9 +37,18 @@ public class UsuarioController {
 
 	@GetMapping(value = "/usuarios/edit")
 	public String updateUsuario(final ModelMap model, HttpServletRequest request) {
+		Map<Object, String> municipios = new HashMap<Object, String>();
+		
+		Municipio[] a = Municipio.values();
+		int cont = 0;
+		for (Municipio i : Municipio.values()) {
+		    municipios.put(a[cont], i.toString());
+		    cont++;
+		}
 		Usuario usuario = this.usuarioService.getCurrentUsuario();
 		model.addAttribute("usuario", usuario);
-		model.put("municipio", Municipio.values());
+		model.put("municipios", municipios);
+		model.addAttribute("municipio", usuario.getMunicipio());
 		return UsuarioController.VIEWS_USUARIO_CREATE_OR_UPDATE_FORM;
 	}
 

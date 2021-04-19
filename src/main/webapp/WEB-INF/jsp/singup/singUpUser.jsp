@@ -273,7 +273,7 @@
 	}
 
 </style>
-<cheapy:layout pageName="singUp">
+<cheapy:layout pageName="singUpUser">
 <div class="text-center">
     <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px">
         <fmt:message key="new"/><fmt:message key="usuario"/>
@@ -295,21 +295,13 @@
 				name="usuar.username" />
 			<cheapy:passwordField label="Contraseña" placeholder="Ponga aqui su contraseña" 
 				name="usuar.password" />
-			<div class="form-group">                   
-	            <label class="col-sm-2 control-label">Municipio </label>
-	            <div class="col-sm-10">
-				<select name="municipio" class="select-municipio" style="width:80%;text-align-last:center;" >
-					
-					<c:forEach items="${municipio}" var="entry">
-						<option value="${entry}">${entry.toString()}</option>
-					</c:forEach>
-				</select>
-				</div>
-			</div>
+			
+	        <cheapy:selectMunicipio label="Municipio" name="municipio" size="1" items="${municipios}" ></cheapy:selectMunicipio>
+			
+		</div>
 			<div class="text-center">
 				<input type="submit" class="fadeIn fourth" value="Registrarse">
 			</div>
-		</div>
 	</form:form>
 
 </cheapy:layout>
