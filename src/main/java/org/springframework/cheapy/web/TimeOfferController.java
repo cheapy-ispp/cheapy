@@ -1,6 +1,7 @@
 
 package org.springframework.cheapy.web;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
@@ -103,6 +104,11 @@ public class TimeOfferController {
 
 		if (!this.checkTimes(timeOffer)) {
 			result.rejectValue("finish", "", "La hora de fin debe ser posterior a la de inicio");
+
+		}
+		
+		if (timeOffer.getStart()==null || timeOffer.getStart().isBefore(LocalDateTime.now())) {
+			result.rejectValue("start", "", "La fecha de inicio debe ser futura");
 
 		}
 

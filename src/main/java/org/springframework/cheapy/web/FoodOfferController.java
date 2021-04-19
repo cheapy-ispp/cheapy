@@ -1,6 +1,7 @@
 
 package org.springframework.cheapy.web;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
@@ -93,6 +94,12 @@ public class FoodOfferController {
 			result.rejectValue("end", "", "La fecha de fin debe ser posterior a la fecha de inicio");
 
 		}
+		
+		if (foodOffer.getStart()==null || foodOffer.getStart().isBefore(LocalDateTime.now())) {
+			result.rejectValue("start", "", "La fecha de inicio debe ser futura");
+
+		}
+		
 		if (result.hasErrors()) {
 			return FoodOfferController.VIEWS_FOOD_OFFER_CREATE_OR_UPDATE_FORM;
 		}
