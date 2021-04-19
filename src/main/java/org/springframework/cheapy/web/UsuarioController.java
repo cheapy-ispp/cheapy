@@ -60,7 +60,7 @@ public class UsuarioController {
 		}
 
 		BeanUtils.copyProperties(usuario, usuarioEdit, "nombre", "apellidos", "municipio", "direccion","email", "usuar");
-		usuarioEdit.getUsuar().setUsername(usuario.getNombre());
+		usuarioEdit.getUsuar().setUsername(usuario.getUsuar().getUsername());
 		usuarioEdit.getUsuar().setEnabled(true);
 		this.usuarioService.saveUsuario(usuarioEdit);
 		return "redirect:/usuarios/show";
