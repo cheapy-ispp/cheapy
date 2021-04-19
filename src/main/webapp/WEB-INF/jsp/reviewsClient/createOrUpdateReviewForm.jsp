@@ -12,7 +12,7 @@
     <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px">
     	<c:if test="${review['new']}">Nueva </c:if> Reseña
     </h2>
-    <form:form modelAttribute="review" class="form-horizontal" id="add-review-form">
+    <form:form modelAttribute="reviewClient" class="form-horizontal" id="add-review-form">
         <div class="form-group has-feedback">
         	<form:hidden path="id"/>
             <cheapy:textAreaField label="Opinión" name="opinion"/>
@@ -23,7 +23,7 @@
             <div class="col-sm-offset-2 col-sm-10">
             	<div class="btn-mod">
                 <c:choose>
-                    <c:when test="${review['new']}">
+                    <c:when test="${reviewClient['new']}">
                         <button class="btn btn-default" type="submit" style="font-family: 'Lobster'; font-size: 20px;">
 	                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true" style="padding: 5px"> </span>
 	                        Crear reseña</button>

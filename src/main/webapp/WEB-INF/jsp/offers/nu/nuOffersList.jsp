@@ -63,7 +63,7 @@
         <c:forEach items="${nuOfferLs}" var="nuOffer">
             <tr>
                 <td>
-                    <c:out value="${nuOffer.client.name}"/>
+                     <a href="/restaurant/${nuOffer.client.id}"><c:out value="${nuOffer.client.name}"/></a>
                 </td>
                 <td>
                     <c:out value="${localDateTimeFormat.format(nuOffer.start)}"/>
