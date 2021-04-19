@@ -5,16 +5,33 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="cheapy" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <cheapy:layout pageName="foodOffer">
+	<script>
+		$(document).ready(function(){
+		  $('[data-toggle="desplegable"]').popover();   
+		});
+	</script>
 
-    <h2 style="text-align:center;padding:5px"><fmt:message key="foodOffer"/></h2>
+    <h2 style="font-family: 'Lobster'; text-align:left; font-size:200%;  color: rgb(0, 64, 128); padding:10px; margin-bottom:20px;"><fmt:message key="foodOffer"/>
+    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir el plato indicado en la oferta">
+    	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
+    </h2>
 
 
 	
     <table class="table table-striped" id="foodOfferTable">
     	<thead>
+    	<tr>
+            <th><fmt:message key="client"/></th>
+            <td><c:out value="${foodOffer.client.name}"/> </td>
+        </tr>
         <tr>
             <th><fmt:message key="offerBeginning"/></th>
             <td><c:out value="${localDateTimeFormat.format(foodOffer.start)}"/></td>
@@ -30,6 +47,10 @@
         <tr>
             <th><fmt:message key="discount"/></th>
             <td><c:out value="${foodOffer.discount}%"/> </td>
+        </tr>
+        <tr>
+            <th><fmt:message key="municipio"/></th>
+            <td><c:out value="${foodOffer.client.municipio}"/> </td>
         </tr>
 
         <tr>

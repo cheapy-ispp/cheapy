@@ -5,10 +5,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="cheapy" tagdir="/WEB-INF/tags" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
 <cheapy:layout pageName="speedOffers">
-    <h2 style="text-align:center;padding:5px">
+    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px">
         <c:if test="${speedOffer['new']}"><fmt:message key="new"/> </c:if> <fmt:message key="speedOffer"/>
     </h2>
     <form:form modelAttribute="speedOffer" class="form-horizontal" id="add-speedOffer-form">
@@ -16,8 +18,8 @@
             <form:hidden path="id"/>
             <form:hidden path="code"/>
             <form:hidden path="status"/>
-            <cheapy:inputField label="Fecha de Inicio" placeholder="dd/MM/yyyy HH:mm" name="start"/>
-            <cheapy:inputField label="Fecha de Fin"  placeholder="dd/MM/yyyy HH:mm" name="end"/>
+            <cheapy:dateField label="Fecha de Inicio" placeholder="dd/MM/yyyy HH:mm" name="start"/>
+            <cheapy:dateField label="Fecha de Fin"  placeholder="dd/MM/yyyy HH:mm" name="end"/>
             <cheapy:inputField label="Tiempo para comer (nivel Oro)" placeholder="XX minutos (Ej. 5)" name="gold"/>
             <cheapy:inputField label="Descuento nivel Oro" placeholder="XX% (Ej. 35)" name="discountGold"/>
             <cheapy:inputField label="Tiempo para comer (nivel Plata)" placeholder="XX minutos (Ej. 10)" name="silver"/>

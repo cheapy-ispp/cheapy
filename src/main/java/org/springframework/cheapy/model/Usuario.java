@@ -2,6 +2,8 @@ package org.springframework.cheapy.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -12,29 +14,25 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "usuarios")
 public class Usuario extends BaseEntity{
 	
-	/** nombre, apellidos, dni, direccion, telefono, email, username
-	 * (id,nombre, apellidos, dni, direccion, telefono, email, usuar)
-	 */
+	/* nombre, apellidos, dni, direccion, telefono, email, username
+	  (id,nombre, apellidos, dni, direccion, telefono, email, usuar)*/
+	
 	private static final long serialVersionUID = 1L;
 
-	@NotBlank
+	@NotBlank(message="No debe estar vacío")
 	private String	nombre;
 
-	@NotBlank
+	@NotBlank(message="No debe estar vacío")
 	private String	apellidos;
 
-	@NotBlank
-	private String	dni;
-
-	@NotBlank
+	@NotBlank(message="No debe estar vacío")
 	private String	direccion;
 
-	@NotBlank
-	//@Pattern(regexp = "([+][^0][\\d]{0,2})?[ ]?([(][\\d]{0,4}[)])?[ ]?([\\d]{6,10})$")
-	private String	telefono;
-
+	@Enumerated(value = EnumType.STRING)
+	private Municipio municipio;
+	
 	@Email
-	@NotBlank
+	@NotBlank(message="No debe estar vacío")
 	private String	email;
 
 	@OneToOne(cascade = CascadeType.ALL)
@@ -57,13 +55,6 @@ public class Usuario extends BaseEntity{
 		this.apellidos = apellidos;
 	}
 
-	public String getDni() {
-		return dni;
-	}
-
-	public void setDni(String dni) {
-		this.dni = dni;
-	}
 
 	public String getDireccion() {
 		return direccion;
@@ -73,12 +64,20 @@ public class Usuario extends BaseEntity{
 		this.direccion = direccion;
 	}
 
-	public String getTelefono() {
-		return telefono;
+	public Municipio getMunicipio() {
+		return municipio;
 	}
 
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
+	public void setMunicipio(Municipio municipio) {
+		this.municipio = municipio;
+	}
+
+	public User getUsuar() {
+		return usuar;
+	}
+
+	public void setUsuar(User usuar) {
+		this.usuar = usuar;
 	}
 
 	public String getEmail() {
@@ -89,13 +88,7 @@ public class Usuario extends BaseEntity{
 		this.email = email;
 	}
 
-	public User getUser() {
-		return usuar;
-	}
 
-	public void setUser(User username) {
-		this.usuar = username;
-	}
 	
 	
 }

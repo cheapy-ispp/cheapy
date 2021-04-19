@@ -28,15 +28,36 @@
 					<span>Inicio</span>
 				</cheapy:menuItem>
 				
-				<cheapy:menuItem active="${name eq 'ofertas'}" url="/offers" title="ofertas">
+				<cheapy:menuItem active="${name eq 'ofertas'}" url="/offers" title="Ver ofertas">
 					<span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>
 					<span>Ver ofertas</span>
 				</cheapy:menuItem>
 				
 				<sec:authorize access="hasAnyAuthority('client')">
-				<cheapy:menuItem active="${name eq 'ofertasM'}" url="/myOffers" title="misOfertas">
+				<cheapy:menuItem active="${name eq 'ofertasM'}" url="/myOffers" title="Mis ofertas">
 					<span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>
 					<span>Mis ofertas</span>
+				</cheapy:menuItem>
+				</sec:authorize>
+				
+				<sec:authorize access="hasAnyAuthority('admin')">
+				<cheapy:menuItem active="${name eq 'clientes'}" url="/administrators/clients/page/0" title="clients">
+					<span class="glyphicon " aria-hidden="true"></span>
+					<span>Clientes</span>
+				</cheapy:menuItem>
+				</sec:authorize>
+				
+				<sec:authorize access="hasAnyAuthority('admin')">
+				<cheapy:menuItem active="${name eq 'usuarios'}" url="/administrators/usuarios/page/0" title="usuarios">
+					<span class="glyphicon " aria-hidden="true"></span>
+					<span>Usuarios</span>
+				</cheapy:menuItem>
+				</sec:authorize>
+				
+				<sec:authorize access="hasAnyAuthority('admin')">
+				<cheapy:menuItem active="${name eq 'registro'}" url="/administrators/offersRecord0" title="offersRecord">
+					<span class="glyphicon " aria-hidden="true"></span>
+					<span>Historial de ofertas</span>
 				</cheapy:menuItem>
 				</sec:authorize>
 				<!--  
@@ -47,21 +68,56 @@
 				</cheapy:menuItem>
 				-->
 				<sec:authorize access="isAuthenticated()">
-					<cheapy:menuItem active="${name eq 'reviews'}" url="/reviews" title="opiniones">
+					<cheapy:menuItem active="${name eq 'reviews'}" url="/reviewsList/0" title="Reseñas">
 						<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 						<span>Reseñas</span>
 					</cheapy:menuItem>
-					<cheapy:menuItem active="${name eq 'reviewsN'}" url="/reviews/new" title="valóranos">
+				</sec:authorize>
+				<sec:authorize access="hasAnyAuthority('client')">
+					<cheapy:menuItem active="${name eq 'reviewsN'}" url="/reviews/new" title="Valóranos">
 						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 						<span>Valóranos</span>
-					</cheapy:menuItem>
-				</sec:authorize>
+					</cheapy:menuItem>		           		            
+		        </sec:authorize>
+				<sec:authorize access="hasAnyAuthority('usuario')">
+					<cheapy:menuItem active="${name eq 'reviewsN'}" url="/reviews/new" title="Valóranos">
+						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+						<span>Valóranos</span>
+					</cheapy:menuItem> 		           		            
+		        </sec:authorize>
 			</ul>
-
+			
 			<ul class="nav navbar-nav navbar-right">
+	   
+                <sec:authorize access="hasAnyAuthority('client')">
+					<cheapy:menuItem active="${name eq 'miPerfil'}" url="/clients/show" title="miPerfil">
+						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+						<span>Mi perfil</span>
+					</cheapy:menuItem> 		           		            
+		        </sec:authorize>
+				<sec:authorize access="hasAnyAuthority('usuario')">
+					<cheapy:menuItem active="${name eq 'miPerfil'}" url="/usuarios/show" title="miPerfil">
+						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+						<span>Mi perfil</span>
+					</cheapy:menuItem> 		           		            
+		        </sec:authorize>
 				<sec:authorize access="!isAuthenticated()">
-					<li><a href="<c:url value="/login" />">Iniciar sesión</a></li>
-					<!--<li><a href="<c:url value="/users/new" />">Register</a></li>-->
+					<cheapy:menuItem active="${name eq 'login'}" url="/login" title="login">
+						<span>Iniciar sesión</span>
+					</cheapy:menuItem> 	
+					<!--<li><a href="<c:url value="/login" />">Iniciar sesiï¿½n</a></li>-->
+				</sec:authorize>
+				<sec:authorize access="!isAuthenticated()">
+					<cheapy:menuItem active="${name eq 'singUpUser'}" url="/users/new" title="singUpUser">
+						<span>Registrarse Usuario</span>
+					</cheapy:menuItem> 
+					<!--<li><a href="<c:url value="/users/new" />">Registrarse Usuario</a></li>-->
+				</sec:authorize>
+				<sec:authorize access="!isAuthenticated()">
+					<cheapy:menuItem active="${name eq 'singUpClient'}" url="/clients/new" title="singUpClient">
+						<span>Registrarse Cliente</span>
+					</cheapy:menuItem> 
+					<!--<li><a href="<c:url value="/clients/new" />">Registrarse Cliente</a></li>-->
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -84,7 +140,7 @@
 											</p>
 											<form action="/logout" method=post>
 												<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-												<input type="submit" value="logout" style="align-content:center;color:white;background-color:#004080;padding:10px; border:none; text-align:center">
+												<input type="submit" value="Salir" style="align-content:center;color:white;background-color:#004080;padding:10px; border:none; text-align:center">
 											</form>
 										</div>
 									</div>
