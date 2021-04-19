@@ -204,4 +204,30 @@ class FoodOfferControllerTest {
 				.andExpect(view().name("exception"));
 	}
 	
+	@WithMockUser(value = "spring", authorities = "client")
+    @Test
+    void testDisableInitSuccess() throws Exception {
+        this.mockMvc.perform(get("/offers/food/{foodOfferId}/disable", TEST_FOODOFFER_ID))
+                    .andExpect(status().isOk())
+                    .andExpect(view().name("offers/food/foodOffersDisable"));
+    }
+	
+    @WithMockUser(value = "spring", authorities = "client")
+    @Test
+    void testDisableFormSuccess() throws Exception {
+        this.mockMvc.perform(post("/offers/food/{foodOfferId}/disable", TEST_FOODOFFER_ID)
+        			.with(csrf()))
+                    .andExpect(status().is3xxRedirection())
+                    .andExpect(view().name("redirect:/myOffers"));
+    }
+
+    @WithMockUser(value = "spring", authorities = "client")
+    @Test
+    void testDisableHasErrors() throws Exception {
+    	Client c = new Client();
+    	c.setId(2);
+    	fo1.setClient(c);
+        mockMvc.perform(get("/offers/food/{foodOfferId}/disable", TEST_FOODOFFER_ID))
+                .andExpect(view().name("error"));
+    }
 }
