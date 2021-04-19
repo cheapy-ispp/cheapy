@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.cheapy.model.Client;
-import org.springframework.cheapy.model.Review;
 import org.springframework.cheapy.model.ReviewClient;
 import org.springframework.cheapy.model.User;
 import org.springframework.cheapy.service.ClientService;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import net.bytebuddy.asm.Advice.This;
 
 @Controller
 public class ReviewClientController {
@@ -60,24 +58,24 @@ public class ReviewClientController {
 			return "error";
 		}
 		
-		ReviewClient review = new ReviewClient();
+		ReviewClient reviewClient = new ReviewClient();
 
-		model.put("review", review);
+		model.put("reviewClient", reviewClient);
 		return ReviewClientController.VIEWS_REVIEWS_CREATE_OR_UPDATE_FORM;
 	}
 
 	@PostMapping("/reviewsClient/new/{idClient}")
-	public String processCreationForm(@Valid final ReviewClient review, @PathVariable("idClient") final String idClient,final BindingResult result) {
+	public String processCreationForm(@PathVariable("idClient") final String idClient ,@Valid final ReviewClient reviewClient ,final BindingResult result) {
 		if (result.hasErrors()) {
 			return ReviewClientController.VIEWS_REVIEWS_CREATE_OR_UPDATE_FORM;
 		} else {
 			User escritor = this.userService.getCurrentUser();
-			review.setEscritor(escritor);
+			reviewClient.setEscritor(escritor);
 			Client bar = this.clientService.findByUsername(idClient);
-			review.setBar(bar);
+			reviewClient.setBar(bar);
 		
-			this.reviewService.saveReview(review);
-			return "redirect:/reviewsClient/" + review.getId();
+			this.reviewService.saveReview(reviewClient);
+			return "redirect:/reviewsClient/" + reviewClient.getId();
 		}
 	}
 	
@@ -93,9 +91,12 @@ public class ReviewClientController {
 	@GetMapping("/reviewsClientList/{idClient}/{page}")
 	public String processFindForm(@PathVariable("page") final int page, @PathVariable("idClient") final String idClient, final Map<String, Object> model) {
 		Pageable elements = PageRequest.of(page, 6);
+		Pageable nextPage = PageRequest.of(page+1, 6);
 		Client client = this.clientService.findByUsername(idClient);
 
 		List<ReviewClient> reviewsLs = this.reviewService.findAllReviewsByBar(elements,client);
+		Integer next = this.reviewService.findAllReviewsByBar(nextPage,client).size();
+		model.put("nextPage", next);
 		model.put("reviewsLs", reviewsLs);
 		model.put("client", idClient);
 
@@ -108,9 +109,9 @@ public class ReviewClientController {
 		if (!this.checkIdentity(reviewId)) {
 			return "error";
 		}
-		ReviewClient review = this.reviewService.findReviewById(reviewId);
+		ReviewClient reviewClient = this.reviewService.findReviewById(reviewId);
 		
-		model.addAttribute("review", review);
+		model.addAttribute("reviewClient", reviewClient);
 		return ReviewClientController.VIEWS_REVIEWS_CREATE_OR_UPDATE_FORM;
 	}
 	
@@ -120,7 +121,7 @@ public class ReviewClientController {
 			return "error";
 		}
 		if (result.hasErrors()) {
-			model.addAttribute("review", reviewEdit);
+			model.addAttribute("reviewClient", reviewEdit);
 			return ReviewClientController.VIEWS_REVIEWS_CREATE_OR_UPDATE_FORM;
 
 		} else {

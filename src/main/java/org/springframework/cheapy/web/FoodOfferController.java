@@ -1,6 +1,7 @@
 
 package org.springframework.cheapy.web;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
@@ -67,9 +68,13 @@ public class FoodOfferController {
 	@GetMapping("/offers/foodOfferList/{page}")
 	public String processFindForm(@PathVariable("page") final int page, final Map<String, Object> model) {
 		Pageable elements = PageRequest.of(page, 5);
+		Pageable nextPage = PageRequest.of(page+1, 5);
 
 		List<FoodOffer> foodOfferLs = this.foodOfferService.findActiveFoodOffer(elements);
+		Integer next = this.foodOfferService.findActiveFoodOffer(nextPage).size();
+		
 		model.put("foodOfferLs", foodOfferLs);
+		model.put("nextPage", next);
 		model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 		return "offers/food/foodOffersList";
 
@@ -89,6 +94,12 @@ public class FoodOfferController {
 			result.rejectValue("end", "", "La fecha de fin debe ser posterior a la fecha de inicio");
 
 		}
+		
+		if (foodOffer.getStart()==null || foodOffer.getStart().isBefore(LocalDateTime.now())) {
+			result.rejectValue("start", "", "La fecha de inicio debe ser futura");
+
+		}
+		
 		if (result.hasErrors()) {
 			return FoodOfferController.VIEWS_FOOD_OFFER_CREATE_OR_UPDATE_FORM;
 		}

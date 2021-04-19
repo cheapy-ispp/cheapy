@@ -41,21 +41,21 @@
 				</sec:authorize>
 				
 				<sec:authorize access="hasAnyAuthority('admin')">
-				<cheapy:menuItem active="${name eq 'clientes'}" url="/administrators/clients0" title="clients">
+				<cheapy:menuItem active="${name eq 'clientes'}" url="/administrators/clients/page/0" title="clients">
 					<span class="glyphicon " aria-hidden="true"></span>
 					<span>Clientes</span>
 				</cheapy:menuItem>
 				</sec:authorize>
 				
 				<sec:authorize access="hasAnyAuthority('admin')">
-				<cheapy:menuItem active="${name eq 'usuarios'}" url="/administrators/usuarios0" title="usuarios">
+				<cheapy:menuItem active="${name eq 'usuarios'}" url="/administrators/usuarios/page/0" title="usuarios">
 					<span class="glyphicon " aria-hidden="true"></span>
 					<span>Usuarios</span>
 				</cheapy:menuItem>
 				</sec:authorize>
 				
 				<sec:authorize access="hasAnyAuthority('admin')">
-				<cheapy:menuItem active="${name eq 'registro'}" url="/administrators/offersRecord" title="offersRecord">
+				<cheapy:menuItem active="${name eq 'registro'}" url="/administrators/offersRecord0" title="offersRecord">
 					<span class="glyphicon " aria-hidden="true"></span>
 					<span>Historial de ofertas</span>
 				</cheapy:menuItem>

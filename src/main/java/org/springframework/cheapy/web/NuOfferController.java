@@ -24,7 +24,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class NuOfferController {
@@ -89,9 +88,13 @@ public class NuOfferController {
 	@GetMapping("/offers/nuOfferList/{page}")
 	public String processFindForm(@PathVariable("page") final int page, final Map<String, Object> model) {
 		Pageable elements = PageRequest.of(page, 5);
-
+		Pageable nextPage = PageRequest.of(page+1, 5);
+		
 		List<NuOffer> foodOfferLs = this.nuOfferService.findActiveNuOffer(elements);
+		Integer next = this.nuOfferService.findActiveNuOffer(nextPage).size();
+		
 		model.put("nuOfferLs", foodOfferLs);
+		model.put("nextPage", next);
 		model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 		return "offers/nu/nuOffersList";
 
@@ -117,6 +120,11 @@ public class NuOfferController {
 		}
 		if (!this.checkDiscounts(nuOffer)) {
 			result.rejectValue("discountGold", "", "El descuento de Oro debe ser mayor o igual que el de plata, y el de plata mayor o igual que el de bronce");
+
+		}
+		
+		if (nuOffer.getStart()==null || nuOffer.getStart().isBefore(LocalDateTime.now())) {
+			result.rejectValue("start", "", "La fecha de inicio debe ser futura");
 
 		}
 
@@ -213,7 +221,7 @@ public class NuOfferController {
 			return NuOfferController.VIEWS_NU_OFFER_CREATE_OR_UPDATE_FORM;
 
 		}
-		BeanUtils.copyProperties(this.nuOfferService.findNuOfferById(nuOfferEdit.getId()), nuOfferEdit, "start", "end", "gold", "discount_gold", "silver", "discount_silver", "bronze", "discount_bronze");
+		BeanUtils.copyProperties(this.nuOfferService.findNuOfferById(nuOfferEdit.getId()), nuOfferEdit, "start", "end", "gold", "discountGold", "silver", "discountSilver", "bronze", "discountBronze");
 		this.nuOfferService.saveNuOffer(nuOfferEdit);
 		return "redirect:/offers/nu/" + nuOfferEdit.getId();
 

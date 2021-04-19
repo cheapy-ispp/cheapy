@@ -110,8 +110,8 @@ class TimeOfferControllerTest {
 	void testProcessCreationFormHasErrors() throws Exception {
 		mockMvc.perform(post("/offers/time/new")
 					.with(csrf())
-					.param("start", "lsqdufhlqhf")
-					.param("end", "")
+					.param("start", "2020-12-23T12:30")
+					.param("end", "2020-12-22T12:30")
 					.param("init", "gold")
 					.param("finish", "")
 					.param("discount", ""))

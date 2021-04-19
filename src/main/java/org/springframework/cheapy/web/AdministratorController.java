@@ -33,7 +33,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class AdministratorController {
 
-	private static final String		VIEWS_USUARIO_CREATE_OR_UPDATE_FORM	= "usuarios/createOrUpdateUsuarioForm";
 
 	private final UsuarioService	usuarioService;
 	private final ClientService		clientService;
@@ -54,7 +53,7 @@ public class AdministratorController {
 		this.timeOfferService = timeOfferService;
 	}
 
-	@GetMapping("/administrators/usuarios{page}")
+	@GetMapping("/administrators/usuarios/page/{page}")
 	public String processFindUsuariosForm(@PathVariable("page") final int page, final Map<String, Object> model) {
 		Pageable elements = PageRequest.of(page, 10);
 		Pageable nextPage = PageRequest.of(page + 1, 10);
@@ -66,7 +65,7 @@ public class AdministratorController {
 		return "usuarios/usuariosList";
 	}
 
-	@GetMapping("/administrators/clients{page}")
+	@GetMapping("/administrators/clients/page/{page}")
 	public String processFindClientesForm(@PathVariable("page") final int page, final Map<String, Object> model) {
 		Pageable elements = PageRequest.of(page, 10);
 		Pageable nextPage = PageRequest.of(page + 1, 10);
@@ -80,6 +79,9 @@ public class AdministratorController {
 	@GetMapping("/administrators/usuarios/{username}")
 	public String processUsuarioShowForm(@PathVariable("username") final String username, final Map<String, Object> model) {
 		Usuario usuario = this.usuarioService.findByUsername(username);
+		if (usuario==null) {
+			return "error";
+		}
 		model.put("usuario", usuario);
 		return "usuarios/usuariosShow";
 	}
@@ -87,6 +89,9 @@ public class AdministratorController {
 	@GetMapping("/administrators/clients/{username}")
 	public String processClientShowForm(@PathVariable("username") final String username, final Map<String, Object> model) {
 		Client client = this.clientService.findByUsername(username);
+		if (client==null) {
+			return "error";
+		}
 		model.put("client", client);
 		return "clients/clientShow";
 	}
@@ -105,7 +110,7 @@ public class AdministratorController {
 		Usuario usuario = this.usuarioService.findByUsername(username);
 		usuario.getUsuar().setEnabled(false);
 		this.usuarioService.saveUsuario(usuario);
-		return "redirect:/administrators/usuarios";
+		return "redirect:/administrators/usuarios/page/0";
 	}
 
 	@GetMapping(value = "/administrators/clients/{username}/disable")
@@ -135,7 +140,7 @@ public class AdministratorController {
 		timeOffers.stream().forEach(t -> t.setStatus(StatusOffer.inactive));
 
 		this.clientService.saveClient(client);
-		return "redirect:/administrators/clients";
+		return "redirect:/administrators/clients/page/0";
 	}
 
 	@GetMapping(value = "/administrators/clients/{username}/activate")
@@ -151,36 +156,60 @@ public class AdministratorController {
 		Client client = this.clientService.findByUsername(username);
 		client.getUsuar().setEnabled(true);
 		this.clientService.saveClient(client);
-		return "redirect:/administrators/clients";
+		return "redirect:/administrators/clients/page/0";
 	}
 	
-	@GetMapping("/administrators/offersRecord")
-	public String processOffersRecordForm(final Map<String, Object> model) {
-		
-		Pageable p = PageRequest.of(0, 3);
+	@GetMapping("/administrators/offersRecord{page}")
+	public String processOffersRecordForm(@PathVariable("page") final int page, final Map<String, Object> model) {
+		Pageable elements = PageRequest.of(page, 2);
+		Pageable nextPage = PageRequest.of(page+1, 2);
 		
 		List<Object[]> datos = new ArrayList<Object[]>();
 		
-		for(Offer of:this.foodOfferService.findAllFoodOffer(p)) {
+		for(Offer of:this.foodOfferService.findAllFoodOffer(elements)) {
 			Object[] fo = {of, "food"};
 			datos.add(fo);
 		}
 		
-		for(Offer of:this.nuOfferService.findAllNuOffer(p)) {
+		for(Offer of:this.nuOfferService.findAllNuOffer(elements)) {
 			Object[] nu = {of, "nu"};
 			datos.add(nu);
 		}
 		
-		for(Offer of:this.speedOfferService.findAllSpeedOffer(p)) {
+		for(Offer of:this.speedOfferService.findAllSpeedOffer(elements)) {
 			Object[] sp = {of, "speed"};
 			datos.add(sp);
 		}
 		
-		for(Offer of:this.timeOfferService.findAllTimeOffer(p)) {
+		for(Offer of:this.timeOfferService.findAllTimeOffer(elements)) {
 			Object[] ti = {of, "time"};
 			datos.add(ti);
 		}
 		
+		List<Object[]> datosNext = new ArrayList<Object[]>();
+		
+		for(Offer of:this.foodOfferService.findAllFoodOffer(nextPage)) {
+			Object[] fo = {of, "food"};
+			datosNext.add(fo);
+		}
+		
+		for(Offer of:this.nuOfferService.findAllNuOffer(nextPage)) {
+			Object[] nu = {of, "nu"};
+			datosNext.add(nu);
+		}
+		
+		for(Offer of:this.speedOfferService.findAllSpeedOffer(nextPage)) {
+			Object[] sp = {of, "speed"};
+			datosNext.add(sp);
+		}
+		
+		for(Offer of:this.timeOfferService.findAllTimeOffer(nextPage)) {
+			Object[] ti = {of, "time"};
+			datosNext.add(ti);
+		}
+		
+		Integer next = datosNext.size();
+		model.put("nextPage", next);
 		model.put("datos", datos);
 
 		//Se añade formateador de fecha al modelo

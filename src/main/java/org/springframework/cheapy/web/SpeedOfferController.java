@@ -1,6 +1,7 @@
 
 package org.springframework.cheapy.web;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
@@ -86,9 +87,13 @@ public class SpeedOfferController {
 	@GetMapping("/offers/speedOfferList/{page}")
 	public String processFindForm(@PathVariable("page") final int page, final Map<String, Object> model) {
 		Pageable elements = PageRequest.of(page, 5);
-
+		Pageable nextPage = PageRequest.of(page+1, 5);
+		
 		List<SpeedOffer> speedOfferLs = this.speedOfferService.findActiveSpeedOffer(elements);
+		Integer next = this.speedOfferService.findActiveSpeedOffer(nextPage).size();
+		
 		model.put("speedOfferLs", speedOfferLs);
+		model.put("nextPage", next);
 		model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 		return "offers/speed/speedOffersList";
 
@@ -114,6 +119,11 @@ public class SpeedOfferController {
 		}
 		if (!this.checkDiscounts(speedOffer)) {
 			result.rejectValue("discountGold", "", "El descuento de Oro debe ser menor o igual que el de plata, y el de plata menor o igual que el de bronce");
+
+		}
+		
+		if (speedOffer.getStart()==null || speedOffer.getStart().isBefore(LocalDateTime.now())) {
+			result.rejectValue("start", "", "La fecha de inicio debe ser futura");
 
 		}
 
@@ -193,7 +203,7 @@ public class SpeedOfferController {
 
 		}
 		if (!this.checkConditions(speedOfferEdit)) {
-			result.rejectValue("gold", "", "Oro debe ser menor o igual que plata, y plata menor o igual que bronce");
+			result.rejectValue("gold", "", "Los minutos de Oro deben ser menores o iguales que los de plata, y los de plata menores o iguales que los de bronce");
 
 		}
 		if (!this.checkDiscounts(speedOfferEdit)) {
@@ -206,7 +216,7 @@ public class SpeedOfferController {
 			return SpeedOfferController.VIEWS_SPEED_OFFER_CREATE_OR_UPDATE_FORM;
 
 		}
-		BeanUtils.copyProperties(this.speedOfferService.findSpeedOfferById(speedOfferEdit.getId()), speedOfferEdit, "start", "end", "gold", "discount_gold", "silver", "discount_silver", "bronze", "discount_bronze");
+		BeanUtils.copyProperties(this.speedOfferService.findSpeedOfferById(speedOfferEdit.getId()), speedOfferEdit, "start", "end", "gold", "discountGold", "silver", "discountSilver", "bronze", "discountBronze");
 		this.speedOfferService.saveSpeedOffer(speedOfferEdit);
 		return "redirect:/offers/speed/" + speedOfferEdit.getId();
 

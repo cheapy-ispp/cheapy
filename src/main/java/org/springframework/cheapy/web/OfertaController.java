@@ -2,7 +2,7 @@
 package org.springframework.cheapy.web;
 
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +23,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class OfertaController {
@@ -67,52 +68,136 @@ public class OfertaController {
 
 	}
 
-	@GetMapping("/offersByName")
-	public String processFindFormByName(final Map<String, Object> model, final String name) {
-
-		List<FoodOffer> foodOfferLs = this.foodOfferService.findFoodOfferByClientName(name);
-		List<NuOffer> nuOfferLs = this.nuOfferService.findNuOfferByClientName(name);
-		List<SpeedOffer> speedOfferLs = this.speedOfferService.findSpeedOfferByClientName(name);
-		List<TimeOffer> timeOfferLs = this.timeOfferService.findTimeOfferByClientName(name);
-		model.put("foodOfferLs", foodOfferLs);
-		model.put("nuOfferLs", nuOfferLs);
-		model.put("speedOfferLs", speedOfferLs);
-		model.put("timeOfferLs", timeOfferLs);
-
+	@GetMapping("/offersByName/{page}")
+	public String processFindFormByName(@PathVariable("page") final int page, final Map<String, Object> model, final String name) {
+		Pageable elements = PageRequest.of(page, 2);
+		Pageable nextPage = PageRequest.of(page+1, 2);
+		
+		List<Object[]> datos = new ArrayList<Object[]>();
+		
+		for(Offer of:this.foodOfferService.findFoodOfferByClientName(name, elements)) {
+			Object[] fo = {of, "food"};
+			datos.add(fo);
+		}
+		
+		for(Offer of:this.nuOfferService.findNuOfferByClientName(name, elements)) {
+			Object[] nu = {of, "nu"};
+			datos.add(nu);
+		}
+		
+		for(Offer of:this.speedOfferService.findSpeedOfferByClientName(name, elements)) {
+			Object[] sp = {of, "speed"};
+			datos.add(sp);
+		}
+		
+		for(Offer of:this.timeOfferService.findTimeOfferByClientName(name, elements)) {
+			Object[] ti = {of, "time"};
+			datos.add(ti);
+		}
+		
+		List<Object[]> datosNext = new ArrayList<Object[]>();
+		
+		for(Offer of:this.foodOfferService.findFoodOfferByClientName(name, nextPage)) {
+			Object[] fo = {of, "food"};
+			datosNext.add(fo);
+		}
+		
+		for(Offer of:this.nuOfferService.findNuOfferByClientName(name, nextPage)) {
+			Object[] nu = {of, "nu"};
+			datosNext.add(nu);
+		}
+		
+		for(Offer of:this.speedOfferService.findSpeedOfferByClientName(name, nextPage)) {
+			Object[] sp = {of, "speed"};
+			datosNext.add(sp);
+		}
+		
+		for(Offer of:this.timeOfferService.findTimeOfferByClientName(name, nextPage)) {
+			Object[] ti = {of, "time"};
+			datosNext.add(ti);
+		}
+		Integer next = datosNext.size();
+		model.put("nextPage", next);
+		model.put("datos", datos);
+		model.put("name", name);
+		
 		// Añade la lista de municipios al desplegable
 		model.put("municipios", Municipio.values());
 
 		//Se añade formateador de fecha al modelo
 		model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 
-		return "offers/offersListSearch";
+		return "offers/offersListNameSearch";
 
 	}
 
-	@GetMapping("/offersByFood")
-	public String processFindFormByFood(final Map<String, Object> model, final String name) {
-
-		List<FoodOffer> foodOfferLs = this.foodOfferService.findFoodOfferByClientFood(name);
-		List<NuOffer> nuOfferLs = this.nuOfferService.findNuOfferByClientFood(name);
-		List<SpeedOffer> speedOfferLs = this.speedOfferService.findSpeedOfferByClientFood(name);
-		List<TimeOffer> timeOfferLs = this.timeOfferService.findTimeOfferByClientFood(name);
-		model.put("foodOfferLs", foodOfferLs);
-		model.put("nuOfferLs", nuOfferLs);
-		model.put("speedOfferLs", speedOfferLs);
-		model.put("timeOfferLs", timeOfferLs);
-
+	@GetMapping("/offersByFood/{page}")
+	public String processFindFormByFood(@PathVariable("page") final int page, final Map<String, Object> model, final String name) {
+		Pageable elements = PageRequest.of(page, 2);
+		Pageable nextPage = PageRequest.of(page+1, 2);
+		
+		List<Object[]> datos = new ArrayList<Object[]>();
+		
+		for(Offer of:this.foodOfferService.findFoodOfferByClientFood(name, elements)) {
+			Object[] fo = {of, "food"};
+			datos.add(fo);
+		}
+		
+		for(Offer of:this.nuOfferService.findNuOfferByClientFood(name, elements)) {
+			Object[] nu = {of, "nu"};
+			datos.add(nu);
+		}
+		
+		for(Offer of:this.speedOfferService.findSpeedOfferByClientFood(name, elements)) {
+			Object[] sp = {of, "speed"};
+			datos.add(sp);
+		}
+		
+		for(Offer of:this.timeOfferService.findTimeOfferByClientFood(name, elements)) {
+			Object[] ti = {of, "time"};
+			datos.add(ti);
+		}
+		
+		List<Object[]> datosNext = new ArrayList<Object[]>();
+		
+		for(Offer of:this.foodOfferService.findFoodOfferByClientFood(name, nextPage)) {
+			Object[] fo = {of, "food"};
+			datosNext.add(fo);
+		}
+		
+		for(Offer of:this.nuOfferService.findNuOfferByClientFood(name, nextPage)) {
+			Object[] nu = {of, "nu"};
+			datosNext.add(nu);
+		}
+		
+		for(Offer of:this.speedOfferService.findSpeedOfferByClientFood(name, nextPage)) {
+			Object[] sp = {of, "speed"};
+			datosNext.add(sp);
+		}
+		
+		for(Offer of:this.timeOfferService.findTimeOfferByClientFood(name, nextPage)) {
+			Object[] ti = {of, "time"};
+			datosNext.add(ti);
+		}
+		Integer next = datosNext.size();
+		Integer now = datos.size();
+		model.put("now", now);
+		model.put("nextPage", next);
+		model.put("datos", datos);
+		model.put("name", name);
+		
 		// Añade la lista de municipios al desplegable
 		model.put("municipios", Municipio.values());
 
 		//Se añade formateador de fecha al modelo
 		model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 
-		return "offers/offersListSearch";
+		return "offers/offersListFoodSearch";
 
 	}
 
-	@GetMapping("/offersByPlace")
-	public String processFindFormByPlace(final Map<String, Object> model, final HttpServletRequest request) {
+	@GetMapping("/offersByPlace/{page}")
+	public String processFindFormByPlace(@PathVariable("page") final int page, final Map<String, Object> model, final HttpServletRequest request) {
 
 		if (request.getParameter("municipio").equals("") || request.getParameter("municipio").equals(null)) {
 			// Añade la lista de municipios al desplegable
@@ -126,22 +211,66 @@ public class OfertaController {
 
 		Municipio mun = Municipio.valueOf(request.getParameter("municipio"));
 
-		List<FoodOffer> foodOfferLs = this.foodOfferService.findFoodOfferByClientPlace(mun);
-		List<NuOffer> nuOfferLs = this.nuOfferService.findNuOfferByClientPlace(mun);
-		List<SpeedOffer> speedOfferLs = this.speedOfferService.findSpeedOfferByClientPlace(mun);
-		List<TimeOffer> timeOfferLs = this.timeOfferService.findTimeOfferByClientPlace(mun);
-		model.put("foodOfferLs", foodOfferLs);
-		model.put("nuOfferLs", nuOfferLs);
-		model.put("speedOfferLs", speedOfferLs);
-		model.put("timeOfferLs", timeOfferLs);
-
+		Pageable elements = PageRequest.of(page, 2);
+		Pageable nextPage = PageRequest.of(page+1, 2);
+		
+		List<Object[]> datos = new ArrayList<Object[]>();
+		
+		for(Offer of:this.foodOfferService.findFoodOfferByClientPlace(mun, elements)) {
+			Object[] fo = {of, "food"};
+			datos.add(fo);
+		}
+		
+		for(Offer of:this.nuOfferService.findNuOfferByClientPlace(mun, elements)) {
+			Object[] nu = {of, "nu"};
+			datos.add(nu);
+		}
+		
+		for(Offer of:this.speedOfferService.findSpeedOfferByClientPlace(mun, elements)) {
+			Object[] sp = {of, "speed"};
+			datos.add(sp);
+		}
+		
+		for(Offer of:this.timeOfferService.findTimeOfferByClientPlace(mun, elements)) {
+			Object[] ti = {of, "time"};
+			datos.add(ti);
+		}
+		
+		List<Object[]> datosNext = new ArrayList<Object[]>();
+		
+		for(Offer of:this.foodOfferService.findFoodOfferByClientPlace(mun, nextPage)) {
+			Object[] fo = {of, "food"};
+			datosNext.add(fo);
+		}
+		
+		for(Offer of:this.nuOfferService.findNuOfferByClientPlace(mun, nextPage)) {
+			Object[] nu = {of, "nu"};
+			datosNext.add(nu);
+		}
+		
+		for(Offer of:this.speedOfferService.findSpeedOfferByClientPlace(mun, nextPage)) {
+			Object[] sp = {of, "speed"};
+			datosNext.add(sp);
+		}
+		
+		for(Offer of:this.timeOfferService.findTimeOfferByClientPlace(mun, nextPage)) {
+			Object[] ti = {of, "time"};
+			datosNext.add(ti);
+		}
+		Integer next = datosNext.size();
+		Integer now = datos.size();
+		model.put("mun", mun);
+		model.put("now", now);
+		model.put("nextPage", next);
+		model.put("datos", datos);
+		
 		// Añade la lista de municipios al desplegable
 		model.put("municipios", Municipio.values());
 
 		//Se añade formateador de fecha al modelo
 		model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 
-		return "offers/offersListSearch";
+		return "offers/offersListPlaceSearch";
 
 	}
 
