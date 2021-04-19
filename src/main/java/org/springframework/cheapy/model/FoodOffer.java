@@ -33,7 +33,7 @@ public class FoodOffer extends Offer {
 	private String food;
 
 	@NotNull(message = "Debe rellenar el descuento que proporciona")
-	@Range(min = 0, max = 100, message = "El descuento debe estar entre 0 y 100 %")
+	@Range(min = 1, max = 100, message = "El descuento debe estar entre 1 y 100 %")
 	private Integer discount;
 
 	public String getFood() {
