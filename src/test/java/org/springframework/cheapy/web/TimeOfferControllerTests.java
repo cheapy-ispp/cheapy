@@ -1,5 +1,7 @@
 package org.springframework.cheapy.web;
 
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.is;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -19,6 +21,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cheapy.configuration.SecurityConfiguration;
 import org.springframework.cheapy.model.Client;
 import org.springframework.cheapy.model.Code;
+import org.springframework.cheapy.model.StatusOffer;
 import org.springframework.cheapy.model.TimeOffer;
 import org.springframework.cheapy.model.User;
 import org.springframework.cheapy.service.ClientService;
@@ -48,6 +51,7 @@ class TimeOfferControllerTest {
 	private ClientService clientService;
 
 	private TimeOffer time1;
+	private Client clientTest;
 
 	@BeforeEach
 	void setup() {
@@ -69,6 +73,7 @@ class TimeOfferControllerTest {
 		client1.setCode(code1);
 		client1.setFood("client1");
 		client1.setUsuar(user1);
+		clientTest = client1;
 		BDDMockito.given(this.clientService.getCurrentClient()).willReturn(client1);
 		
 		TimeOffer time1test = new TimeOffer();
@@ -79,6 +84,8 @@ class TimeOfferControllerTest {
 		time1test.setFinish(LocalTime.of(13, 00));
 		time1test.setDiscount(10);
 		time1test.setClient(client1);
+		time1test.setStatus(StatusOffer.hidden);
+		time1test.setCode("");
 		this.time1 = time1test;
 		BDDMockito.given(this.timeOfferService.findTimeOfferById(TEST_TIMEOFFER_ID)).willReturn(this.time1);	
 	}
@@ -139,7 +146,68 @@ class TimeOfferControllerTest {
 				.andExpect(view().name("exception"));
 	}
 
+	@WithMockUser(value = "spring", authorities = "client")
+	@Test
+	void testInitUpdateTimeOfferSuccess() throws Exception {
+		mockMvc.perform(get("/offers/time/{timeOfferId}/edit",TEST_TIMEOFFER_ID)
+					.with(csrf()))
+				.andExpect(model().attributeExists("timeOffer"))
+				.andExpect(model().attribute("timeOffer", hasProperty("start", is(LocalDateTime.of(2021, 12, 23, 12, 30)))))
+				.andExpect(model().attribute("timeOffer", hasProperty("end", is(LocalDateTime.of(2022, 12, 23, 12, 30)))))
+				.andExpect(model().attribute("timeOffer", hasProperty("init",is(LocalTime.of(12, 00)))))
+				.andExpect(model().attribute("timeOffer", hasProperty("finish",is(LocalTime.of(13, 00)))))
+				.andExpect(model().attribute("timeOffer", hasProperty("discount", is(10))))
+				.andExpect(model().attribute("timeOffer", hasProperty("client", is(clientTest))))
+				.andExpect(status().isOk())
+				.andExpect(view().name("offers/time/createOrUpdateTimeOfferForm"));
+	}
 	
+	@WithMockUser(value = "spring", authorities = "client")
+	@Test
+	void testInitUpdateTimeOfferError() throws Exception {
+		time1.setStatus(StatusOffer.inactive);
+		mockMvc.perform(get("/offers/time/{timeOfferId}/edit",TEST_TIMEOFFER_ID)
+					.with(csrf()))
+				.andExpect(status().isOk())
+				.andExpect(view().name("error"));
+	}
+	
+	@WithMockUser(value = "spring", authorities = "client")
+	@Test
+	void testUpdateTimeOfferSuccess() throws Exception {
+		mockMvc.perform(post("/offers/time/{timeOfferId}/edit",TEST_TIMEOFFER_ID)
+					.with(csrf())
+					.param("id","1")
+					.param("start", "2021-12-23T12:30")
+					.param("end", "2022-12-23T12:30")
+					.param("init", "12:30")
+					.param("finish", "13:30")
+					.param("status", "hidden")
+					.param("discount", "10")
+					.param("code", "")
+					.sessionAttr("idTime", TEST_TIMEOFFER_ID))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/offers/time/"+TEST_TIMEOFFER_ID));
+	}
+	
+	@WithMockUser(value = "spring", authorities = "client")
+	@Test
+	void testUpdateTimeOfferError() throws Exception {
+		mockMvc.perform(post("/offers/time/{timeOfferId}/edit",TEST_TIMEOFFER_ID)
+					.with(csrf())
+					.param("id","1")
+					.param("start", "2021-12-23T12:30")
+					.param("end", "2021-12-22T12:30")
+					.param("init", "12:30")
+					.param("finish", "11:30")
+					.param("status", "hidden")
+					.param("discount", "10")
+					.param("code", "")
+					.sessionAttr("idTime", TEST_TIMEOFFER_ID))
+				.andExpect(model().attributeExists("timeOffer"))
+				.andExpect(status().isOk())
+				.andExpect(view().name("offers/time/createOrUpdateTimeOfferForm"));
+	}
 
 	
 }

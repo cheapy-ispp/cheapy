@@ -33,7 +33,6 @@ public class NuOfferController {
 	private final NuOfferService	nuOfferService;
 	private final ClientService		clientService;
 
-
 	public NuOfferController(final NuOfferService nuOfferService, final ClientService clientService) {
 		this.nuOfferService = nuOfferService;
 		this.clientService = clientService;
