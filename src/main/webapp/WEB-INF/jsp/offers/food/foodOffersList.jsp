@@ -67,7 +67,7 @@
         <c:forEach items="${foodOfferLs}" var="foodOffer">
             <tr>
             	<td>
-                    <c:out value="${foodOffer.client.name}"/>
+                     <a href="/restaurant/${foodOffer.client.id}"><c:out value="${foodOffer.client.name}"/></a>
                 </td>
                 <td>
                     <c:out value="${foodOffer.food}"/>

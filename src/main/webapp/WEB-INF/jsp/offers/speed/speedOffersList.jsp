@@ -63,7 +63,7 @@
         <c:forEach items="${speedOfferLs}" var="speedOffer">
             <tr>
                 <td>
-                    <c:out value="${speedOffer.client.name}"/>
+                     <a href="/restaurant/${speedOffer.client.id}"><c:out value="${speedOffer.client.name}"/></a>
                 </td>
                 <td>
                     <c:out value="${localDateTimeFormat.format(speedOffer.start)}"/>

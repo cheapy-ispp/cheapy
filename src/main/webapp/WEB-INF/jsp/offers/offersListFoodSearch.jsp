@@ -31,7 +31,8 @@
 		        <c:forEach items="${datos}" var="datos">
 		            <tr>
 		                <td>
-		                    <c:out value="${datos[0].client.name}"/>
+		                    <a href="/restaurant/${datos[0].client.id}"><c:out value="${datos[0].client.name}"/></a>
+
 		                </td>
 		                <td>
 		                	<c:if test="${datos[1] == 'time'}">
