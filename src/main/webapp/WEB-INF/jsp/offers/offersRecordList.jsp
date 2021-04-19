@@ -7,7 +7,14 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
-<cheapy:layout pageName="ofertasM">
+<cheapy:layout pageName="registro">
+	<script>
+		function pagNum(pagina) {
+			paginaAct = pagina + 1;
+			document.write("Página " + paginaAct + " <br />");
+		}
+	
+	</script>
 
     <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px">Historial de Ofertas</h2>
 	<c:if test="${empty datos }">
@@ -83,27 +90,34 @@
 		        </c:forEach>
 		        </tbody>
 		    </table>
-		<div>
+	<div class="text-center">
+    	<script type="text/javascript">
+			          
+    		pagNum(${page});
+								
+		</script>
+    </div>
+	<div style="display:inline">
 	<c:if test='${page!=0}'>
-   	<div class="text-left">
+	
     	<spring:url value="/administrators/offersRecord{page}" var="SearchOfferListUrl">
     		<spring:param name="page" value="${page-1}"/>
     	</spring:url>
     	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(SearchOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 		<span class="glyphicon 	glyphicon glyphicon-arrow-left" aria-hidden="true" style="padding: 5px"> </span>
 		Pág. anterior</button>
-	</div>	
+
     </c:if>
     
     <c:if test="${nextPage > 0}">
-    <div class="text-right">
+
     	<spring:url value="/administrators/offersRecord{page}" var="SearchOfferListUrl">
     		<spring:param name="page" value="${page+1}"/>
     	</spring:url>
     	<button type="button" class="btn-pag"  role="link" onclick="window.location='${fn:escapeXml(SearchOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 		<span class="glyphicon 	glyphicon glyphicon-arrow-right" aria-hidden="true" style="padding: 5px"> </span>
 		Pág. siguiente</button>
-	</div>	
+
 	</c:if>
 	</div>
 		</div>

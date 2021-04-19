@@ -124,7 +124,7 @@
     </div>
     <div>
 	    <c:if test='${page!=0}'>
-		    <div class="text-right">
+		    <div class="text-left">
 		    	<spring:url value="/offers/speedOfferList/{page}" var="speedOfferListUrl">
 		    		<spring:param name="page" value="${page-1}"/>
 		    	</spring:url>
