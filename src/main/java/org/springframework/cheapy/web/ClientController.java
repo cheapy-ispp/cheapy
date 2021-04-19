@@ -116,7 +116,14 @@ public class ClientController {
 
 			if (result.hasErrors()) {
 				model.addAttribute("client", clientEdit);
-				model.put("municipio", Municipio.values());
+				Map<Object, String> municipios = new HashMap<Object, String>();
+				Municipio[] a = Municipio.values();
+				int cont = 0;
+				for (Municipio i : Municipio.values()) {
+				    municipios.put(a[cont], i.toString());
+				    cont++;
+				}
+				model.put("municipios", municipios);
 				return ClientController.VIEWS_CREATE_OR_UPDATE_CLIENT;
 			}
 			

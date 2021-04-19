@@ -1,13 +1,8 @@
 package org.springframework.cheapy.system;
 
-import java.io.Console;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +17,6 @@ import org.springframework.cheapy.service.ClientService;
 import org.springframework.cheapy.service.UserService;
 import org.springframework.cheapy.service.UsuarioService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -80,7 +74,6 @@ public class SingUpController {
 		    cont++;
 		}
 		
-		municipios.put("null", "Seleccione uno de los municipios");
 		Usuario usuario = new Usuario();
 		
 		User user=new User();
@@ -105,7 +98,14 @@ public class SingUpController {
 			result.rejectValue("usuar.username","" ,"El nombre de usuario ya esta registrado");
 		}
 		if (result.hasErrors()) {
-			model.put("municipio", Municipio.values());
+			Map<Object, String> municipios = new HashMap<Object, String>();
+			Municipio[] a = Municipio.values();
+			int cont = 0;
+			for (Municipio i : Municipio.values()) {
+			    municipios.put(a[cont], i.toString());
+			    cont++;
+			}
+			model.put("municipios", municipios);
 			
 			if(usuario.getUsuar().getPassword().equals("")) {
 				result.rejectValue("usuar.password","" ,"La contraseña no puede estar vacía");
@@ -146,7 +146,6 @@ public class SingUpController {
 		    cont++;
 		}
 		
-		municipios.put("null", "Seleccione uno de los municipios");
 		Client cliente = new Client();
 		
 		User user=new User();
@@ -183,7 +182,16 @@ public class SingUpController {
 			result.rejectValue("usuar.username","" ,"El nombre de usuario ya esta registrado");
 		}
 		if (result.hasErrors()) {
-			model.put("municipio", Municipio.values());
+			Map<Object, String> municipios = new HashMap<Object, String>();
+			Municipio[] a = Municipio.values();
+			int cont = 0;
+			for (Municipio i : Municipio.values()) {
+			    municipios.put(a[cont], i.toString());
+			    cont++;
+			}
+			model.put("municipios", municipios);
+			
+			
 			model.put("cliente", cliente);
 			if(cliente.getUsuar().getPassword().equals("")) {
 				result.rejectValue("usuar.password","" ,"La contraseña no puede estar vacía");
@@ -196,8 +204,16 @@ public class SingUpController {
 			}
 			return "singup/singUpClient";
 		}else if(cliente.getUsuar().getPassword().equals("")||cliente.getUsuar().getUsername().equals("")||code.getActivo().equals(false)) {
-			 model.put("municipio", Municipio.values());
-			 model.put("cliente", cliente); 
+			Map<Object, String> municipios = new HashMap<Object, String>();
+			Municipio[] a = Municipio.values();
+			int cont = 0;
+			for (Municipio i : Municipio.values()) {
+			    municipios.put(a[cont], i.toString());
+			    cont++;
+			}
+			municipios.put("null", "Seleccione uno de los municipios");
+			model.put("municipios", municipios);
+			model.put("cliente", cliente); 
 			 if(cliente.getUsuar().getPassword().equals("")) {
 					result.rejectValue("usuar.password","" ,"La contraseña no puede estar vacía");
 			}

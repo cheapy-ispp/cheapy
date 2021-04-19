@@ -28,13 +28,13 @@
 					<span>Inicio</span>
 				</cheapy:menuItem>
 				
-				<cheapy:menuItem active="${name eq 'ofertas'}" url="/offers" title="ofertas">
+				<cheapy:menuItem active="${name eq 'ofertas'}" url="/offers" title="Ver ofertas">
 					<span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>
 					<span>Ver ofertas</span>
 				</cheapy:menuItem>
 				
 				<sec:authorize access="hasAnyAuthority('client')">
-				<cheapy:menuItem active="${name eq 'ofertasM'}" url="/myOffers" title="misOfertas">
+				<cheapy:menuItem active="${name eq 'ofertasM'}" url="/myOffers" title="Mis ofertas">
 					<span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>
 					<span>Mis ofertas</span>
 				</cheapy:menuItem>
@@ -68,19 +68,19 @@
 				</cheapy:menuItem>
 				-->
 				<sec:authorize access="isAuthenticated()">
-					<cheapy:menuItem active="${name eq 'reviews'}" url="/reviewsList/0" title="opiniones">
+					<cheapy:menuItem active="${name eq 'reviews'}" url="/reviewsList/0" title="Reseñas">
 						<span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
 						<span>Reseñas</span>
 					</cheapy:menuItem>
 				</sec:authorize>
 				<sec:authorize access="hasAnyAuthority('client')">
-					<cheapy:menuItem active="${name eq 'reviewsN'}" url="/reviews/new" title="valï¿½ranos">
+					<cheapy:menuItem active="${name eq 'reviewsN'}" url="/reviews/new" title="Valóranos">
 						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 						<span>Valóranos</span>
 					</cheapy:menuItem>		           		            
 		        </sec:authorize>
 				<sec:authorize access="hasAnyAuthority('usuario')">
-					<cheapy:menuItem active="${name eq 'reviewsN'}" url="/reviews/new" title="valï¿½ranos">
+					<cheapy:menuItem active="${name eq 'reviewsN'}" url="/reviews/new" title="Valóranos">
 						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 						<span>Valóranos</span>
 					</cheapy:menuItem> 		           		            
@@ -140,7 +140,7 @@
 											</p>
 											<form action="/logout" method=post>
 												<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-												<input type="submit" value="logout" style="align-content:center;color:white;background-color:#004080;padding:10px; border:none; text-align:center">
+												<input type="submit" value="Salir" style="align-content:center;color:white;background-color:#004080;padding:10px; border:none; text-align:center">
 											</form>
 										</div>
 									</div>

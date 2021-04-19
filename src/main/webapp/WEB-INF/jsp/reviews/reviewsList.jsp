@@ -16,6 +16,7 @@
 			document.write("Página " + paginaAct + " <br />");
 		}
 	</script>
+    <div class="text-center">
     <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="reviews"/></h2>
 	<div class="table-responsive">
 	    <table id="reviewTable" class="table table-striped">
@@ -101,5 +102,6 @@
 				<span class="glyphicon 	glyphicon glyphicon-arrow-right" aria-hidden="true" style="padding: 5px"> </span></button>
 			</div>
 		</c:if>
+	</div>
 	</div>
 </cheapy:layout>

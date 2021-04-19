@@ -9,7 +9,7 @@
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<cheapy:layout pageName="review">
+<cheapy:layout pageName="reviewClient">
 
 
     <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="review"/></h2>
@@ -17,7 +17,7 @@
     <form:form modelAttribute="review" class="form-horizontal" id="add-review-form">
 
 
-
+	<div class="table-responsive">
     <table class="table table-striped" id="review-table">
         <tr>
             <th><fmt:message key="stars"/></th>
@@ -30,6 +30,7 @@
         </tr>
     
     </table>
+    </div>
     
     </form:form>
 
