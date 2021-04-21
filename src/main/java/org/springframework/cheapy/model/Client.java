@@ -66,10 +66,6 @@ public class Client extends BaseEntity {
 	@JoinColumn(name = "username", referencedColumnName = "username")
 	private User				usuar;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "code", referencedColumnName = "code")
-	private Code cod;
-
 	@OneToMany
 	private List<FoodOffer>		foodOffers;
 
@@ -145,15 +141,6 @@ public class Client extends BaseEntity {
 
 	public void setDescription(final String description) {
 		this.description = description;
-	}
-
-
-	public Code getCode() {
-		return cod;
-	}
-
-	public void setCode(Code code) {
-		this.cod = code;
 	}
 
 	public String getFood() {

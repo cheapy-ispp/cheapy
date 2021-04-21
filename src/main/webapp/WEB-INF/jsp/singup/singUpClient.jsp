@@ -302,8 +302,6 @@
 				name="usuar.username" />
 			<cheapy:passwordField label="Contraseña" placeholder="Ponga aqui su contraseña"
 				name="usuar.password" />
-			<cheapy:inputField label="Código de activación" placeholder="Ponga aqui el código que se le suministro al firmar el contrato"
-				name="code.code" />
 			<cheapy:selectMunicipio label="Municipio" name="municipio" size="1" items="${municipios}" ></cheapy:selectMunicipio>
 				
 			<div class="text-center">
