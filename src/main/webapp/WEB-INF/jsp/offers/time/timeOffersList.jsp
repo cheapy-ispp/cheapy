@@ -5,11 +5,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="cheapy" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<%@ page contentType="text/html; charset=UTF-8" %>
+
 
 <cheapy:layout pageName="ofertas por intervalo de tiempo">
 	<script>
@@ -88,7 +89,7 @@
 				<option value="">Seleccione una de las opciones</option>
 			
 			<c:forEach items="${municipios}" var="entry">
-				<option value="${entry}">${entry.toString()}</option>
+				<option value="${fn:escapeXml(entry)}">${fn:escapeXml(entry.toString())}</option>
 			</c:forEach>
 			</select>
 			<button type="submit" class="btn-mas">Buscar por municipio</button>
@@ -121,7 +122,7 @@
 	        	<c:forEach items="${timeOfferLs}" var="timeOffer">
 	            <tr>
 	                <td>
-	                    <a href="/restaurant/${timeOffer.client.id}"><c:out value="${timeOffer.client.name}"/></a>
+	                    <a href="/restaurant/${fn:escapeXml(timeOffer.client.id)}"><c:out value="${timeOffer.client.name}"/></a>
 	                </td>
 	                <td>
 	                    <c:out value="${localDateTimeFormat.format(timeOffer.start)}"/>
