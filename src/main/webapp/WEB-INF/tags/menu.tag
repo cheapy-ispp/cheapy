@@ -85,6 +85,12 @@
 						<span>Valóranos</span>
 					</cheapy:menuItem> 		           		            
 		        </sec:authorize>
+		        <sec:authorize access="hasAnyAuthority('client')">
+					<cheapy:menuItem active="${name eq 'reviewsClient'}" url="/myClientReviews" title="Mis Reseñas">
+						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+						<span>Mis Reseñas</span>
+					</cheapy:menuItem>		           		            
+		        </sec:authorize>
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">
