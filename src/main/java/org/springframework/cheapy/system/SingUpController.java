@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cheapy.configuration.SecurityConfiguration;
 import org.springframework.cheapy.model.Authorities;
 import org.springframework.cheapy.model.Client;
 import org.springframework.cheapy.model.Code;
@@ -37,14 +38,17 @@ public class SingUpController {
 	private final UsuarioService usuarioService;
 	@Autowired
 	private final AuthoritiesService authoritiesService;
+	@Autowired
+	private final SecurityConfiguration security;
 
 
 	public SingUpController(final ClientService clientService, UserService userService, AuthoritiesService authoritiesService,
-			UsuarioService usuarioService) {
+			UsuarioService usuarioService, SecurityConfiguration security) {
 		this.clientService = clientService;
 		this.userService = userService;
 		this.authoritiesService = authoritiesService;
 		this.usuarioService = usuarioService;
+		this.security = security;
 
 	}
 	
@@ -90,6 +94,7 @@ public class SingUpController {
 		Authorities auth=new Authorities();
 		User user= usuario.getUsuar();
 		user.setEnabled(true);
+		
 		usuario.setUsuar(user);
 		auth.setUsername(user.getUsername());
 		auth.setAuthority("usuario");
@@ -127,6 +132,7 @@ public class SingUpController {
 			
 			//auth.setId(1);
 			//this.authoritiesService.saveAuthorities(auth);
+			usuario.getUsuar().setPassword(MD5(usuario.getUsuar().getPassword())); //MD5 a la contraseña para que no circule en claro por la red
 			this.usuarioService.saveUsuario(usuario);
 			this.userService.saveUser(user);
 			this.authoritiesService.saveAuthorities(usuario.getUsuar().getUsername(), "usuario");
@@ -225,6 +231,8 @@ public class SingUpController {
 			}
 				return "singup/singUpClient";
 		 }else {
+			
+			cliente.getUsuar().setPassword(MD5(cliente.getUsuar().getPassword())); //MD5 a la contraseña para que no circule en claro por la red
 			code.setActivo(false);
 			this.clientService.saveCode(code);
 			cliente.setCode(code);
@@ -236,4 +244,17 @@ public class SingUpController {
 			return "redirect:/";
 		}
 	}
+	private String MD5(String md5) {
+		   try {
+		        java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+		        byte[] array = md.digest(md5.getBytes());
+		        StringBuffer sb = new StringBuffer();
+		        for (int i = 0; i < array.length; ++i) {
+		          sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
+		       }
+		        return sb.toString();
+		    } catch (java.security.NoSuchAlgorithmException e) {
+		    }
+		    return null;
+		}
 }
