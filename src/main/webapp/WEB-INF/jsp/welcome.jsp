@@ -9,6 +9,8 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
+ 
+
 <cheapy:layout pageName="home"> 
     <h2 class="text-center" style="font-family: 'Lobster'; font-size: 300%; color: rgb(0, 64, 128); padding:30px"><fmt:message key="welcome"/></h2>
     <div class="row">
@@ -36,7 +38,7 @@
                       <fmt:message key="createOffers"/> </button>
                   </div>
                      
-
+				
               </sec:authorize>
             </div>
 	        

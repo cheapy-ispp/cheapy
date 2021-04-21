@@ -150,6 +150,18 @@
     <artifactId>postgresql</artifactId>
     <scope>runtime</scope>
 </dependency>
+<!-- stripe (pagos) -->
+<dependency>
+            <groupId>
+                com.stripe
+            </groupId>
+            <artifactId>
+                stripe-java
+            </artifactId>
+            <version>
+                20.47.0
+            </version>
+        </dependency>
   </dependencies>
   
   
