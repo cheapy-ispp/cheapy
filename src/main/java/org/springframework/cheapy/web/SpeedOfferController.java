@@ -11,6 +11,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.cheapy.model.Client;
+import org.springframework.cheapy.model.Municipio;
 import org.springframework.cheapy.model.SpeedOffer;
 import org.springframework.cheapy.model.StatusOffer;
 import org.springframework.cheapy.service.ClientService;
@@ -91,6 +92,8 @@ public class SpeedOfferController {
 		
 		List<SpeedOffer> speedOfferLs = this.speedOfferService.findActiveSpeedOffer(elements);
 		Integer next = this.speedOfferService.findActiveSpeedOffer(nextPage).size();
+		
+		model.put("municipios", Municipio.values());
 		
 		model.put("speedOfferLs", speedOfferLs);
 		model.put("nextPage", next);
