@@ -11,6 +11,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.cheapy.model.Client;
+import org.springframework.cheapy.model.Municipio;
 import org.springframework.cheapy.model.StatusOffer;
 import org.springframework.cheapy.model.TimeOffer;
 import org.springframework.cheapy.service.ClientService;
@@ -79,6 +80,8 @@ public class TimeOfferController {
 
 		List<TimeOffer> timeOfferLs = this.timeOfferService.findActiveTimeOffer(elements);
 		Integer next = this.timeOfferService.findActiveTimeOffer(nextPage).size();
+		
+		model.put("municipios", Municipio.values());
 		
 		model.put("timeOfferLs", timeOfferLs);
 		model.put("nextPage", next);

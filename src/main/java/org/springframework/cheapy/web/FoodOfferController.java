@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.cheapy.model.Client;
 import org.springframework.cheapy.model.FoodOffer;
+import org.springframework.cheapy.model.Municipio;
 import org.springframework.cheapy.model.StatusOffer;
 import org.springframework.cheapy.service.ClientService;
 import org.springframework.cheapy.service.FoodOfferService;
@@ -72,6 +73,8 @@ public class FoodOfferController {
 
 		List<FoodOffer> foodOfferLs = this.foodOfferService.findActiveFoodOffer(elements);
 		Integer next = this.foodOfferService.findActiveFoodOffer(nextPage).size();
+		
+		model.put("municipios", Municipio.values());
 		
 		model.put("foodOfferLs", foodOfferLs);
 		model.put("nextPage", next);

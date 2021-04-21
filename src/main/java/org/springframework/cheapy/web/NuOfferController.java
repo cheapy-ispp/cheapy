@@ -12,6 +12,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.cheapy.model.Client;
+import org.springframework.cheapy.model.Municipio;
 import org.springframework.cheapy.model.NuOffer;
 import org.springframework.cheapy.model.StatusOffer;
 import org.springframework.cheapy.service.ClientService;
@@ -91,6 +92,8 @@ public class NuOfferController {
 		
 		List<NuOffer> foodOfferLs = this.nuOfferService.findActiveNuOffer(elements);
 		Integer next = this.nuOfferService.findActiveNuOffer(nextPage).size();
+		
+		model.put("municipios", Municipio.values());
 		
 		model.put("nuOfferLs", foodOfferLs);
 		model.put("nextPage", next);
