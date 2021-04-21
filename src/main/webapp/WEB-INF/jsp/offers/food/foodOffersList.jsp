@@ -55,6 +55,48 @@
 		</div>
 	</div>
 	
+	<spring:url value="/offersByName/{page}" var="SearchNameOfferListUrl">
+				<spring:param name="page" value="0"/>
+	</spring:url>
+	<form class="example" action="${fn:escapeXml(SearchNameOfferListUrl)}">
+		<h2 class="text-center" style="font-family: 'Lobster'; text-align:center; font-size:150%;  color: rgb(0, 64, 128); padding:10px;" >Búsqueda por nombre del bar/restaurante: </h2>
+		<div class="text-center">
+	  		<input type="text" placeholder="Búsqueda por nombre" name="name" style="border:solid; width:80%; border-color: rgb(0, 64, 128);">
+	  		<button type="submit" class="btn-search"><i class="fa fa-search"></i>
+	  		<span class="glyphicon 	glyphicon glyphicon-search" aria-hidden="true" style="padding: 5px"> </span>
+	  		</button>
+  		</div>
+	</form>
+	
+	<spring:url value="/offersByFood/{page}" var="SearchFoodOfferListUrl">
+				<spring:param name="page" value="0"/>
+	</spring:url>
+	<form class="example" action="${fn:escapeXml(SearchFoodOfferListUrl)}">
+		<h2 class="text-center" style="font-family: 'Lobster'; text-align:center; font-size:150%;  color: rgb(0, 64, 128); padding:10px;" >Búsqueda por tipo de comida: </h2>
+		<div class="text-center">
+	  		<input type="text" placeholder="Búsqueda por tipo comida (Ej: americana)" name="name" style="border:solid; width:80%; border-color: rgb(0, 64, 128);">
+	  		<button type="submit" class="btn-search"><i class="fa fa-search"></i>
+	  		<span class="glyphicon 	glyphicon glyphicon-search" aria-hidden="true" style="padding: 5px"> </span>
+	  		</button>
+  		</div>
+	</form>
+	
+	<spring:url value="/offersByPlace/{page}" var="SearchPlaceOfferListUrl">
+				<spring:param name="page" value="0"/>
+	</spring:url>
+	<form class="example" action="${fn:escapeXml(SearchPlaceOfferListUrl)}">
+		<div class="text-center">
+			<select name="municipio" class="select-municipio" >
+				<option value="">Seleccione una de las opciones</option>
+			
+			<c:forEach items="${municipios}" var="entry">
+				<option value="${entry}">${entry.toString()}</option>
+			</c:forEach>
+			</select>
+			<button type="submit" class="btn-mas">Buscar por municipio</button>
+		</div>
+	</form>
+	
     <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="foodOffers"/>
     	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir el plato indicado en la oferta">
     	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
@@ -83,7 +125,7 @@
 	        <c:forEach items="${foodOfferLs}" var="foodOffer">
 	            <tr>
 	            	<td>
-	                    <c:out value="${foodOffer.client.name}"/>
+	                    <a href="/restaurant/${foodOffer.client.id}"><c:out value="${foodOffer.client.name}"/></a>
 	                </td>
 	                <td>
 	                    <c:out value="${foodOffer.food}"/>

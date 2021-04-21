@@ -22,8 +22,7 @@
 		<div class="btn-filter-max">
 			<spring:url value="/offers/foodOfferList/{page}" var="foodOfferListUrl">
 				<spring:param name="page" value="0"/>
-		    </spring:url>
-		    
+		    </spring:url> 
 		    
 			<button type="button" class="btn-filter" role="link" onclick="window.location='${fn:escapeXml(foodOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 			<span class="glyphicon 	glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
