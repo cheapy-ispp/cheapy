@@ -52,7 +52,7 @@ public class SpeedOfferController {
 
 	private boolean checkOffer(final SpeedOffer session, final SpeedOffer offer) {
 		boolean res = false;
-		if (session.getId() == offer.getId() && session.getStatus() == offer.getStatus() && (session.getCode() == null ? offer.getCode() == "" : session.getCode().equals(offer.getCode())) && !session.getStatus().equals(StatusOffer.inactive)) {
+		if (session.getId() == offer.getId() && session.getStatus().equals(offer.getStatus()) && (session.getCode() == null ? offer.getCode().equals("") : session.getCode().equals(offer.getCode())) && !session.getStatus().equals(StatusOffer.inactive)) {
 			res = true;
 		}
 		return res;
@@ -69,7 +69,7 @@ public class SpeedOfferController {
 	private boolean checkConditions(final SpeedOffer speedOffer) {
 		boolean res = false;
 		if (speedOffer.getGold() == null || speedOffer.getSilver() == null || speedOffer.getBronze() == null) {
-
+			res = true;
 		} else if (speedOffer.getGold() <= speedOffer.getSilver() && speedOffer.getSilver() <= speedOffer.getBronze()) {
 			res = true;
 		}
@@ -79,6 +79,7 @@ public class SpeedOfferController {
 	private boolean checkDiscounts(final SpeedOffer speedOffer) {
 		boolean res = false;
 		if (speedOffer.getDiscountGold() == null || speedOffer.getDiscountSilver() == null || speedOffer.getDiscountBronze() == null) {
+			res = true;
 		} else if (speedOffer.getDiscountGold() >= speedOffer.getDiscountSilver() && speedOffer.getDiscountSilver() >= speedOffer.getDiscountBronze()) {
 			res = true;
 		}
@@ -190,9 +191,9 @@ public class SpeedOfferController {
 	}
 
 	@PostMapping(value = "/offers/speed/{speedOfferId}/edit")
-	public String updateSpeedOffer(@Valid final SpeedOffer speedOfferEdit, final BindingResult result, final ModelMap model, final HttpServletRequest request) {
+	public String updateSpeedOffer(@PathVariable("speedOfferId") final int speedOfferId, @Valid final SpeedOffer speedOfferEdit, final BindingResult result, final ModelMap model, final HttpServletRequest request) {
 
-		if (!this.checkIdentity(speedOfferEdit.getId())) {
+		if (!this.checkIdentity(speedOfferId)) {
 			return "error";
 		}
 		Integer id = (Integer) request.getSession().getAttribute("idSpeed");

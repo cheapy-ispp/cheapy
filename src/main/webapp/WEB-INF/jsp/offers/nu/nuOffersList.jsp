@@ -88,7 +88,7 @@
 				<option value="">Seleccione una de las opciones</option>
 			
 			<c:forEach items="${municipios}" var="entry">
-				<option value="${entry}">${entry.toString()}</option>
+				<option value="${fn:escapeXml(entry)}">${fn:escapeXml(entry.toString())}</option>
 			</c:forEach>
 			</select>
 			<button type="submit" class="btn-mas">Buscar por municipio</button>
@@ -122,7 +122,7 @@
 	        <c:forEach items="${nuOfferLs}" var="nuOffer">
 	            <tr>
 	                <td>
-	                    <a href="/restaurant/${nuOffer.client.id}"><c:out value="${nuOffer.client.name}"/></a>
+	                    <a href="/restaurant/${fn:escapeXml(nuOffer.client.id)}"><c:out value="${nuOffer.client.name}"/></a>
 	                </td>
 	                <td>
 	                    <c:out value="${localDateTimeFormat.format(nuOffer.start)}"/>

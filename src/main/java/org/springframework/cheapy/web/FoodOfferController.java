@@ -52,7 +52,7 @@ public class FoodOfferController {
 
 	private boolean checkOffer(final FoodOffer session, final FoodOffer offer) {
 		boolean res = false;
-		if (session.getId() == offer.getId() && session.getStatus() == offer.getStatus() && (session.getCode() == null ? offer.getCode() == "" : session.getCode().equals(offer.getCode())) && !session.getStatus().equals(StatusOffer.inactive)) {
+		if (session.getId() == offer.getId() && session.getStatus().equals(offer.getStatus()) && (session.getCode() == null ? offer.getCode().equals("") : session.getCode().equals(offer.getCode())) && !session.getStatus().equals(StatusOffer.inactive)) {
 			res = true;
 		}
 		return res;
@@ -163,9 +163,9 @@ public class FoodOfferController {
 	}
 
 	@PostMapping(value = "/offers/food/{foodOfferId}/edit")
-	public String updateFoodOffer(@Valid final FoodOffer foodOfferEdit, final BindingResult result, final ModelMap model, final HttpServletRequest request) {
+	public String updateFoodOffer(@PathVariable("foodOfferId") final int foodOfferId, @Valid final FoodOffer foodOfferEdit, final BindingResult result, final ModelMap model, final HttpServletRequest request) {
 
-		if (!this.checkIdentity(foodOfferEdit.getId())) {
+		if (!this.checkIdentity(foodOfferId)) {
 			return "error";
 		}
 		Integer id = (Integer) request.getSession().getAttribute("idFood");
