@@ -150,18 +150,12 @@
     <artifactId>postgresql</artifactId>
     <scope>runtime</scope>
 </dependency>
-<!-- stripe (pagos) -->
+
 <dependency>
-            <groupId>
-                com.stripe
-            </groupId>
-            <artifactId>
-                stripe-java
-            </artifactId>
-            <version>
-                20.47.0
-            </version>
-        </dependency>
+			<groupId>com.paypal.sdk</groupId>
+			<artifactId>rest-api-sdk</artifactId>
+			<version>1.14.0</version>
+		</dependency>
   </dependencies>
   
   
