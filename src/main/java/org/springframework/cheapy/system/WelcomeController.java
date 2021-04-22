@@ -16,14 +16,39 @@
 
 package org.springframework.cheapy.system;
 
+import java.time.LocalDate;
+
+import org.springframework.cheapy.model.Authorities;
+import org.springframework.cheapy.model.Client;
+import org.springframework.cheapy.service.AuthoritiesService;
+import org.springframework.cheapy.service.ClientService;
+import org.springframework.cheapy.service.FoodOfferService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 class WelcomeController {
 
+	private final ClientService		clientService;
+	private final AuthoritiesService authoritiesService;
+	
+	public WelcomeController( final ClientService clientService, final AuthoritiesService authoritiesService) {
+		this.clientService = clientService;
+		this.authoritiesService = authoritiesService;
+	}
+	
 	@GetMapping("/")
 	public String welcome() {
+		Client client = this.clientService.getCurrentClient();
+		
+		//Authorities auth=this.authoritiesService.findAuthoritiyByUsername(username);
+		if(client!=null) {
+			String username=client.getUsuar().getUsername();
+			LocalDate exp=client.getExpiration();
+			if(exp.isBefore(LocalDate.now())) {
+				this.authoritiesService.saveAuthorities(username, "notsubscribed");
+			}
+		}
 		return "welcome";
 	}
 

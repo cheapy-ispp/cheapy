@@ -1,5 +1,6 @@
 package org.springframework.cheapy.system;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -150,6 +151,8 @@ public class SingUpController {
 		User user=new User();
 		
 		cliente.setUsuar(user);
+		LocalDate ayer= LocalDate.now().minusDays(2);
+		cliente.setExpiration(ayer);
 		model.put("municipios", municipios);
 		model.put("cliente", cliente);
 		//model.put("user", user);
@@ -164,6 +167,8 @@ public class SingUpController {
 		cliente.setUsuar(user);
 		auth.setUsername(user.getUsername());
 		auth.setAuthority("client");
+		LocalDate ayer= LocalDate.now().minusDays(2);
+		cliente.setExpiration(ayer);
 		if(!this.checkTimes(cliente)) {
 			result.rejectValue("finish","" ,"La hora de cierre debe ser posterior a la hora de apertura");
 			
@@ -212,7 +217,7 @@ public class SingUpController {
 		 }else {
 			this.clientService.saveClient(cliente);
 			this.userService.saveUser(user);
-			this.authoritiesService.saveAuthorities(cliente.getUsuar().getUsername(), "client");
+			this.authoritiesService.saveAuthorities(cliente.getUsuar().getUsername(), "notsubscribed");
 			
 			
 			return "redirect:/";

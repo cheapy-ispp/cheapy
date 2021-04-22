@@ -49,6 +49,7 @@ public class PaypalController {
 		order.setMethod("paypal");
 		order.setPrice(30);
 		order.setDescription("Pago por suscripcion");
+		
 		Client client = this.clientservice.getCurrentClient();
 		
 		if (true) {
@@ -69,6 +70,7 @@ public class PaypalController {
 					"http://localhost:8080/" + SUCCESS_URL);
 			for (Links link : payment.getLinks()) {
 				if (link.getRel().equals("approval_url")) {
+					
 					return "redirect:" + link.getHref();
 				}
 			}
@@ -81,7 +83,7 @@ public class PaypalController {
 
 	@GetMapping(value = CANCEL_URL)
 	public String cancelPay() {
-		return CANCEL_URL;
+		return "pay/cancel";
 	}
 
 	@GetMapping(value = SUCCESS_URL)
@@ -89,10 +91,16 @@ public class PaypalController {
 		try {
 			Payment payment = payPalService.executePayment(paymentId, payerId);
 			if (payment.getState().equals("approved")) {
-				return SUCCESS_URL;
+				Client client = this.clientservice.getCurrentClient();
+				String username=client.getUsuar().getUsername();
+				this.authoritiesService.saveAuthorities(username, "client");
+				client.setExpiration(LocalDate.now().plusMonths(1));
+				this.clientservice.saveClient(client);
+				System.out.println("");
+				//return SUCCESS_URL;
 			}
 		} catch (PayPalRESTException e) {
 		}
-		return "redirect:/";
+		return "pay/successPayment";
 	}
 }

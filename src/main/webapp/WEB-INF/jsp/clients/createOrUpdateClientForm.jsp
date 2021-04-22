@@ -25,7 +25,9 @@
             <cheapy:inputField label="Teléfono" placeholder="" name="telephone"/>
             <cheapy:inputField label="Descripción" placeholder="" name="description"/>
             <cheapy:inputField label="Comida" placeholder="food" name="food"/>
-            <cheapy:selectMunicipio label="Municipio" name="municipio" size="1" items="${municipios}" ></cheapy:selectMunicipio>
+            <input readonly name="expiration" value="${client.expiration}" />
+<!--             <input  type="text" id="expiration" name="Expiración de la subscripción" value="expiration" readonly/>
+ -->            <cheapy:selectMunicipio label="Municipio" name="municipio" size="1" items="${municipios}" ></cheapy:selectMunicipio>
             
 					<script>
 

@@ -303,7 +303,7 @@
 			<cheapy:passwordField label="Contraseña" placeholder="Ponga aqui su contraseña"
 				name="usuar.password" />
 			<cheapy:selectMunicipio label="Municipio" name="municipio" size="1" items="${municipios}" ></cheapy:selectMunicipio>
-				
+			<form:hidden path="expiration"/>
 			<div class="text-center">
 				<input type="submit" class="fadeIn fourth" value="Registrarse">
 			</div>

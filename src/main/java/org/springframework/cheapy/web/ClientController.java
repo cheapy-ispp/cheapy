@@ -100,9 +100,8 @@ public class ClientController {
 	@PostMapping(value = "/clients/edit")
 	public String updateClient(@Valid final Client clientEdit, final BindingResult result,
 			final ModelMap model, HttpServletRequest request) {
-
-
 		Client clienteSesion = this.clientService.getCurrentClient();
+		BeanUtils.copyProperties(clienteSesion, clientEdit, "name", "email", "address","init","municipio", "finish","telephone", "description","food","expiration","usuar");
 		if(!this.checkTimes(clientEdit)) {
 			result.rejectValue("finish","" ,"La hora de cierre debe ser posterior a la hora de apertura");
 			
@@ -127,7 +126,6 @@ public class ClientController {
 				return ClientController.VIEWS_CREATE_OR_UPDATE_CLIENT;
 			}
 			
-			BeanUtils.copyProperties(clienteSesion, clientEdit, "name", "email", "address","init","municipio", "finish","telephone", "description","food","usuar");
 			clientEdit.getUsuar().setUsername(clienteSesion.getUsuar().getUsername());
 			clientEdit.getUsuar().setEnabled(true);
 			this.clientService.saveClient(clientEdit);
