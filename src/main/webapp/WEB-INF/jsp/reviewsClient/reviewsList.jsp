@@ -80,27 +80,32 @@
 								
 		</script>
     </div>
-    <c:if test='${page!=0}'>
-    <div class="text-left">
-    	<spring:url value="/reviewsClientList/{client}/{page}" var="reviewsListUrl">
-    		<spring:param name="page" value="${page-1}"/>
-    		<spring:param name="client" value="${client}"/>
-    	</spring:url>
-    	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(reviewsListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-		<span class="glyphicon 	glyphicon glyphicon-arrow-left" aria-hidden="true" style="padding: 5px"> </span>
-		Pág. anterior</button>
- 	</div>
-    </c:if>
-    
-    <c:if test="${fn:length(reviewsLs) == 6 && nextPage > 0}">
-    <div class="text-right">
-    	<spring:url value="/reviewsClientList/{client}/{page}" var="reviewsListUrl">
-    		<spring:param name="page" value="${page+1}"/>
-    		<spring:param name="client" value="${client}"/>
-    	</spring:url>
-    	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(reviewsListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-		<span class="glyphicon 	glyphicon glyphicon-arrow-right" aria-hidden="true" style="padding: 5px"> </span>
-		Pág. siguiente</button>
+    <div class="row-pag-btn">
+	    <div class="column-pag-btn" style="text-align: left;">
+	    	<c:if test='${page!=0}'>
+		    	<spring:url value="/reviewsClientList/{client}/{page}" var="reviewsListUrl">
+		    		<spring:param name="page" value="${page-1}"/>
+		    		<spring:param name="client" value="${client}"/>
+		    	</spring:url>
+		    	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(reviewsListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+				<span class="glyphicon 	glyphicon glyphicon-arrow-left" aria-hidden="true" style="padding: 5px"> </span>
+				Pág. anterior</button>
+		    </c:if>
+	    	​
+	    </div>
+	    <div class="column-pag-btn" style="text-align: right;">
+	    	<c:if test="${fn:length(reviewsLs) == 6 && nextPage > 0}">
+		    	<spring:url value="/reviewsClientList/{client}/{page}" var="reviewsListUrl">
+		    		<spring:param name="page" value="${page+1}"/>
+		    		<spring:param name="client" value="${client}"/>
+		    	</spring:url>
+		    	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(reviewsListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+				<span class="glyphicon 	glyphicon glyphicon-arrow-right" aria-hidden="true" style="padding: 5px"> </span>
+				Pág. siguiente</button>
+			</c:if>​
+		</div>
 	</div>
-	</c:if>
+    
+    
+    
 </cheapy:layout>
