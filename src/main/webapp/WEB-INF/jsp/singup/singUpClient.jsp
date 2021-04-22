@@ -74,9 +74,7 @@
 	  -webkit-border-radius: 0 0 10px 10px;
 	  border-radius: 0 0 10px 10px;
 	}
-	
-	
-	
+		
 	/* TABS */
 	
 	h2.inactive {
@@ -136,7 +134,7 @@
 	  display: inline-block;
 	  font-size: 16px;
 	  margin: 5px;
-	  width: 85%;
+	  width: 70%;
 	  border: 2px solid #f6f6f6;
 	  -webkit-transition: all 0.5s ease-in-out;
 	  -moz-transition: all 0.5s ease-in-out;
@@ -147,7 +145,28 @@
 	  border-radius: 5px 5px 5px 5px;
 	}
 	
+	input[type=time]{
+		background-color: #f6f6f6;
+		border: none;
+	  	color: #0d0d0d;
+	  	padding: 10px 10px;
+	  	text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		  							   
+		
+	}
+
+input::-webkit-calendar-picker-indicator:hover {
+  
+  cursor: pointer;
+}
+	
 	input[type=text]:focus {
+	  background-color: #fff;
+	  border-bottom: 2px solid #5fbae9;
+	}
+	input[type=password]:focus {
 	  background-color: #fff;
 	  border-bottom: 2px solid #5fbae9;
 	}
@@ -286,9 +305,9 @@
 				name="name" />
 			<cheapy:inputField label="Direccion" placeholder="Ponga aqui su dirección"
 				name="address" />			
-			<cheapy:inputField label="Hora de apertura" placeholder="Ponga aqui su hora de apertura (formato HH:mm)"
+			<cheapy:timeField label="Hora de apertura" placeholder="Ponga aqui su hora de apertura (formato HH:mm)"
 				name="init" />
-			<cheapy:inputField label="Hora de cierre" placeholder="Ponga aqui su hora de cierre (formato HH:mm)"
+			<cheapy:timeField label="Hora de cierre" placeholder="Ponga aqui su hora de cierre (formato HH:mm)"
 				name="finish" />
 			<cheapy:inputField label="Teléfono" placeholder="Ponga aqui el teléfono del local"
 				name="telephone" />

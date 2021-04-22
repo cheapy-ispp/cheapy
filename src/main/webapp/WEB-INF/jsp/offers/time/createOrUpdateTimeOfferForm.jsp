@@ -20,8 +20,8 @@
             <cheapy:dateField label="Fecha de inicio" placeholder="dd/MM/yyyy HH:mm" name="start"/>
             <cheapy:dateField label="Fecha de fin" placeholder="dd/MM/yyyy HH:mm" name="end"/>
 
-            <cheapy:inputField label="Hora de inicio" placeholder="HH:mm" name="init"/>
-            <cheapy:inputField label="Hora de final" placeholder="HH:mm" name="finish"/>
+            <cheapy:timeField label="Hora de inicio" placeholder="HH:mm" name="init"/>
+            <cheapy:timeField label="Hora de final" placeholder="HH:mm" name="finish"/>
             <cheapy:inputField label="Descuento" placeholder="XX% (Ej.15)" name="discount"/>
 
 

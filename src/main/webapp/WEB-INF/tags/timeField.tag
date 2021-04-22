@@ -12,19 +12,10 @@
     <c:set var="cssGroup" value="form-group ${status.error ? 'has-error' : '' }"/>
     <c:set var="valid" value="${not status.error and not empty status.actualValue}"/>
     <div class="${cssGroup}">
-        <label class="col-sm-2 control-label">${label}</label>
+        <label class="col-sm-2 control-label" style="vertical-align:middle">${label}</label>
 		
         <div class="col-sm-10">
-            <form:input type="password" class="form-control" id="myInput" placeholder="${placeholder }" path="${name}" style="width:70%"/>
-            <c:if test="${(!usuario['new']) and (!cliente['new'])}">
-            	<div class="form-check">
-				  <input class="form-check-input" type="radio" id="showPassword" onclick="myFunction()">
-				  <label class="form-check-label" for="showPassword">
-				    Mostrar Contraseña
-				  </label>
-				  
-				</div>
-            </c:if>
+        	<form:input type="time" class="time"  path="${name}" style="width:70%"/>
             <c:if test="${valid}">
                 <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
             </c:if>
@@ -34,7 +25,4 @@
             </c:if>
         </div>
     </div>
-    
-    
-
 </spring:bind>
