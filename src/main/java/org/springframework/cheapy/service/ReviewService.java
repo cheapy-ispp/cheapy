@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cheapy.model.Review;
+import org.springframework.cheapy.model.User;
 import org.springframework.cheapy.repository.ReviewRepository;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Pageable;
@@ -35,6 +36,13 @@ public class ReviewService {
 	@Transactional
 	public void saveReview(final Review Review) throws DataAccessException {
 		this.reviewRepository.save(Review);
+	}
+
+	public void deleteReviewsByUser(final User user) {
+		List<Review> reviews = this.reviewRepository.findByEscritor(user);
+		if (reviews.size() > 0) {
+			this.reviewRepository.deleteAll(reviews);
+		}
 	}
 
 }

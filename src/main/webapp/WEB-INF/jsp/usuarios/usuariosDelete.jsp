@@ -6,22 +6,25 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
+
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
-<cheapy:layout pageName="client">
+<cheapy:layout pageName="usuario">
 
 	<jsp:body>
-        <h2 class="text-center" style="font-family: 'Lobster'; font-size: 30px; color: rgb(0, 64, 128); padding:30px"><em>¿Está seguro de que quiere activar esta cuenta?</em></h2>
+        <h2 class="text-center" style="font-family: 'Lobster'; font-size: 30px; color: rgb(0, 64, 128); padding:30px"><em>¿Está seguro de que quiere eliminar su cuenta? 
+        No podrás recuperarla y todas sus reseñas desaparecerán.</em></h2>
+      		
+      		 <form:form modelAttribute="usuario" class="form-horizontal">
 
-      		<form:form modelAttribute="client" class="form-horizontal">
+        		<div class="btns-edit2">
 
-				    <div class="btns-edit2">
         			<button type="submit" style="font-family: 'Lobster'; font-size: 20px;">
         			<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
-        			Activar</button>
+        			Eliminar cuenta</button>
         		</div>
         	</form:form>
-
+        
+           
     </jsp:body>
-
 </cheapy:layout>

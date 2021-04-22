@@ -6,7 +6,9 @@
 <%@ attribute name="label" required="true" rtexprvalue="true"
               description="Label appears in red color if input is considered as invalid after submission" %>
 <%@ attribute name="placeholder" required="false" rtexprvalue="true"
-              description="Placeholder para los campos en los input fields" %>             
+              description="Placeholder para los campos en los input fields" %>      
+<%@ attribute name="value" required="false" rtexprvalue="true"
+              description="Valor por defecto del selector" %>                       
 
 <spring:bind path="${name}">
     <c:set var="cssGroup" value="form-group ${status.error ? 'has-error' : '' }"/>
@@ -15,16 +17,7 @@
         <label class="col-sm-2 control-label">${label}</label>
 		
         <div class="col-sm-10">
-            <form:input type="password" class="form-control" id="myInput" placeholder="${placeholder }" path="${name}" style="width:70%"/>
-            <c:if test="${(!usuario['new']) and (!cliente['new'])}">
-            	<div class="form-check">
-				  <input class="form-check-input" type="radio" id="showPassword" onclick="myFunction()">
-				  <label class="form-check-label" for="showPassword">
-				    Mostrar Contraseña
-				  </label>
-				  
-				</div>
-            </c:if>
+        	<form:input type="time" step='1' value="${value }" class="time"  path="${name}" style="width:70%" />
             <c:if test="${valid}">
                 <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
             </c:if>
@@ -34,7 +27,4 @@
             </c:if>
         </div>
     </div>
-    
-    
-
 </spring:bind>

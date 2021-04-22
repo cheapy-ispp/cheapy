@@ -13,6 +13,7 @@
     <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px">
         <c:if test="${speedOffer['new']}"><fmt:message key="new"/> </c:if> <fmt:message key="speedOffer"/>
     </h2>
+    
     <form:form modelAttribute="speedOffer" class="form-horizontal" id="add-speedOffer-form">
         <div class="form-group has-feedback">
             <form:hidden path="id"/>
@@ -20,11 +21,15 @@
             <form:hidden path="status"/>
             <cheapy:dateField label="Fecha de Inicio" placeholder="dd/MM/yyyy HH:mm" name="start"/>
             <cheapy:dateField label="Fecha de Fin"  placeholder="dd/MM/yyyy HH:mm" name="end"/>
-            <cheapy:inputField label="Tiempo para comer (nivel Oro)" placeholder="XX minutos (Ej. 5)" name="gold"/>
+            <c:if test="${gold != null  }"><cheapy:timeSecondsField label="Tiempo para comer (nivel Oro)" value="${gold}" name="gold"/></c:if>
+            <c:if test="${gold == null  }"><cheapy:timeSecondsField label="Tiempo para comer (nivel Oro)" value="00:00:00" name="gold"/></c:if>
             <cheapy:inputField label="Descuento nivel Oro" placeholder="XX% (Ej. 35)" name="discountGold"/>
-            <cheapy:inputField label="Tiempo para comer (nivel Plata)" placeholder="XX minutos (Ej. 10)" name="silver"/>
+            <c:if test="${silver != null  }"><cheapy:timeSecondsField label="Tiempo para comer (nivel Plata)" value="${silver}" name="silver"/></c:if>
+            <c:if test="${silver == null  }"><cheapy:timeSecondsField label="Tiempo para comer (nivel Plata)" value="00:00:00" name="silver"/></c:if>
+            
             <cheapy:inputField label="Descuento nivel Plata" placeholder="XX% (Ej. 15)" name="discountSilver"/>
-            <cheapy:inputField label="Tiempo para comer (nivel Bronce)" placeholder="XX minutos (Ej. 20)" name="bronze"/>
+            <c:if test="${bronze != null  }"><cheapy:timeSecondsField label="Tiempo para comer (nivel Bronce)" value="${bronze}" name="bronze"/></c:if>
+            <c:if test="${bronze == null  }"><cheapy:timeSecondsField label="Tiempo para comer (nivel Bronce)" value="00:00:00" name="bronze"/></c:if>
             <cheapy:inputField label="Descuento nivel Bronce" placeholder="XX% (Ej. 5)" name="discountBronze"/>
         </div>
         <div class="form-group">

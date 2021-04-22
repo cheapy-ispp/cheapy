@@ -1,18 +1,18 @@
-INSERT INTO users (username,password,enabled) VALUES ('admin','admin', TRUE );
+INSERT INTO users (username,password,enabled) VALUES ('admin',MD5('admin'), TRUE );
 INSERT INTO authorities (username,authority) VALUES ('admin','admin');
 
-INSERT INTO users (username,password,enabled) VALUES ('manoli','manoli', TRUE );
+INSERT INTO users (username,password,enabled) VALUES ('manoli',MD5('manoli'), TRUE );
 INSERT INTO authorities (username,authority) VALUES ('manoli','client');
-INSERT INTO users (username,password,enabled) VALUES ('david','david', TRUE );
+INSERT INTO users (username,password,enabled) VALUES ('david',MD5('david'), TRUE );
 INSERT INTO authorities (username,authority) VALUES ('david','client');
 INSERT INTO users (username,password,enabled) VALUES ('lopez','lopez', TRUE );
 INSERT INTO authorities (username,authority) VALUES ('lopez','client');
 
-INSERT INTO users (username,password,enabled) VALUES ('paco','paco', TRUE );
+INSERT INTO users (username,password,enabled) VALUES ('paco',MD5('paco'), TRUE );
 INSERT INTO authorities (username,authority) VALUES ('paco','usuario');
-INSERT INTO users (username,password,enabled) VALUES ('lolo','lolo', TRUE );
+INSERT INTO users (username,password,enabled) VALUES ('lolo',MD5('lolo'), TRUE );
 INSERT INTO authorities (username,authority) VALUES ('lolo','usuario');
-INSERT INTO users (username,password,enabled) VALUES ('pepe','pepe', TRUE );
+INSERT INTO users (username,password,enabled) VALUES ('pepe',MD5('pepe'), TRUE );
 INSERT INTO authorities (username,authority) VALUES ('pepe','usuario');
 
 

@@ -17,15 +17,15 @@
 		}
 	
 	</script>
+	<div class="text-center">
     <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="reviews"/></h2>
 	
 	<div class="table-responsive">
     <table id="reviewTable" class="table table-striped">
         <thead>
 	        <tr>
-	        	<!-- <th style="width: 150px;">Restaurante</th> -->
 	        	<th><fmt:message key="user"/></th>
-	        	<th style="text-align:left"><fmt:message key="stars"/></th>
+	        	<th><fmt:message key="stars"/></th>
 	            <th><fmt:message key="opinion"/></th>
 	            <th> </th>
 	        </tr>
@@ -36,20 +36,15 @@
 	        	<tr><td colspan="4"><em><c:out value="No se ha realizado ninguna valoración por el momento."/></em></td></tr>
 	        </c:when>
 	        <c:otherwise>
-	        <c:forEach items="${reviewsLs}" var="review">
-	       
+	        <c:forEach items="${reviewsLs}" var="review">       
 	            <tr>
-	<!--                 <td> -->
-	<%--                     <c:out value="nombre por definir"/> <!-- ${review.usuario.nombre},${review.usuario.apellidos}  --> --%>
-	<!--                 </td> -->
 	                <td>
 	                    <c:out value="${review.escritor.username}"/>
 	                </td>
 	                <td>
-	                
-	                    <!--<c:out value="${review.stars}"/> -->
-	                    <cheapy:showStars value='${review.stars}'></cheapy:showStars>
-
+	                	<div style="display: inline-block; margin: auto;">                    
+	                    	<cheapy:showStars value='${review.stars}'></cheapy:showStars>
+						</div>
 	                </td>
 	                <td>
 	                    <c:out value="${review.opinion}"/>
@@ -103,4 +98,5 @@
 		Pág. siguiente</button>
 	</div>
 	</c:if>
+	</div>
 </cheapy:layout>

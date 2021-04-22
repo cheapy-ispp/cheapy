@@ -38,7 +38,6 @@ public class SingUpController {
 	@Autowired
 	private final AuthoritiesService authoritiesService;
 
-
 	public SingUpController(final ClientService clientService, UserService userService, AuthoritiesService authoritiesService,
 			UsuarioService usuarioService) {
 		this.clientService = clientService;
@@ -47,8 +46,6 @@ public class SingUpController {
 		this.usuarioService = usuarioService;
 
 	}
-	
-	
 
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
@@ -90,11 +87,12 @@ public class SingUpController {
 		Authorities auth=new Authorities();
 		User user= usuario.getUsuar();
 		user.setEnabled(true);
+		
 		usuario.setUsuar(user);
 		auth.setUsername(user.getUsername());
 		auth.setAuthority("usuario");
 		Boolean duplicate=this.userService.duplicateUsername(usuario.getUsuar().getUsername());
-		if(duplicate==true) {
+		if(duplicate) {
 			result.rejectValue("usuar.username","" ,"El nombre de usuario ya esta registrado");
 		}
 		if (result.hasErrors()) {
@@ -127,6 +125,7 @@ public class SingUpController {
 			
 			//auth.setId(1);
 			//this.authoritiesService.saveAuthorities(auth);
+			usuario.getUsuar().setPassword(md5(usuario.getUsuar().getPassword())); //MD5 a la contraseña para que no circule en claro por la red
 			this.usuarioService.saveUsuario(usuario);
 			this.userService.saveUser(user);
 			this.authoritiesService.saveAuthorities(usuario.getUsuar().getUsername(), "usuario");
@@ -215,6 +214,7 @@ public class SingUpController {
 			}
 				return "singup/singUpClient";
 		 }else {
+			cliente.getUsuar().setPassword(md5(cliente.getUsuar().getPassword())); //MD5 a la contraseña para que no circule en claro por la red
 			this.clientService.saveClient(cliente);
 			this.userService.saveUser(user);
 			this.authoritiesService.saveAuthorities(cliente.getUsuar().getUsername(), "notsubscribed");
@@ -223,4 +223,17 @@ public class SingUpController {
 			return "redirect:/";
 		}
 	}
+	private String md5(String md5) {
+		   try {
+		        java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+		        byte[] array = md.digest(md5.getBytes());
+		        StringBuffer sb = new StringBuffer();
+		        for (int i = 0; i < array.length; ++i) {
+		          sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
+		       }
+		        return sb.toString();
+		    } catch (java.security.NoSuchAlgorithmException e) {
+		    }
+		    return null;
+		}
 }

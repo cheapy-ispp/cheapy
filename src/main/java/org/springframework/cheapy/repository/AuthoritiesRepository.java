@@ -19,8 +19,5 @@ public interface AuthoritiesRepository extends  CrudRepository<Authorities, Stri
 	@Query("SELECT authority FROM Authorities authority WHERE authority.username =:username")
 	@Transactional(readOnly = true)
 	Authorities findAuthorityByUsername(String username);
-//	@Autowired
-//	void save(Authorities authorities);
-	
 	
 }

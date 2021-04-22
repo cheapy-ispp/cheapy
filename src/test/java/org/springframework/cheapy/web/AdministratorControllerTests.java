@@ -9,6 +9,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
@@ -17,8 +19,12 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cheapy.configuration.SecurityConfiguration;
 import org.springframework.cheapy.model.Client;
+import org.springframework.cheapy.model.FoodOffer;
 import org.springframework.cheapy.model.User;
 import org.springframework.cheapy.model.Municipio;
+import org.springframework.cheapy.model.NuOffer;
+import org.springframework.cheapy.model.SpeedOffer;
+import org.springframework.cheapy.model.TimeOffer;
 import org.springframework.cheapy.model.Usuario;
 import org.springframework.cheapy.service.ClientService;
 import org.springframework.cheapy.service.FoodOfferService;
@@ -82,7 +88,7 @@ class AdministratorControllerTest {
     User user2 = new User();
 		user2.setUsername("user1");
 		user2.setPassword("user1");
-		Client client1 = new Client();;
+		Client client1 = new Client();
 		client1.setId(1);
 		client1.setName("client1");
 		client1.setEmail("client1");
@@ -94,12 +100,12 @@ class AdministratorControllerTest {
 		client1.setFood("client1");
 		client1.setUsuar(user2);
 		BDDMockito.given(this.clientService.getCurrentClient()).willReturn(client1);
-		
 		BDDMockito.given(this.clientService.findByUsername(TEST_CLIENT_USERNAME)).willReturn(client1);
 		
-		
-	
-
+		BDDMockito.given(this.foodOfferService.findFoodOfferActOclByUserId(1)).willReturn(new ArrayList<FoodOffer>());
+		BDDMockito.given(this.nuOfferService.findNuOfferActOclByUserId(1)).willReturn(new ArrayList<NuOffer>());
+		BDDMockito.given(this.speedOfferService.findSpeedOfferActOclByUserId(1)).willReturn(new ArrayList<SpeedOffer>());
+		BDDMockito.given(this.timeOfferService.findTimeOfferActOclByUserId(1)).willReturn(new ArrayList<TimeOffer>());
 		
 	}
 	

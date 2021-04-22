@@ -77,11 +77,11 @@ class SpeedOfferControllerTest {
 		sp1test.setId(TEST_SPEEDOFFER_ID);
 		sp1test.setStart(LocalDateTime.of(2021, 12, 23, 12, 30));
 		sp1test.setEnd(LocalDateTime.of(2022, 12, 23, 12, 30));
-		sp1test.setGold(5);
+		sp1test.setGold(LocalTime.of(00,05,30 ));
 		sp1test.setDiscountGold(15);
-		sp1test.setSilver(10);
+		sp1test.setSilver(LocalTime.of(00,10,30 ));
 		sp1test.setDiscountSilver(10);
-		sp1test.setBronze(15);
+		sp1test.setBronze(LocalTime.of(00,15,30 ));
 		sp1test.setDiscountBronze(5);
 		sp1test.setClient(client1);
 		sp1test.setStatus(StatusOffer.hidden);
@@ -107,11 +107,11 @@ class SpeedOfferControllerTest {
 					.with(csrf())
 					.param("start", "2021-12-23T12:30")
 					.param("end", "2022-12-23T12:30")
-					.param("gold", "5")
+					.param("gold", "00:05:30")
 					.param("discountGold", "15")
-					.param("silver", "10")
+					.param("silver", "00:10:30")
 					.param("discountSilver", "10")
-					.param("bronze", "15")
+					.param("bronze", "00:15:30")
 					.param("discountBronze", "5"))
 				.andExpect(status().is3xxRedirection());
 	}
@@ -202,11 +202,11 @@ class SpeedOfferControllerTest {
 				.andExpect(model().attributeExists("speedOffer"))
 				.andExpect(model().attribute("speedOffer", hasProperty("start", is(LocalDateTime.of(2021, 12, 23, 12, 30)))))
 				.andExpect(model().attribute("speedOffer", hasProperty("end", is(LocalDateTime.of(2022, 12, 23, 12, 30)))))
-				.andExpect(model().attribute("speedOffer", hasProperty("gold", is(5))))
+				.andExpect(model().attribute("speedOffer", hasProperty("gold", is(LocalTime.of(00,05,30 )))))
 				.andExpect(model().attribute("speedOffer", hasProperty("discountGold", is(15))))
-				.andExpect(model().attribute("speedOffer", hasProperty("silver", is(10))))
+				.andExpect(model().attribute("speedOffer", hasProperty("silver", is(LocalTime.of(00,10,30 )))))
 				.andExpect(model().attribute("speedOffer", hasProperty("discountSilver", is(10))))
-				.andExpect(model().attribute("speedOffer", hasProperty("bronze", is(15))))
+				.andExpect(model().attribute("speedOffer", hasProperty("bronze", is(LocalTime.of(00,15,30 )))))
 				.andExpect(model().attribute("speedOffer", hasProperty("discountBronze", is(5))))
 				.andExpect(model().attribute("speedOffer", hasProperty("client", is(clientTest))))
 				.andExpect(status().isOk())
@@ -233,11 +233,11 @@ class SpeedOfferControllerTest {
 					.param("end", "2022-12-23T12:30")
 					.param("food", "food1test")
 					.param("status", "hidden")
-					.param("gold", "5")
+					.param("gold", "00:05:30")
 					.param("discountGold", "15")
-					.param("silver", "10")
+					.param("silver", "00:10:30")
 					.param("discountSilver", "10")
-					.param("bronze", "15")
+					.param("bronze", "00:15:30")
 					.param("discountBronze", "5")
 					.param("code", "")
 					.sessionAttr("idSpeed", TEST_SPEEDOFFER_ID))
@@ -255,11 +255,11 @@ class SpeedOfferControllerTest {
 					.param("end", "2021-12-22T12:30")
 					.param("food", "food1test")
 					.param("status", "hidden")
-					.param("gold", "5")
+					.param("gold", "00:05:30")
 					.param("discountGold", "15")
-					.param("silver", "10")
+					.param("silver", "00:10:30")
 					.param("discountSilver", "10")
-					.param("bronze", "15")
+					.param("bronze", "00:15:00")
 					.param("discountBronze", "5")
 					.param("code", "")
 					.sessionAttr("idSpeed", TEST_SPEEDOFFER_ID))

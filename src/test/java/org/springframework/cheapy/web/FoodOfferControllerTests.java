@@ -58,7 +58,7 @@ class FoodOfferControllerTest {
 		User user1 = new User();
 		user1.setUsername("user1");
 		user1.setPassword("user1");
-		Client client1 = new Client();;
+		Client client1 = new Client();
 		client1.setId(TEST_CLIENT_ID);
 		client1.setName("client1");
 		client1.setEmail("client1");

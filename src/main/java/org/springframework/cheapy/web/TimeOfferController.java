@@ -11,6 +11,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.cheapy.model.Client;
+import org.springframework.cheapy.model.Municipio;
 import org.springframework.cheapy.model.StatusOffer;
 import org.springframework.cheapy.model.TimeOffer;
 import org.springframework.cheapy.service.ClientService;
@@ -50,7 +51,7 @@ public class TimeOfferController {
 
 	private boolean checkOffer(final TimeOffer session, final TimeOffer offer) {
 		boolean res = false;
-		if (session.getId() == offer.getId() && session.getStatus() == offer.getStatus() && (session.getCode() == null ? offer.getCode() == "" : session.getCode().equals(offer.getCode())) && !session.getStatus().equals(StatusOffer.inactive)) {
+		if (session.getId() == offer.getId() && session.getStatus().equals(offer.getStatus()) && (session.getCode() == null ? offer.getCode().equals("") : session.getCode().equals(offer.getCode())) && !session.getStatus().equals(StatusOffer.inactive)) {
 			res = true;
 		}
 		return res;
@@ -79,6 +80,8 @@ public class TimeOfferController {
 
 		List<TimeOffer> timeOfferLs = this.timeOfferService.findActiveTimeOffer(elements);
 		Integer next = this.timeOfferService.findActiveTimeOffer(nextPage).size();
+		
+		model.put("municipios", Municipio.values());
 		
 		model.put("timeOfferLs", timeOfferLs);
 		model.put("nextPage", next);
@@ -178,9 +181,9 @@ public class TimeOfferController {
 	}
 
 	@PostMapping(value = "/offers/time/{timeOfferId}/edit")
-	public String updateTimeOffer(@Valid final TimeOffer timeOfferEdit, final BindingResult result, final ModelMap model, final HttpServletRequest request) {
+	public String updateTimeOffer(@PathVariable("timeOfferId") final int timeOfferId, @Valid final TimeOffer timeOfferEdit, final BindingResult result, final ModelMap model, final HttpServletRequest request) {
 
-		if (!this.checkIdentity(timeOfferEdit.getId())) {
+		if (!this.checkIdentity(timeOfferId)) {
 			return "error";
 		}
 		Integer id = (Integer) request.getSession().getAttribute("idTime");

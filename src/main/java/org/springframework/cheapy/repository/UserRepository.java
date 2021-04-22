@@ -1,14 +1,10 @@
 
 package org.springframework.cheapy.repository;
 
+import org.springframework.cheapy.model.User;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cheapy.model.User;
-import org.springframework.cheapy.model.Usuario;
-import org.springframework.context.annotation.Scope;
 
 public interface UserRepository extends Repository<User, Integer> {
 

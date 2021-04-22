@@ -4,10 +4,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="cheapy" tagdir="/WEB-INF/tags" %>
-<link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
-<!-- %@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %-->  
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
+<link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
  
 
@@ -17,7 +16,7 @@
         <div class="col-md-12">
             <div class="img-home">
                 <spring:url value="/resources/images/Logo Cheapy.png" htmlEscape="true" var="cheapyImage"/>
-                <img class="img-responsive" src="${cheapyImage}"/>
+                <img class="img-responsive" src="${fn:escapeXml(cheapyImage)}"/>
             </div>
             <div class="btn-home-max">
 	            <div class="btn-home">
@@ -37,8 +36,7 @@
                       <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
                       <fmt:message key="createOffers"/> </button>
                   </div>
-                     
-				
+                    
               </sec:authorize>
             </div>
 	        
