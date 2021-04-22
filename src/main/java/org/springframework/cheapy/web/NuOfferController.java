@@ -12,6 +12,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.cheapy.model.Client;
+import org.springframework.cheapy.model.Municipio;
 import org.springframework.cheapy.model.NuOffer;
 import org.springframework.cheapy.model.StatusOffer;
 import org.springframework.cheapy.service.ClientService;
@@ -51,7 +52,7 @@ public class NuOfferController {
 
 	private boolean checkOffer(final NuOffer session, final NuOffer offer) {
 		boolean res = false;
-		if (session.getId() == offer.getId() && session.getStatus() == offer.getStatus() && (session.getCode() == null ? offer.getCode() == "" : session.getCode().equals(offer.getCode())) && !session.getStatus().equals(StatusOffer.inactive)) {
+		if (session.getId() == offer.getId() && session.getStatus().equals(offer.getStatus()) && (session.getCode() == null ? offer.getCode().equals("") : session.getCode().equals(offer.getCode())) && !session.getStatus().equals(StatusOffer.inactive)) {
 			res = true;
 		}
 		return res;
@@ -68,7 +69,7 @@ public class NuOfferController {
 	private boolean checkConditions(final NuOffer nuOffer) {
 		boolean res = false;
 		if (nuOffer.getGold() == null || nuOffer.getSilver() == null || nuOffer.getBronze() == null) {
-
+			res = true;
 		} else if (nuOffer.getGold() >= nuOffer.getSilver() && nuOffer.getSilver() >= nuOffer.getBronze()) {
 			res = true;
 		}
@@ -78,6 +79,7 @@ public class NuOfferController {
 	private boolean checkDiscounts(final NuOffer NuOffer) {
 		boolean res = false;
 		if (NuOffer.getDiscountGold() == null || NuOffer.getDiscountSilver() == null || NuOffer.getDiscountBronze() == null) {
+			res = true;
 		} else if (NuOffer.getDiscountGold() >= NuOffer.getDiscountSilver() && NuOffer.getDiscountSilver() >= NuOffer.getDiscountBronze()) {
 			res = true;
 		}
@@ -91,6 +93,8 @@ public class NuOfferController {
 		
 		List<NuOffer> foodOfferLs = this.nuOfferService.findActiveNuOffer(elements);
 		Integer next = this.nuOfferService.findActiveNuOffer(nextPage).size();
+		
+		model.put("municipios", Municipio.values());
 		
 		model.put("nuOfferLs", foodOfferLs);
 		model.put("nextPage", next);
@@ -191,9 +195,9 @@ public class NuOfferController {
 	}
 
 	@PostMapping(value = "/offers/nu/{nuOfferId}/edit")
-	public String updateNuOffer(@Valid final NuOffer nuOfferEdit, final BindingResult result, final ModelMap model, final HttpServletRequest request) {
+	public String updateNuOffer(@PathVariable("nuOfferId") final int nuOfferId, @Valid final NuOffer nuOfferEdit, final BindingResult result, final ModelMap model, final HttpServletRequest request) {
 
-		if (!this.checkIdentity(nuOfferEdit.getId())) {
+		if (!this.checkIdentity(nuOfferId)) {
 			return "error";
 		}
 		Integer id = (Integer) request.getSession().getAttribute("idNu");

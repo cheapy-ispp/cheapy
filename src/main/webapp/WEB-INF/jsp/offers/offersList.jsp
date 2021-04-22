@@ -22,8 +22,7 @@
 		<div class="btn-filter-max">
 			<spring:url value="/offers/foodOfferList/{page}" var="foodOfferListUrl">
 				<spring:param name="page" value="0"/>
-		    </spring:url>
-		    
+		    </spring:url> 
 		    
 			<button type="button" class="btn-filter" role="link" onclick="window.location='${fn:escapeXml(foodOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 			<span class="glyphicon 	glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
@@ -89,7 +88,7 @@
 				<option value="">Seleccione una de las opciones</option>
 			
 			<c:forEach items="${municipios}" var="entry">
-				<option value="${entry}">${entry.toString()}</option>
+				<option value="${fn:escapeXml(entry)}">${fn:escapeXml(entry.toString())}</option>
 			</c:forEach>
 			</select>
 			<button type="submit" class="btn-mas">Buscar por municipio</button>
@@ -125,7 +124,7 @@
         <c:forEach items="${foodOfferLs}" var="foodOffer">
             <tr>
             	<td>
-                    <a href="/restaurant/${foodOffer.client.id}"><c:out value="${foodOffer.client.name}"/></a>
+                    <a href="/restaurant/${fn:escapeXml(foodOffer.client.id)}"><c:out value="${foodOffer.client.name}"/></a>
                 </td>
                 <td>
                     <c:out value="${foodOffer.food}"/>
@@ -195,7 +194,7 @@
         <c:forEach items="${nuOfferLs}" var="nuOffer">
             <tr>
                 <td>
-                <a href="/restaurant/${nuOffer.client.id}"><c:out value="${nuOffer.client.name}"/></a>
+                <a href="/restaurant/${fn:escapeXml(nuOffer.client.id)}"><c:out value="${nuOffer.client.name}"/></a>
                 </td>
                 <td>
                     <c:out value="${localDateTimeFormat.format(nuOffer.start)}"/>
@@ -264,7 +263,7 @@
 		        <c:forEach items="${speedOfferLs}" var="speedOffer">
 		            <tr>
 		                <td>
-                	      <a href="/restaurant/${speedOffer.client.id}"><c:out value="${speedOffer.client.name}"/></a>
+                	      <a href="/restaurant/${fn:escapeXml(speedOffer.client.id)}"><c:out value="${speedOffer.client.name}"/></a>
 		                </td>
 		                <td>
 		                    <c:out value="${localDateTimeFormat.format(speedOffer.start)}"/>
@@ -334,7 +333,7 @@
 		        	<c:forEach items="${timeOfferLs}" var="timeOffer">
 		            <tr>
 		                <td>
-                        <a href="/restaurant/${timeOffer.client.id}"><c:out value="${timeOffer.client.name}"/></a>
+                        <a href="/restaurant/${fn:escapeXml(timeOffer.client.id)}"><c:out value="${timeOffer.client.name}"/></a>
 		                </td>
 		                <td>
 		                    <c:out value="${localDateTimeFormat.format(timeOffer.start)}"/>
