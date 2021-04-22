@@ -30,7 +30,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(value = NuOfferController.class, 
@@ -106,7 +105,7 @@ class NuOfferControllerTest {
 	@Test
 	void testProcessCreationFormSuccess() throws Exception {
 		mockMvc.perform(post("/offers/nu/new")
-				.with(SecurityMockMvcRequestPostProcessors.csrf())
+				.with(csrf())
 				.param("start", "2021-12-23T12:30")
 				.param("end", "2022-12-23T12:30")
 				.param("gold", "15")

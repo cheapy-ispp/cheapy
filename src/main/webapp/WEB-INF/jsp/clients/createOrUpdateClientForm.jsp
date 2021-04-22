@@ -87,5 +87,5 @@
 				  }
 				}
 	
-		</script>
+	</script>
 </cheapy:layout>

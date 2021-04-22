@@ -6,11 +6,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
 <cheapy:layout pageName="reviewClient">
-
 
     <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="review"/></h2>
 
@@ -21,7 +20,6 @@
     <table class="table table-striped" id="review-table">
         <tr>
             <th><fmt:message key="stars"/></th>
-           <!--  <td><c:out value="${review.stars}"/></td>--> 
             <td><cheapy:showStars value='${review.stars}'></cheapy:showStars></td>
         </tr>
         <tr>
