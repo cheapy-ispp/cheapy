@@ -1,12 +1,7 @@
 package org.springframework.cheapy.repository;
 
-import java.util.List;
-
-import org.springframework.cheapy.model.Client;
 import org.springframework.cheapy.model.Code;
-import org.springframework.cheapy.model.Usuario;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

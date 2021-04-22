@@ -36,7 +36,6 @@
 		    <table id="foodOfferTable" class="table table-striped">
 		        <thead>
 		        <tr>
-		        	<!-- <th style="width: 150px;">Restaurante</th> -->
 		        	<th><fmt:message key="food"/></th>
 		            <th><fmt:message key="startDate"/></th>
 		            <th><fmt:message key="endDate"/></th>
@@ -44,7 +43,6 @@
 		            <th><fmt:message key="municipio"/></th>
 		            <th> <spring:url value="/offers/food/new" var="newFoodUrl">
 		    </spring:url>
-		    <!--  <a href="${fn:escapeXml(newFoodUrl)}" class="btn btn-default">Nueva oferta</a></th>-->
 		        </tr>
 		        </thead>
 		        <tbody>
@@ -107,14 +105,12 @@
 		    <table id="nuOfferTable" class="table table-striped">
 		        <thead>
 		        <tr>
-		        	<!-- <th style="width: 150px;">Restaurante</th> -->
 		            <th><fmt:message key="startDate"/></th>
 		            <th><fmt:message key="endDate"/></th>
 		            <th><fmt:message key="status"/></th>
 		            <th><fmt:message key="municipio"/></th>
 		            <th> <spring:url value="/offers/nu/new" var="newNuUrl">
 		    </spring:url>
-		    <!--  <a href="${fn:escapeXml(newNuUrl)}" class="btn btn-default">Nueva oferta</a></th>-->
 		            
 		        </tr>
 		        </thead>
@@ -176,14 +172,12 @@
 		    <table id="speedOfferTable" class="table table-striped">
 		        <thead>
 		        <tr>
-		        	<!-- <th style="width: 150px;">Restaurante</th> -->
 		            <th><fmt:message key="startDate"/></th>
 		            <th><fmt:message key="endDate"/></th>
 		            <th><fmt:message key="status"/></th>
 		            <th><fmt:message key="municipio"/></th>
 		            <th> <spring:url value="/offers/speed/new" var="newSpeedUrl">
 		    </spring:url>
-		   <!-- <a href="${fn:escapeXml(newSpeedUrl)}" class="btn btn-default">Nueva oferta</a></th>-->
 		            
 		        </tr>
 		        </thead>
@@ -246,14 +240,12 @@
 		    <table id="timeOfferTable" class="table table-striped">
 		        <thead>
 		        <tr>
-		        	<!-- <th style="width: 150px;">Restaurante</th> -->
 		            <th><fmt:message key="startDate"/></th>
 		            <th><fmt:message key="endDate"/></th>
 		            <th><fmt:message key="status"/></th>
 		            <th><fmt:message key="municipio"/></th>
 		            <th><spring:url value="/offers/time/new" var="newTimeUrl">
 		    </spring:url>
-		    <!--<a href="${fn:escapeXml(newTimeUrl)}" class="btn btn-default">Nueva oferta</a> </th>-->
 		        </tr>
 		        </thead>
 		        <tbody>
