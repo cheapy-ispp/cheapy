@@ -19,16 +19,20 @@
 	<script type="text/javascript">
 		
 	</script>
+	<div class="text-center">
     <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="foodOffers"/>
     	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir el plato indicado en la oferta">
     	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
     </h2>
 	<c:if test="${empty foodOfferLs }">
 		<p id="vacio" >No hay ninguna oferta por plato específico creada.</p>
-		<div class="createOffer">
-            <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
-            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
-            <fmt:message key="createOffers"/> </button>
+		
+		<div class="btn-home-max">
+			<div class="btn-home">
+	            <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;text-align:center;"  class="btn-block">
+	            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
+	            <fmt:message key="createOffers"/> </button>
+            </div>
         </div>
 	</c:if>
 	<c:if test="${not empty foodOfferLs }">
@@ -96,10 +100,12 @@
     </h2>
 	<c:if test="${empty nuOfferLs }">
 		<p id="vacio" >No hay ninguna oferta por número de comensales creada.</p>
-		<div class="createOffer">
-            <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
-            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
-            <fmt:message key="createOffers"/> </button>
+		<div class="btn-home-max">
+			<div class="btn-home">
+	            <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
+	            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
+	            <fmt:message key="createOffers"/> </button>
+            </div>
         </div>
 	</c:if>
 	<c:if test="${not empty nuOfferLs }">
@@ -165,10 +171,12 @@
     </h2>
 	<c:if test="${empty speedOfferLs }">
 		<p id="vacio" >No hay ninguna oferta por tiempo empleado en comer creada.</p>
-		<div class="createOffer">
-            <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
-            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
-            <fmt:message key="createOffers"/> </button>
+		<div class="btn-home-max">
+			<div class="btn-home">
+	            <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
+	            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
+	            <fmt:message key="createOffers"/> </button>
+        	</div>
         </div>
 	</c:if>
 	<c:if test="${not empty speedOfferLs }">
@@ -235,10 +243,12 @@
     </h2>
 	<c:if test="${empty timeOfferLs }">
 		<p id="vacio" >No hay ninguna oferta por franja horaria creada.</p>
-		<div class="createOffer">
-            <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
-            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
-            <fmt:message key="createOffers"/> </button>
+		<div class="btn-home-max">
+			<div class="btn-home">
+	            <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
+	            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
+	            <fmt:message key="createOffers"/> </button>
+	        </div>
         </div>
 	</c:if>
 	<c:if test="${not empty timeOfferLs }">
@@ -296,4 +306,5 @@
 		    </table>
     	</div>
     </c:if>
+    </div>
 </cheapy:layout>
