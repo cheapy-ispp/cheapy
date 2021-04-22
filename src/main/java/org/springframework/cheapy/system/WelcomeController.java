@@ -26,6 +26,11 @@ class WelcomeController {
 	public String welcome() {
 		return "welcome";
 	}
+	
+	@GetMapping("/termAndCondition")
+		public String termAndConditions(){
+		return "termAndConditions";
+	}
 
 	
 	
