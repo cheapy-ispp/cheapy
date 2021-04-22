@@ -324,7 +324,11 @@ input::-webkit-calendar-picker-indicator:hover {
 			<cheapy:inputField label="Código de activación" placeholder="Ponga aqui el código que se le suministro al firmar el contrato"
 				name="code.code" />
 			<cheapy:selectMunicipio label="Municipio" name="municipio" size="1" items="${municipios}" ></cheapy:selectMunicipio>
-				
+			
+			<div class="text-center">
+	        	<label id="terminos"  class="">Acepte los <a href="/termAndCondition">términos y condiciones</a></label>
+	        	<input id="terminos"   name="terminos" type="checkbox" required="required">
+			</div>	
 			<div class="text-center">
 				<input type="submit" class="fadeIn fourth" value="Registrarse">
 			</div>
