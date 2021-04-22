@@ -8,6 +8,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
+ 
+
 <cheapy:layout pageName="home"> 
     <h2 class="text-center" style="font-family: 'Lobster'; font-size: 300%; color: rgb(0, 64, 128); padding:30px"><fmt:message key="welcome"/></h2>
     <div class="row">
@@ -34,7 +36,7 @@
                       <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
                       <fmt:message key="createOffers"/> </button>
                   </div>
-                     
+                    
               </sec:authorize>
             </div>
 	        

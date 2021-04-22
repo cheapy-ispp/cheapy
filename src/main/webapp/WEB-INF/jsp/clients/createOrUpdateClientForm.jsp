@@ -24,7 +24,9 @@
             <cheapy:inputField label="Teléfono" placeholder="" name="telephone"/>
             <cheapy:inputField label="Descripción" placeholder="" name="description"/>
             <cheapy:inputField label="Comida" placeholder="food" name="food"/>
+            <input readonly name="expiration" value="${client.expiration}" />
             <cheapy:passwordField label="Contraseña" placeholder="Restaurante pepito" name="usuar.password"/>
+
             
 					<script>
 

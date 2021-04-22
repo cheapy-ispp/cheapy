@@ -38,8 +38,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/users/new").permitAll()
 		
 		.antMatchers("/clients/new").permitAll()
-		.antMatchers("/clients/edit").hasAnyAuthority("client")
-		.antMatchers("/clients/disable").hasAnyAuthority("client")
+		.antMatchers("/clients/edit").hasAnyAuthority("client","notsubscribed")
+		.antMatchers("/clients/disable").hasAnyAuthority("client","notsubscribed")
 
 		.antMatchers("/login/**").anonymous()
 		.antMatchers("/logout").authenticated()
@@ -58,9 +58,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/offersCreate").hasAuthority("client")
 
 
-		.antMatchers("/reviews/new").hasAnyAuthority("usuario","client")
+		.antMatchers("/reviews/new").hasAnyAuthority("usuario","client","notsubscribed")
 		
 		.antMatchers("/reviewsClient/new").hasAnyAuthority("usuario")
+		.antMatchers("/pay").hasAnyAuthority("notsubscribed")
 		
 
 		.and().formLogin()

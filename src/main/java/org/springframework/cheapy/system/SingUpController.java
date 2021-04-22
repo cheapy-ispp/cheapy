@@ -1,5 +1,6 @@
 package org.springframework.cheapy.system;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,7 +9,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cheapy.model.Authorities;
 import org.springframework.cheapy.model.Client;
-import org.springframework.cheapy.model.Code;
 import org.springframework.cheapy.model.Municipio;
 import org.springframework.cheapy.model.User;
 import org.springframework.cheapy.model.Usuario;
@@ -150,6 +150,8 @@ public class SingUpController {
 		User user=new User();
 		
 		cliente.setUsuar(user);
+		LocalDate ayer= LocalDate.now().minusDays(2);
+		cliente.setExpiration(ayer);
 		model.put("municipios", municipios);
 		model.put("cliente", cliente);
 		//model.put("user", user);
@@ -159,19 +161,13 @@ public class SingUpController {
 	@PostMapping("/clients/new")
 	public String singUpClientForm(@ModelAttribute("cliente") @Valid Client cliente, BindingResult result,  Map<String, Object> model) {
 		Authorities auth=new Authorities();
-		String cod=cliente.getCode().getCode();
-		Code code=new Code();
-		code.setActivo(false);
-		Boolean exist= this.clientService.goodCode(cod);
-		if(exist) {
-			code=this.clientService.findCodeByCode(cod);
-		}
-		
 		User user= cliente.getUsuar();
 		user.setEnabled(true);
 		cliente.setUsuar(user);
 		auth.setUsername(user.getUsername());
 		auth.setAuthority("client");
+		LocalDate ayer= LocalDate.now().minusDays(2);
+		cliente.setExpiration(ayer);
 		if(!this.checkTimes(cliente)) {
 			result.rejectValue("finish","" ,"La hora de cierre debe ser posterior a la hora de apertura");
 			
@@ -198,11 +194,8 @@ public class SingUpController {
 			if(cliente.getUsuar().getUsername().equals("")) {
 				result.rejectValue("usuar.username","" ,"El nombre de usuario no puede estar vacío");
 			}
-			if(code.getActivo().equals(false)) {
-				result.rejectValue("code.code","" ,"El código introducido no es válido");
-			}
 			return "singup/singUpClient";
-		}else if(cliente.getUsuar().getPassword().equals("")||cliente.getUsuar().getUsername().equals("")||code.getActivo().equals(false)) {
+		}else if(cliente.getUsuar().getPassword().equals("")||cliente.getUsuar().getUsername().equals("")) {
 			Map<Object, String> municipios = new HashMap<Object, String>();
 			Municipio[] a = Municipio.values();
 			int cont = 0;
@@ -219,19 +212,12 @@ public class SingUpController {
 			if(cliente.getUsuar().getUsername().equals("")) {
 					result.rejectValue("usuar.username","" ,"El nombre de usuario no puede estar vacío");
 			}
-			if(code.getActivo().equals(false)) {
-				result.rejectValue("code.code","" ,"El código introducido no es válido");
-			}
 				return "singup/singUpClient";
 		 }else {
-			
 			cliente.getUsuar().setPassword(md5(cliente.getUsuar().getPassword())); //MD5 a la contraseña para que no circule en claro por la red
-			code.setActivo(false);
-			this.clientService.saveCode(code);
-			cliente.setCode(code);
 			this.clientService.saveClient(cliente);
 			this.userService.saveUser(user);
-			this.authoritiesService.saveAuthorities(cliente.getUsuar().getUsername(), "client");
+			this.authoritiesService.saveAuthorities(cliente.getUsuar().getUsername(), "notsubscribed");
 			
 			
 			return "redirect:/";

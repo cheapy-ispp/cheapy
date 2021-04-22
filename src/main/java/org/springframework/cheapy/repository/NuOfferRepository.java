@@ -22,7 +22,7 @@ public interface NuOfferRepository extends PagingAndSortingRepository<NuOffer, I
 
 	//void save(NuOffer nuOffer);
 
-	@Query("SELECT nuOffer FROM NuOffer nuOffer WHERE nuOffer.status =:status")
+	@Query("SELECT nuOffer FROM NuOffer nuOffer WHERE nuOffer.status =:status AND nuOffer.client.expiration > CURRENT_DATE()")
 	@Transactional(readOnly = true)
 	List<NuOffer> findActiveNuOffer(StatusOffer status, Pageable p);
 
@@ -34,15 +34,15 @@ public interface NuOfferRepository extends PagingAndSortingRepository<NuOffer, I
 	@Transactional(readOnly = true)
 	List<NuOffer> findNuOfferActOclByUserId(@Param("id") Integer id);
 
-	@Query("SELECT nuOffer FROM NuOffer nuOffer WHERE nuOffer.client.name LIKE :name AND nuOffer.status= 'active'")
+	@Query("SELECT nuOffer FROM NuOffer nuOffer WHERE nuOffer.client.name LIKE :name AND nuOffer.status= 'active' AND nuOffer.client.expiration > CURRENT_DATE()")
 	@Transactional(readOnly = true)
 	List<NuOffer> findNuOfferByClientName(String name, Pageable p);
 
-	@Query("SELECT nuOffer FROM NuOffer nuOffer WHERE nuOffer.client.food LIKE :name AND nuOffer.status= 'active'")
+	@Query("SELECT nuOffer FROM NuOffer nuOffer WHERE nuOffer.client.food LIKE :name AND nuOffer.status= 'active' AND nuOffer.client.expiration > CURRENT_DATE()")
 	@Transactional(readOnly = true)
 	List<NuOffer> findNuOfferByClientFood(String name, Pageable p);
 
-	@Query("SELECT nuOffer FROM NuOffer nuOffer WHERE nuOffer.client.municipio =:municipio AND nuOffer.status= 'active'")
+	@Query("SELECT nuOffer FROM NuOffer nuOffer WHERE nuOffer.client.municipio =:municipio AND nuOffer.status= 'active' AND nuOffer.client.expiration > CURRENT_DATE()")
 	@Transactional(readOnly = true)
 	List<NuOffer> findNuOfferByClientPlace(Municipio municipio, Pageable p);
 }
