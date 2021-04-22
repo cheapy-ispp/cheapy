@@ -3,6 +3,9 @@ package org.springframework.cheapy.web;
 import java.time.LocalDate;
 import java.util.Map;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cheapy.model.Authorities;
 import org.springframework.cheapy.model.Client;
@@ -87,7 +90,7 @@ public class PaypalController {
 	}
 
 	@GetMapping(value = SUCCESS_URL)
-	public String successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId) {
+	public String successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId, final HttpServletRequest request) throws ServletException {
 		try {
 			Payment payment = payPalService.executePayment(paymentId, payerId);
 			if (payment.getState().equals("approved")) {
@@ -96,11 +99,11 @@ public class PaypalController {
 				this.authoritiesService.saveAuthorities(username, "client");
 				client.setExpiration(LocalDate.now().plusMonths(1));
 				this.clientservice.saveClient(client);
-				System.out.println("");
 				//return SUCCESS_URL;
 			}
 		} catch (PayPalRESTException e) {
 		}
-		return "pay/successPayment";
+		request.logout();
+		return "redirect:/login";
 	}
 }

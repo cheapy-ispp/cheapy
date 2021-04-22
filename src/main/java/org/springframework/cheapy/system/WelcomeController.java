@@ -18,6 +18,9 @@ package org.springframework.cheapy.system;
 
 import java.time.LocalDate;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.cheapy.model.Authorities;
 import org.springframework.cheapy.model.Client;
 import org.springframework.cheapy.service.AuthoritiesService;
@@ -38,15 +41,18 @@ class WelcomeController {
 	}
 	
 	@GetMapping("/")
-	public String welcome() {
+	public String welcome( final HttpServletRequest request) throws ServletException {
 		Client client = this.clientService.getCurrentClient();
 		
 		//Authorities auth=this.authoritiesService.findAuthoritiyByUsername(username);
 		if(client!=null) {
 			String username=client.getUsuar().getUsername();
 			LocalDate exp=client.getExpiration();
-			if(exp.isBefore(LocalDate.now())) {
+			Authorities auth=this.authoritiesService.findAuthoritiyByUsername(username);
+			if(exp.isBefore(LocalDate.now())&&auth.getAuthority().equals("client")) {
 				this.authoritiesService.saveAuthorities(username, "notsubscribed");
+				request.logout();
+				return "redirect:/login";
 			}
 		}
 		return "welcome";
