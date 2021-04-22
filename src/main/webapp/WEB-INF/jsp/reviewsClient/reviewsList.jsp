@@ -17,6 +17,7 @@
 		}
 	
 	</script>
+	<div class="text-center">
     <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="reviews"/></h2>
 	
 	<div class="table-responsive">
@@ -25,7 +26,7 @@
 	        <tr>
 	        	<!-- <th style="width: 150px;">Restaurante</th> -->
 	        	<th><fmt:message key="user"/></th>
-	        	<th style="text-align:left"><fmt:message key="stars"/></th>
+	        	<th><fmt:message key="stars"/></th>
 	            <th><fmt:message key="opinion"/></th>
 	            <th> </th>
 	        </tr>
@@ -46,10 +47,10 @@
 	                    <c:out value="${review.escritor.username}"/>
 	                </td>
 	                <td>
-	                
+	                	<div style="display: inline-block; margin: auto;">
 	                    <!--<c:out value="${review.stars}"/> -->
-	                    <cheapy:showStars value='${review.stars}'></cheapy:showStars>
-
+	                    	<cheapy:showStars value='${review.stars}'></cheapy:showStars>
+						</div>
 	                </td>
 	                <td>
 	                    <c:out value="${review.opinion}"/>
@@ -103,4 +104,5 @@
 		Pág. siguiente</button>
 	</div>
 	</c:if>
+	</div>
 </cheapy:layout>

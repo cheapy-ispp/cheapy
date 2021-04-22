@@ -136,7 +136,7 @@
 	  display: inline-block;
 	  font-size: 16px;
 	  margin: 5px;
-	  width: 85%;
+	  width: 70%;
 	  border: 2px solid #f6f6f6;
 	  -webkit-transition: all 0.5s ease-in-out;
 	  -moz-transition: all 0.5s ease-in-out;

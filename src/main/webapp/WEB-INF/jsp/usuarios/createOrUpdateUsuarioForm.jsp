@@ -56,6 +56,8 @@
             <cheapy:inputField label="Direccion" name="direccion"/>
             <cheapy:inputField label="Email" name="email"/>
             <cheapy:passwordField label="Password" name="usuar.password"/>
+            
+            
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
@@ -68,4 +70,21 @@
         </div>
     </form:form>
     
+	    <script>
+	    
+			function myFunction() {
+				
+				
+				  var x = document.getElementById("myInput");
+				  if (x.type === "password") {
+				    x.type = "text";
+				    $( "#showPassword" ).prop( "checked", true );
+				  } else {
+				    x.type = "password";
+				    $( "#showPassword" ).prop( "checked", false );
+				  }
+				}
+	
+		</script>
+	
 </cheapy:layout>

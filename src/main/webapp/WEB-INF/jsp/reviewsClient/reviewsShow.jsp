@@ -22,7 +22,7 @@
         <tr>
             <th><fmt:message key="stars"/></th>
            <!--  <td><c:out value="${review.stars}"/></td>--> 
-            <td><cheapy:ratingStar label="" name="stars" disabled="true"></cheapy:ratingStar></td>
+            <td><cheapy:showStars value='${review.stars}'></cheapy:showStars></td>
         </tr>
         <tr>
             <th><fmt:message key="opinion"/></th>

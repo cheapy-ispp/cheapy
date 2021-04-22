@@ -17,7 +17,7 @@
         <label class="col-sm-2 control-label">${label}</label>
 
         <div class="col-sm-10">
-            <form:select id="selectMunicipio" class="form-control select-municipio" path="${name}" items="${items}" size="${size}" style="width:85%;text-align-last:center;"/>
+            <form:select id="selectMunicipio" class="form-control select-municipio" path="${name}" items="${items}" size="${size}" style="width:70%;text-align-last:center;"/>
             <c:if test="${valid}">
                 <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
             </c:if>

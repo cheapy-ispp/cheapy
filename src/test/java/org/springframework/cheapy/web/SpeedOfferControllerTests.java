@@ -82,11 +82,11 @@ class SpeedOfferControllerTest {
 		sp1test.setId(TEST_SPEEDOFFER_ID);
 		sp1test.setStart(LocalDateTime.of(2021, 12, 23, 12, 30));
 		sp1test.setEnd(LocalDateTime.of(2022, 12, 23, 12, 30));
-		sp1test.setGold(5);
+		sp1test.setGold(LocalTime.of(00,05,30 ));
 		sp1test.setDiscountGold(15);
-		sp1test.setSilver(10);
+		sp1test.setSilver(LocalTime.of(00,10,30 ));
 		sp1test.setDiscountSilver(10);
-		sp1test.setBronze(15);
+		sp1test.setBronze(LocalTime.of(00,15,30 ));
 		sp1test.setDiscountBronze(5);
 		sp1test.setClient(client1);
 		sp1test.setStatus(StatusOffer.hidden);

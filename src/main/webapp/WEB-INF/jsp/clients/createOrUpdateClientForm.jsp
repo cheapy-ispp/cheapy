@@ -15,17 +15,16 @@
     
     <form:form modelAttribute="client" class="form-horizontal" id="add-client-form">
         <div class="form-group has-feedback">
-			                
-            <cheapy:passwordField label="Contraseña" placeholder="Restaurante pepito" name="usuar.password"/>		
-            <cheapy:inputField label="Hora de inicio" placeholder="HH:mm" name="init"/>
-            <cheapy:inputField label="Hora de fin" placeholder="HH:mm" name="finish"/>
-            <cheapy:inputField label="Nombre" placeholder="Restaurante pepito" name="name"/>
-            <cheapy:inputField label="Email" placeholder="" name="email"/>
-            <cheapy:inputField label="Dirección" placeholder="" name="address"/>           
+			<cheapy:inputField label="Nombre" placeholder="Restaurante pepito" name="name"/>                
+            <cheapy:inputField label="Dirección" placeholder="" name="address"/>		
+            <cheapy:timeField label="Hora de inicio" placeholder="HH:mm" name="init"/>
+            <cheapy:timeField label="Hora de fin" placeholder="HH:mm" name="finish"/>
+            <cheapy:selectMunicipio label="Municipio" name="municipio" size="1" items="${municipios}" ></cheapy:selectMunicipio>
+            <cheapy:inputField label="Email" placeholder="" name="email"/>                 
             <cheapy:inputField label="Teléfono" placeholder="" name="telephone"/>
             <cheapy:inputField label="Descripción" placeholder="" name="description"/>
             <cheapy:inputField label="Comida" placeholder="food" name="food"/>
-            <cheapy:selectMunicipio label="Municipio" name="municipio" size="1" items="${municipios}" ></cheapy:selectMunicipio>
+            <cheapy:passwordField label="Contraseña" placeholder="Restaurante pepito" name="usuar.password"/>
             
 					<script>
 
@@ -73,5 +72,20 @@
             </div>
         </div>
     </form:form>
-    
+    <script>
+	    
+			function myFunction() {
+				
+				
+				  var x = document.getElementById("myInput");
+				  if (x.type === "password") {
+				    x.type = "text";
+				    $( "#showPassword" ).prop( "checked", true );
+				  } else {
+				    x.type = "password";
+				    $( "#showPassword" ).prop( "checked", false );
+				  }
+				}
+	
+		</script>
 </cheapy:layout>

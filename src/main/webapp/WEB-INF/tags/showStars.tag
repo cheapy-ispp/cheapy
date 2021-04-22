@@ -10,7 +10,7 @@
     <c:if test="${label}">
         <label class="col-sm-2 control-label">${label}</label>
 	</c:if>
-<div class="rating"> 
+<div class="rating2"> 
 	<input type="radio" class="form-control" disabled name="rating" value="5" id="5" <%= value.equals(5)  ?"checked='checked'" : ""%> /><label for="5"><span style="font-size: 100%" class="estrella_vacia">&#9734;</span></label> 		
 	<input type="radio" class="form-control" disabled name="rating" value="4" id="4" <%= value.equals(4) ? "checked='checked'" : ""  %> /><label for="4"><span style="font-size: 100%" class="estrella_vacia">&#9734;</span></label> 
 	<input type="radio" class="form-control" disabled name="rating" value="3" id="3" <%= value.equals(3)  ? "checked='checked'" : ""  %>/><label for="3"><span style="font-size: 100%" class="estrella_vacia">&#9734;</span></label> 
