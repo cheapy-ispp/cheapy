@@ -107,7 +107,6 @@
 	    <table id="nuOfferTable" class="table table-striped">
 	        <thead>
 	        <tr>
-	        	<!-- <th style="width: 150px;">Restaurante</th> -->
 	            <th><fmt:message key="name"/></th>
 	            <th><fmt:message key="startDate"/></th>
 	            <th><fmt:message key="endDate"/></th>
@@ -176,7 +175,7 @@
 	    	​
 	    </div>
 	    <div class="column-pag-btn" style="text-align: right;">
-	    	<c:if test="${fn:length(nuOfferLs) == 5}">
+	    	<c:if test="${nextPage > 0}">
 		    	<spring:url value="/offers/nuOfferList/{page}" var="nuOfferListUrl">
 		    		<spring:param name="page" value="${page+1}"/>
 		    	</spring:url>

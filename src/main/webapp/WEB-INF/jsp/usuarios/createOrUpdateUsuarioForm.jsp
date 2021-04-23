@@ -10,7 +10,7 @@
 
 <cheapy:layout pageName="usuarios">
     <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px">
-        <c:if test="${usuario['new']}"><fmt:message key="new"/> </c:if> <fmt:message key="usuario"/>
+        <fmt:message key="usuario"/>
     </h2>
     
     <form:form modelAttribute="usuario" class="form-horizontal" id="add-usuario-form">
@@ -18,7 +18,10 @@
             <cheapy:inputField label="Nombre" name="nombre"/>
             <cheapy:inputField label="Apellidos" name="apellidos"/>
 			<cheapy:selectMunicipio label="Municipio" name="municipio" size="1" items="${municipios}" ></cheapy:selectMunicipio>
-            
+            <cheapy:inputField label="Direccion" name="direccion"/>
+            <cheapy:inputField label="Email" name="email"/>
+            <cheapy:passwordField label="Contraseña" name="usuar.password"/>
+					
 					<script>
 
 						function setSelectedIndex(s, valsearch)
@@ -51,11 +54,8 @@
 						
 						setSelectedIndex(document.getElementById("selectMunicipio"),"${municipio}");
 						
-					</script>
-	
-            <cheapy:inputField label="Direccion" name="direccion"/>
-            <cheapy:inputField label="Email" name="email"/>
-            <cheapy:passwordField label="Password" name="usuar.password"/>
+					</script>           
+            
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
@@ -67,5 +67,21 @@
             </div>
         </div>
     </form:form>
+    	<script>
+	    
+			function myFunction() {
+				
+				
+				  var x = document.getElementById("myInput");
+				  if (x.type === "password") {
+				    x.type = "text";
+				    $( "#showPassword" ).prop( "checked", true );
+				  } else {
+				    x.type = "password";
+				    $( "#showPassword" ).prop( "checked", false );
+				  }
+				}
+	
+		</script>
     
 </cheapy:layout>

@@ -1,6 +1,7 @@
 
 package org.springframework.cheapy.model;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -61,15 +62,15 @@ public class Client extends BaseEntity {
 
 	@NotEmpty(message="No debe estar vacío")
 	private String				food;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@NotNull
+	private LocalDate expiration;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "username", referencedColumnName = "username")
 	private User				usuar;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "code", referencedColumnName = "code")
-	private Code cod;
-
 	@OneToMany
 	private List<FoodOffer>		foodOffers;
 
@@ -147,15 +148,6 @@ public class Client extends BaseEntity {
 		this.description = description;
 	}
 
-
-	public Code getCode() {
-		return cod;
-	}
-
-	public void setCode(Code code) {
-		this.cod = code;
-	}
-
 	public String getFood() {
 		return this.food;
 	}
@@ -202,6 +194,14 @@ public class Client extends BaseEntity {
 
 	public void setTimeOffers(final List<TimeOffer> timeOffers) {
 		this.timeOffers = timeOffers;
+	}
+
+	public LocalDate getExpiration() {
+		return expiration;
+	}
+
+	public void setExpiration(LocalDate expiration) {
+		this.expiration = expiration;
 	}
 
 }

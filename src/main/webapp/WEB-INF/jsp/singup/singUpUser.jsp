@@ -11,8 +11,6 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<!-- %@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %-->  
-
 <style>
 	
 	
@@ -136,7 +134,7 @@
 	  display: inline-block;
 	  font-size: 16px;
 	  margin: 5px;
-	  width: 85%;
+	  width: 70%;
 	  border: 2px solid #f6f6f6;
 	  -webkit-transition: all 0.5s ease-in-out;
 	  -moz-transition: all 0.5s ease-in-out;
@@ -297,7 +295,10 @@
 				name="usuar.password" />
 			
 	        <cheapy:selectMunicipio label="Municipio" name="municipio" size="1" items="${municipios}" ></cheapy:selectMunicipio>
-			
+	        <div class="text-center">
+	        <label id="terminos"  class="">Acepte los <a href="/termAndCondition">términos y condiciones</a></label>
+	        <input id="terminos"   name="terminos" type="checkbox" required="required">
+			</div>
 		</div>
 			<div class="text-center">
 				<input type="submit" class="fadeIn fourth" value="Registrarse">

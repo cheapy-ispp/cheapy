@@ -47,6 +47,13 @@
 				</cheapy:menuItem>
 				</sec:authorize>
 				
+				<sec:authorize access="hasAnyAuthority('notsubscribed')">
+				<cheapy:menuItem active="${name eq 'clientes'}" url="/pay" title="pagar">
+					<span class="glyphicon " aria-hidden="true"></span>
+					<span>Renovar suscripción</span>
+				</cheapy:menuItem>
+				</sec:authorize>
+				
 				<sec:authorize access="hasAnyAuthority('admin')">
 				<cheapy:menuItem active="${name eq 'usuarios'}" url="/administrators/usuarios/page/0" title="usuarios">
 					<span class="glyphicon " aria-hidden="true"></span>

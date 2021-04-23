@@ -12,7 +12,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.MessageDigestPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /*
@@ -39,8 +38,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/users/new").permitAll()
 		
 		.antMatchers("/clients/new").permitAll()
-		.antMatchers("/clients/edit").hasAnyAuthority("client")
-		.antMatchers("/clients/disable").hasAnyAuthority("client")
+		.antMatchers("/clients/show").hasAnyAuthority("client","notsubscribed")
+		.antMatchers("/clients/delete").hasAnyAuthority("client","notsubscribed")
+		.antMatchers("/clients/edit").hasAnyAuthority("client","notsubscribed")
+		.antMatchers("/clients/disable").hasAnyAuthority("client","notsubscribed")
 
 		.antMatchers("/login/**").anonymous()
 		.antMatchers("/logout").authenticated()
@@ -59,9 +60,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/offersCreate").hasAuthority("client")
 
 
-		.antMatchers("/reviews/new").hasAnyAuthority("usuario","client")
+		.antMatchers("/reviews/new").hasAnyAuthority("usuario","client","notsubscribed")
 		
-		.antMatchers("/reviewsClient/new").hasAnyAuthority("usuario")
+		.antMatchers("/reviewsClient/new/**").hasAnyAuthority("usuario")
+		.antMatchers("/pay").hasAnyAuthority("notsubscribed")
 		
 
 		.and().formLogin()

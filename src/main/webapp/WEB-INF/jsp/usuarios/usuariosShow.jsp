@@ -53,6 +53,11 @@
 	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deactivateUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 	        	<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
 	         Desactivar usuario</button>
+	         
+	        <spring:url value="delete" var="deleteUrl"/>
+	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deleteUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+	        	<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
+	         Eliminar usuario</button>
     	</div>
     </sec:authorize>
     <sec:authorize access="hasAnyAuthority('admin')">

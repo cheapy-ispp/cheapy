@@ -199,7 +199,7 @@ public class OfertaController {
 	@GetMapping("/offersByPlace/{page}")
 	public String processFindFormByPlace(@PathVariable("page") final int page, final Map<String, Object> model, final HttpServletRequest request) {
 
-		if (request.getParameter("municipio").equals("") || request.getParameter("municipio").equals(null)) {
+		if (request.getParameter("municipio").equals("") || request.getParameter("municipio") == null) {
 			// Añade la lista de municipios al desplegable
 			model.put("municipios", Municipio.values());
 

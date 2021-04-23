@@ -108,7 +108,6 @@
 	    <table id="timeOfferTable" class="table table-striped">
 	        <thead>
 	        <tr>
-	        	<!-- <th style="width: 150px;">Restaurante</th> -->
 	            <th><fmt:message key="name"/></th>
 	            <th><fmt:message key="startDate"/></th>
 	            <th><fmt:message key="endDate"/></th>
@@ -176,7 +175,7 @@
 	    	​
 	    </div>
 	    <div class="column-pag-btn" style="text-align: right;">
-	    	 <c:if test="${fn:length(timeOfferLs) == 5}">
+			<c:if test="${nextPage > 0}">
 		    <div class="text-right">
 		    	<spring:url value="/offers/timeOfferList/{page}" var="timeOfferListUrl">
 		    		<spring:param name="page" value="${page+1}"/>

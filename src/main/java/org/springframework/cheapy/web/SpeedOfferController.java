@@ -2,6 +2,7 @@
 package org.springframework.cheapy.web;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
@@ -70,7 +71,7 @@ public class SpeedOfferController {
 		boolean res = false;
 		if (speedOffer.getGold() == null || speedOffer.getSilver() == null || speedOffer.getBronze() == null) {
 			res = true;
-		} else if (speedOffer.getGold() <= speedOffer.getSilver() && speedOffer.getSilver() <= speedOffer.getBronze()) {
+		} else if (speedOffer.getGold().isBefore(speedOffer.getSilver()) && speedOffer.getSilver().isBefore( speedOffer.getBronze())) {
 			res = true;
 		}
 		return res;
@@ -111,8 +112,8 @@ public class SpeedOfferController {
 	}
 
 	@PostMapping("/offers/speed/new")
-	public String processCreationForm(@Valid final SpeedOffer speedOffer, final BindingResult result) {
-
+	public String processCreationForm(@Valid final SpeedOffer speedOffer, final BindingResult result,final Map<String, Object> model) {
+		
 		if (!this.checkDates(speedOffer)) {
 			result.rejectValue("end", "", "La fecha de fin debe ser posterior a la fecha de inicio");
 
@@ -131,7 +132,25 @@ public class SpeedOfferController {
 
 		}
 
+		if(speedOffer.getGold()!=null) {
+			LocalTime a= speedOffer.getGold();
+			model.put("gold",a);
+		}
+		
+		if(speedOffer.getSilver()!=null) {
+			LocalTime b= speedOffer.getSilver();
+			model.put("silver",b);
+		}
+		
+		if(speedOffer.getBronze()!=null) {
+			LocalTime c= speedOffer.getBronze();
+			model.put("bronze",c);
+		}
+		
+		
 		if (result.hasErrors()) {
+			
+			
 			return SpeedOfferController.VIEWS_SPEED_OFFER_CREATE_OR_UPDATE_FORM;
 		}
 

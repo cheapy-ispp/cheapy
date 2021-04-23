@@ -11,8 +11,6 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-<!-- %@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %-->  
-
 <style>
 	
 	
@@ -74,9 +72,7 @@
 	  -webkit-border-radius: 0 0 10px 10px;
 	  border-radius: 0 0 10px 10px;
 	}
-	
-	
-	
+		
 	/* TABS */
 	
 	h2.inactive {
@@ -136,7 +132,7 @@
 	  display: inline-block;
 	  font-size: 16px;
 	  margin: 5px;
-	  width: 85%;
+	  width: 70%;
 	  border: 2px solid #f6f6f6;
 	  -webkit-transition: all 0.5s ease-in-out;
 	  -moz-transition: all 0.5s ease-in-out;
@@ -147,7 +143,28 @@
 	  border-radius: 5px 5px 5px 5px;
 	}
 	
+	input[type=time]{
+		background-color: #f6f6f6;
+		border: none;
+	  	color: #0d0d0d;
+	  	padding: 10px 10px;
+	  	text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		  							   
+		
+	}
+
+input::-webkit-calendar-picker-indicator:hover {
+  
+  cursor: pointer;
+}
+	
 	input[type=text]:focus {
+	  background-color: #fff;
+	  border-bottom: 2px solid #5fbae9;
+	}
+	input[type=password]:focus {
 	  background-color: #fff;
 	  border-bottom: 2px solid #5fbae9;
 	}
@@ -286,9 +303,9 @@
 				name="name" />
 			<cheapy:inputField label="Direccion" placeholder="Ponga aqui su dirección"
 				name="address" />			
-			<cheapy:inputField label="Hora de apertura" placeholder="Ponga aqui su hora de apertura (formato HH:mm)"
+			<cheapy:timeField label="Hora de apertura" placeholder="Ponga aqui su hora de apertura (formato HH:mm)"
 				name="init" />
-			<cheapy:inputField label="Hora de cierre" placeholder="Ponga aqui su hora de cierre (formato HH:mm)"
+			<cheapy:timeField label="Hora de cierre" placeholder="Ponga aqui su hora de cierre (formato HH:mm)"
 				name="finish" />
 			<cheapy:inputField label="Teléfono" placeholder="Ponga aqui el teléfono del local"
 				name="telephone" />
@@ -302,10 +319,12 @@
 				name="usuar.username" />
 			<cheapy:passwordField label="Contraseña" placeholder="Ponga aqui su contraseña"
 				name="usuar.password" />
-			<cheapy:inputField label="Código de activación" placeholder="Ponga aqui el código que se le suministro al firmar el contrato"
-				name="code.code" />
 			<cheapy:selectMunicipio label="Municipio" name="municipio" size="1" items="${municipios}" ></cheapy:selectMunicipio>
-				
+			<form:hidden path="expiration"/>
+			<div class="text-center">
+	        	<label id="terminos"  class="">Acepte los <a href="/termAndCondition">términos y condiciones</a></label>
+	        	<input id="terminos"   name="terminos" type="checkbox" required="required">
+			</div>	
 			<div class="text-center">
 				<input type="submit" class="fadeIn fourth" value="Registrarse">
 			</div>

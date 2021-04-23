@@ -9,10 +9,6 @@
 
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css">
-
-     -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -42,29 +38,7 @@
             <form:hidden path="id"/>
             <form:hidden path="code"/>
             <form:hidden path="status"/>
-            
-           <!--  <div class="container">
-			   <div class="row">
-			      <div class='col-sm-6'>
-			         <div class="form-group">
-			            <div class='input-group date' id='datetimepicker1'>
-		                    <input type='text' class="form-control" />
-		                    <span class="input-group-addon">
-		                            <span class="glyphicon glyphicon-calendar"></span>
-		                    </span>
-		                </div>
-					</div>
-			      </div>
-			      <script type="text/javascript">
-			         $(function () {
-			             $('#datetimepicker1').datetimepicker();
-			         });
-			      </script>
-			   </div>
-			</div>
-			 -->
-			
-			
+            			
 			<cheapy:dateField label="Fecha de Inicio" placeholder="dd/MM/yyyy HH:mm" name="start"/>
             <cheapy:dateField label="Fecha de Fin"  placeholder="dd/MM/yyyy HH:mm" name="end"/>
             
