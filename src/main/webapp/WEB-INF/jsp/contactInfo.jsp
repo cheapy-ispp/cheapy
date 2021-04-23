@@ -45,7 +45,7 @@
   color: white;
 }
 
-.column {
+.column-info {
   float: left;
   width: 33%;
   margin-top: 6px;
@@ -53,7 +53,7 @@
   text-align: center;
 }
 
-.row:after {
+.row-info:after {
   content: "";
   display: table;
   clear: both;
@@ -62,6 +62,10 @@
 .landingPage {
 	height: 80px;
 }
+
+.barImage {
+	width: 60%;
+}
 </style>
 
 <cheapy:layout pageName="contactInfo">
@@ -69,18 +73,23 @@
     <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px; margin-bottom:20px;">Información de contacto</h2>
     <p style="font-family: 'Lobster'; text-align:center; font-size:150%;  color: rgb(0, 64, 128); padding:10px; margin-bottom:20px;">
     ¿Tienes alguna duda? Puedes hacernosla llegar a través de los siguientes medios:</p>
+    
+    <div style="text-align: center;">
+    	<img src="/resources/images/bar3-CI.jpg" class = "barImage">
+    </div>
+    
 
-	<div class="row">
-	    <div class="column">
+	<div class="row-info">
+	    <div class="column-info">
 	    	<a href="https://twitter.com/cheapyispp" class="fa fa-twitter"></a>
 	    	<p><b>@cheapyispp</b></p>
 	    	​
 	    </div>
-	    <div class="column">
+	    <div class="column-info">
 	    	<a href="https://www.instagram.com/cheapyispp/" class="fa fa-instagram"></a>
 	    	<p><b>@cheapyispp</b></p>​
 	    </div>
-	    <div class="column">
+	    <div class="column-info">
 	    	<a href="mailto:cheapy.ispp@gmail.com" class="fa fa-google"></a>
 	    	<p><b>cheapy.ispp@gmail.com</b></p>
 	    	​
