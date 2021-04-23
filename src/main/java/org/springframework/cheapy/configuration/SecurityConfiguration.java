@@ -60,7 +60,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		.antMatchers("/reviews/new").hasAnyAuthority("usuario","client","notsubscribed")
 		
-		.antMatchers("/reviewsClient/new").hasAnyAuthority("usuario")
+		.antMatchers("/reviewsClient/new/**").hasAnyAuthority("usuario")
 		.antMatchers("/pay").hasAnyAuthority("notsubscribed")
 		
 
