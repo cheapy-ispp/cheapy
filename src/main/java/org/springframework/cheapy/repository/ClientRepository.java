@@ -15,8 +15,6 @@ public interface ClientRepository extends PagingAndSortingRepository<Client, Int
 	@Transactional(readOnly = true)
 	Client findByUsername(String username);
 
-	//	void save(Client client);
-
 	@Query("SELECT client FROM Client client")
 	@Transactional(readOnly = true)
 	List<Client> findAllClient(Pageable page);

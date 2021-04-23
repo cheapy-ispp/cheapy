@@ -75,6 +75,8 @@
 		<br>
 		<li type="circle"><p>Si un cliente desea eliminar su cuenta por completo de Cheapy, podrá hacerlo sabiendo que, en el historial disponible por los administradores se quedarán las ofertas realizadas por él y quedará solo el nombre del local asociada a ella. </p></li>			
 		<br>
+		<li type="circle"><p>Si un cliente desea eliminar su cuenta mientras su periodo de suscripción sigue activo, no habrá rembolso del dinero pagado por dicha suscripción. </p></li>
+		<br>
 		<li type="circle"><p>En el caso en el que a un cliente suscrito se le agote la suscripción, su cuenta quedará accesible, pero se le redireccionará a la plataforma de pago y sus ofertas existentes pasarán a estar ocultas para los clientes. </p></li>
 		<br>
 		<li type="circle"><p>En el caso en el que se encuentren irregularidades en el uso de nuestra aplicación por parte del cliente, se procederá a una inspección y Cheapy cortará su relación comercial con él, así como las posibles sanciones que puedan llegar a determinar organismos públicos. </p></li>

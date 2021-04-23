@@ -62,16 +62,21 @@
 	<sec:authentication var="principal" property="principal" />
       <div class="btns-edit">
       		
-		        <spring:url value="edit" var="editUrl"/>
-		        <button type="button" role="link" onclick="window.location='${fn:escapeXml(editUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-		            <span class="glyphicon 	glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
-		          Editar cliente</button>
+		    <spring:url value="edit" var="editUrl"/>
+		    <button type="button" role="link" onclick="window.location='${fn:escapeXml(editUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+		 	    <span class="glyphicon 	glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
+		        Editar cliente</button>
 		
 
 	        <spring:url value="disable" var="disableUrl"/>
 	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(disableUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 	            <span class="glyphicon 	glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
-	          Borrar  cliente</button>
+	          Desactivar cuenta</button>
+	          
+	        <spring:url value="delete" var="deleteUrl"/>
+	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deleteUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+	            <span class="glyphicon 	glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
+	          Eliminar cuenta</button>
       </div>
       </sec:authorize>
       <sec:authorize access="hasAnyAuthority('admin')">
