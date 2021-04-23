@@ -84,7 +84,7 @@
 	</div>	
     </c:if>
     
-    <c:if test="${fn:length(clientoLs) == 10 && nextPage > 0}">
+    <c:if test="${nextPage > 0}">
     <div class="text-right">
     	
     	<spring:url value="/administrators/clients/page/{page}" var="clientListUrl">

@@ -177,7 +177,7 @@
 			</div>	
 	    </c:if>
 	    
-	    <c:if test="${fn:length(foodOfferLs) == 5}">
+	    <c:if test="${nextPage > 0}">
 		    <div class="text-right">
 		    	
 		    	<spring:url value="/offers/foodOfferList/{page}" var="foodOfferListUrl">
