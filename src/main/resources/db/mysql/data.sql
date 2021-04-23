@@ -5,7 +5,7 @@ INSERT INTO users (username,password,enabled) VALUES ('manoli',MD5('manoli'), TR
 INSERT INTO authorities (username,authority) VALUES ('manoli','client');
 INSERT INTO users (username,password,enabled) VALUES ('david',MD5('david'), TRUE );
 INSERT INTO authorities (username,authority) VALUES ('david','client');
-INSERT INTO users (username,password,enabled) VALUES ('lopez','lopez', TRUE );
+INSERT INTO users (username,password,enabled) VALUES ('lopez',MD5('lopez'), TRUE );
 INSERT INTO authorities (username,authority) VALUES ('lopez','client');
 
 INSERT INTO users (username,password,enabled) VALUES ('paco',MD5('paco'), TRUE );

@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -28,6 +29,7 @@ import org.springframework.cheapy.service.FoodOfferService;
 import org.springframework.cheapy.service.NuOfferService;
 import org.springframework.cheapy.service.SpeedOfferService;
 import org.springframework.cheapy.service.TimeOfferService;
+import org.springframework.cheapy.service.UserService;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
@@ -48,6 +50,9 @@ class ClientControllerTest {
 	
 	@MockBean
 	private ClientService clientService;
+	
+	@MockBean
+	private UserService userService;
 	
 	@MockBean
 	private FoodOfferService foodOfferService;
@@ -74,6 +79,7 @@ class ClientControllerTest {
 		client1.setAddress("client1");
 		client1.setInit(LocalTime.of(01, 00));
 		client1.setFinish(LocalTime.of(01, 01));
+		client1.setExpiration(LocalDate.of(3000,12,30));
 		client1.setTelephone("123456789");
 		client1.setDescription("client1");
 		client1.setFood("client1");
@@ -113,6 +119,7 @@ class ClientControllerTest {
 					.param("usuar.password", "Contrasenya123")
 					.param("init", "11:30")
 					.param("finish", "23:30")
+					.param("expiration", "3000-12-30")
 					.param("name", "Restaurante Pepe")
 					.param("email", "pepe@hotmail.es")
 					.param("address", "Pirineos 10")
@@ -120,7 +127,8 @@ class ClientControllerTest {
 					.param("description", "Comida al mejor precio")
 					.param("food", "Americana")
 					.param("municipio", "Dos_Hermanas"))
-				.andExpect(status().is3xxRedirection());
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/clients/show"));
 	}
 	
 
@@ -133,6 +141,7 @@ class ClientControllerTest {
 					.param("init", "24:30")
 					.param("finish", "a:30")
 					.param("name", "")
+					.param("expiration", "")
 					.param("email", "")
 					.param("address", "")
 					.param("telephone", "654999")
@@ -143,6 +152,7 @@ class ClientControllerTest {
 				.andExpect(model().attributeHasFieldErrors("client", "usuar.password"))
 				.andExpect(model().attributeHasFieldErrors("client", "init"))
 				.andExpect(model().attributeHasFieldErrors("client", "finish"))
+				.andExpect(model().attributeHasFieldErrors("client", "expiration"))
 				.andExpect(model().attributeHasFieldErrors("client", "name"))
 				.andExpect(model().attributeHasFieldErrors("client", "email"))
 				.andExpect(model().attributeHasFieldErrors("client", "address"))
