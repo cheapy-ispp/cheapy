@@ -45,9 +45,14 @@
   color: white;
 }
 
+.fa-github {
+  background: #2c4762;
+  color: white;
+}
+
 .column-info {
   float: left;
-  width: 33%;
+  width: 25%;
   margin-top: 6px;
   padding: 20px;
   text-align: center;
@@ -92,6 +97,11 @@
 	    <div class="column-info">
 	    	<a href="mailto:cheapy.ispp@gmail.com" class="fa fa-google"></a>
 	    	<p><b>cheapy.ispp@gmail.com</b></p>
+	    	​
+	    </div>
+	    <div class="column-info">
+	    	<a href="https://github.com/cheapy-ispp" class="fa fa-github"></a>
+	    	<p><b>cheapy-ispp</b></p>
 	    	​
 	    </div>
 	    <!--
