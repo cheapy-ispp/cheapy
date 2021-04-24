@@ -251,7 +251,6 @@ public class ClientController {
 		client.setUsuar(null);
 
 		this.clientService.saveClient(client);
-		System.out.println("----------------- Funciono");
 		this.userService.deleteUser(elim);
 
 		try {
