@@ -174,7 +174,7 @@ public class SingUpController {
 			
 		}
 		Boolean duplicate=this.userService.duplicateUsername(cliente.getUsuar().getUsername());
-		if(duplicate==true) {
+		if(duplicate) {
 			result.rejectValue("usuar.username","" ,"El nombre de usuario ya esta registrado");
 		}
 		if (result.hasErrors()) {
