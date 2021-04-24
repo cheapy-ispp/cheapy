@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
@@ -23,6 +24,7 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.util.Assert;
 
 
 
@@ -124,5 +126,24 @@ class UsuarioControllerTest {
 				.with(csrf()))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(view().name("redirect:/login"));
+	}
+	
+	@WithMockUser(value = "spring", authorities = "usuario")
+	@Test
+	void testInitDelete() throws Exception {
+		mockMvc.perform(get("/usuarios/delete"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeExists("usuario"))
+			.andExpect(view().name("usuarios/usuariosDelete"));
+	}
+	
+	@WithMockUser(value = "spring", authorities = "usuario")
+	@Test
+	void testProcessDeleteSuccess() throws Exception {
+		mockMvc.perform(post("/usuarios/delete")
+				.with(csrf()))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/login"));
+		Assertions.assertTrue(usuarioService.findByUsername("user") == null);
 	}
 }
