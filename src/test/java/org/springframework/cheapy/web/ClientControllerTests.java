@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
@@ -20,6 +21,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cheapy.configuration.SecurityConfiguration;
 import org.springframework.cheapy.model.Client;
 import org.springframework.cheapy.model.FoodOffer;
+import org.springframework.cheapy.model.Municipio;
 import org.springframework.cheapy.model.NuOffer;
 import org.springframework.cheapy.model.SpeedOffer;
 import org.springframework.cheapy.model.TimeOffer;
@@ -85,6 +87,7 @@ class ClientControllerTest {
 		client1.setFood("client1");
 		client1.setUsuar(user1);
 		BDDMockito.given(this.clientService.getCurrentClient()).willReturn(client1);
+		BDDMockito.given(this.clientService.findById(TEST_CLIENT_ID)).willReturn(client1);
 		
 		BDDMockito.given(this.foodOfferService.findFoodOfferActOclByUserId(1)).willReturn(new ArrayList<FoodOffer>());
 		BDDMockito.given(this.nuOfferService.findNuOfferActOclByUserId(1)).willReturn(new ArrayList<NuOffer>());
@@ -182,5 +185,33 @@ class ClientControllerTest {
 				.andExpect(view().name("redirect:/login"));
 	}
 	
+	@WithMockUser(value = "user1", authorities = "client")
+	@Test
+	void testInitDeleteForm() throws Exception {
+		mockMvc.perform(get("/clients/delete"))
+				.andExpect(status().isOk())
+				.andExpect(model().attributeExists("client"))
+				.andExpect(view().name("/clients/clientDelete"));
+	}
 	
+	@WithMockUser(value = "spring", authorities = "client")
+	@Test
+	void testProcessDeleteFormSuccess() throws Exception {
+		mockMvc.perform(post("/clients/delete")
+				.with(csrf()))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/login"));
+		
+		Client cliente = clientService.findById(TEST_CLIENT_ID);
+		Assertions.assertTrue(cliente.getAddress()=="Eliminado");
+		Assertions.assertTrue(cliente.getDescription()=="Eliminado");
+		Assertions.assertTrue(cliente.getEmail()=="e@liminado");
+		Assertions.assertTrue(cliente.getExpiration().equals(LocalDate.now()));
+		Assertions.assertTrue(cliente.getFinish()==LocalTime.of(00, 00));
+		Assertions.assertTrue(cliente.getInit()==LocalTime.of(00, 00));
+		Assertions.assertTrue(cliente.getFood()=="Eliminado");
+		Assertions.assertTrue(cliente.getTelephone()=="000000000");	
+		Assertions.assertTrue(cliente.getMunicipio()==Municipio.Sevilla);
+		Assertions.assertTrue(cliente.getUsuar()==null);
+	}
 }
