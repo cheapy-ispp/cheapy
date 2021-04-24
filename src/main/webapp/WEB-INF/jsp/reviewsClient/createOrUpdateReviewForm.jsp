@@ -16,7 +16,9 @@
         <div class="form-group has-feedback">
         	<form:hidden path="id"/>
             <cheapy:textAreaField label="Opinión" name="opinion"/>
-            <cheapy:ratingStar label="Valoración" name="stars" disabled="false"></cheapy:ratingStar>
+            <cheapy:ratingStar label="Servicio" name="service" disabled="false"></cheapy:ratingStar>
+            <cheapy:ratingStar label="Comida" name="food" disabled="false"></cheapy:ratingStar>
+            <cheapy:ratingStar label="Calidad/Precio" name="qualityPrice" disabled="false"></cheapy:ratingStar>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
