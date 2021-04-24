@@ -92,6 +92,16 @@
 						<span>Valóranos</span>
 					</cheapy:menuItem> 		           		            
 		        </sec:authorize>
+		        <sec:authorize access="hasAnyAuthority('client')">
+					<cheapy:menuItem active="${name eq 'reviewsClient'}" url="/myClientReviews" title="Mis Reseñas">
+						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+						<span>Mis Reseñas</span>
+					</cheapy:menuItem>		           		            
+		        </sec:authorize>
+		        <cheapy:menuItem active="${name eq 'contactInfo'}" url="/contactInfo" title="Contáctanos">
+					<span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>
+					<span>Contáctanos</span>
+				</cheapy:menuItem>
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">

@@ -7,6 +7,11 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
+<style>
+
+
+</style>
+
 <cheapy:layout pageName="registro">
 	<script>
 		function pagNum(pagina) {
@@ -90,6 +95,7 @@
 		        </c:forEach>
 		        </tbody>
 		    </table>
+	</div>
 	<div class="text-center">
     	<script type="text/javascript">
 			          
@@ -97,29 +103,33 @@
 								
 		</script>
     </div>
-	<div style="display:inline">
-	<c:if test='${page!=0}'>
+	<div class="row-pag-btn">
+	    <div class="column-pag-btn" style="text-align: left;">
+	    	<c:if test='${page!=0}'>
 	
-    	<spring:url value="/administrators/offersRecord{page}" var="SearchOfferListUrl">
-    		<spring:param name="page" value="${page-1}"/>
-    	</spring:url>
-    	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(SearchOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-		<span class="glyphicon 	glyphicon glyphicon-arrow-left" aria-hidden="true" style="padding: 5px"> </span>
-		Pág. anterior</button>
+		    	<spring:url value="/administrators/offersRecord{page}" var="SearchOfferListUrl">
+		    		<spring:param name="page" value="${page-1}"/>
+		    	</spring:url>
+		    	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(SearchOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+				<span class="glyphicon 	glyphicon glyphicon-arrow-left" aria-hidden="true" style="padding: 5px"> </span>
+				Pág. anterior</button>
 
-    </c:if>
-    
-    <c:if test="${nextPage > 0}">
+   			</c:if>
+	    	​
+	    </div>
+	    <div class="column-pag-btn" style="text-align: right;">
+	    	<c:if test="${nextPage > 0}">
 
-    	<spring:url value="/administrators/offersRecord{page}" var="SearchOfferListUrl">
-    		<spring:param name="page" value="${page+1}"/>
-    	</spring:url>
-    	<button type="button" class="btn-pag"  role="link" onclick="window.location='${fn:escapeXml(SearchOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-		<span class="glyphicon 	glyphicon glyphicon-arrow-right" aria-hidden="true" style="padding: 5px"> </span>
-		Pág. siguiente</button>
+		    	<spring:url value="/administrators/offersRecord{page}" var="SearchOfferListUrl">
+		    		<spring:param name="page" value="${page+1}"/>
+		    	</spring:url>
+		    	<button type="button" class="btn-pag"  role="link" onclick="window.location='${fn:escapeXml(SearchOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+				<span class="glyphicon 	glyphicon glyphicon-arrow-right" aria-hidden="true" style="padding: 5px"> </span>
+				Pág. siguiente</button>
 
-	</c:if>
-	</div>
+			</c:if>​
 		</div>
+	</div>
+		
     </c:if>
 </cheapy:layout>
