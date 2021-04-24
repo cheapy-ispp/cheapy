@@ -322,7 +322,7 @@ input::-webkit-calendar-picker-indicator:hover {
 			<cheapy:selectMunicipio label="Municipio" name="municipio" size="1" items="${municipios}" ></cheapy:selectMunicipio>
 			<form:hidden path="expiration"/>
 			<div class="text-center">
-	        	<label id="terminos"  class="">Acepte los <a href="/termAndCondition">términos y condiciones</a></label>
+	        	<label id="terminos"  class="">Acepte los <a href="/termAndCondition"  target="_blank">términos y condiciones</a></label>
 	        	<input id="terminos"   name="terminos" type="checkbox" required="required">
 			</div>	
 			<div class="text-center">

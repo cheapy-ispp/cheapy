@@ -17,11 +17,13 @@ import org.springframework.cheapy.model.NuOffer;
 import org.springframework.cheapy.model.SpeedOffer;
 import org.springframework.cheapy.model.StatusOffer;
 import org.springframework.cheapy.model.TimeOffer;
+import org.springframework.cheapy.model.Usuario;
 import org.springframework.cheapy.service.ClientService;
 import org.springframework.cheapy.service.FoodOfferService;
 import org.springframework.cheapy.service.NuOfferService;
 import org.springframework.cheapy.service.SpeedOfferService;
 import org.springframework.cheapy.service.TimeOfferService;
+import org.springframework.cheapy.utils.MD5;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -184,4 +186,34 @@ public class ClientController {
 		model.put("reviews", valoraciones);
 		return "clients/restaurantShow";
 	}
+	
+	@GetMapping(value = "/clients/edit/password")
+	public String updatePassClient(final ModelMap model, final HttpServletRequest request) {
+	
+		Client clienteSesion = this.clientService.getCurrentClient();
+		clienteSesion.getUsuar().setPassword("");
+		model.addAttribute("client", clienteSesion);
+		return "clients/password";
+	}
+	
+	@PostMapping(value = "/clients/edit/password")
+	public String updatePassClient(@Valid final Client clientEdit, final BindingResult result, final ModelMap model, final HttpServletRequest request) {
+
+		Client clienteSesion = this.clientService.getCurrentClient();
+
+		if (clientEdit.getUsuar().getPassword().equals("")) {
+			result.rejectValue("usuar.password", "", "La contraseña no puede estar vacía");
+		}
+
+		if (result.hasErrors()) {
+			return "clients/password";
+		}
+
+		BeanUtils.copyProperties(clienteSesion, clientEdit, "name", "email", "address","init","municipio", "finish","telephone", "description","food","expiration","usuar");
+		clientEdit.getUsuar().setUsername(clienteSesion.getUsuar().getUsername());
+		clientEdit.getUsuar().setPassword(MD5.md5(clientEdit.getUsuar().getPassword()));
+		clientEdit.getUsuar().setEnabled(true);
+		this.clientService.saveClient(clientEdit);
+		return "redirect:/clients/show";
+}
 }

@@ -25,8 +25,8 @@
             <cheapy:inputField label="Descripción" placeholder="" name="description"/>
             <cheapy:inputField label="Comida" placeholder="food" name="food"/>
             <input readonly name="expiration" value="${client.expiration}" />
-            <cheapy:passwordField label="Contraseña" placeholder="Restaurante pepito" name="usuar.password"/>
-
+            <form:hidden path="usuar.password"/>
+            
             
 					<script>
 
@@ -65,11 +65,15 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-            	<div class="btn-mod">
+            	<div class="text-left">
 	               
 	                        <button class="btn btn-default" type="submit" style="font-family: 'Lobster'; font-size: 20px;">
 	                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true" style="padding: 5px"> </span>
 	                        Modificar</button>
+	                        <a href="/clients/edit/password">
+	                        <button class="btn btn-default" type="button"  style="font-family: 'Lobster'; font-size: 20px;">
+	                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true" style="padding: 5px"> </span>
+	                        Cambiar contraseña</button></a>
                 </div>
             </div>
         </div>
