@@ -129,7 +129,7 @@
 		                    	<c:out value="Por número de comensales"/>
 		                    </c:if>
 		                    <c:if test="${datos[1] == 'speed'}">
-		                    	<c:out value="Por rapidez"/>
+		                    	<c:out value="Por velocidad"/>
 		                    </c:if>
 		                    <c:if test="${datos[1] == 'food'}">
 		                    	<c:out value="Por plato específico"/>

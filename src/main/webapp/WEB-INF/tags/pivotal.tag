@@ -12,6 +12,7 @@
 			<a href="https://twitter.com/cheapyispp" class="fa fa-twitter"></a>
 			<a href="https://www.instagram.com/cheapyispp/" class="fa fa-instagram"></a>		
 			<a href="mailto:cheapy.ispp@gmail.com" class="fa fa-envelope"></a>	
+			<a href="https://github.com/cheapy-ispp/cheapy" class="fa fa-github"></a>	
 		</div>	
 		
 		</div>  	
