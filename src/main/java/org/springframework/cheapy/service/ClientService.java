@@ -5,10 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cheapy.model.Client;
-import org.springframework.cheapy.model.Code;
 import org.springframework.cheapy.model.ReviewClient;
 import org.springframework.cheapy.repository.ClientRepository;
-import org.springframework.cheapy.repository.CodeRepository;
 import org.springframework.cheapy.repository.ReviewClientRepository;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Pageable;
@@ -21,14 +19,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class ClientService {
 
 	private ClientRepository		clientRepository;
-	private CodeRepository			codeRepository;
 	private ReviewClientRepository	reviewRepositoy;
 
 
 	@Autowired
-	public ClientService(final ClientRepository clientRepository, final CodeRepository codeRepository, final ReviewClientRepository reviewRepositoy) {
+	public ClientService(final ClientRepository clientRepository, final ReviewClientRepository reviewRepositoy) {
 		this.clientRepository = clientRepository;
-		this.codeRepository = codeRepository;
 		this.reviewRepositoy = reviewRepositoy;
 	}
 
@@ -41,15 +37,6 @@ public class ClientService {
 
 	public void saveClient(final Client client) throws DataAccessException {
 		this.clientRepository.save(client);
-	}
-
-	public void saveCode(final Code code) throws DataAccessException {
-		this.codeRepository.save(code);
-
-	}
-
-	public Code findCodeByCode(final String code) {
-		return this.codeRepository.findCodeByCode(code);
 	}
 
 	@Transactional
@@ -76,7 +63,4 @@ public class ClientService {
 		}
 	}
 
-	public Boolean goodCode(String cod) {
-		return this.codeRepository.goodCode(cod);
-	}
 }

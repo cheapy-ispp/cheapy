@@ -7,7 +7,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,13 +19,17 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cheapy.configuration.SecurityConfiguration;
 import org.springframework.cheapy.model.Client;
-import org.springframework.cheapy.model.Code;
+import org.springframework.cheapy.model.FoodOffer;
+import org.springframework.cheapy.model.NuOffer;
+import org.springframework.cheapy.model.SpeedOffer;
+import org.springframework.cheapy.model.TimeOffer;
 import org.springframework.cheapy.model.User;
 import org.springframework.cheapy.service.ClientService;
 import org.springframework.cheapy.service.FoodOfferService;
 import org.springframework.cheapy.service.NuOfferService;
 import org.springframework.cheapy.service.SpeedOfferService;
 import org.springframework.cheapy.service.TimeOfferService;
+import org.springframework.cheapy.service.UserService;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
@@ -46,6 +52,9 @@ class ClientControllerTest {
 	private ClientService clientService;
 	
 	@MockBean
+	private UserService userService;
+	
+	@MockBean
 	private FoodOfferService foodOfferService;
 	
 	@MockBean
@@ -61,29 +70,27 @@ class ClientControllerTest {
 	@BeforeEach
 	void setup() {
 		User user1 = new User();
-		Code code1 = new Code();
-		code1.setActivo(true);
-		code1.setCode("codeTest1");
 		user1.setUsername("user1");
 		user1.setPassword("user1");
-		Client client1 = new Client();;
+		Client client1 = new Client();
 		client1.setId(TEST_CLIENT_ID);
 		client1.setName("client1");
 		client1.setEmail("client1");
 		client1.setAddress("client1");
 		client1.setInit(LocalTime.of(01, 00));
 		client1.setFinish(LocalTime.of(01, 01));
+		client1.setExpiration(LocalDate.of(3000,12,30));
 		client1.setTelephone("123456789");
 		client1.setDescription("client1");
-		client1.setCode(code1);
 		client1.setFood("client1");
 		client1.setUsuar(user1);
 		BDDMockito.given(this.clientService.getCurrentClient()).willReturn(client1);
 		
-
-		
-		
-		
+		BDDMockito.given(this.foodOfferService.findFoodOfferActOclByUserId(1)).willReturn(new ArrayList<FoodOffer>());
+		BDDMockito.given(this.nuOfferService.findNuOfferActOclByUserId(1)).willReturn(new ArrayList<NuOffer>());
+		BDDMockito.given(this.speedOfferService.findSpeedOfferActOclByUserId(1)).willReturn(new ArrayList<SpeedOffer>());
+		BDDMockito.given(this.timeOfferService.findTimeOfferActOclByUserId(1)).willReturn(new ArrayList<TimeOffer>());	
+				
 	}
 	
 	@WithMockUser(value = "spring", authorities = "client")
@@ -112,6 +119,7 @@ class ClientControllerTest {
 					.param("usuar.password", "Contrasenya123")
 					.param("init", "11:30")
 					.param("finish", "23:30")
+					.param("expiration", "3000-12-30")
 					.param("name", "Restaurante Pepe")
 					.param("email", "pepe@hotmail.es")
 					.param("address", "Pirineos 10")
@@ -119,7 +127,8 @@ class ClientControllerTest {
 					.param("description", "Comida al mejor precio")
 					.param("food", "Americana")
 					.param("municipio", "Dos_Hermanas"))
-				.andExpect(status().is3xxRedirection());
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/clients/show"));
 	}
 	
 
@@ -132,6 +141,7 @@ class ClientControllerTest {
 					.param("init", "24:30")
 					.param("finish", "a:30")
 					.param("name", "")
+					.param("expiration", "")
 					.param("email", "")
 					.param("address", "")
 					.param("telephone", "654999")
@@ -142,6 +152,7 @@ class ClientControllerTest {
 				.andExpect(model().attributeHasFieldErrors("client", "usuar.password"))
 				.andExpect(model().attributeHasFieldErrors("client", "init"))
 				.andExpect(model().attributeHasFieldErrors("client", "finish"))
+				.andExpect(model().attributeHasFieldErrors("client", "expiration"))
 				.andExpect(model().attributeHasFieldErrors("client", "name"))
 				.andExpect(model().attributeHasFieldErrors("client", "email"))
 				.andExpect(model().attributeHasFieldErrors("client", "address"))

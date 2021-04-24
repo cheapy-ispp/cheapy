@@ -22,7 +22,6 @@
 	    <table id="reviewTable" class="table table-striped">
 	        <thead>
 		        <tr>
-		        	<!-- <th style="width: 150px;">Restaurante</th> -->
 		        	<th><fmt:message key="user"/></th>
 		        	<th><fmt:message key="stars"/></th>
 		            <th><fmt:message key="opinion"/></th>
@@ -38,15 +37,10 @@
 		        <c:forEach items="${reviewsLs}" var="review">
 		       
 		            <tr>
-		<!--                 <td> -->
-		<%--                     <c:out value="nombre por definir"/> <!-- ${review.usuario.nombre},${review.usuario.apellidos}  --> --%>
-		<!--                 </td> -->
 		                <td>
 		                    <c:out value="${review.escritor.username}"/>
 		                </td>
 		                <td>
-		                
-		                    <!--<c:out value="${review.stars}"/> -->
 		                    <div style="display: inline-block; margin: auto;">
 		                    	<cheapy:showStars value='${review.stars}'></cheapy:showStars>
 							</div>
@@ -92,7 +86,7 @@
 		 	</div>
 	    </c:if>
 	    
-	    <c:if test="${fn:length(reviewsLs) == 6}">
+	    <c:if test="${nextPage > 0}">
 		    <div class="text-right">
 		    	<spring:url value="/reviewsList/{page}" var="reviewsListUrl">
 		    		<spring:param name="page" value="${page+1}"/>

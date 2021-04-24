@@ -20,7 +20,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cheapy.configuration.SecurityConfiguration;
 import org.springframework.cheapy.model.Client;
-import org.springframework.cheapy.model.Code;
 import org.springframework.cheapy.model.SpeedOffer;
 import org.springframework.cheapy.model.StatusOffer;
 import org.springframework.cheapy.model.User;
@@ -58,9 +57,6 @@ class SpeedOfferControllerTest {
 	@BeforeEach
 	void setup() {
 		User user1 = new User();
-		Code code1 = new Code();
-		code1.setActivo(true);
-		code1.setCode("codeTest1");
 		user1.setUsername("user1");
 		user1.setPassword("user1");
 		Client client1 = new Client();
@@ -72,7 +68,6 @@ class SpeedOfferControllerTest {
 		client1.setFinish(LocalTime.of(01, 01));
 		client1.setTelephone("123456789");
 		client1.setDescription("client1");
-		client1.setCode(code1);
 		client1.setFood("client1");
 		client1.setUsuar(user1);
 		clientTest = client1;

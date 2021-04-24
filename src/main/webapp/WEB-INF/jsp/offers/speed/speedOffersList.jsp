@@ -108,7 +108,6 @@
 	    <table id="speedOfferTable" class="table table-striped">
 	        <thead>
 	        <tr>
-	        	<!-- <th style="width: 150px;">Restaurante</th> -->
 	            <th><fmt:message key="name"/></th>
 	            <th><fmt:message key="startDate"/></th>
 	            <th><fmt:message key="endDate"/></th>
@@ -177,7 +176,7 @@
 			</div>
 	    </c:if>
 	    
-	    <c:if test="${fn:length(speedOfferLs) == 5}">
+	    <c:if test="${nextPage > 0}">
 		    <div class="text-right">
 		    	<spring:url value="/offers/speedOfferList/{page}" var="speedOfferListUrl">
 		    		<spring:param name="page" value="${page+1}"/>

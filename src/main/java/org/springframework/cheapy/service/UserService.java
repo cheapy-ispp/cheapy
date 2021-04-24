@@ -1,7 +1,7 @@
+
 package org.springframework.cheapy.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cheapy.model.FoodOffer;
 import org.springframework.cheapy.model.User;
 import org.springframework.cheapy.repository.UserRepository;
 import org.springframework.dao.DataAccessException;
@@ -14,7 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
 
 	private UserRepository userRepository;
-	
+
+
 	@Autowired
 	public UserService(final UserRepository userRepository) {
 		this.userRepository = userRepository;
@@ -30,9 +31,14 @@ public class UserService {
 	public void saveUser(final User user) throws DataAccessException {
 		this.userRepository.save(user);
 	}
-	
-	public Boolean duplicateUsername(String username) throws DataAccessException {
+
+	public Boolean duplicateUsername(final String username) throws DataAccessException {
 		return this.userRepository.duplicateUsername(username);
 	}
-	
+
+	public void deleteUser(final User usuar) {
+		this.userRepository.delete(usuar);
+
+	}
+
 }

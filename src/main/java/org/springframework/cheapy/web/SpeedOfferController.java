@@ -70,8 +70,7 @@ public class SpeedOfferController {
 	private boolean checkConditions(final SpeedOffer speedOffer) {
 		boolean res = false;
 		if (speedOffer.getGold() == null || speedOffer.getSilver() == null || speedOffer.getBronze() == null) {
-
-
+			res = true;
 		} else if (speedOffer.getGold().isBefore(speedOffer.getSilver()) && speedOffer.getSilver().isBefore( speedOffer.getBronze())) {
 			res = true;
 		}

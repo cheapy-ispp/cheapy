@@ -109,7 +109,6 @@
     <table id="foodOfferTable" class="table table-striped">
         <thead>
         <tr>
-        	<!-- <th style="width: 150px;">Restaurante</th> -->
         	<th><fmt:message key="name"/></th>
         	<th><fmt:message key="food"/></th>
         	<th><fmt:message key="discount"/></th>

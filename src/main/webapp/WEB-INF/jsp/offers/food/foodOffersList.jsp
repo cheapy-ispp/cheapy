@@ -110,7 +110,6 @@
 	    <table id="foodOfferTable" class="table table-striped">
 	        <thead>
 	        <tr>
-	        	<!-- <th style="width: 150px;">Restaurante</th> -->
 	        	<th><fmt:message key="name"/></th>
 	        	<th><fmt:message key="food"/></th>
 	        	<th><fmt:message key="discount"/></th>
@@ -178,7 +177,7 @@
 			</div>	
 	    </c:if>
 	    
-	    <c:if test="${fn:length(foodOfferLs) == 5}">
+	    <c:if test="${nextPage > 0}">
 		    <div class="text-right">
 		    	
 		    	<spring:url value="/offers/foodOfferList/{page}" var="foodOfferListUrl">

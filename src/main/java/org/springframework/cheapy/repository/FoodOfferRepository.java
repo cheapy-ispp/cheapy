@@ -24,7 +24,7 @@ public interface FoodOfferRepository extends PagingAndSortingRepository<FoodOffe
 
 	//void save(FoodOffer foodOffer);
 
-	@Query("SELECT foodOffer FROM FoodOffer foodOffer WHERE foodOffer.status =:status")
+	@Query("SELECT foodOffer FROM FoodOffer foodOffer WHERE foodOffer.status =:status AND foodOffer.client.expiration > CURRENT_DATE()")
 	@Transactional(readOnly = true)
 	List<FoodOffer> findActiveFoodOffer(StatusOffer status, Pageable p);
 
@@ -36,15 +36,15 @@ public interface FoodOfferRepository extends PagingAndSortingRepository<FoodOffe
 	@Transactional(readOnly = true)
 	List<FoodOffer> findFoodOfferActOclByUserId(@Param("id") Integer id);
 
-	@Query("SELECT foodOffer FROM FoodOffer foodOffer WHERE foodOffer.client.name LIKE :name AND foodOffer.status= 'active'")
+	@Query("SELECT foodOffer FROM FoodOffer foodOffer WHERE foodOffer.client.name LIKE :name AND foodOffer.status= 'active' AND foodOffer.client.expiration > CURRENT_DATE()")
 	@Transactional(readOnly = true)
 	List<FoodOffer> findFoodOfferByClientName(String name, Pageable p);
 
-	@Query("SELECT foodOffer FROM FoodOffer foodOffer WHERE foodOffer.client.food LIKE :name AND foodOffer.status= 'active'")
+	@Query("SELECT foodOffer FROM FoodOffer foodOffer WHERE foodOffer.client.food LIKE :name AND foodOffer.status= 'active' AND foodOffer.client.expiration > CURRENT_DATE()")
 	@Transactional(readOnly = true)
 	List<FoodOffer> findFoodOfferByClientFood(String name, Pageable p);
 
-	@Query("SELECT foodOffer FROM FoodOffer foodOffer WHERE foodOffer.client.municipio =:municipio AND foodOffer.status= 'active'")
+	@Query("SELECT foodOffer FROM FoodOffer foodOffer WHERE foodOffer.client.municipio =:municipio AND foodOffer.status= 'active' AND foodOffer.client.expiration > CURRENT_DATE()")
 	@Transactional(readOnly = true)
 	List<FoodOffer> findFoodOfferByClientPlace(Municipio municipio, Pageable p);
 
