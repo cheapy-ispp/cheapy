@@ -160,63 +160,46 @@ public class AdministratorController {
 	}
 	
 	@GetMapping("/administrators/offersRecord{page}")
-	public String processOffersRecordForm(@PathVariable("page") final int page, final Map<String, Object> model) {
-		Pageable elements = PageRequest.of(page, 2);
-		Pageable nextPage = PageRequest.of(page+1, 2);
-		
-		List<Object[]> datos = new ArrayList<Object[]>();
-		
-		for(Offer of:this.foodOfferService.findAllFoodOffer(elements)) {
-			Object[] fo = {of, "food"};
-			datos.add(fo);
-		}
-		
-		for(Offer of:this.nuOfferService.findAllNuOffer(elements)) {
-			Object[] nu = {of, "nu"};
-			datos.add(nu);
-		}
-		
-		for(Offer of:this.speedOfferService.findAllSpeedOffer(elements)) {
-			Object[] sp = {of, "speed"};
-			datos.add(sp);
-		}
-		
-		for(Offer of:this.timeOfferService.findAllTimeOffer(elements)) {
-			Object[] ti = {of, "time"};
-			datos.add(ti);
-		}
-		
-		List<Object[]> datosNext = new ArrayList<Object[]>();
-		
-		for(Offer of:this.foodOfferService.findAllFoodOffer(nextPage)) {
-			Object[] fo = {of, "food"};
-			datosNext.add(fo);
-		}
-		
-		for(Offer of:this.nuOfferService.findAllNuOffer(nextPage)) {
-			Object[] nu = {of, "nu"};
-			datosNext.add(nu);
-		}
-		
-		for(Offer of:this.speedOfferService.findAllSpeedOffer(nextPage)) {
-			Object[] sp = {of, "speed"};
-			datosNext.add(sp);
-		}
-		
-		for(Offer of:this.timeOfferService.findAllTimeOffer(nextPage)) {
-			Object[] ti = {of, "time"};
-			datosNext.add(ti);
-		}
-		
-		Integer next = datosNext.size();
-		model.put("nextPage", next);
-		model.put("datos", datos);
+    public String processOffersRecordForm(@PathVariable("page") final int page, final Map<String, Object> model) {
+        Pageable elements = PageRequest.of(page, 2);
+        Pageable nextPage = PageRequest.of(page+1, 2);
 
-		//Se añade formateador de fecha al modelo
-		model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+        List<Object[]> datos = ofertasPag(elements);
+        List<Object[]> datosNext = ofertasPag(nextPage);
 
-		return "offers/offersRecordList";
-	}
+        Integer next = datosNext.size();
+        model.put("nextPage", next);
+        model.put("datos", datos);
+        model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+
+        return "offers/offersRecordList";
+    }
+
+    private List<Object[]> ofertasPag(Pageable pag ){
+    	List<Object[]> datos = new ArrayList<Object[]>();
+
+        for(Offer of:this.foodOfferService.findAllFoodOffer(pag)) {
+            Object[] fo = {of, "food"};
+            datos.add(fo);
+        }
+
+        for(Offer of:this.nuOfferService.findAllNuOffer(pag)) {
+            Object[] nu = {of, "nu"};
+            datos.add(nu);
+        }
+
+        for(Offer of:this.speedOfferService.findAllSpeedOffer(pag)) {
+            Object[] sp = {of, "speed"};
+            datos.add(sp);
+        }
+
+        for(Offer of:this.timeOfferService.findAllTimeOffer(pag)) {
+            Object[] ti = {of, "time"};
+            datos.add(ti);
+        }
+        return datos;
+
+    }
 	
 	@GetMapping("/administrators/offers/nu/{nuOfferId}")
 	public String processShowNuForm(@PathVariable("nuOfferId") final int nuOfferId, final Map<String, Object> model) {
