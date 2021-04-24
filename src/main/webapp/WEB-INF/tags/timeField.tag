@@ -6,7 +6,7 @@
 <%@ attribute name="label" required="true" rtexprvalue="true"
               description="Label appears in red color if input is considered as invalid after submission" %>
 <%@ attribute name="placeholder" required="false" rtexprvalue="true"
-              description="Placeholder para los campos en los input fields" %>             
+              description="Placeholder para los campos en los input fields" %>                          
 
 <spring:bind path="${name}">
     <c:set var="cssGroup" value="form-group ${status.error ? 'has-error' : '' }"/>
@@ -15,7 +15,7 @@
         <label class="col-sm-2 control-label" style="vertical-align:middle">${label}</label>
 		
         <div class="col-sm-10">
-        	<form:input type="time" class="time"  path="${name}" style="width:70%"/>
+        	<form:input type="time" class="form-control" id="time1" path="${name}" style="width:70%"/>
             <c:if test="${valid}">
                 <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
             </c:if>
