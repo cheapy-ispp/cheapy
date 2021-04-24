@@ -11,12 +11,13 @@ public interface UserRepository extends Repository<User, Integer> {
 	@Query("SELECT u FROM User u WHERE username =:username")
 	@Transactional(readOnly = true)
 	User findByUsername(String username);
-	
+
 	@Query("SELECT (count(*) > 0) FROM User u WHERE username =:username")
 	@Transactional(readOnly = true)
 	Boolean duplicateUsername(String username);
 
-	
+	void delete(User user);
+
 	void save(User user);
-	
+
 }

@@ -86,7 +86,7 @@
 		 	</div>
 	    </c:if>
 	    
-	    <c:if test="${fn:length(reviewsLs) == 6}">
+	    <c:if test="${nextPage > 0}">
 		    <div class="text-right">
 		    	<spring:url value="/reviewsList/{page}" var="reviewsListUrl">
 		    		<spring:param name="page" value="${page+1}"/>

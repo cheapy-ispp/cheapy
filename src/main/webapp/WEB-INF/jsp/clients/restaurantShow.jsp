@@ -58,15 +58,15 @@
 		</sec:authorize>
 	</div>
     <div class="btn-menu">
-  
     
-      <div class="text-left">
+    <div class="text-left">
+    <c:if test="${client.usuar.username != null}">
     	<spring:url value="/reviewsClientList/{client}/0" var="reviewsListUrl">
     		<spring:param name="client" value="${client.usuar.username}"/>
     	</spring:url>
     	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(reviewsListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 		Valoraciones</button>
- 	
+ 	</c:if>
  	<sec:authorize access="hasAnyAuthority('usuario')">
  	     
     	<spring:url value="/reviewsClient/new/{client}/" var="reviewsCreateUrl">

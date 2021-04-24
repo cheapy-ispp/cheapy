@@ -11,14 +11,15 @@
 <cheapy:layout pageName="client">
 
 	<jsp:body>
-        <h2 class="text-center" style="font-family: 'Lobster'; font-size: 30px; color: rgb(0, 64, 128); padding:30px"><em>¿Está seguro de que quiere desactivar su cuenta?</em></h2>
+        <h2 class="text-center" style="font-family: 'Lobster'; font-size: 30px; color: rgb(0, 64, 128); padding:30px"><em>¿Está seguro de que quiere eliminar su cuenta? 
+        Sus ofertas dejarán de ser visibles para los clientes, solo quedarán en nuestro registro interno con el nombre de su local y los demás datos se eliminarán del sistema.</em></h2>
       		
       		<form:form modelAttribute="client" class="form-horizontal">
             
 				      <div class="btns-edit2">
         			<button type="submit" style="font-family: 'Lobster'; font-size: 20px;">
         			<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
-        			Dar de baja</button>
+        			Eliminar cuenta</button>
         		</div>
         	</form:form>
         

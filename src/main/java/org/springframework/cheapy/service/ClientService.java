@@ -39,7 +39,6 @@ public class ClientService {
 		this.clientRepository.save(client);
 	}
 
-
 	@Transactional
 	public Client findByUsername(final String username) throws DataAccessException {
 		return this.clientRepository.findByUsername(username);
