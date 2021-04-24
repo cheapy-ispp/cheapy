@@ -12,6 +12,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.cheapy.model.Municipio;
 import org.springframework.cheapy.model.Usuario;
 import org.springframework.cheapy.service.UsuarioService;
+import org.springframework.cheapy.utils.MD5;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -133,4 +134,33 @@ public class UsuarioController {
 
 		return "redirect:/login";
 	}
+	
+	@GetMapping(value = "/usuarios/edit/password")
+	public String updatePassUsuario(final ModelMap model, final HttpServletRequest request) {
+	
+		Usuario usuario = this.usuarioService.getCurrentUsuario();
+		usuario.getUsuar().setPassword("");
+		model.addAttribute("usuario", usuario);
+		return "usuarios/password";
+	}
+	
+	@PostMapping(value = "/usuarios/edit/password")
+	public String updatePassUsuario(@Valid final Usuario usuarioEdit, final BindingResult result, final ModelMap model, final HttpServletRequest request) {
+
+		Usuario usuario = this.usuarioService.getCurrentUsuario();
+
+		if (usuarioEdit.getUsuar().getPassword().equals("")) {
+			result.rejectValue("usuar.password", "", "La contraseña no puede estar vacía");
+		}
+
+		if (result.hasErrors()) {
+			return "usuarios/password";
+		}
+		BeanUtils.copyProperties(usuario, usuarioEdit, "nombre", "apellidos", "municipio", "direccion", "email", "usuar");
+		usuarioEdit.getUsuar().setUsername(usuario.getUsuar().getUsername());
+		usuarioEdit.getUsuar().setPassword(MD5.md5(usuarioEdit.getUsuar().getPassword()));
+		usuarioEdit.getUsuar().setEnabled(true);
+		this.usuarioService.saveUsuario(usuarioEdit);
+		return "redirect:/usuarios/show";
+}
 }
