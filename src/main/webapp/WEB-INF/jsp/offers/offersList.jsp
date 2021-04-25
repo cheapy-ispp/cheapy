@@ -54,7 +54,7 @@
 	</div>		
 	
 	<spring:url value="/offersByName/{page}" var="SearchNameOfferListUrl">
-				<spring:param name="page" value="0"/>
+			<spring:param name="page" value="0"/>
 	</spring:url>
 	<form class="example" action="${fn:escapeXml(SearchNameOfferListUrl)}">
 		<h2 class="text-center" style="font-family: 'Lobster'; text-align:center; font-size:150%;  color: rgb(0, 64, 128); padding:10px;" >Búsqueda por nombre del bar/restaurante: </h2>
@@ -67,7 +67,7 @@
 	</form>
 	
 	<spring:url value="/offersByFood/{page}" var="SearchFoodOfferListUrl">
-				<spring:param name="page" value="0"/>
+			<spring:param name="page" value="0"/>
 	</spring:url>
 	<form class="example" action="${fn:escapeXml(SearchFoodOfferListUrl)}">
 		<h2 class="text-center" style="font-family: 'Lobster'; text-align:center; font-size:150%;  color: rgb(0, 64, 128); padding:10px;" >Búsqueda por tipo de comida: </h2>
@@ -80,7 +80,7 @@
 	</form>
 	
 	<spring:url value="/offersByPlace/{page}" var="SearchPlaceOfferListUrl">
-				<spring:param name="page" value="0"/>
+			<spring:param name="page" value="0"/>
 	</spring:url>
 	<form class="example" action="${fn:escapeXml(SearchPlaceOfferListUrl)}">
 		<div class="text-center">
@@ -93,6 +93,20 @@
 			</select>
 			<button type="submit" class="btn-mas">Buscar por municipio</button>
 		</div>
+	</form>
+	
+	<spring:url value="/offersByDate/{page}" var="SearchDateOfferListUrl">
+			<spring:param name="page" value="0"/>
+	</spring:url>
+	<form class="example" action="${fn:escapeXml(SearchDateOfferListUrl)}">
+		<h2 class="text-center" style="font-family: 'Lobster'; text-align:center; font-size:150%;  color: rgb(0, 64, 128); padding:10px;" >Búsqueda por tfecha: </h2>
+		<div class="text-center">
+	  		<cheapy:dateField label="Fecha de Inicio" placeholder="dd/MM/yyyy HH:mm" name="start"/>
+            <cheapy:dateField label="Fecha de Fin" placeholder="dd/MM/yyyy HH:mm" name="end"/>
+	  		<button type="submit" class="btn-search">
+	  		<span class="glyphicon 	glyphicon glyphicon-search" aria-hidden="true" style="padding: 5px"> </span>
+	  		</button>
+  		</div>
 	</form>
 
     <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="foodOffers"/>

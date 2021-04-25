@@ -1,6 +1,7 @@
 
 package org.springframework.cheapy.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,5 +69,9 @@ public class NuOfferService {
 
 	public List<NuOffer> findNuOfferByClientPlace(final Municipio mun, final Pageable p) {
 		return this.nuOfferRepository.findNuOfferByClientPlace(mun, p);
+	}
+	
+	public List<NuOffer> findNuOfferByDate(final LocalDateTime star, final LocalDateTime end, final Pageable p) {
+		return this.nuOfferRepository.findNuOfferByDate(star, end, p);
 	}
 }

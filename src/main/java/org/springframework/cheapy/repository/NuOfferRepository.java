@@ -1,6 +1,7 @@
 
 package org.springframework.cheapy.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.cheapy.model.Municipio;
@@ -45,4 +46,8 @@ public interface NuOfferRepository extends PagingAndSortingRepository<NuOffer, I
 	@Query("SELECT nuOffer FROM NuOffer nuOffer WHERE nuOffer.client.municipio =:municipio AND nuOffer.status= 'active' AND nuOffer.client.expiration > CURRENT_DATE()")
 	@Transactional(readOnly = true)
 	List<NuOffer> findNuOfferByClientPlace(Municipio municipio, Pageable p);
+	
+	@Query("SELECT nuOffer FROM NuOffer nuOffer WHERE nuOffer.status= 'active' AND nuOffer.end BETWEEN :star AND :end")
+	@Transactional(readOnly = true)
+	List<NuOffer> findNuOfferByDate(final LocalDateTime star, final LocalDateTime end, Pageable p);
 }
