@@ -42,28 +42,28 @@
 				
 				<sec:authorize access="hasAnyAuthority('admin')">
 				<cheapy:menuItem active="${name eq 'clientes'}" url="/administrators/clients/page/0" title="clients">
-					<span class="glyphicon " aria-hidden="true"></span>
+					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
 					<span>Clientes</span>
 				</cheapy:menuItem>
 				</sec:authorize>
 				
 				<sec:authorize access="hasAnyAuthority('notsubscribed')">
-				<cheapy:menuItem active="${name eq 'clientes'}" url="/pay" title="pagar">
-					<span class="glyphicon " aria-hidden="true"></span>
+				<cheapy:menuItem active="${name eq 'payment'}" url="/pay" title="pagar">
+					<span class="glyphicon glyphicon-euro " aria-hidden="true"></span>
 					<span>Renovar suscripción</span>
 				</cheapy:menuItem>
 				</sec:authorize>
 				
 				<sec:authorize access="hasAnyAuthority('admin')">
 				<cheapy:menuItem active="${name eq 'usuarios'}" url="/administrators/usuarios/page/0" title="usuarios">
-					<span class="glyphicon " aria-hidden="true"></span>
+					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
 					<span>Usuarios</span>
 				</cheapy:menuItem>
 				</sec:authorize>
 				
 				<sec:authorize access="hasAnyAuthority('admin')">
 				<cheapy:menuItem active="${name eq 'registro'}" url="/administrators/offersRecord0" title="offersRecord">
-					<span class="glyphicon " aria-hidden="true"></span>
+					<span class="glyphicon glyphicon-list-alt " aria-hidden="true"></span>
 					<span>Historial de ofertas</span>
 				</cheapy:menuItem>
 				</sec:authorize>
@@ -157,7 +157,7 @@
 											</p>
 											<form action="/logout" method=post>
 												<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-												<input type="submit" value="Salir" style="align-content:center;color:white;background-color:#004080;padding:10px; border:none; text-align:center">
+												<input type="submit" value="Salir" style="align-content:center;color:white;background-color:#004080;padding:10px; border:none; text-align:center;margin:auto">
 											</form>
 										</div>
 									</div>

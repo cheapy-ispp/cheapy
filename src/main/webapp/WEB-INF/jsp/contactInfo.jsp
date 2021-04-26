@@ -25,31 +25,6 @@
   border-radius: 50%;
 }
 
-.fa:hover {
-    opacity: 0.7;
-}
-
-.fa-twitter {
-  background: #55ACEE;
-  color: white;
-}
-
-.fa-google {
-  background: #dd4b39;
-  color: white;
-}
-
-
-.fa-instagram {
-  background: #125688;
-  color: white;
-}
-
-.fa-github {
-  background: #2c4762;
-  color: white;
-}
-
 .column-info {
   float: left;
   width: 25%;
@@ -77,7 +52,7 @@
 
     <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px; margin-bottom:20px;">Información de contacto</h2>
     <p style="font-family: 'Lobster'; text-align:center; font-size:150%;  color: rgb(0, 64, 128); padding:10px; margin-bottom:20px;">
-    ¿Tienes alguna duda? Puedes hacernosla llegar a través de los siguientes medios:</p>
+    ¿Tienes alguna duda? Puedes hacérnosla llegar a través de los siguientes medios:</p>
     
     <div style="text-align: center;">
     	<img src="/resources/images/bar3-CI.jpg" class = "barImage">
@@ -86,21 +61,21 @@
 
 	<div class="row-info">
 	    <div class="column-info">
-	    	<a href="https://twitter.com/cheapyispp" class="fa fa-twitter"></a>
+	    	<a href="https://twitter.com/cheapyispp" target="_blank" class="fa fa-twitter"></a>
 	    	<p><b>@cheapyispp</b></p>
 	    	​
 	    </div>
 	    <div class="column-info">
-	    	<a href="https://www.instagram.com/cheapyispp/" class="fa fa-instagram"></a>
+	    	<a href="https://www.instagram.com/cheapyispp/" target="_blank" class="fa fa-instagram"></a>
 	    	<p><b>@cheapyispp</b></p>​
 	    </div>
 	    <div class="column-info">
-	    	<a href="mailto:cheapy.ispp@gmail.com" class="fa fa-google"></a>
+	    	<a href="mailto:cheapy.ispp@gmail.com" target="_blank" class="fa fa-envelope"></a>
 	    	<p><b>cheapy.ispp@gmail.com</b></p>
 	    	​
 	    </div>
 	    <div class="column-info">
-	    	<a href="https://github.com/cheapy-ispp" class="fa fa-github"></a>
+	    	<a href="https://github.com/cheapy-ispp" target="_blank" class="fa fa-github"></a>
 	    	<p><b>cheapy-ispp</b></p>
 	    	​
 	    </div>
