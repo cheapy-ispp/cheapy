@@ -78,6 +78,7 @@ class FoodOfferControllerTest {
 		fo1test.setEnd(LocalDateTime.of(2022, 12, 23, 12, 30));
 		fo1test.setFood("fo1test");
 		fo1test.setDiscount(1);
+		fo1test.setPrice(10.0);
 		fo1test.setStatus(StatusOffer.hidden);
 		fo1test.setCode("");
 		fo1test.setClient(client1);
@@ -103,7 +104,8 @@ class FoodOfferControllerTest {
 					.param("start", "2021-12-23T12:30")
 					.param("end", "2022-12-23T12:30")
 					.param("food", "food")
-					.param("discount", "10"))
+					.param("discount", "10")
+					.param("price", "10.5"))
 				.andExpect(status().is3xxRedirection());
 	}
 
@@ -115,12 +117,14 @@ class FoodOfferControllerTest {
 					.param("start", "2020-12-23T12:30")
 					.param("end", "2020-12-22T12:30")
 					.param("food", "")
-					.param("discount", ""))
+					.param("discount", "")
+					.param("price", ""))
 				.andExpect(model().attributeHasErrors("foodOffer"))
 				.andExpect(model().attributeHasFieldErrors("foodOffer", "start"))
 				.andExpect(model().attributeHasFieldErrors("foodOffer", "end"))
 				.andExpect(model().attributeHasFieldErrors("foodOffer", "food"))
 				.andExpect(model().attributeHasFieldErrors("foodOffer", "discount"))
+				.andExpect(model().attributeHasFieldErrors("foodOffer", "price"))
 				.andExpect(view().name("offers/food/createOrUpdateFoodOfferForm"));
 	}
 	
@@ -134,6 +138,7 @@ class FoodOfferControllerTest {
 				.andExpect(model().attribute("foodOffer", hasProperty("end", is(LocalDateTime.of(2022, 12, 23, 12, 30)))))
 				.andExpect(model().attribute("foodOffer", hasProperty("food",is("fo1test"))))
 				.andExpect(model().attribute("foodOffer", hasProperty("discount", is(1))))
+				.andExpect(model().attribute("foodOffer", hasProperty("price", is(10.0))))
 				.andExpect(model().attribute("foodOffer", hasProperty("client", is(clientTest))))
 				.andExpect(status().isOk())
 				.andExpect(view().name("offers/food/createOrUpdateFoodOfferForm"));
@@ -160,6 +165,7 @@ class FoodOfferControllerTest {
 					.param("food", "food1test")
 					.param("status", "hidden")
 					.param("discount", "10")
+					.param("price", "10.5")
 					.param("code", "")
 					.sessionAttr("idFood", TEST_FOODOFFER_ID))
 				.andExpect(status().is3xxRedirection())
@@ -177,6 +183,7 @@ class FoodOfferControllerTest {
 					.param("food", "food1test")
 					.param("status", "hidden")
 					.param("discount", "10")
+					.param("price", "manoli")
 					.param("code", "")
 					.sessionAttr("idFood", TEST_FOODOFFER_ID))
 				.andExpect(model().attributeExists("foodOffer"))
