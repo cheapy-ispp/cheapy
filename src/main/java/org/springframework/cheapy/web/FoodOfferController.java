@@ -135,11 +135,13 @@ public class FoodOfferController {
 		FoodOffer foodOffer = this.foodOfferService.findFoodOfferById(foodOfferId);
 		if (foodOffer.getStatus().equals(StatusOffer.active)) {
 			model.put("foodOffer", foodOffer);
+			model.put("newPrice", foodOffer.getNewPrice());
 			model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 			return "offers/food/foodOffersShow";
 
 		} else if (foodOffer.getStatus().equals(StatusOffer.hidden) && this.checkIdentity(foodOfferId)) {
 			model.put("foodOffer", foodOffer);
+			model.put("newPrice", foodOffer.getNewPrice());
 			model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 			return "offers/food/foodOffersShow";
 		} else {
@@ -184,7 +186,7 @@ public class FoodOfferController {
 			return FoodOfferController.VIEWS_FOOD_OFFER_CREATE_OR_UPDATE_FORM;
 
 		}
-		BeanUtils.copyProperties(this.foodOfferService.findFoodOfferById(foodOfferEdit.getId()), foodOfferEdit, "start", "end", "food", "discount");
+		BeanUtils.copyProperties(this.foodOfferService.findFoodOfferById(foodOfferEdit.getId()), foodOfferEdit, "start", "end", "food", "discount", "price");
 		this.foodOfferService.saveFoodOffer(foodOfferEdit);
 		return "redirect:/offers/food/" + foodOfferEdit.getId();
 

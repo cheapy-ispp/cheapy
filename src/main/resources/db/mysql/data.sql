@@ -26,14 +26,14 @@ INSERT INTO clients (id, name, email, address, municipio, init, finish, telephon
 INSERT INTO clients (id, name, email, address, municipio, init, finish, telephone, description, food, expiration, username) VALUES (3,'bar lopez','loez@gmail.com', 'C/Sevilla', 'Dos_Hermanas','09:30:00','22:00:00','608726191', 'description 3', 'americana y mexicana', '2019-08-15','lopez');
 
 
-INSERT INTO food_offers(start, end, code, status, client_id, food, discount) VALUES ('2021-08-14 12:00:00', '2021-08-15 12:00:00', 'FO-1', 'inactive', 1, 'macarrones', 15);
-INSERT INTO food_offers(start, end, code, status, client_id, food, discount) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'FO-2', 'active', 3, 'macarrones con tomate', 10);
-INSERT INTO food_offers(start, end, code, status, client_id, food, discount) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'FO-3', 'active', 3, 'Estofado', 10);
-INSERT INTO food_offers(start, end, code, status, client_id, food, discount) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'FO-4', 'active', 1, 'Puchero', 10);
-INSERT INTO food_offers(start, end, code, status, client_id, food, discount) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'FO-5', 'active', 2, 'Tumbalobos', 10);
-INSERT INTO food_offers(start, end, code, status, client_id, food, discount) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'FO-6', 'active', 2, 'Tortilla', 10);
-INSERT INTO food_offers(start, end, code, status, client_id, food, discount) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'FO-7', 'active', 2, 'Arroz con leche', 10);
-INSERT INTO food_offers(start, end, code, status, client_id, food, discount) VALUES ('2021-08-16 12:00:00', '2021-08-17 12:00:00', null, 'hidden', 1, 'macarrones con queso', 5);
+INSERT INTO food_offers(start, end, code, status, client_id, food, discount, price) VALUES ('2021-08-14 12:00:00', '2021-08-15 12:00:00', 'FO-1', 'inactive', 1, 'macarrones', 15, 10.0);
+INSERT INTO food_offers(start, end, code, status, client_id, food, discount, price) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'FO-2', 'active', 3, 'macarrones con tomate', 10, 20.0);
+INSERT INTO food_offers(start, end, code, status, client_id, food, discount, price) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'FO-3', 'active', 3, 'Estofado', 10, 25.0);
+INSERT INTO food_offers(start, end, code, status, client_id, food, discount, price) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'FO-4', 'active', 1, 'Puchero', 10, 14.50);
+INSERT INTO food_offers(start, end, code, status, client_id, food, discount, price) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'FO-5', 'active', 2, 'Tumbalobos', 10, 9.45);
+INSERT INTO food_offers(start, end, code, status, client_id, food, discount, price) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'FO-6', 'active', 2, 'Tortilla', 10, 5.2);
+INSERT INTO food_offers(start, end, code, status, client_id, food, discount, price) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'FO-7', 'active', 2, 'Arroz con leche', 10, 50.70);
+INSERT INTO food_offers(start, end, code, status, client_id, food, discount, price) VALUES ('2021-08-16 12:00:00', '2021-08-17 12:00:00', null, 'hidden', 1, 'macarrones con queso', 5, 12.43);
 
 INSERT INTO time_offers(start, end, code, status, client_id, init, finish, discount) VALUES ('2021-08-14 12:00:00', '2021-08-15 12:00:00', 'T-1', 'inactive', 1, '12:00:00', '13:00:00', 5);
 INSERT INTO time_offers(start, end, code, status, client_id, init, finish, discount) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'T-2', 'active', 3, '12:00:00', '13:00:00', 10);
