@@ -1,7 +1,10 @@
 
 package org.springframework.cheapy.web;
 
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -9,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.cheapy.model.Client;
 import org.springframework.cheapy.model.Municipio;
 import org.springframework.cheapy.model.Usuario;
 import org.springframework.cheapy.service.UsuarioService;
@@ -17,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -36,6 +41,31 @@ public class UsuarioController {
 		Usuario usuario = this.usuarioService.getCurrentUsuario();
 		model.put("usuario", usuario);
 		return "usuarios/usuariosShow";
+	}
+	
+	@GetMapping("/usuarios/favoritos/{page}")
+	public String processFindForm(@PathVariable("page") final int page, final Map<String, Object> model) {
+		List<Client> client = this.usuarioService.getCurrentUsuario().getFavoritos();
+		List<Client> res = new ArrayList<>();
+		
+		for(int i=page*5; i<page*5+5; i++) {
+			if(client.size()<=i) {
+				break;
+			}
+			res.add(client.get(i));
+		}
+		
+		Boolean next = true;
+		if(page*5+5>client.size()) {
+			next = false;
+		}
+		
+		model.put("municipios", Municipio.values());
+		model.put("clientLs", res);
+		model.put("nextPage", next);
+		model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+		return "usuarios/favoritos";
+
 	}
 
 	@GetMapping(value = "/usuarios/edit")

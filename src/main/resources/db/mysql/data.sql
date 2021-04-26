@@ -15,7 +15,6 @@ INSERT INTO authorities (username,authority) VALUES ('lolo','usuario');
 INSERT INTO users (username,password,enabled) VALUES ('pepe',MD5('pepe'), TRUE );
 INSERT INTO authorities (username,authority) VALUES ('pepe','usuario');
 
-
 INSERT INTO usuarios (id, nombre, apellidos, direccion, municipio, email, username) VALUES (1, 'admin', 'admin',  'C/admin', 'Carmona', 'admin@gmail.com','admin');
 INSERT INTO usuarios (id, nombre, apellidos, direccion, municipio, email, username) VALUES (2, 'Paco', 'Naranjo', 'C/Esperanza', 'Sevilla', 'Paco@gmail.com','paco');
 INSERT INTO usuarios (id, nombre, apellidos, direccion, municipio, email, username) VALUES (3, 'Lolo', 'Lopez',  'C/Macarena', 'Dos_Hermanas', 'Lolo@gmail.com','lolo');
@@ -24,7 +23,9 @@ INSERT INTO usuarios (id, nombre, apellidos, direccion, municipio, email, userna
 INSERT INTO clients (id, name, email, address, municipio, init, finish, telephone, description, food, expiration, username) VALUES (1,'bar manoli','manoli@gmail.com','C/Betis', 'Sevilla','10:00:00','22:00:00','608726190', 'description 1', 'ESPAÑOLA', '2029-08-15' ,'manoli');
 INSERT INTO clients (id, name, email, address, municipio, init, finish, telephone, description, food, expiration, username) VALUES (2,'bar david','david@gmail.com', 'C/Sevilla', 'Dos_Hermanas','09:30:00','22:00:00','608726190', 'description 2', 'americana', '2029-08-15','david');
 INSERT INTO clients (id, name, email, address, municipio, init, finish, telephone, description, food, expiration, username) VALUES (3,'bar lopez','loez@gmail.com', 'C/Sevilla', 'Dos_Hermanas','09:30:00','22:00:00','608726191', 'description 3', 'americana y mexicana', '2019-08-15','lopez');
-
+INSERT INTO clients (id, name, email, address, municipio, init, finish, telephone, description, food, expiration, username) VALUES (4,'bar lopez','loez@gmail.com', 'C/Sevilla', 'Dos_Hermanas','09:30:00','22:00:00','608726191', 'description 3', 'americana y mexicana', '2019-08-15',null);
+INSERT INTO clients (id, name, email, address, municipio, init, finish, telephone, description, food, expiration, username) VALUES (5,'bar lopez','loez@gmail.com', 'C/Sevilla', 'Dos_Hermanas','09:30:00','22:00:00','608726191', 'description 3', 'americana y mexicana', '2019-08-15',null);
+INSERT INTO clients (id, name, email, address, municipio, init, finish, telephone, description, food, expiration, username) VALUES (6,'bar lopez','loez@gmail.com', 'C/Sevilla', 'Dos_Hermanas','09:30:00','22:00:00','608726191', 'description 3', 'americana y mexicana', '2019-08-15',null);
 
 INSERT INTO food_offers(start, end, code, status, client_id, food, discount, price) VALUES ('2021-08-14 12:00:00', '2021-08-15 12:00:00', 'FO-1', 'inactive', 1, 'macarrones', 15, 10.0);
 INSERT INTO food_offers(start, end, code, status, client_id, food, discount, price) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'FO-2', 'active', 3, 'macarrones con tomate', 10, 20.0);
@@ -72,3 +73,11 @@ INSERT INTO review_client(opinion, stars, username, client ) VALUES ('No retrasm
 INSERT INTO review_client(opinion, stars, username, client ) VALUES ('Un sitio perfecto para llevar a tu pareja',5,'paco',2);
 INSERT INTO review_client(opinion, stars, username, client ) VALUES ('En hora punta nunca hay sitio',2,'lolo',2);
 INSERT INTO review_client(opinion, stars, username, client ) VALUES ('Fui una vez por probar y ahora voy todas las tardes',4,'pepe',2);
+
+INSERT INTO usuario_favoritos(client_id, usuario_id) VALUES (1,2);
+INSERT INTO usuario_favoritos(client_id, usuario_id) VALUES (2,2);	
+INSERT INTO usuario_favoritos(client_id, usuario_id) VALUES (3,2);
+INSERT INTO usuario_favoritos(client_id, usuario_id) VALUES (4,2);
+INSERT INTO usuario_favoritos(client_id, usuario_id) VALUES (5,2);
+INSERT INTO usuario_favoritos(client_id, usuario_id) VALUES (6,2);	
+INSERT INTO usuario_favoritos(client_id, usuario_id) VALUES (1,3);	

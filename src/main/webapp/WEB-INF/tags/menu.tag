@@ -33,6 +33,13 @@
 					<span>Ver ofertas</span>
 				</cheapy:menuItem>
 				
+				<sec:authorize access="hasAnyAuthority('usuario')">
+				<cheapy:menuItem active="${name eq 'favoritos'}" url="/usuarios/favoritos/0" title="Mis favoritos">
+					<span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>
+					<span>Mis favoritos</span>
+				</cheapy:menuItem>
+				</sec:authorize>
+				
 				<sec:authorize access="hasAnyAuthority('client')">
 				<cheapy:menuItem active="${name eq 'ofertasM'}" url="/myOffers" title="Mis ofertas">
 					<span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>
