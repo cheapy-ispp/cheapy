@@ -49,8 +49,8 @@ public interface FoodOfferRepository extends PagingAndSortingRepository<FoodOffe
 	@Transactional(readOnly = true)
 	List<FoodOffer> findFoodOfferByClientPlace(Municipio municipio, Pageable p);
 	
-	@Query("SELECT foodOffer FROM FoodOffer foodOffer WHERE foodOffer.status= 'active' AND foodOffer.end BETWEEN :star AND :end")
+	@Query("SELECT foodOffer FROM FoodOffer foodOffer WHERE foodOffer.status= 'active' AND :start BETWEEN foodOffer.start AND foodOffer.end")
 	@Transactional(readOnly = true)
-	List<FoodOffer> findFoodOfferByDate(final LocalDateTime star, final LocalDateTime end, Pageable p);
+	List<FoodOffer> findFoodOfferByDate(final LocalDateTime start, Pageable p);
 
 }

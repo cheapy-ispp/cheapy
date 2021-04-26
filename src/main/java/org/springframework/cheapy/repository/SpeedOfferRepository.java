@@ -49,7 +49,7 @@ public interface SpeedOfferRepository extends PagingAndSortingRepository<SpeedOf
 	@Transactional(readOnly = true)
 	List<SpeedOffer> findSpeedOfferByClientPlace(Municipio municipio, Pageable p);
 	
-	@Query("SELECT speedOffer FROM SpeedOffer speedOffer WHERE speedOffer.status= 'active' AND speedOffer.end BETWEEN :star AND :end")
+	@Query("SELECT speedOffer FROM SpeedOffer speedOffer WHERE speedOffer.status= 'active' AND :start BETWEEN speedOffer.start AND speedOffer.end")
 	@Transactional(readOnly = true)
-	List<SpeedOffer> findSpeedOfferByDate(final LocalDateTime star, final LocalDateTime end, Pageable p);
+	List<SpeedOffer> findSpeedOfferByDate(final LocalDateTime start, Pageable p);
 }

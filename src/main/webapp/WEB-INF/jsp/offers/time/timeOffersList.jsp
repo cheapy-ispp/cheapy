@@ -95,6 +95,19 @@
 			<button type="submit" class="btn-mas">Buscar por municipio</button>
 		</div>
 	</form>
+	
+	<spring:url value="/offersByDate/{page}" var="SearchDateOfferListUrl">
+			<spring:param name="page" value="0"/>
+	</spring:url>
+	<form class="example" action="${fn:escapeXml(SearchDateOfferListUrl)}">
+		<h2 class="text-center" style="font-family: 'Lobster'; text-align:center; font-size:150%;  color: rgb(0, 64, 128); padding:10px;" >Búsqueda por tfecha: </h2>
+		<div class="text-center">
+	  		<input type="datetime-local" class="time"  name="start" style="width:70%"/>
+	  		<button type="submit" class="btn-search">
+	  		<span class="glyphicon 	glyphicon glyphicon-search" aria-hidden="true" style="padding: 5px"> </span>
+	  		</button>
+  		</div>
+	</form>
     
     <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="timeOffers"/>
     	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir en el local durante el intervalo indicado">

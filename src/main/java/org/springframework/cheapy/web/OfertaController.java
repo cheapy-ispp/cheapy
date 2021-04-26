@@ -211,12 +211,16 @@ public class OfertaController {
 	
 	@GetMapping("/offersByDate/{page}")
     public String processFindFormByDate(@PathVariable("page") final int page, final Map<String, Object> model,
-    		final LocalDateTime start, final LocalDateTime end) {
+    		final String start) {
+		LocalDateTime inic = LocalDateTime.parse(start,
+		        DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")); 
+		
+		
         Pageable elements = PageRequest.of(page, 2);
         Pageable nextPage = PageRequest.of(page+1, 2);
 
-        List<Object[]> datos = ofertasPorFecha(start, end, elements);
-        List<Object[]> datosNext = ofertasPorFecha(start, end, nextPage);
+        List<Object[]> datos = ofertasPorFecha(inic, elements);
+        List<Object[]> datosNext = ofertasPorFecha(inic, nextPage);
 
         Integer next = datosNext.size();
         Integer now = datos.size();
@@ -230,25 +234,25 @@ public class OfertaController {
 
     }
 
-    private List<Object[]> ofertasPorFecha(final LocalDateTime start, final LocalDateTime end, Pageable pag){
+    private List<Object[]> ofertasPorFecha(final LocalDateTime start, Pageable pag){
         List<Object[]> datos = new ArrayList<Object[]>();
 
-        for(Offer of:this.foodOfferService.findFoodOfferByDate(start, end, pag)) {
+        for(Offer of:this.foodOfferService.findFoodOfferByDate(start, pag)) {
             Object[] fo = {of, "food"};
             datos.add(fo);
         }
 
-        for(Offer of:this.nuOfferService.findNuOfferByDate(start, end, pag)) {
+        for(Offer of:this.nuOfferService.findNuOfferByDate(start, pag)) {
             Object[] nu = {of, "nu"};
             datos.add(nu);
         }
 
-        for(Offer of:this.speedOfferService.findSpeedOfferByDate(start, end, pag)) {
+        for(Offer of:this.speedOfferService.findSpeedOfferByDate(start, pag)) {
             Object[] sp = {of, "speed"};
             datos.add(sp);
         }
 
-        for(Offer of:this.timeOfferService.findTimeOfferByDate(start, end, pag)) {
+        for(Offer of:this.timeOfferService.findTimeOfferByDate(start, pag)) {
             Object[] ti = {of, "time"};
             datos.add(ti);
         }

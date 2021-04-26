@@ -47,7 +47,7 @@ public interface NuOfferRepository extends PagingAndSortingRepository<NuOffer, I
 	@Transactional(readOnly = true)
 	List<NuOffer> findNuOfferByClientPlace(Municipio municipio, Pageable p);
 	
-	@Query("SELECT nuOffer FROM NuOffer nuOffer WHERE nuOffer.status= 'active' AND nuOffer.end BETWEEN :star AND :end")
+	@Query("SELECT nuOffer FROM NuOffer nuOffer WHERE nuOffer.status= 'active' AND :start BETWEEN nuOffer.start AND nuOffer.end")
 	@Transactional(readOnly = true)
-	List<NuOffer> findNuOfferByDate(final LocalDateTime star, final LocalDateTime end, Pageable p);
+	List<NuOffer> findNuOfferByDate(final LocalDateTime start, Pageable p);
 }

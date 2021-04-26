@@ -50,7 +50,7 @@ public interface TimeOfferRepository extends PagingAndSortingRepository<TimeOffe
 	@Transactional(readOnly = true)
 	List<TimeOffer> findTimeOfferByClientPlace(Municipio municipio, Pageable p);
 	
-	@Query("SELECT timeOffer FROM TimeOffer timeOffer WHERE timeOffer.status= 'active' AND timeOffer.end BETWEEN :star AND :end")
+	@Query("SELECT timeOffer FROM TimeOffer timeOffer WHERE timeOffer.status= 'active' AND :start BETWEEN timeOffer.start AND timeOffer.end")
 	@Transactional(readOnly = true)
-	List<TimeOffer> findTimeOfferByDate(final LocalDateTime star, final LocalDateTime end, Pageable p);
+	List<TimeOffer> findTimeOfferByDate(final LocalDateTime start, Pageable p);
 }

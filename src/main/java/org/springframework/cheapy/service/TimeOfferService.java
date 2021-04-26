@@ -62,7 +62,7 @@ public class TimeOfferService {
 		return this.timeOfferRepository.findTimeOfferByClientPlace(mun, p);
 	}
 	
-	public List<TimeOffer> findTimeOfferByDate(final LocalDateTime star, final LocalDateTime end, final Pageable p) {
-		return this.timeOfferRepository.findTimeOfferByDate(star, end, p);
+	public List<TimeOffer> findTimeOfferByDate(final LocalDateTime start, final Pageable p) {
+		return this.timeOfferRepository.findTimeOfferByDate(start, p);
 	}
 }

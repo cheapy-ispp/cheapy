@@ -62,7 +62,7 @@ public class FoodOfferService {
 		return this.foodOfferRepository.findFoodOfferByClientPlace(municip, p);
 	}
 	
-	public List<FoodOffer> findFoodOfferByDate(final LocalDateTime star, final LocalDateTime end, final Pageable p) {
-		return this.foodOfferRepository.findFoodOfferByDate(star, end, p);
+	public List<FoodOffer> findFoodOfferByDate(final LocalDateTime start, final Pageable p) {
+		return this.foodOfferRepository.findFoodOfferByDate(start, p);
 	}
 }

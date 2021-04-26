@@ -101,8 +101,7 @@
 	<form class="example" action="${fn:escapeXml(SearchDateOfferListUrl)}">
 		<h2 class="text-center" style="font-family: 'Lobster'; text-align:center; font-size:150%;  color: rgb(0, 64, 128); padding:10px;" >Búsqueda por tfecha: </h2>
 		<div class="text-center">
-	  		<cheapy:dateField label="Fecha de Inicio" placeholder="dd/MM/yyyy HH:mm" name="start"/>
-            <cheapy:dateField label="Fecha de Fin" placeholder="dd/MM/yyyy HH:mm" name="end"/>
+	  		<input type="datetime-local" class="time"  name="start" style="width:70%"/>
 	  		<button type="submit" class="btn-search">
 	  		<span class="glyphicon 	glyphicon glyphicon-search" aria-hidden="true" style="padding: 5px"> </span>
 	  		</button>

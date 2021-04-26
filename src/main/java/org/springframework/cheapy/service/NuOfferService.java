@@ -71,7 +71,7 @@ public class NuOfferService {
 		return this.nuOfferRepository.findNuOfferByClientPlace(mun, p);
 	}
 	
-	public List<NuOffer> findNuOfferByDate(final LocalDateTime star, final LocalDateTime end, final Pageable p) {
-		return this.nuOfferRepository.findNuOfferByDate(star, end, p);
+	public List<NuOffer> findNuOfferByDate(final LocalDateTime start, final Pageable p) {
+		return this.nuOfferRepository.findNuOfferByDate(start, p);
 	}
 }

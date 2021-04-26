@@ -66,7 +66,7 @@ public class SpeedOfferService {
 		return this.speedOfferRepository.findSpeedOfferByClientPlace(mun, p);
 	}
 	
-	public List<SpeedOffer> findSpeedOfferByDate(final LocalDateTime star, final LocalDateTime end, final Pageable p) {
-		return this.speedOfferRepository.findSpeedOfferByDate(star, end, p);
+	public List<SpeedOffer> findSpeedOfferByDate(final LocalDateTime start, final Pageable p) {
+		return this.speedOfferRepository.findSpeedOfferByDate(start, p);
 	}
 }
