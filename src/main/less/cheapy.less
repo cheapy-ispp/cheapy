@@ -699,6 +699,34 @@ text-align: center;
 	
 }
 
+.eliminar{
+  display: table;
+  margin:auto;
+  
+}
+
+.eliminar button{
+  	
+  	border: 1px solid; 
+  	color: white; 
+  	padding: 10px 24px; 
+  	cursor: pointer; 
+	font-family: 'Lobster'; 
+	font-size: 20px;
+	background-color: rgb(157, 0, 0); 
+	border-color:rgb(255, 0, 0)
+}
+
+.eliminar button:not(:last-child) {
+  border-bottom: none; 
+}
+
+
+.eliminar button:hover {
+  background-color: rgb(255, 0, 0);
+}
+
+
 input::-webkit-calendar-picker-indicator:hover {
   
   cursor: pointer;
@@ -752,3 +780,4 @@ hr {
 @import "responsive.less";
 @import "starRating.less";
 @import "socialButton.less";
+@import "transiction.less";
