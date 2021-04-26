@@ -5,6 +5,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="cheapy" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 
 <cheapy:layout pageName="payment">
 	<center>
@@ -23,10 +24,19 @@
 				<form:input type="hidden" path="description" />
 
 				<div class="form-group">
+					<div class="infoPago">
+						<p> Precio de la suscripción: </p>
+						<p><br><strong>${order.price} €</strong></p>
+						<p><br><em>${order.description} </em></p>
+					</div>
 					<button class="boton" value="Pagar" type="submit">
-						<img width="146px" height="36px" src="/images/logoPayPal.png"
-									alt="PayPalLOGO">
+						<spring:url value="/resources/images/paypal240.png" htmlEscape="true" var="paypal240"/>
+    					<img class="img-responsive" src="${fn:escapeXml(paypal240)}"/>
 					</button>
+					<div class="infoPago">
+						<p><em> (Puede pagar usando Paypal o su tarjeta de crédito o débito)</em></p>
+						
+					</div>
 				</div>
 			</div>
 		</form:form>
