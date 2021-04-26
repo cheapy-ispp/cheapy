@@ -1,6 +1,7 @@
 
 package org.springframework.cheapy.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class FoodOfferService {
 		return this.foodOfferRepository.findByIdFO(id);
 	}
 	
-	public List<FoodOffer> findAllFoodOffer(final Pageable p) { //
+	public List<FoodOffer> findAllFoodOffer(final Pageable p) {
 		return this.foodOfferRepository.findAllFoodOffer(p);
 	}
 
@@ -59,5 +60,9 @@ public class FoodOfferService {
 
 	public List<FoodOffer> findFoodOfferByClientPlace(final Municipio municip, final Pageable p) {
 		return this.foodOfferRepository.findFoodOfferByClientPlace(municip, p);
+	}
+	
+	public List<FoodOffer> findFoodOfferByDate(final LocalDateTime start, final Pageable p) {
+		return this.foodOfferRepository.findFoodOfferByDate(start, p);
 	}
 }

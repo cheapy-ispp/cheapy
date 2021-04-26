@@ -1,6 +1,7 @@
 
 package org.springframework.cheapy.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,5 +64,9 @@ public class SpeedOfferService {
 
 	public List<SpeedOffer> findSpeedOfferByClientPlace(final Municipio mun, final Pageable p) {
 		return this.speedOfferRepository.findSpeedOfferByClientPlace(mun, p);
+	}
+	
+	public List<SpeedOffer> findSpeedOfferByDate(final LocalDateTime start, final Pageable p) {
+		return this.speedOfferRepository.findSpeedOfferByDate(start, p);
 	}
 }
