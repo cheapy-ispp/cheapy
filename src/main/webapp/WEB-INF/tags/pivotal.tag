@@ -9,10 +9,10 @@
                                              alt="Eat fast, eat cheapy"/>
 	        
 		<div style="margin-bottom:10px">
-			<a href="https://twitter.com/cheapyispp" class="fa fa-twitter"></a>
-			<a href="https://www.instagram.com/cheapyispp/" class="fa fa-instagram"></a>		
-			<a href="mailto:cheapy.ispp@gmail.com" class="fa fa-envelope"></a>	
-			<a href="https://github.com/cheapy-ispp/cheapy" class="fa fa-github"></a>	
+			<a href="https://twitter.com/cheapyispp" target="_blank" class="fa fa-twitter"></a>
+			<a href="https://www.instagram.com/cheapyispp/" target="_blank" class="fa fa-instagram"></a>		
+			<a href="mailto:cheapy.ispp@gmail.com"  target="_blank" class="fa fa-envelope"></a>	
+			<a href="https://github.com/cheapy-ispp/cheapy" target="_blank" class="fa fa-github"></a>	
 		</div>	
 		
 		</div>  	
