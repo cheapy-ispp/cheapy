@@ -125,13 +125,13 @@
 					<!--<li><a href="<c:url value="/login" />">Iniciar sesi�n</a></li>-->
 				</sec:authorize>
 				<sec:authorize access="!isAuthenticated()">
-					<cheapy:menuItem active="${name eq 'singUpUser'}" url="/users/new" title="singUpUser">
+					<cheapy:menuItem active="${name eq 'singUpUser'}" url="/sign-up-user/new" title="singUpUser">
 						<span>Registrarse Usuario</span>
 					</cheapy:menuItem> 
 					<!--<li><a href="<c:url value="/users/new" />">Registrarse Usuario</a></li>-->
 				</sec:authorize>
 				<sec:authorize access="!isAuthenticated()">
-					<cheapy:menuItem active="${name eq 'singUpClient'}" url="/clients/new" title="singUpClient">
+					<cheapy:menuItem active="${name eq 'singUpClient'}" url="/sign-up-client/new" title="singUpClient">
 						<span>Registrarse Cliente</span>
 					</cheapy:menuItem> 
 					<!--<li><a href="<c:url value="/clients/new" />">Registrarse Cliente</a></li>-->
