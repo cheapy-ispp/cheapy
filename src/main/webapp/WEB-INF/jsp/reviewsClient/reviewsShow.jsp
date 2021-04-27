@@ -19,10 +19,19 @@
 	<div class="table-responsive">
     <table class="table table-striped" id="review-table">
         <tr>
-            <th><fmt:message key="stars"/></th>
-            <td><cheapy:showStars value='${review.stars}'></cheapy:showStars></td>
+            <th><fmt:message key="service"/></th>
+            <td><cheapy:showStars value='${review.service}'></cheapy:showStars></td>
         </tr>
         <tr>
+            <th><fmt:message key="food"/></th>
+            <td><cheapy:showStars value='${review.food}'></cheapy:showStars></td>
+        </tr>
+        <tr>
+            <th><fmt:message key="qualityPrice"/></th>
+            <td><cheapy:showStars value='${review.qualityPrice}'></cheapy:showStars></td>
+        </tr>
+        <tr>
+        
             <th><fmt:message key="opinion"/></th>
             <td><c:out value="${review.opinion}"/></td>
         </tr>

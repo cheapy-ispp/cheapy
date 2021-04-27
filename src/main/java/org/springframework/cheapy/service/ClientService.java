@@ -57,10 +57,9 @@ public class ClientService {
 	public Integer mediaValoraciones(final Client client) {
 		List<ReviewClient> valoraciones = this.reviewRepositoy.findAllReviewClientByBar(client);
 		if (valoraciones.size() != 0) {
-			return Integer.valueOf((int) valoraciones.stream().mapToInt(x -> x.getStars()).average().getAsDouble());
+			return Integer.valueOf((int) valoraciones.stream().mapToInt(x -> x.getMedia()).average().getAsDouble());
 		} else {
 			return 0;
 		}
 	}
-
 }
