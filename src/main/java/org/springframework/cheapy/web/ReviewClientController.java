@@ -1,5 +1,6 @@
 package org.springframework.cheapy.web;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -96,8 +97,14 @@ public class ReviewClientController {
 
 		List<ReviewClient> reviewsLs = this.reviewService.findAllReviewsByBar(elements,client);
 		Integer next = this.reviewService.findAllReviewsByBar(nextPage,client).size();
+		
+		List<Object[]> datos = new ArrayList<Object[]>();
+        for(ReviewClient re: reviewsLs) {
+            Object[] r = {re, re.getMedia()};
+            datos.add(r);
+        }
+		model.put("datos", datos);
 		model.put("nextPage", next);
-		model.put("reviewsLs", reviewsLs);
 		model.put("client", idClient);
 		model.put("restaurant", client.getName());
 
