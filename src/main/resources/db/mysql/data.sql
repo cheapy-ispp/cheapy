@@ -16,7 +16,7 @@ INSERT INTO users (username,password,enabled) VALUES ('pepe',MD5('pepe'), TRUE )
 INSERT INTO authorities (username,authority) VALUES ('pepe','usuario');
 
 
-INSERT INTO usuarios (id, nombre, apellidos, direccion, municipio, email, username) VALUES (1, 'admin', 'admin',  'C/admin', 'Carmona', 'admin@gmail.com','admin');
+INSERT INTO administrators (id, username) VALUES (1, 'admin');
 INSERT INTO usuarios (id, nombre, apellidos, direccion, municipio, email, username) VALUES (2, 'Paco', 'Naranjo', 'C/Esperanza', 'Sevilla', 'Paco@gmail.com','paco');
 INSERT INTO usuarios (id, nombre, apellidos, direccion, municipio, email, username) VALUES (3, 'Lolo', 'Lopez',  'C/Macarena', 'Dos_Hermanas', 'Lolo@gmail.com','lolo');
 INSERT INTO usuarios (id, nombre, apellidos, direccion, municipio, email, username) VALUES (4, 'Pepe', 'Lopez', 'C/Macarena', 'Carmona', 'Pepe@gmail.com','pepe');
