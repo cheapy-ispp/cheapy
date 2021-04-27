@@ -18,13 +18,13 @@ import org.springframework.cheapy.configuration.SecurityConfiguration;
 import org.springframework.cheapy.model.Municipio;
 import org.springframework.cheapy.model.User;
 import org.springframework.cheapy.model.Usuario;
+import org.springframework.cheapy.service.ClientService;
 import org.springframework.cheapy.service.UsuarioService;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.util.Assert;
 
 
 
@@ -39,6 +39,9 @@ class UsuarioControllerTest {
 
 	@MockBean
 	private UsuarioService usuarioService;
+	
+	@MockBean
+	private ClientService clientService;
 
 	@BeforeEach
 	void setup() {
