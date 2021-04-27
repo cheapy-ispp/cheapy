@@ -15,6 +15,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.cheapy.model.Client;
 import org.springframework.cheapy.model.Municipio;
 import org.springframework.cheapy.model.Usuario;
+import org.springframework.cheapy.service.ClientService;
 import org.springframework.cheapy.service.UsuarioService;
 import org.springframework.cheapy.utils.MD5;
 import org.springframework.stereotype.Controller;
@@ -30,10 +31,12 @@ public class UsuarioController {
 	private static final String		VIEWS_USUARIO_CREATE_OR_UPDATE_FORM	= "usuarios/createOrUpdateUsuarioForm";
 
 	private final UsuarioService	usuarioService;
+	private final ClientService		clientService;
 
 
-	public UsuarioController(final UsuarioService usuarioService) {
+	public UsuarioController(final UsuarioService usuarioService, final ClientService clientService) {
 		this.usuarioService = usuarioService;
+		this.clientService = clientService;
 	}
 
 	@GetMapping("/usuarios/show")
@@ -44,7 +47,7 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/usuarios/favoritos/{page}")
-	public String processFindForm(@PathVariable("page") final int page, final Map<String, Object> model) {
+	public String listFavorite(@PathVariable("page") final int page, final Map<String, Object> model) {
 		List<Client> client = this.usuarioService.getCurrentUsuario().getFavoritos();
 		List<Client> res = new ArrayList<>();
 		
@@ -65,6 +68,32 @@ public class UsuarioController {
 		model.put("nextPage", next);
 		model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 		return "usuarios/favoritos";
+
+	}
+	
+	@GetMapping(value = "/usuarios/favoritos/{clientId}/add")
+	public String addFavorite(@PathVariable("clientId") final int clientId, final ModelMap modelMap) {
+		Client client = this.clientService.findById(clientId);
+		Usuario usuario = this.usuarioService.getCurrentUsuario();
+		if(usuario==null || usuario.getFavoritos().contains(client)) {
+			return "error";
+		}
+		usuario.getFavoritos().add(client);
+		this.usuarioService.saveUsuario(usuario);
+		return "redirect:/restaurant/"+clientId;
+
+	}
+	
+	@GetMapping(value = "/usuarios/favoritos/{clientId}/remove")
+	public String removeFavorite(@PathVariable("clientId") final int clientId, final ModelMap modelMap) {
+		Client client = this.clientService.findById(clientId);
+		Usuario usuario = this.usuarioService.getCurrentUsuario();
+		if(usuario==null || !usuario.getFavoritos().contains(client)) {
+			return "error";
+		}
+		usuario.getFavoritos().remove(client);
+		this.usuarioService.saveUsuario(usuario);
+		return "redirect:/restaurant/"+clientId;
 
 	}
 

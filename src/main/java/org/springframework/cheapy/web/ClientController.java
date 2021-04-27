@@ -20,12 +20,14 @@ import org.springframework.cheapy.model.SpeedOffer;
 import org.springframework.cheapy.model.StatusOffer;
 import org.springframework.cheapy.model.TimeOffer;
 import org.springframework.cheapy.model.User;
+import org.springframework.cheapy.model.Usuario;
 import org.springframework.cheapy.service.ClientService;
 import org.springframework.cheapy.service.FoodOfferService;
 import org.springframework.cheapy.service.NuOfferService;
 import org.springframework.cheapy.service.SpeedOfferService;
 import org.springframework.cheapy.service.TimeOfferService;
 import org.springframework.cheapy.service.UserService;
+import org.springframework.cheapy.service.UsuarioService;
 import org.springframework.cheapy.utils.MD5;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -50,16 +52,19 @@ public class ClientController {
 	private final NuOfferService	nuOfferService;
 
 	private final TimeOfferService	timeOfferService;
+	
+	private final UsuarioService	usuarioService;
 
 
 	public ClientController(final ClientService clientService, final UserService userService, final FoodOfferService foodOfferService, final SpeedOfferService speedOfferService, final NuOfferService nuOfferService,
-		final TimeOfferService timeOfferService) {
+		final TimeOfferService timeOfferService, final UsuarioService usuarioService) {
 		this.clientService = clientService;
 		this.userService = userService;
 		this.foodOfferService = foodOfferService;
 		this.speedOfferService = speedOfferService;
 		this.nuOfferService = nuOfferService;
 		this.timeOfferService = timeOfferService;
+		this.usuarioService = usuarioService;
 	}
 
 	private boolean checkTimes(final Client client) {
@@ -173,10 +178,17 @@ public class ClientController {
 
 	@GetMapping(value = "/restaurant/{clientId}")
 	public String showRestaurant(final ModelMap model, @PathVariable("clientId") final Integer id) {
-
 		Client client = this.clientService.findById(id);
 		Integer valoraciones = this.clientService.mediaValoraciones(client);
-
+		Usuario usuario = this.usuarioService.getCurrentUsuario();
+		
+		if(usuario==null) {
+			model.put("favoritos", 0);
+		} else if(usuario.getFavoritos().contains(client)) {
+			model.put("favoritos", 1);
+		} else {
+			model.put("favoritos", 2);
+		}
 		model.put("client", client);
 		model.put("reviews", valoraciones);
 		return "clients/restaurantShow";
