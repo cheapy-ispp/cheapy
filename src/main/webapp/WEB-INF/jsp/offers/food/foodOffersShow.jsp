@@ -45,8 +45,16 @@
             <td><c:out value="${foodOffer.food}"/></td>
         </tr>
         <tr>
+            <th><fmt:message key="price"/></th>
+            <td><c:out value="${foodOffer.price}€"/> </td>
+        </tr>
+        <tr>
             <th><fmt:message key="discount"/></th>
             <td><c:out value="${foodOffer.discount}%"/> </td>
+        </tr>
+        <tr>
+            <th><fmt:message key="newPrice"/></th>
+            <td><c:out value="${foodOffer.newPrice}€"/> </td>
         </tr>
         <tr>
             <th><fmt:message key="municipio"/></th>

@@ -39,11 +39,11 @@
         </thead>
     </table>
 
-    <div class="btn-menu">
+    <div class="btn-menu" style="float:right">
 	    
 	<sec:authorize access="hasAnyAuthority('usuario')">
 		<sec:authentication var="principal" property="principal" />
-    	<div class="btns-edit">
+    	<div class="btns-edit" style="float:left">
 			<spring:url value="edit" var="editUrl"/>
 		    <button type="button" role="link" onclick="window.location='${fn:escapeXml(editUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 		    	<span class="glyphicon 	glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
@@ -53,12 +53,14 @@
 	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deactivateUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 	        	<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
 	         Desactivar usuario</button>
-	         
+	     </div>   
+	     
+	     <div class="eliminar">
 	        <spring:url value="delete" var="deleteUrl"/>
-	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deleteUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deleteUrl)}'">
 	        	<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
 	         Eliminar usuario</button>
-    	</div>
+    	</div> 
     </sec:authorize>
     <sec:authorize access="hasAnyAuthority('admin')">
 		<sec:authentication var="principal" property="principal" />

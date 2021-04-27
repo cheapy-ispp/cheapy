@@ -51,7 +51,7 @@ public class PaypalController {
 		order.setCurrency("EUR");
 		order.setMethod("paypal");
 		order.setPrice(30);
-		order.setDescription("Pago por suscripcion");
+		order.setDescription("Suscripción a Cheapy para bares o restaurantes de 1 mes.");
 		
 		Client client = this.clientservice.getCurrentClient();
 		

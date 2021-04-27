@@ -1,6 +1,7 @@
 
 package org.springframework.cheapy.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.cheapy.model.FoodOffer;
@@ -47,5 +48,9 @@ public interface FoodOfferRepository extends PagingAndSortingRepository<FoodOffe
 	@Query("SELECT foodOffer FROM FoodOffer foodOffer WHERE foodOffer.client.municipio =:municipio AND foodOffer.status= 'active' AND foodOffer.client.expiration > CURRENT_DATE()")
 	@Transactional(readOnly = true)
 	List<FoodOffer> findFoodOfferByClientPlace(Municipio municipio, Pageable p);
+	
+	@Query("SELECT foodOffer FROM FoodOffer foodOffer WHERE foodOffer.status= 'active' AND :start BETWEEN foodOffer.start AND foodOffer.end")
+	@Transactional(readOnly = true)
+	List<FoodOffer> findFoodOfferByDate(final LocalDateTime start, Pageable p);
 
 }

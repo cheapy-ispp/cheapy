@@ -96,6 +96,19 @@
 		</div>
 	</form>
 	
+	<spring:url value="/offersByDate/{page}" var="SearchDateOfferListUrl">
+			<spring:param name="page" value="0"/>
+	</spring:url>
+	<form class="example" action="${fn:escapeXml(SearchDateOfferListUrl)}">
+		<h2 class="text-center" style="font-family: 'Lobster'; text-align:center; font-size:150%;  color: rgb(0, 64, 128); padding:10px;" >Búsqueda por tfecha: </h2>
+		<div class="text-center">
+	  		<input type="datetime-local" class="time"  name="start" style="width:70%"/>
+	  		<button type="submit" class="btn-search">
+	  		<span class="glyphicon 	glyphicon glyphicon-search" aria-hidden="true" style="padding: 5px"> </span>
+	  		</button>
+  		</div>
+	</form>
+	
     <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="speedOffers"/>
     	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir en menos de alguno de los tres posibles tiempos">
     	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
@@ -164,28 +177,29 @@
 								
 		</script>
     </div>
-    <div>
-	    <c:if test='${page!=0}'>
-		    <div class="text-left">
+    <div class="row-pag-btn">
+	    <div class="column-pag-btn" style="text-align: left;">
+	    	 <c:if test='${page!=0}'>
 		    	<spring:url value="/offers/speedOfferList/{page}" var="speedOfferListUrl">
 		    		<spring:param name="page" value="${page-1}"/>
 		    	</spring:url>
 		    	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(speedOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 				<span class="glyphicon 	glyphicon glyphicon-arrow-left" aria-hidden="true" style="padding: 5px"> </span>
 				Pág. anterior</button>
-			</div>
 	    </c:if>
-	    
-	    <c:if test="${nextPage > 0}">
-		    <div class="text-right">
+	    	​
+	    </div>
+	    <div class="column-pag-btn" style="text-align: right;">
+	    	<c:if test="${nextPage > 0}">
 		    	<spring:url value="/offers/speedOfferList/{page}" var="speedOfferListUrl">
 		    		<spring:param name="page" value="${page+1}"/>
 		    	</spring:url>
 		    	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(speedOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+				<span class="glyphicon 	glyphicon glyphicon-arrow-right" aria-hidden="true" style="padding: 5px"> </span>
 				Pág. siguiente
-				<span class="glyphicon 	glyphicon glyphicon-arrow-right" aria-hidden="true" style="padding: 5px"> </span></button>
-			</div>
-		</c:if>
-	</div>	
+				</button>
+			</c:if>​
+		</div>
+	</div>
     </c:if>
 </cheapy:layout>

@@ -289,6 +289,20 @@ img.img-responsive{
 	color: white;
 }
 
+.column-pag-btn {
+  float: left;
+  width: 50%;
+  margin-top: 6px;
+  padding: 20px;
+  display:inline;
+}
+
+.row-pag-btn:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 .btn-search{
 	background:	rgb(40, 140, 215);
 	color: white;
@@ -547,6 +561,15 @@ vertical-align: middle;
   background-color: rgb(40, 140, 215);
 }
 
+.boton {
+	width:30%;
+	border:solid;
+	padding:0px;
+	border-radius: 30px;
+	border-color: rgb(0, 0, 160);
+	background-color: rgb(255, 255, 0);
+}
+
 #foodOfferTable td{
   vertical-align:middle;
 text-align: center;
@@ -670,6 +693,40 @@ text-align: center;
 	color: rgb(29, 142, 226);
 }
 
+.infoPago {
+	font-size: 130%;
+	margin:20px;
+	
+}
+
+.eliminar{
+  display: table;
+  margin:auto;
+  
+}
+
+.eliminar button{
+  	
+  	border: 1px solid; 
+  	color: white; 
+  	padding: 10px 24px; 
+  	cursor: pointer; 
+	font-family: 'Lobster'; 
+	font-size: 20px;
+	background-color: rgb(157, 0, 0); 
+	border-color:rgb(255, 0, 0)
+}
+
+.eliminar button:not(:last-child) {
+  border-bottom: none; 
+}
+
+
+.eliminar button:hover {
+  background-color: rgb(255, 0, 0);
+}
+
+
 input::-webkit-calendar-picker-indicator:hover {
   
   cursor: pointer;
@@ -723,3 +780,4 @@ hr {
 @import "responsive.less";
 @import "starRating.less";
 @import "socialButton.less";
+@import "transiction.less";

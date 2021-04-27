@@ -1,6 +1,7 @@
 
 package org.springframework.cheapy.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.cheapy.model.Municipio;
@@ -47,4 +48,8 @@ public interface SpeedOfferRepository extends PagingAndSortingRepository<SpeedOf
 	@Query("SELECT speedOffer FROM SpeedOffer speedOffer WHERE speedOffer.client.municipio =:municipio AND speedOffer.status= 'active' AND speedOffer.client.expiration > CURRENT_DATE()")
 	@Transactional(readOnly = true)
 	List<SpeedOffer> findSpeedOfferByClientPlace(Municipio municipio, Pageable p);
+	
+	@Query("SELECT speedOffer FROM SpeedOffer speedOffer WHERE speedOffer.status= 'active' AND :start BETWEEN speedOffer.start AND speedOffer.end")
+	@Transactional(readOnly = true)
+	List<SpeedOffer> findSpeedOfferByDate(final LocalDateTime start, Pageable p);
 }

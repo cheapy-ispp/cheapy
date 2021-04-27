@@ -1,6 +1,7 @@
 
 package org.springframework.cheapy.web;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -152,7 +153,6 @@ public class OfertaController {
             Object[] ti = {of, "time"};
             datos.add(ti);
         }
-
         return datos;
     }
 
@@ -208,6 +208,57 @@ public class OfertaController {
 		}
 		return datos;
 	}
+	
+	@GetMapping("/offersByDate/{page}")
+    public String processFindFormByDate(@PathVariable("page") final int page, final Map<String, Object> model,
+    		final String start) {
+		LocalDateTime inic = LocalDateTime.parse(start,
+		        DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")); 
+		
+		
+        Pageable elements = PageRequest.of(page, 2);
+        Pageable nextPage = PageRequest.of(page+1, 2);
+
+        List<Object[]> datos = ofertasPorFecha(inic, elements);
+        List<Object[]> datosNext = ofertasPorFecha(inic, nextPage);
+
+        Integer next = datosNext.size();
+        Integer now = datos.size();
+        model.put("now", now);
+        model.put("nextPage", next);
+        model.put("datos", datos);
+        model.put("municipios", Municipio.values());
+        model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+
+        return "offers/offersListFoodSearch";
+
+    }
+
+    private List<Object[]> ofertasPorFecha(final LocalDateTime start, Pageable pag){
+        List<Object[]> datos = new ArrayList<Object[]>();
+
+        for(Offer of:this.foodOfferService.findFoodOfferByDate(start, pag)) {
+            Object[] fo = {of, "food"};
+            datos.add(fo);
+        }
+
+        for(Offer of:this.nuOfferService.findNuOfferByDate(start, pag)) {
+            Object[] nu = {of, "nu"};
+            datos.add(nu);
+        }
+
+        for(Offer of:this.speedOfferService.findSpeedOfferByDate(start, pag)) {
+            Object[] sp = {of, "speed"};
+            datos.add(sp);
+        }
+
+        for(Offer of:this.timeOfferService.findTimeOfferByDate(start, pag)) {
+            Object[] ti = {of, "time"};
+            datos.add(ti);
+        }
+        return datos;
+    }
+
 
 	@GetMapping("/myOffers")
 	public String processMyOffersForm(final Map<String, Object> model) {

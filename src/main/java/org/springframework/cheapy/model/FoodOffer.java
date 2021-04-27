@@ -17,6 +17,7 @@ package org.springframework.cheapy.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -35,6 +36,22 @@ public class FoodOffer extends Offer {
 	@NotNull(message = "Debe rellenar el descuento que proporciona")
 	@Range(min = 1, max = 100, message = "El descuento debe estar entre 1 y 100 %")
 	private Integer discount;
+	
+	@NotNull(message = "Debe rellenar el precio del plato")
+	@Min(1)
+	private Double price;
+	
+	public Double getNewPrice() {
+		return this.price - (this.price*this.discount)/100;
+	}
+	
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
 
 	public String getFood() {
 		return food;

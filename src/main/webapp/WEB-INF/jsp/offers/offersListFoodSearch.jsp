@@ -94,6 +94,19 @@
 			<button type="submit" class="btn-mas">Buscar por municipio</button>
 		</div>
 	</form>
+	
+	<spring:url value="/offersByDate/{page}" var="SearchDateOfferListUrl">
+			<spring:param name="page" value="0"/>
+	</spring:url>
+	<form class="example" action="${fn:escapeXml(SearchDateOfferListUrl)}">
+		<h2 class="text-center" style="font-family: 'Lobster'; text-align:center; font-size:150%;  color: rgb(0, 64, 128); padding:10px;" >Búsqueda por tfecha: </h2>
+		<div class="text-center">
+	  		<input type="datetime-local" class="time"  name="start" style="width:70%"/>
+	  		<button type="submit" class="btn-search">
+	  		<span class="glyphicon 	glyphicon glyphicon-search" aria-hidden="true" style="padding: 5px"> </span>
+	  		</button>
+  		</div>
+	</form>
 
 
 
@@ -163,30 +176,34 @@
 								
 		</script>
     </div>
-	<div style="display:inline">
-	<c:if test='${page!=0}'>
+    <div class="row-pag-btn">
+	    <div class="column-pag-btn" style="text-align: left;">
+	    	<c:if test='${page!=0}'>
 
-    	<spring:url value="/offersByFood/{page}?name={name}" var="SearchOfferListUrl">
-    		<spring:param name="page" value="${page-1}"/>
-    		<spring:param name="name" value="${name}"/>
-    	</spring:url>
-    	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(SearchOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-		<span class="glyphicon 	glyphicon glyphicon-arrow-left" aria-hidden="true" style="padding: 5px"> </span>
-		Pág. anterior</button>
+		    	<spring:url value="/offersByFood/{page}?name={name}" var="SearchOfferListUrl">
+		    		<spring:param name="page" value="${page-1}"/>
+		    		<spring:param name="name" value="${name}"/>
+		    	</spring:url>
+		    	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(SearchOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+				<span class="glyphicon 	glyphicon glyphicon-arrow-left" aria-hidden="true" style="padding: 5px"> </span>
+				Pág. anterior</button>
+		
+		    </c:if>
+	    	​
+	    </div>
+	    <div class="column-pag-btn" style="text-align: right;">
+	    	<c:if test="${nextPage > 0}">
 
-    </c:if>
-    
-    <c:if test="${nextPage > 0}">
-
-    	<spring:url value="/offersByFood/{page}?name={name}" var="SearchOfferListUrl">
-    		<spring:param name="page" value="${page+1}"/>
-    		<spring:param name="name" value="${name}"/>
-    	</spring:url>
-    	<button type="button" class="btn-pag"  role="link" onclick="window.location='${fn:escapeXml(SearchOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-		<span class="glyphicon 	glyphicon glyphicon-arrow-right" aria-hidden="true" style="padding: 5px"> </span>
-		Pág. siguiente</button>
-
-	</c:if>
+		    	<spring:url value="/offersByFood/{page}?name={name}" var="SearchOfferListUrl">
+		    		<spring:param name="page" value="${page+1}"/>
+		    		<spring:param name="name" value="${name}"/>
+		    	</spring:url>
+		    	<button type="button" class="btn-pag"  role="link" onclick="window.location='${fn:escapeXml(SearchOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+				<span class="glyphicon 	glyphicon glyphicon-arrow-right" aria-hidden="true" style="padding: 5px"> </span>
+				Pág. siguiente</button>
+		
+			</c:if>​
+		</div>
 	</div>
     </c:if>
 </cheapy:layout>
