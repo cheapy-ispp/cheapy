@@ -28,7 +28,9 @@
 	                        Crear reseña</button>
                     </c:when>
                     <c:otherwise>
-                        <button class="btn btn-default" type="submit">Modificar Reseña</button>
+                        <button class="btn btn-default" type="submit" style="font-family: 'Lobster'; font-size: 20px;">
+                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true" style="padding: 5px"> </span>
+                        Modificar Reseña</button>
                     </c:otherwise>
                 </c:choose>
                 </div>
