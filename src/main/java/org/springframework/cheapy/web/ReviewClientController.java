@@ -53,6 +53,7 @@ public class ReviewClientController {
 		Client bar = this.clientService.findByUsername(client);
 		return (bar == null||user==null)? false: true;
 	}
+	
 	@GetMapping("/reviewsClient/new/{idClient}")
 	public String initCreationForm(final Map<String, Object> model, @PathVariable("idClient") final String idClient) {
 		if(!checkClient(idClient)) {
