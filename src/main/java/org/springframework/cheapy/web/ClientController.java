@@ -107,14 +107,9 @@ public class ClientController {
 	@PostMapping(value = "/clients/edit")
 	public String updateClient(@Valid final Client clientEdit, final BindingResult result, final ModelMap model, final HttpServletRequest request) {
 		Client clienteSesion = this.clientService.getCurrentClient();
-		BeanUtils.copyProperties(clienteSesion, clientEdit, "name", "email", "address", "init", "municipio", "finish", "telephone", "description", "food", "expiration", "usuar");
+		BeanUtils.copyProperties(clienteSesion, clientEdit, "name", "email", "address", "init", "municipio", "finish", "telephone", "description", "food");
 		if (!this.checkTimes(clientEdit)) {
 			result.rejectValue("finish", "", "La hora de cierre debe ser posterior a la hora de apertura");
-
-		}
-
-		if (clientEdit.getUsuar().getPassword().equals("")) {
-			result.rejectValue("usuar.password", "", "La contraseña no puede estar vacía");
 
 		}
 
@@ -131,8 +126,6 @@ public class ClientController {
 			return ClientController.VIEWS_CREATE_OR_UPDATE_CLIENT;
 		}
 
-		clientEdit.getUsuar().setUsername(clienteSesion.getUsuar().getUsername());
-		clientEdit.getUsuar().setEnabled(true);
 		this.clientService.saveClient(clientEdit);
 		return "redirect:/clients/show";
 
@@ -216,7 +209,7 @@ public class ClientController {
 			return "clients/password";
 		}
 
-		BeanUtils.copyProperties(clienteSesion, clientEdit, "name", "email", "address", "init", "municipio", "finish", "telephone", "description", "food", "expiration", "usuar");
+		BeanUtils.copyProperties(clienteSesion, clientEdit, "usuar");
 		clientEdit.getUsuar().setUsername(clienteSesion.getUsuar().getUsername());
 		clientEdit.getUsuar().setPassword(MD5.md5(clientEdit.getUsuar().getPassword()));
 		clientEdit.getUsuar().setEnabled(true);

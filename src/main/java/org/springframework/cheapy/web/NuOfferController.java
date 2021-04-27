@@ -34,6 +34,7 @@ public class NuOfferController {
 	private final NuOfferService	nuOfferService;
 	private final ClientService		clientService;
 
+
 	public NuOfferController(final NuOfferService nuOfferService, final ClientService clientService) {
 		this.nuOfferService = nuOfferService;
 		this.clientService = clientService;
@@ -89,13 +90,13 @@ public class NuOfferController {
 	@GetMapping("/offers/nuOfferList/{page}")
 	public String processFindForm(@PathVariable("page") final int page, final Map<String, Object> model) {
 		Pageable elements = PageRequest.of(page, 5);
-		Pageable nextPage = PageRequest.of(page+1, 5);
-		
+		Pageable nextPage = PageRequest.of(page + 1, 5);
+
 		List<NuOffer> foodOfferLs = this.nuOfferService.findActiveNuOffer(elements);
 		Integer next = this.nuOfferService.findActiveNuOffer(nextPage).size();
-		
+
 		model.put("municipios", Municipio.values());
-		
+
 		model.put("nuOfferLs", foodOfferLs);
 		model.put("nextPage", next);
 		model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
@@ -125,8 +126,8 @@ public class NuOfferController {
 			result.rejectValue("discountGold", "", "El descuento de Oro debe ser mayor o igual que el de plata, y el de plata mayor o igual que el de bronce");
 
 		}
-		
-		if (nuOffer.getStart()==null || nuOffer.getStart().isBefore(LocalDateTime.now())) {
+
+		if (nuOffer.getStart() == null || nuOffer.getStart().isBefore(LocalDateTime.now())) {
 			result.rejectValue("start", "", "La fecha de inicio debe ser futura");
 
 		}
@@ -149,13 +150,10 @@ public class NuOfferController {
 	public String activateNuOffer(@PathVariable("nuOfferId") final int nuOfferId, final ModelMap modelMap) {
 		Client client = this.clientService.getCurrentClient();
 		NuOffer nuOffer = this.nuOfferService.findNuOfferById(nuOfferId);
-		if (nuOffer.getClient().equals(client)) {
+		if (nuOffer.getClient().equals(client) && !nuOffer.isInactive()) {
 			nuOffer.setStatus(StatusOffer.active);
 			nuOffer.setCode("NU-" + nuOfferId);
 			this.nuOfferService.saveNuOffer(nuOffer);
-
-		} else {
-			modelMap.addAttribute("message", "You don't have access to this number offer");
 		}
 		return "redirect:/offers/nu/" + nuOffer.getId();
 
