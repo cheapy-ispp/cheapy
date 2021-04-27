@@ -32,6 +32,7 @@ import org.springframework.cheapy.service.NuOfferService;
 import org.springframework.cheapy.service.SpeedOfferService;
 import org.springframework.cheapy.service.TimeOfferService;
 import org.springframework.cheapy.service.UserService;
+import org.springframework.cheapy.service.UsuarioService;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
@@ -55,6 +56,9 @@ class ClientControllerTest {
 	
 	@MockBean
 	private UserService userService;
+	
+	@MockBean
+	private UsuarioService usuarioService;
 	
 	@MockBean
 	private FoodOfferService foodOfferService;
