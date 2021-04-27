@@ -119,7 +119,6 @@ class ClientControllerTest {
 	void testProcessUpdateFormSuccess() throws Exception {
 		mockMvc.perform(post("/clients/edit")
 					.with(csrf())
-					.param("usuar.password", "Contrasenya123")
 					.param("init", "11:30")
 					.param("finish", "23:30")
 					.param("expiration", "3000-12-30")
@@ -140,7 +139,6 @@ class ClientControllerTest {
 	void testProcessUpdateFormHasErrors() throws Exception {
 		mockMvc.perform(post("/clients/edit")
 					.with(csrf())
-					.param("usuar.password", "")
 					.param("init", "24:30")
 					.param("finish", "a:30")
 					.param("name", "")
@@ -152,7 +150,6 @@ class ClientControllerTest {
 					.param("food", "")
 					.param("municipio", "Dos Hermanas"))
 				.andExpect(model().attributeHasErrors("client"))
-				.andExpect(model().attributeHasFieldErrors("client", "usuar.password"))
 				.andExpect(model().attributeHasFieldErrors("client", "init"))
 				.andExpect(model().attributeHasFieldErrors("client", "finish"))
 				.andExpect(model().attributeHasFieldErrors("client", "expiration"))
