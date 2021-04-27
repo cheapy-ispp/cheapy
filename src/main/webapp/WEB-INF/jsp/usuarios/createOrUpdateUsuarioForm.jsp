@@ -20,7 +20,6 @@
 			<cheapy:selectMunicipio label="Municipio" name="municipio" size="1" items="${municipios}" ></cheapy:selectMunicipio>
             <cheapy:inputField label="Direccion" name="direccion"/>
             <cheapy:inputField label="Email" name="email"/>
-            <form:hidden path="usuar.password"/>
 
 					
 					<script>

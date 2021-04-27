@@ -25,7 +25,6 @@
             <cheapy:inputField label="Descripción" placeholder="" name="description"/>
             <cheapy:inputField label="Comida" placeholder="food" name="food"/>
             <input type="hidden" readonly name="expiration" value="${client.expiration}" />
-            <form:hidden path="usuar.password"/>
             
             
 					<script>

@@ -60,11 +60,6 @@ public class UsuarioController {
 
 		Usuario usuario = this.usuarioService.getCurrentUsuario();
 
-		if (usuarioEdit.getUsuar().getPassword().equals("")) {
-			result.rejectValue("usuar.password", "", "La contraseña no puede estar vacía");
-
-		}
-
 		if (result.hasErrors()) {
 			model.addAttribute("usuario", usuarioEdit);
 			Map<Object, String> municipios = new HashMap<Object, String>();
@@ -78,7 +73,7 @@ public class UsuarioController {
 			return UsuarioController.VIEWS_USUARIO_CREATE_OR_UPDATE_FORM;
 		}
 
-		BeanUtils.copyProperties(usuario, usuarioEdit, "nombre", "apellidos", "municipio", "direccion", "email", "usuar");
+		BeanUtils.copyProperties(usuario, usuarioEdit, "nombre", "apellidos", "municipio", "direccion", "email");
 		usuarioEdit.getUsuar().setUsername(usuario.getUsuar().getUsername());
 		usuarioEdit.getUsuar().setEnabled(true);
 		this.usuarioService.saveUsuario(usuarioEdit);
@@ -134,16 +129,16 @@ public class UsuarioController {
 
 		return "redirect:/login";
 	}
-	
+
 	@GetMapping(value = "/usuarios/edit/password")
 	public String updatePassUsuario(final ModelMap model, final HttpServletRequest request) {
-	
+
 		Usuario usuario = this.usuarioService.getCurrentUsuario();
 		usuario.getUsuar().setPassword("");
 		model.addAttribute("usuario", usuario);
 		return "usuarios/password";
 	}
-	
+
 	@PostMapping(value = "/usuarios/edit/password")
 	public String updatePassUsuario(@Valid final Usuario usuarioEdit, final BindingResult result, final ModelMap model, final HttpServletRequest request) {
 
@@ -156,11 +151,11 @@ public class UsuarioController {
 		if (result.hasErrors()) {
 			return "usuarios/password";
 		}
-		BeanUtils.copyProperties(usuario, usuarioEdit, "nombre", "apellidos", "municipio", "direccion", "email", "usuar");
+		BeanUtils.copyProperties(usuario, usuarioEdit, "usuar");
 		usuarioEdit.getUsuar().setUsername(usuario.getUsuar().getUsername());
 		usuarioEdit.getUsuar().setPassword(MD5.md5(usuarioEdit.getUsuar().getPassword()));
 		usuarioEdit.getUsuar().setEnabled(true);
 		this.usuarioService.saveUsuario(usuarioEdit);
 		return "redirect:/usuarios/show";
-}
+	}
 }
