@@ -20,11 +20,11 @@
 	</c:if>
         <div class="col-sm-10">
 			<div class="rating"> 
-				<form:radiobutton class="form-control" disabled="${disabled}" name="rating" value="5" id="5" path="${name}"/><label for="5"><span style="font-size: 100%" class="estrella_vacia">&#9734;</span></label> 
-				<form:radiobutton class="form-control" disabled="${disabled}" name="rating" value="4" id="4" path="${name}"/><label for="4"><span style="font-size: 100%" class="estrella_vacia">&#9734;</span></label> 
-				<form:radiobutton class="form-control" disabled="${disabled}" name="rating" value="3" id="3" path="${name}"/><label for="3"><span style="font-size: 100%" class="estrella_vacia">&#9734;</span></label> 
-				<form:radiobutton class="form-control" disabled="${disabled}" name="rating" value="2" id="2" path="${name}"/><label for="2"><span style="font-size: 100%" class="estrella_vacia">&#9734;</span></label> 
-				<form:radiobutton class="form-control" disabled="${disabled}" name="rating" value="1" id="1" path="${name}"/><label for="1"><span style="font-size: 100%" class="estrella_vacia">&#9734;</span></label>
+				<form:radiobutton class="form-control" disabled="${disabled}" name="rating" value="5" id="${name}5" path="${name}"/><label for="${name}5"><span style="font-size: 100%" class="estrella_vacia">&#9734;</span></label> 
+				<form:radiobutton class="form-control" disabled="${disabled}" name="rating" value="4" id="${name}4" path="${name}"/><label for="${name}4"><span style="font-size: 100%" class="estrella_vacia">&#9734;</span></label> 
+				<form:radiobutton class="form-control" disabled="${disabled}" name="rating" value="3" id="${name}3" path="${name}"/><label for="${name}3"><span style="font-size: 100%" class="estrella_vacia">&#9734;</span></label> 
+				<form:radiobutton class="form-control" disabled="${disabled}" name="rating" value="2" id="${name}2" path="${name}"/><label for="${name}2"><span style="font-size: 100%" class="estrella_vacia">&#9734;</span></label> 
+				<form:radiobutton class="form-control" disabled="${disabled}" name="rating" value="1" id="${name}1" path="${name}"/><label for="${name}1"><span style="font-size: 100%" class="estrella_vacia">&#9734;</span></label>
 				
 			</div>            
 		
