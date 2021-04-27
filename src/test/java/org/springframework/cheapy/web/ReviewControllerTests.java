@@ -155,7 +155,6 @@ class ReviewControllerTest {
 					.param("opinion", "")
 					.param("stars", "6"))
 				.andExpect(model().attributeExists("review"))
-//				.andExpect(model().attributeHasFieldErrors("review", "id"))
 				.andExpect(model().attributeHasFieldErrors("review", "opinion"))
 				.andExpect(model().attributeHasFieldErrors("review", "stars"))
 				.andExpect(status().isOk())

@@ -69,9 +69,9 @@ class ReviewClientControllerTest {
 		BDDMockito.given(this.userService.getCurrentUser()).willReturn(user);
 		
 		User userClient = new User();
-		userClient.setUsername("client");
+		userClient.setUsername(TEST_CLIENT_ID);
 		userClient.setPassword("client");
-		Client client = new Client();
+		client = new Client();
 		client.setName("client1");
 		client.setEmail("client1");
 		client.setAddress("client1");
@@ -102,93 +102,129 @@ class ReviewClientControllerTest {
 	@WithMockUser(value = "spring", authorities = "usuario")
 	@Test
 	void testFind() throws Exception {
-		mockMvc.perform(get("/reviewsClientList/{idClient}/{page}", ))
+		mockMvc.perform(get("/reviewsClientList/{idClient}/{page}", TEST_CLIENT_ID, 0))
 				.andExpect(status().isOk())
+				.andExpect(model().attributeExists("datos"))
+//				.andExpect(model().attribute("datos", reviewClientLs))
+				.andExpect(model().attributeExists("nextPage"))
+				.andExpect(model().attributeExists("client"))
+				.andExpect(model().attribute("client", TEST_CLIENT_ID))
+				.andExpect(model().attributeExists("restaurant"))
+				.andExpect(model().attribute("restaurant", client.getName()))
+				.andExpect(view().name("reviewsClient/reviewsList"));
+	}
+	
+	@WithMockUser(value = "spring", authorities = "client")
+	@Test
+	void testFindMyReviews() throws Exception {
+		mockMvc.perform(get("/myClientReviews"))
+				.andExpect(status().isOk())
+				.andExpect(model().attributeExists("page"))
+				.andExpect(model().attributeExists("nextPage"))
 				.andExpect(model().attributeExists("reviewsLs"))
-				.andExpect(model().attribute("reviewsLs", reviewLs))
-				.andExpect(view().name("reviews/reviewsList"));
+				.andExpect(model().attribute("reviewsLs", reviewClientLs))
+				.andExpect(model().attributeExists("client"))
+				.andExpect(model().attribute("client", TEST_CLIENT_ID))
+				.andExpect(model().attributeExists("restaurant"))
+				.andExpect(model().attribute("restaurant", client.getName()))
+				.andExpect(view().name("reviewsClient/reviewsList"));
 	}
 	
 
 	@WithMockUser(value = "spring", authorities = "usuario")
 	@Test
 	void testShow() throws Exception {
-		mockMvc.perform(get("/reviews/{reviewId}", TEST_REVIEW_ID))
+		mockMvc.perform(get("/reviewsClient/{reviewId}", TEST_REVIEW_CLIENT_ID))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("review"))
-				.andExpect(view().name("reviews/reviewsShow"));
+				.andExpect(view().name("reviewsClient/reviewsShow"));
 	}
 	
 	@WithMockUser(value = "spring", authorities = "usuario")
 	@Test
 	void testInitCreationForm() throws Exception {
-		mockMvc.perform(get("/reviews/new"))
+		mockMvc.perform(get("/reviewsClient/new/{idClient}", TEST_CLIENT_ID))
 				.andExpect(status().isOk())
-				.andExpect(model().attributeExists("review"))
-				.andExpect(view().name("reviews/createOrUpdateReviewForm"));
+				.andExpect(model().attributeExists("reviewClient"))
+				.andExpect(view().name("reviewsClient/createOrUpdateReviewForm"));
 	}
 
 	@WithMockUser(value = "spring", authorities = "usuario")
 	@Test
 	void testProcessCreationFormSuccess() throws Exception {
-		mockMvc.perform(post("/reviews/new")
+		mockMvc.perform(post("/reviewsClient/new/{idClient}", TEST_CLIENT_ID)
 					.with(csrf())
 					.param("opinion", "test")
-					.param("stars", "5"))
+					.param("service", "5")
+					.param("food", "5")
+					.param("qualityPrice", "5"))
 				.andExpect(status().is3xxRedirection());
 	}
 
 	@WithMockUser(value = "spring", authorities = "usuario")
 	@Test
 	void testProcessCreationFormHasErrors() throws Exception {
-		mockMvc.perform(post("/reviews/new")
-					.with(csrf())
-					.param("opinion", "")
-					.param("stars", "6"))
-				.andExpect(model().attributeHasErrors("review"))
-				.andExpect(model().attributeHasFieldErrors("review", "opinion"))
-				.andExpect(model().attributeHasFieldErrors("review", "stars"))
-				.andExpect(view().name("reviews/createOrUpdateReviewForm"));
+		mockMvc.perform(post("/reviewsClient/new/{idClient}", TEST_CLIENT_ID)
+				.with(csrf())
+				.param("opinion", "")
+				.param("service", "6")
+				.param("food", "6")
+				.param("qualityPrice", "6"))
+				.andExpect(model().attributeHasErrors("reviewClient"))
+				.andExpect(model().attributeHasFieldErrors("reviewClient", "opinion"))
+				.andExpect(model().attributeHasFieldErrors("reviewClient", "service"))
+				.andExpect(model().attributeHasFieldErrors("reviewClient", "food"))
+				.andExpect(model().attributeHasFieldErrors("reviewClient", "qualityPrice"))
+				.andExpect(view().name("reviewsClient/createOrUpdateReviewForm"));
 	}
 	
 	@WithMockUser(value = "spring", authorities = "usuario")
 	@Test
 	void testInitUpdateForm() throws Exception {
-		mockMvc.perform(get("/reviews/{reviewId}/edit", TEST_REVIEW_ID)
+		mockMvc.perform(get("/reviewsClient/{reviewId}/edit", TEST_REVIEW_CLIENT_ID)
 					.with(csrf()))
-				.andExpect(model().attributeExists("review"))
-				.andExpect(model().attribute("review", hasProperty("opinion", is("test"))))
-				.andExpect(model().attribute("review", hasProperty("stars", is(5))))
-				.andExpect(model().attribute("review", hasProperty("escritor",is(user))))
+				.andExpect(model().attributeExists("reviewClient"))
+				.andExpect(model().attribute("reviewClient", hasProperty("opinion", is("test"))))
+				.andExpect(model().attribute("reviewClient", hasProperty("service", is(5))))
+				.andExpect(model().attribute("reviewClient", hasProperty("food",is(5))))
+				.andExpect(model().attribute("reviewClient", hasProperty("qualityPrice",is(5))))
+				.andExpect(model().attribute("reviewClient", hasProperty("escritor",is(user))))
+				.andExpect(model().attribute("reviewClient", hasProperty("bar",is(client))))
 				.andExpect(status().isOk())
-				.andExpect(view().name("reviews/createOrUpdateReviewForm"));
+				.andExpect(view().name("reviewsClient/createOrUpdateReviewForm"));
 	}
 	
 	@WithMockUser(value = "spring", authorities = "usuario")
 	@Test
 	void testUpdateFormSuccess() throws Exception {
-		mockMvc.perform(post("/reviews/{reviewId}/edit", TEST_REVIEW_ID)
+		mockMvc.perform(get("/reviewsClient/{reviewId}/edit", TEST_REVIEW_CLIENT_ID)
 					.with(csrf())
-					.param("id","1")
+					.param("id", "1")
 					.param("opinion", "test")
-					.param("stars", "5"))
+					.param("service", "5")
+					.param("food", "5")
+					.param("qualityPrice", "5"))
 				.andExpect(status().is3xxRedirection())
-				.andExpect(view().name("redirect:/reviews/"+ TEST_REVIEW_ID));
+				.andExpect(status().isOk())
+				.andExpect(view().name("redirect:/reviewsClient/"+ TEST_REVIEW_CLIENT_ID));
 	}
 	
 	@WithMockUser(value = "spring", authorities = "usuario")
 	@Test
 	void testUpdateFormHasError() throws Exception {
-		mockMvc.perform(post("/reviews/{reviewId}/edit", TEST_REVIEW_ID)
+		mockMvc.perform(get("/reviewsClient/{reviewId}/edit", TEST_REVIEW_CLIENT_ID)
 					.with(csrf())
 					.param("id", "1")
-					.param("opinion", "")
-					.param("stars", "6"))
-				.andExpect(model().attributeExists("review"))
-//				.andExpect(model().attributeHasFieldErrors("review", "id"))
-				.andExpect(model().attributeHasFieldErrors("review", "opinion"))
-				.andExpect(model().attributeHasFieldErrors("review", "stars"))
+					.param("opinion", "6")
+					.param("service", "6")
+					.param("food", "6")
+					.param("qualityPrice", "6"))
+				.andExpect(model().attributeExists("reviewClient"))
+				.andExpect(model().attributeHasFieldErrors("reviewClient", "opinion"))
+				.andExpect(model().attributeHasFieldErrors("reviewClient", "service"))
+				.andExpect(model().attributeHasFieldErrors("reviewClient", "food"))
+				.andExpect(model().attributeHasFieldErrors("reviewClient", "qualityPrice"))
 				.andExpect(status().isOk())
-				.andExpect(view().name("reviews/createOrUpdateReviewForm"));
+				.andExpect(view().name("reviewsClient/createOrUpdateReviewForm"));
 	}
 }
