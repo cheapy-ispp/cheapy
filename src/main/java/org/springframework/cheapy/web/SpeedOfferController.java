@@ -221,6 +221,12 @@ public class SpeedOfferController {
 			result.rejectValue("end", "", "La fecha de fin debe ser posterior a la fecha de inicio");
 
 		}
+
+		if (speedOfferEdit.getStart() == null || speedOfferEdit.getStart().isBefore(LocalDateTime.now())) {
+			result.rejectValue("start", "", "La fecha de inicio debe ser futura");
+
+		}
+
 		if (!this.checkConditions(speedOfferEdit)) {
 			result.rejectValue("gold", "", "Los minutos de Oro deben ser menores o iguales que los de plata, y los de plata menores o iguales que los de bronce");
 
