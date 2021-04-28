@@ -33,7 +33,7 @@
 	      <input type="password" id="password" class="fadeIn third" name="password" placeholder="Contraseña" required>
 	      <sec:csrfInput />  
 	      <div style="text-align: center;">
-		  	<input type="submit" class="fadeIn fourth" value="Iniciar sesión">
+		  	<input type="submit" class="fadeIn fourth"  value="Iniciar sesión">
 		  </div>
 	    </form>
 	

@@ -12,7 +12,7 @@
 <cheapy:layout pageName="usuario">
 
 	<jsp:body>
-        <h2 class="text-center" style="font-family: 'Lobster'; font-size: 25px; color: rgb(0, 64, 128); padding:30px">¿Está seguro de que quiere desactivar su cuenta? 
+        <h2 class="titulo" style="font-family: 'Lobster'; font-size: 25px; padding:30px">¿Está seguro de que quiere desactivar su cuenta? 
         Si desea reactivarla tendrá que ponerse en contacto con nosotros.</h2>
       		
       		 <form:form modelAttribute="usuario" class="form-horizontal">

@@ -17,7 +17,7 @@
 		}
 	
 	</script>
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="reviews"/> de <font style="text-transform: uppercase;">${restaurant}</font></h2>
+    <h2 class="titulo" style="font-family: 'Lobster'; text-align:center; font-size:200%; padding:10px"><fmt:message key="reviews"/> de <font style="text-transform: uppercase;">${restaurant}</font></h2>
 	
 	<div class="table-responsive">
     <table id="reviewTable" class="table table-striped">

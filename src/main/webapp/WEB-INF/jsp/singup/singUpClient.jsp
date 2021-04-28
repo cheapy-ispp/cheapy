@@ -14,7 +14,7 @@
 
 <cheapy:layout pageName="singUpClient">
 <div class="text-center">
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px">
+    <h2 class="titulo" style="font-family: 'Lobster'; text-align:center; font-size:200%; padding:10px">
         <fmt:message key="new"/><fmt:message key="client"/>
     </h2>
 </div>
@@ -48,7 +48,7 @@
 	        	<input id="terminos"   name="terminos" type="checkbox" required="required">
 			</div>	
 			<div class="text-center">
-				<input type="submit" class="fadeIn fourth" value="Registrarse">
+				<input type="submit" class="fadeIn fourth"  value="Registrarse">
 			</div>
 		</div>
 	</form:form>

@@ -72,6 +72,13 @@ public class FoodOfferController {
 		Pageable nextPage = PageRequest.of(page+1, 5);
 
 		List<FoodOffer> foodOfferLs = this.foodOfferService.findActiveFoodOffer(elements);
+		for(int i=0; i<foodOfferLs.size();i++) {
+			FoodOffer fo= foodOfferLs.get(i);
+			String aux=fo.getClient().getName().substring(0, 1).toUpperCase();
+			fo.getClient().setName(aux+fo.getClient().getName().substring(1));
+			
+			foodOfferLs.set(i, fo);
+		}
 		Integer next = this.foodOfferService.findActiveFoodOffer(nextPage).size();
 		
 		model.put("municipios", Municipio.values());

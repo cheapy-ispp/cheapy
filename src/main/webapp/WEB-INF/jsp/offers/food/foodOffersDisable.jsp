@@ -11,7 +11,7 @@
 <cheapy:layout pageName="foodOffer">
 
 	<jsp:body>
-        <h2 class="text-center" style="font-family: 'Lobster'; font-size: 30px; color: rgb(0, 64, 128); padding:30px"><em>¿Está seguro de que quiere eliminar su oferta?</em></h2>
+        <h2 class="titulo" style="font-family: 'Lobster'; font-size: 30px;  padding:30px"><em>¿Está seguro de que quiere eliminar su oferta?</em></h2>
       		
       		<form:form modelAttribute="foodOffer" class="form-horizontal">
             

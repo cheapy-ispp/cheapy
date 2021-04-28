@@ -9,7 +9,7 @@
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
 <cheapy:layout pageName="reviewsN">
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px">
+    <h2 class="titulo" style="font-family: 'Lobster'; text-align:center; font-size:200%;   padding:10px">
     	<c:if test="${review['new']}">Nueva </c:if> Reseña
     </h2>
     <form:form modelAttribute="review" class="form-horizontal" id="add-review-form">
