@@ -171,6 +171,11 @@ public class FoodOfferController {
 			return "error";
 		}
 
+		if (foodOfferEdit.getStart() == null || foodOfferEdit.getStart().isBefore(LocalDateTime.now())) {
+			result.rejectValue("start", "", "La fecha de inicio debe ser futura");
+
+		}
+
 		if (!this.checkDates(foodOfferEdit)) {
 			result.rejectValue("end", "", "La fecha de fin debe ser posterior a la fecha de inicio");
 

@@ -185,6 +185,11 @@ public class TimeOfferController {
 			return "error";
 		}
 
+		if (timeOfferEdit.getStart() == null || timeOfferEdit.getStart().isBefore(LocalDateTime.now())) {
+			result.rejectValue("start", "", "La fecha de inicio debe ser futura");
+
+		}
+
 		if (!this.checkDates(timeOfferEdit)) {
 			result.rejectValue("end", "", "La fecha de fin debe ser posterior a la fecha de inicio");
 

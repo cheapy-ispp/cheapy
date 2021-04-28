@@ -205,6 +205,12 @@ public class NuOfferController {
 			result.rejectValue("end", "", "La fecha de fin debe ser posterior a la fecha de inicio");
 
 		}
+
+		if (nuOfferEdit.getStart() == null || nuOfferEdit.getStart().isBefore(LocalDateTime.now())) {
+			result.rejectValue("start", "", "La fecha de inicio debe ser futura");
+
+		}
+
 		if (!this.checkConditions(nuOfferEdit)) {
 			result.rejectValue("gold", "", "Oro debe ser mayor o igual que plata, y plata mayor o igual que bronce");
 
