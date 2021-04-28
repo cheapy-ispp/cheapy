@@ -116,17 +116,8 @@ public class ReviewClientController {
 	@GetMapping("/myClientReviews")
 	public String processFindMyReviewsForm(final Map<String, Object> model) {
 		
-		Pageable elements = PageRequest.of(0, 6);
-		Pageable nextPage = PageRequest.of(0+1, 6);
 		Client client = this.clientService.getCurrentClient();
-
-		List<ReviewClient> reviewsLs = this.reviewService.findAllReviewsByBar(elements,client);
-		Integer next = this.reviewService.findAllReviewsByBar(nextPage,client).size();
 		model.put("page", 0);
-		model.put("nextPage", next);
-		model.put("reviewsLs", reviewsLs);
-		model.put("client", client.getUsuar().getUsername());
-		model.put("restaurant", client.getName());
 
 		return processFindForm(0, client.getUsuar().getUsername(), model);
 

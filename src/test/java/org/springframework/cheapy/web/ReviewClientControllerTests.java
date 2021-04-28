@@ -22,7 +22,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cheapy.configuration.SecurityConfiguration;
 import org.springframework.cheapy.model.Client;
-import org.springframework.cheapy.model.Review;
 import org.springframework.cheapy.model.ReviewClient;
 import org.springframework.cheapy.model.User;
 import org.springframework.cheapy.service.ClientService;
@@ -105,7 +104,6 @@ class ReviewClientControllerTest {
 		mockMvc.perform(get("/reviewsClientList/{idClient}/{page}", TEST_CLIENT_ID, 0))
 				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("datos"))
-//				.andExpect(model().attribute("datos", reviewClientLs))
 				.andExpect(model().attributeExists("nextPage"))
 				.andExpect(model().attributeExists("client"))
 				.andExpect(model().attribute("client", TEST_CLIENT_ID))
@@ -119,10 +117,8 @@ class ReviewClientControllerTest {
 	void testFindMyReviews() throws Exception {
 		mockMvc.perform(get("/myClientReviews"))
 				.andExpect(status().isOk())
-				.andExpect(model().attributeExists("page"))
+				.andExpect(model().attributeExists("datos"))
 				.andExpect(model().attributeExists("nextPage"))
-				.andExpect(model().attributeExists("reviewsLs"))
-				.andExpect(model().attribute("reviewsLs", reviewClientLs))
 				.andExpect(model().attributeExists("client"))
 				.andExpect(model().attribute("client", TEST_CLIENT_ID))
 				.andExpect(model().attributeExists("restaurant"))
@@ -165,11 +161,11 @@ class ReviewClientControllerTest {
 	@Test
 	void testProcessCreationFormHasErrors() throws Exception {
 		mockMvc.perform(post("/reviewsClient/new/{idClient}", TEST_CLIENT_ID)
-				.with(csrf())
-				.param("opinion", "")
-				.param("service", "6")
-				.param("food", "6")
-				.param("qualityPrice", "6"))
+					.with(csrf())
+					.param("opinion", "")
+					.param("service", "6")
+					.param("food", "6")
+					.param("qualityPrice", "6"))
 				.andExpect(model().attributeHasErrors("reviewClient"))
 				.andExpect(model().attributeHasFieldErrors("reviewClient", "opinion"))
 				.andExpect(model().attributeHasFieldErrors("reviewClient", "service"))
@@ -197,7 +193,7 @@ class ReviewClientControllerTest {
 	@WithMockUser(value = "spring", authorities = "usuario")
 	@Test
 	void testUpdateFormSuccess() throws Exception {
-		mockMvc.perform(get("/reviewsClient/{reviewId}/edit", TEST_REVIEW_CLIENT_ID)
+		mockMvc.perform(post("/reviewsClient/{reviewId}/edit", TEST_REVIEW_CLIENT_ID)
 					.with(csrf())
 					.param("id", "1")
 					.param("opinion", "test")
@@ -205,17 +201,16 @@ class ReviewClientControllerTest {
 					.param("food", "5")
 					.param("qualityPrice", "5"))
 				.andExpect(status().is3xxRedirection())
-				.andExpect(status().isOk())
 				.andExpect(view().name("redirect:/reviewsClient/"+ TEST_REVIEW_CLIENT_ID));
 	}
 	
 	@WithMockUser(value = "spring", authorities = "usuario")
 	@Test
 	void testUpdateFormHasError() throws Exception {
-		mockMvc.perform(get("/reviewsClient/{reviewId}/edit", TEST_REVIEW_CLIENT_ID)
+		mockMvc.perform(post("/reviewsClient/{reviewId}/edit", TEST_REVIEW_CLIENT_ID)
 					.with(csrf())
 					.param("id", "1")
-					.param("opinion", "6")
+					.param("opinion", "")
 					.param("service", "6")
 					.param("food", "6")
 					.param("qualityPrice", "6"))
