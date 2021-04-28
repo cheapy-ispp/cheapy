@@ -132,17 +132,13 @@ public class FoodOfferController {
 	public String processShowForm(@PathVariable("foodOfferId") final int foodOfferId, final Map<String, Object> model) {
 
 		FoodOffer foodOffer = this.foodOfferService.findFoodOfferById(foodOfferId);
-		if (foodOffer.getStatus().equals(StatusOffer.active)) {
+		if ((foodOffer.getStatus().equals(StatusOffer.active)) ||
+				(foodOffer.getStatus().equals(StatusOffer.hidden) && this.checkIdentity(foodOfferId))) {
 			model.put("foodOffer", foodOffer);
 			model.put("newPrice", foodOffer.getNewPrice());
 			model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 			return "offers/food/foodOffersShow";
-
-		} else if (foodOffer.getStatus().equals(StatusOffer.hidden) && this.checkIdentity(foodOfferId)) {
-			model.put("foodOffer", foodOffer);
-			model.put("newPrice", foodOffer.getNewPrice());
-			model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-			return "offers/food/foodOffersShow";
+			
 		} else {
 			return "error";
 		}
