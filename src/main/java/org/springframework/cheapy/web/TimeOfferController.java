@@ -146,12 +146,8 @@ public class TimeOfferController {
 	@GetMapping("/offers/time/{timeOfferId}")
 	public String processShowForm(@PathVariable("timeOfferId") final int timeOfferId, final Map<String, Object> model) {
 		TimeOffer timeOffer = this.timeOfferService.findTimeOfferById(timeOfferId);
-		if (timeOffer.getStatus().equals(StatusOffer.active)) {
-			model.put("timeOffer", timeOffer);
-			model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-			return "offers/time/timeOffersShow";
-
-		} else if (timeOffer.getStatus().equals(StatusOffer.hidden) && this.checkIdentity(timeOfferId)) {
+		if ((timeOffer.getStatus().equals(StatusOffer.active)) ||
+				(timeOffer.getStatus().equals(StatusOffer.hidden) && this.checkIdentity(timeOfferId))) {
 			model.put("timeOffer", timeOffer);
 			model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 			return "offers/time/timeOffersShow";
