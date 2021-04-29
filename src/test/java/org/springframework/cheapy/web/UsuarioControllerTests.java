@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cheapy.configuration.SecurityConfiguration;
+import org.springframework.cheapy.model.Client;
 import org.springframework.cheapy.model.Municipio;
 import org.springframework.cheapy.model.User;
 import org.springframework.cheapy.model.Usuario;
@@ -25,6 +26,7 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+
 
 
 
@@ -42,6 +44,8 @@ class UsuarioControllerTest {
 	
 	@MockBean
 	private ClientService clientService;
+	
+	private Usuario usuario;
 
 	@BeforeEach
 	void setup() {
@@ -49,15 +53,24 @@ class UsuarioControllerTest {
 		user.setUsername("user");
 		user.setPassword("user");
 		Usuario usuario = new Usuario();
+		usuario.setId(0);
 		usuario.setNombre("usuario");
 		usuario.setApellidos("usuario");
 		usuario.setDireccion("usuario");
 		usuario.setMunicipio(Municipio.Sevilla);
 		usuario.setEmail("usuario@gmail.com");
 		usuario.setUsuar(user);
-		BDDMockito.given(this.usuarioService.getCurrentUsuario()).willReturn(usuario);
 		
+		Client client1 = new Client();
+		client1.setId(1);
+		usuario.getFavoritos().add(client1);
+		this.usuario = usuario;
+		BDDMockito.given(this.usuarioService.getCurrentUsuario()).willReturn(this.usuario);
 		
+		Client client = new Client();
+		client.setId(0);
+		BDDMockito.given(this.clientService.findById(0)).willReturn(client);
+		BDDMockito.given(this.clientService.findById(1)).willReturn(client1);
 	}
 
 	@WithMockUser(value = "spring", authorities = "usuario")
@@ -148,5 +161,94 @@ class UsuarioControllerTest {
 				.andExpect(status().is3xxRedirection())
 				.andExpect(view().name("redirect:/login"));
 		Assertions.assertTrue(usuarioService.findByUsername("user") == null);
+	}
+	
+	@WithMockUser(value = "spring", authorities = "usuario")
+	@Test
+	void testProcessUpdatePassUsuarioSuccess() throws Exception {
+		mockMvc.perform(get("/usuarios/edit/password")
+				.with(csrf()))
+				.andExpect(model().attributeExists("usuario"))
+				.andExpect(status().isOk())
+				.andExpect(view().name("usuarios/password"));
+	}
+	
+	@WithMockUser(value = "spring", authorities = "usuario")
+	@Test
+	void testUpdatePassUsuarioSuccess() throws Exception {
+		mockMvc.perform(post("/usuarios/edit/password")
+				.with(csrf())
+				.param("nombre", "nombre")
+				.param("apellidos", "apellidos")
+				.param("direccion", "direccion")
+				.param("municipio", "Sevilla")
+				.param("email", "email@gmail.com")
+				.param("usuar.password", "testSuccess"))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/usuarios/show"));
+	}
+	
+	@WithMockUser(value = "spring", authorities = "usuario")
+	@Test
+	void testUpdatePassUsuarioError() throws Exception {
+		mockMvc.perform(post("/usuarios/edit/password")
+				.with(csrf())
+				.param("nombre", "nombre")
+				.param("apellidos", "apellidos")
+				.param("direccion", "direccion")
+				.param("municipio", "Sevilla")
+				.param("email", "email@gmail.com")
+				.param("usuar.password", ""))
+				.andExpect(model().attributeHasFieldErrors("usuario","usuar.password"))
+				.andExpect(status().isOk())
+				.andExpect(view().name("usuarios/password"));
+	}
+	
+	@WithMockUser(value = "spring", authorities = "usuario")
+	@Test
+	void testListFavoriteSuccess() throws Exception {
+		mockMvc.perform(get("/usuarios/favoritos/0")
+				.with(csrf()))
+				.andExpect(model().attributeExists("municipios"))
+				.andExpect(model().attributeExists("clientLs"))
+				.andExpect(model().attributeExists("nextPage"))
+				.andExpect(status().isOk())
+				.andExpect(view().name("usuarios/favoritos"));
+	}
+	
+	@WithMockUser(value = "spring", authorities = "usuario")
+	@Test
+	void testAddFavoriteSuccess() throws Exception {
+		mockMvc.perform(get("/usuarios/favoritos/0/add")
+				.with(csrf()))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/restaurant/0"));
+	}
+	
+	@WithMockUser(value = "spring", authorities = "usuario")
+	@Test
+	void testAddFavoriteError() throws Exception {
+		mockMvc.perform(get("/usuarios/favoritos/1/add")
+				.with(csrf()))
+				.andExpect(status().isOk())
+				.andExpect(view().name("error"));
+	}
+	
+	@WithMockUser(value = "spring", authorities = "usuario")
+	@Test
+	void testRemoveFavoriteSuccess() throws Exception {
+		mockMvc.perform(get("/usuarios/favoritos/1/remove")
+				.with(csrf()))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/restaurant/1"));
+	}
+	
+	@WithMockUser(value = "spring", authorities = "usuario")
+	@Test
+	void testRemoveFavoriteError() throws Exception {
+		mockMvc.perform(get("/usuarios/favoritos/0/remove")
+				.with(csrf()))
+				.andExpect(status().isOk())
+				.andExpect(view().name("error"));
 	}
 }
