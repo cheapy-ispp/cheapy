@@ -57,7 +57,7 @@
 				<spring:param name="page" value="0"/>
 	</spring:url>
 	<form class="example" action="${fn:escapeXml(SearchNameOfferListUrl)}">
-		<h2 class="titulo" style="font-family: 'Lobster'; text-align:center; font-size:150%;  color: rgb(0, 64, 128); padding:10px;" >Búsqueda por nombre del bar/restaurante: </h2>
+		<h2 class="titulo" style="font-family: 'Lobster'; font-size:150%; padding:10px;" >Búsqueda por nombre del bar/restaurante: </h2>
 		<div class="text-center">
 	  		<input type="text" placeholder="Búsqueda por nombre" name="name" style="border:solid; width:80%; border-color: rgb(0, 64, 128);">
 	  		<button type="submit" class="btn-search">
@@ -70,7 +70,7 @@
 				<spring:param name="page" value="0"/>
 	</spring:url>
 	<form class="example" action="${fn:escapeXml(SearchFoodOfferListUrl)}">
-		<h2 class="titulo" style="font-family: 'Lobster'; text-align:center; font-size:150%;  color: rgb(0, 64, 128); padding:10px;" >Búsqueda por tipo de comida: </h2>
+		<h2 class="titulo" style="font-family: 'Lobster'; font-size:150%; padding:10px;" >Búsqueda por tipo de comida: </h2>
 		<div class="text-center">
 	  		<input type="text" placeholder="Búsqueda por tipo comida (Ej: americana)" name="name" style="border:solid; width:80%; border-color: rgb(0, 64, 128);">
 	  		<button type="submit" class="btn-search">
@@ -99,7 +99,7 @@
 			<spring:param name="page" value="0"/>
 	</spring:url>
 	<form class="example" action="${fn:escapeXml(SearchDateOfferListUrl)}">
-		<h2 class="titulo" style="font-family: 'Lobster'; font-size:150%;  color: rgb(0, 64, 128); padding:10px;" >Búsqueda por fecha: </h2>
+		<h2 class="titulo" style="font-family: 'Lobster'; font-size:150%; padding:10px;" >Búsqueda por fecha: </h2>
 		<div class="text-center">
 	  		<input type="datetime-local" class="time"  name="start" style="width:70%"/>
 	  		<button type="submit" class="btn-search">
@@ -111,7 +111,7 @@
 
 
 
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px">Búsqueda de Ofertas</h2>
+    <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%; padding:10px">Búsqueda de Ofertas</h2>
 	<c:if test="${empty datos }">
 		<p id="vacio" >No hay ninguna oferta creada.</p>
 	</c:if>

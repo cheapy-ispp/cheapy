@@ -9,7 +9,7 @@
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
 <cheapy:layout pageName="TimeOffers">
-    <h2 class="titulo" style="font-family: 'Lobster'; text-align:center; font-size:200%; padding:10px">
+    <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%; padding:10px">
         <c:if test="${timeOffer['new']}"><fmt:message key="new"/> </c:if> <fmt:message key="timeOffer"/>
     </h2>
     <form:form modelAttribute="timeOffer" class="form-horizontal" id="add-timeOffer-form">
