@@ -57,6 +57,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/offers/**/activate").hasAnyAuthority("client")
 		.antMatchers("/offers/**/disable").hasAnyAuthority("client")
 
+		.antMatchers("/myOffers").hasAnyAuthority("client")
+		
 		.antMatchers("/offers").permitAll()
 		.antMatchers("/offersCreate").hasAuthority("client")
 
