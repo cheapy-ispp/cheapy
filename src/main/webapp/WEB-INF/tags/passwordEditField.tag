@@ -16,13 +16,20 @@
 		
         <div class="col-sm-10">
             <form:input type="password" class="form-control" id="myInput" placeholder="${placeholder }" path="${name}" style="width:70%"/>
-            <c:if test="${valid}">
-                <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-            </c:if>
-            <c:if test="${status.error}">
-                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                <span class="help-inline">${status.errorMessage}</span>
-            </c:if>
+	            <c:if test="${valid}">
+	                <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+	            </c:if>
+	            <c:if test="${status.error}">
+	                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+	                <span class="help-inline">${status.errorMessage}</span>
+	            </c:if>
+            	<div class="form-check">
+				  <input class="form-check-input" type="radio" id="showPassword" onclick="myFunction()">
+				  <label class="form-check-label" for="showPassword">
+				    Mostrar Contraseña
+				  </label>
+				</div>
+            
         </div>
     </div>
     

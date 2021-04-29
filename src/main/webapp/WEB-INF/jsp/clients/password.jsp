@@ -25,7 +25,7 @@
 	        <form:hidden path="description"/>
 	       	<form:hidden path="food"/>	
             <input hidden="true" readonly name="expiration" value="${client.expiration}" />	  	       	      
-            <cheapy:passwordField label="Nueva contraseña"  name="usuar.password"/>
+            <cheapy:passwordEditField label="Nueva contraseña"  name="usuar.password"/>
 					        
             
         </div>
