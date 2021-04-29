@@ -147,7 +147,7 @@
 								<div class="navbar-login">
 									<div class="row" >
 										<div class="col-lg-4" style="">
-											<p class="text-center">
+											<p class="titulo">
 												<span class="glyphicon glyphicon-user icon-size" ></span>
 											</p>
 										</div>
@@ -157,7 +157,7 @@
 											</p>
 											<form action="/logout" method=post>
 												<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-												<input type="submit" value="Salir" style="align-content:center;color:white;background-color:#004080;padding:10px; border:none; text-align:center;margin:auto">
+												<input  type="submit" value="Salir" style="align-content:center; padding:10px; border:none; text-align:center;margin:auto; background-color: #325a80">
 											</form>
 										</div>
 									</div>

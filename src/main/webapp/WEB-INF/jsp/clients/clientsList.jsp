@@ -15,7 +15,7 @@
 			document.write("Página " + paginaAct + " <br />");
 		}
 	</script>
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="clients"/></h2>
+    <h2 class="titulo" style="font-family: 'Lobster'; text-align:center; font-size:200%; padding:10px"><fmt:message key="clients"/></h2>
     
 	<c:if test="${empty clientLs }">
 		<p id="vacio" >No hay ningun Cliente.</p>

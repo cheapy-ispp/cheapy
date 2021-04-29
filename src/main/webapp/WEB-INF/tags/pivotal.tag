@@ -5,10 +5,10 @@
 <br/>
 <div class="row-full">
     <div class="row" >
-        <div class="col-12 text-center" ><img src="<spring:url value="/resources/images/eslogan.png" htmlEscape="true" />"
+        <div class="col-12 titulo" style="text-align:center"><img src="<spring:url value="/resources/images/eslogan.png" htmlEscape="true" />"
                                              alt="Eat fast, eat cheapy"/>
 	        
-		<div style="margin-bottom:10px">
+		<div style="margin-bottom:10px; text-align:center">
 			<a href="https://twitter.com/cheapyispp" target="_blank" class="fa fa-twitter"></a>
 			<a href="https://www.instagram.com/cheapyispp/" target="_blank" class="fa fa-instagram"></a>		
 			<a href="mailto:cheapy.ispp@gmail.com"  target="_blank" class="fa fa-envelope"></a>	

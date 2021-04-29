@@ -11,7 +11,7 @@
 
 <cheapy:layout pageName="usuario">
 
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="usuario"/></h2>
+    <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%; padding:10px"><fmt:message key="usuario"/></h2>
 
     <table class="table table-striped" id="usuarioTable">
     	<thead>

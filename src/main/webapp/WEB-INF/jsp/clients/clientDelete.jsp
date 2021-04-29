@@ -11,7 +11,7 @@
 <cheapy:layout pageName="client">
 
 	<jsp:body>
-        <h2 class="text-center" style="font-family: 'Lobster'; font-size: 25px; color: rgb(0, 64, 128); padding:30px">¿Está seguro de que quiere eliminar su cuenta? 
+        <h2 class="titulo" style="font-family: 'Lobster'; font-size: 25px;  padding:30px">¿Está seguro de que quiere eliminar su cuenta? 
         Sus ofertas dejarán de ser visibles para los clientes, solo quedarán en nuestro registro interno con el nombre de su local y los demás datos se eliminarán del sistema.</h2>
       		
       		<form:form modelAttribute="client" class="form-horizontal">
