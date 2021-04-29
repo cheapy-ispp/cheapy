@@ -42,7 +42,7 @@
 		    
 			<button type="button" role="link" onclick="window.location='${fn:escapeXml(editUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 	        <span class="glyphicon glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
-		        Editar opinión</button>
+		        Editar reseña</button>
     	</c:if>
     	
     </div>

@@ -99,7 +99,7 @@
 			<spring:param name="page" value="0"/>
 	</spring:url>
 	<form class="example" action="${fn:escapeXml(SearchDateOfferListUrl)}">
-		<h2 class="titulo" style="font-family: 'Lobster'; text-align:center; font-size:150%; padding:10px;" >Búsqueda por fecha: </h2>
+		<h2 class="titulo" style="font-family: 'Lobster'; font-size:150%; padding:10px;" >Búsqueda por fecha: </h2>
 		<div class="text-center">
 	  		<input type="datetime-local" class="time"  name="start" style="width:70%"/>
 	  		<button type="submit" class="btn-search" >

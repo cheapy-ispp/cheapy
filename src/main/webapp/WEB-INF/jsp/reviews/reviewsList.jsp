@@ -17,7 +17,7 @@
 		}
 	</script>
     <div class="text-center">
-    <h2 class="titulo" style="font-family: 'Lobster'; text-align:center; font-size:200%;   padding:10px"><fmt:message key="reviews"/></h2>
+    <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%;   padding:10px"><fmt:message key="reviewsCheapy"/></h2>
 	<div class="table-responsive">
 	    <table id="reviewTable" class="table table-striped">
 	        <thead>

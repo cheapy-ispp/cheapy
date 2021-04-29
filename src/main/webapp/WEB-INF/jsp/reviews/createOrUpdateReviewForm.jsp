@@ -9,8 +9,8 @@
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
 <cheapy:layout pageName="reviewsN">
-    <h2 class="titulo" style="font-family: 'Lobster'; text-align:center; font-size:200%;   padding:10px">
-    	<c:if test="${review['new']}">Nueva </c:if> Reseña
+    <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%;   padding:10px">
+    	<c:if test="${review['new']}"><fmt:message key="newF"/> </c:if> <fmt:message key="reviewCheapy"/>
     </h2>
     <form:form modelAttribute="review" class="form-horizontal" id="add-review-form">
         <div class="form-group has-feedback">
@@ -28,7 +28,9 @@
 	                        Crear reseña</button>
                     </c:when>
                     <c:otherwise>
-                        <button class="btn btn-default" type="submit">Modificar Reseña</button>
+                        <button class="btn btn-default" type="submit" style="font-family: 'Lobster'; font-size: 20px;">
+                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true" style="padding: 5px"> </span>
+                        Modificar Reseña</button>
                     </c:otherwise>
                 </c:choose>
                 </div>
