@@ -52,12 +52,12 @@ public class ClientController {
 	private final NuOfferService	nuOfferService;
 
 	private final TimeOfferService	timeOfferService;
-	
+
 	private final UsuarioService	usuarioService;
 
 
-	public ClientController(final ClientService clientService, final UserService userService, final FoodOfferService foodOfferService, final SpeedOfferService speedOfferService, final NuOfferService nuOfferService,
-		final TimeOfferService timeOfferService, final UsuarioService usuarioService) {
+	public ClientController(final ClientService clientService, final UserService userService, final FoodOfferService foodOfferService, final SpeedOfferService speedOfferService, final NuOfferService nuOfferService, final TimeOfferService timeOfferService,
+		final UsuarioService usuarioService) {
 		this.clientService = clientService;
 		this.userService = userService;
 		this.foodOfferService = foodOfferService;
@@ -174,10 +174,10 @@ public class ClientController {
 		Client client = this.clientService.findById(id);
 		Integer valoraciones = this.clientService.mediaValoraciones(client);
 		Usuario usuario = this.usuarioService.getCurrentUsuario();
-		
-		if(usuario==null) {
+
+		if (usuario == null) {
 			model.put("favoritos", 0);
-		} else if(usuario.getFavoritos().contains(client)) {
+		} else if (usuario.getFavoritos().contains(client)) {
 			model.put("favoritos", 1);
 		} else {
 			model.put("favoritos", 2);
@@ -209,10 +209,9 @@ public class ClientController {
 			return "clients/password";
 		}
 
-		BeanUtils.copyProperties(clienteSesion, clientEdit, "usuar");
-		clientEdit.getUsuar().setUsername(clienteSesion.getUsuar().getUsername());
-		clientEdit.getUsuar().setPassword(MD5.md5(clientEdit.getUsuar().getPassword()));
-		clientEdit.getUsuar().setEnabled(true);
+		String pass = MD5.md5(clientEdit.getUsuar().getPassword());
+		BeanUtils.copyProperties(clienteSesion, clientEdit);
+		clientEdit.getUsuar().setPassword(pass);
 		this.clientService.saveClient(clientEdit);
 		return "redirect:/clients/show";
 	}
