@@ -31,26 +31,26 @@
         </thead>
         <tbody>
         <c:choose>
-	        <c:when test="${empty reviewsLs}">
+	        <c:when test="${empty datos}">
 	        	<tr><td colspan="4"><em><c:out value="No se ha realizado ninguna valoración por el momento."/></em></td></tr>
 	        </c:when>
 	        <c:otherwise>
-	        <c:forEach items="${reviewsLs}" var="review">       
+	        <c:forEach items="${datos}" var="datos">       
 	            <tr>
 	                <td>
-	                    <c:out value="${review.escritor.username}"/>
+	                    <c:out value="${datos[0].escritor.username}"/>
 	                </td>
 	                <td>
 	                	<div style="display: inline-block; margin: auto;">                    
-	                    	<cheapy:showStars value='${review.stars}'></cheapy:showStars>
+	                    	<cheapy:showStars value='${datos[1]}'></cheapy:showStars>
 						</div>
 	                </td>
 	                <td>
-	                    <c:out value="${review.opinion}"/>
+	                    <c:out value="${datos[0].opinion}"/>
 	                </td>
 	                <td>
 		                <spring:url value="/reviewsClient/{reviewId}" var="reviewUrl">
-		                        <spring:param name="reviewId" value="${review.id}"/>
+		                        <spring:param name="reviewId" value="${datos[0].id}"/>
 		                </spring:url>
 		                <div class="btn-detalles">
 	                		<button type="button" role="link" onclick="window.location='${fn:escapeXml(reviewUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">

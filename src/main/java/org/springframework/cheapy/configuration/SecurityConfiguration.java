@@ -41,6 +41,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/clients/show").hasAnyAuthority("client","notsubscribed")
 		.antMatchers("/clients/delete").hasAnyAuthority("client","notsubscribed")
 		.antMatchers("/clients/edit").hasAnyAuthority("client","notsubscribed")
+		.antMatchers("/clients/edit/**").hasAnyAuthority("client","notsubscribed")
 		.antMatchers("/clients/disable").hasAnyAuthority("client","notsubscribed")
 
 		.antMatchers("/sign-up-client/new/**").anonymous()
@@ -58,6 +59,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/offers/**/activate").hasAnyAuthority("client")
 		.antMatchers("/offers/**/disable").hasAnyAuthority("client")
 
+		.antMatchers("/myOffers").hasAnyAuthority("client")
+		
 		.antMatchers("/offers").permitAll()
 		.antMatchers("/offersCreate").hasAuthority("client")
 

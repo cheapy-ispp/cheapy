@@ -71,7 +71,7 @@ public class SpeedOfferController {
 		boolean res = false;
 		if (speedOffer.getGold() == null || speedOffer.getSilver() == null || speedOffer.getBronze() == null) {
 			res = true;
-		} else if (speedOffer.getGold().isBefore(speedOffer.getSilver()) && speedOffer.getSilver().isBefore( speedOffer.getBronze())) {
+		} else if (speedOffer.getGold().isBefore(speedOffer.getSilver()) && speedOffer.getSilver().isBefore(speedOffer.getBronze())) {
 			res = true;
 		}
 		return res;
@@ -90,8 +90,8 @@ public class SpeedOfferController {
 	@GetMapping("/offers/speedOfferList/{page}")
 	public String processFindForm(@PathVariable("page") final int page, final Map<String, Object> model) {
 		Pageable elements = PageRequest.of(page, 5);
-		Pageable nextPage = PageRequest.of(page+1, 5);
-		
+		Pageable nextPage = PageRequest.of(page + 1, 5);
+
 		List<SpeedOffer> speedOfferLs = this.speedOfferService.findActiveSpeedOffer(elements);
 		for(int i=0; i<speedOfferLs.size();i++) {
 			SpeedOffer fo= speedOfferLs.get(i);
@@ -101,9 +101,9 @@ public class SpeedOfferController {
 			speedOfferLs.set(i, fo);
 		}
 		Integer next = this.speedOfferService.findActiveSpeedOffer(nextPage).size();
-		
+
 		model.put("municipios", Municipio.values());
-		
+
 		model.put("speedOfferLs", speedOfferLs);
 		model.put("nextPage", next);
 		model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
@@ -119,8 +119,8 @@ public class SpeedOfferController {
 	}
 
 	@PostMapping("/offers/speed/new")
-	public String processCreationForm(@Valid final SpeedOffer speedOffer, final BindingResult result,final Map<String, Object> model) {
-		
+	public String processCreationForm(@Valid final SpeedOffer speedOffer, final BindingResult result, final Map<String, Object> model) {
+
 		if (!this.checkDates(speedOffer)) {
 			result.rejectValue("end", "", "La fecha de fin debe ser posterior a la fecha de inicio");
 
@@ -133,31 +133,29 @@ public class SpeedOfferController {
 			result.rejectValue("discountGold", "", "El descuento de Oro debe ser menor o igual que el de plata, y el de plata menor o igual que el de bronce");
 
 		}
-		
-		if (speedOffer.getStart()==null || speedOffer.getStart().isBefore(LocalDateTime.now())) {
+
+		if (speedOffer.getStart() == null || speedOffer.getStart().isBefore(LocalDateTime.now())) {
 			result.rejectValue("start", "", "La fecha de inicio debe ser futura");
 
 		}
 
-		if(speedOffer.getGold()!=null) {
-			LocalTime a= speedOffer.getGold();
-			model.put("gold",a);
+		if (speedOffer.getGold() != null) {
+			LocalTime a = speedOffer.getGold();
+			model.put("gold", a);
 		}
-		
-		if(speedOffer.getSilver()!=null) {
-			LocalTime b= speedOffer.getSilver();
-			model.put("silver",b);
+
+		if (speedOffer.getSilver() != null) {
+			LocalTime b = speedOffer.getSilver();
+			model.put("silver", b);
 		}
-		
-		if(speedOffer.getBronze()!=null) {
-			LocalTime c= speedOffer.getBronze();
-			model.put("bronze",c);
+
+		if (speedOffer.getBronze() != null) {
+			LocalTime c = speedOffer.getBronze();
+			model.put("bronze", c);
 		}
-		
-		
+
 		if (result.hasErrors()) {
-			
-			
+
 			return SpeedOfferController.VIEWS_SPEED_OFFER_CREATE_OR_UPDATE_FORM;
 		}
 
@@ -173,12 +171,10 @@ public class SpeedOfferController {
 	public String activateSpeedOffer(@PathVariable("speedOfferId") final int speedOfferId, final ModelMap modelMap) {
 		SpeedOffer speedOffer = this.speedOfferService.findSpeedOfferById(speedOfferId);
 		Client client = this.clientService.getCurrentClient();
-		if (speedOffer.getClient().equals(client)) {
+		if (speedOffer.getClient().equals(client) && !speedOffer.isInactive()) {
 			speedOffer.setStatus(StatusOffer.active);
 			speedOffer.setCode("SP-" + speedOfferId);
 			this.speedOfferService.saveSpeedOffer(speedOffer);
-		} else {
-			modelMap.addAttribute("message", "You don't have access to this speed offer");
 		}
 		return "redirect:/offers/speed/" + speedOffer.getId();
 	}
@@ -186,11 +182,8 @@ public class SpeedOfferController {
 	@GetMapping("/offers/speed/{speedOfferId}")
 	public String processShowForm(@PathVariable("speedOfferId") final int speedOfferId, final Map<String, Object> model) {
 		SpeedOffer speedOffer = this.speedOfferService.findSpeedOfferById(speedOfferId);
-		if (speedOffer.getStatus().equals(StatusOffer.active)) {
-			model.put("speedOffer", speedOffer);
-			model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-			return "offers/speed/speedOffersShow";
-		} else if (speedOffer.getStatus().equals(StatusOffer.hidden) && this.checkIdentity(speedOfferId)) {
+		if ((speedOffer.getStatus().equals(StatusOffer.active)) ||
+				(speedOffer.getStatus().equals(StatusOffer.hidden) && this.checkIdentity(speedOfferId))) {
 			model.put("speedOffer", speedOffer);
 			model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 			return "offers/speed/speedOffersShow";
@@ -232,6 +225,12 @@ public class SpeedOfferController {
 			result.rejectValue("end", "", "La fecha de fin debe ser posterior a la fecha de inicio");
 
 		}
+
+		if (speedOfferEdit.getStart() == null || speedOfferEdit.getStart().isBefore(LocalDateTime.now())) {
+			result.rejectValue("start", "", "La fecha de inicio debe ser futura");
+
+		}
+
 		if (!this.checkConditions(speedOfferEdit)) {
 			result.rejectValue("gold", "", "Los minutos de Oro deben ser menores o iguales que los de plata, y los de plata menores o iguales que los de bronce");
 

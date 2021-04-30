@@ -34,6 +34,7 @@ public class NuOfferController {
 	private final NuOfferService	nuOfferService;
 	private final ClientService		clientService;
 
+
 	public NuOfferController(final NuOfferService nuOfferService, final ClientService clientService) {
 		this.nuOfferService = nuOfferService;
 		this.clientService = clientService;
@@ -89,8 +90,8 @@ public class NuOfferController {
 	@GetMapping("/offers/nuOfferList/{page}")
 	public String processFindForm(@PathVariable("page") final int page, final Map<String, Object> model) {
 		Pageable elements = PageRequest.of(page, 5);
-		Pageable nextPage = PageRequest.of(page+1, 5);
-		
+		Pageable nextPage = PageRequest.of(page + 1, 5);
+
 		List<NuOffer> foodOfferLs = this.nuOfferService.findActiveNuOffer(elements);
 		for(int i=0; i<foodOfferLs.size();i++) {
 			NuOffer fo= foodOfferLs.get(i);
@@ -100,9 +101,9 @@ public class NuOfferController {
 			foodOfferLs.set(i, fo);
 		}
 		Integer next = this.nuOfferService.findActiveNuOffer(nextPage).size();
-		
+
 		model.put("municipios", Municipio.values());
-		
+
 		model.put("nuOfferLs", foodOfferLs);
 		model.put("nextPage", next);
 		model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
@@ -132,8 +133,8 @@ public class NuOfferController {
 			result.rejectValue("discountGold", "", "El descuento de Oro debe ser mayor o igual que el de plata, y el de plata mayor o igual que el de bronce");
 
 		}
-		
-		if (nuOffer.getStart()==null || nuOffer.getStart().isBefore(LocalDateTime.now())) {
+
+		if (nuOffer.getStart() == null || nuOffer.getStart().isBefore(LocalDateTime.now())) {
 			result.rejectValue("start", "", "La fecha de inicio debe ser futura");
 
 		}
@@ -156,13 +157,10 @@ public class NuOfferController {
 	public String activateNuOffer(@PathVariable("nuOfferId") final int nuOfferId, final ModelMap modelMap) {
 		Client client = this.clientService.getCurrentClient();
 		NuOffer nuOffer = this.nuOfferService.findNuOfferById(nuOfferId);
-		if (nuOffer.getClient().equals(client)) {
+		if (nuOffer.getClient().equals(client) && !nuOffer.isInactive()) {
 			nuOffer.setStatus(StatusOffer.active);
 			nuOffer.setCode("NU-" + nuOfferId);
 			this.nuOfferService.saveNuOffer(nuOffer);
-
-		} else {
-			modelMap.addAttribute("message", "You don't have access to this number offer");
 		}
 		return "redirect:/offers/nu/" + nuOffer.getId();
 
@@ -171,11 +169,8 @@ public class NuOfferController {
 	@GetMapping("/offers/nu/{nuOfferId}")
 	public String processShowForm(@PathVariable("nuOfferId") final int nuOfferId, final Map<String, Object> model) {
 		NuOffer nuOffer = this.nuOfferService.findNuOfferById(nuOfferId);
-		if (nuOffer.getStatus().equals(StatusOffer.active)) {
-			model.put("nuOffer", nuOffer);
-			model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-			return "offers/nu/nuOffersShow";
-		} else if (nuOffer.getStatus().equals(StatusOffer.hidden) && this.checkIdentity(nuOfferId)) {
+		if ((nuOffer.getStatus().equals(StatusOffer.active)) ||
+				(nuOffer.getStatus().equals(StatusOffer.hidden) && this.checkIdentity(nuOfferId))) {
 			model.put("nuOffer", nuOffer);
 			model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 			return "offers/nu/nuOffersShow";
@@ -217,6 +212,12 @@ public class NuOfferController {
 			result.rejectValue("end", "", "La fecha de fin debe ser posterior a la fecha de inicio");
 
 		}
+
+		if (nuOfferEdit.getStart() == null || nuOfferEdit.getStart().isBefore(LocalDateTime.now())) {
+			result.rejectValue("start", "", "La fecha de inicio debe ser futura");
+
+		}
+
 		if (!this.checkConditions(nuOfferEdit)) {
 			result.rejectValue("gold", "", "Oro debe ser mayor o igual que plata, y plata mayor o igual que bronce");
 

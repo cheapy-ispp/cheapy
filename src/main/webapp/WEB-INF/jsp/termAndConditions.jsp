@@ -101,10 +101,13 @@
 		<br>
 		<li type="circle"><p>La relación e interacción con los establecimientos a la hora de la aplicación de las ofertas se deja en manos tanto del local como del usuario. Nosotros solo mostramos un panel de ofertas, el uso y aplicación de estas queda en los individuos. </p></li>
 		<br>
+		<li type="circle"><p>Los usuarios pueden realizar reseñas sobre los locales o sobre nuestra aplicación. No obstante, cualquiera texto considerado ofensivo o con contenido del mismo tipo llevará a una penalización o a la desactivación permanente de su cuenta.</p></li> 
+		<br>
 		<li type="circle"><p>Si decides eliminar tu cuenta de Cheapy por completo, todas las reseñas realizadas desaparecerán con tu cuenta.  </p></li>			
 	</ul>
    <h2 class="titulo" style="font-family: 'Lobster'; font-size: 200%; color: rgb(0, 64, 128); padding:30px"><fmt:message key="termAndConditions1.4"/></h2>
    <p>En caso de cualquier problema, ponemos a su disposición nuestro correo corporativo (cheapy.ispp@gmail.com) donde responderemos al correo con el que se nos haya escrito.  </p>
+   <p>Si se detectan campos rellenados con palabras ofensivas o contenido inapropiado, se sancionará dicha cuenta de la forma que se vea apropiada.<p>
    <p>Si desea apelar a cualquiera de los casos descritos en los apartados anteriores, por favor lea con detenimiento las cláusulas y use los asuntos que se describen para una mayor agilidad de nuestro equipo. </p>
    
   

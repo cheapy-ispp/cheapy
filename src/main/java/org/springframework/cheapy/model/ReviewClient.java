@@ -22,7 +22,16 @@ private static final long serialVersionUID = 1L;
 	
 	@NotNull(message= "Por favor rellene este campo")
 	@Range(min = 1, max = 5,message="Las estrellas deben ir entre 1 y 5")
-	private Integer stars;
+	private Integer service;
+	
+	@NotNull(message= "Por favor rellene este campo")
+	@Range(min = 1, max = 5,message="Las estrellas deben ir entre 1 y 5")
+	private Integer food;
+	
+	@Column(name = "quality_price")
+	@NotNull(message= "Por favor rellene este campo")
+	@Range(min = 1, max = 5,message="Las estrellas deben ir entre 1 y 5")
+	private Integer qualityPrice;
 
 	@ManyToOne
 	@JoinColumn(name = "username", referencedColumnName = "username")
@@ -31,6 +40,11 @@ private static final long serialVersionUID = 1L;
 	@ManyToOne
 	@JoinColumn(name = "client", referencedColumnName = "id")
 	private Client bar;
+	
+	public Integer getMedia() {
+		Double media = (((double)this.service + (double)this.food + (double)this.qualityPrice)/3);
+		return (int) Math.round(media);	
+	}
 	
 	public User getEscritor() {
 		return escritor;
@@ -56,12 +70,28 @@ private static final long serialVersionUID = 1L;
 		this.opinion = opinion;
 	}
 
-	public Integer getStars() {
-		return stars;
+	public Integer getService() {
+		return service;
 	}
 
-	public void setStars(Integer stars) {
-		this.stars = stars;
+	public void setService(Integer service) {
+		this.service = service;
 	}
-	
+
+	public Integer getFood() {
+		return food;
+	}
+
+	public void setFood(Integer food) {
+		this.food = food;
+	}
+
+	public Integer getQualityPrice() {
+		return qualityPrice;
+	}
+
+	public void setQualityPrice(Integer qualityPrice) {
+		this.qualityPrice = qualityPrice;
+	}
+
 }

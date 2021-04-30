@@ -11,8 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,37 +27,45 @@ import org.springframework.cheapy.model.StatusOffer;
 import org.springframework.cheapy.model.User;
 import org.springframework.cheapy.service.ClientService;
 import org.springframework.cheapy.service.FoodOfferService;
+import org.springframework.cheapy.service.NuOfferService;
+import org.springframework.cheapy.service.SpeedOfferService;
+import org.springframework.cheapy.service.TimeOfferService;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 
 
-@WebMvcTest(value = FoodOfferController.class, 
+@WebMvcTest(value = OfertaController.class, 
 excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class),
 excludeAutoConfiguration = SecurityConfiguration.class)
-class FoodOfferControllerTest {
+class OfertaControllerTest {
 
 	private static final int TEST_CLIENT_ID = 1;
-	private static final int TEST_CLIENT_2_ID = 2;
 	private static final int TEST_FOODOFFER_ID = 1;
 
 	@Autowired
 	private MockMvc mockMvc;
 
 	@MockBean
+	private  ClientService		clientService;
+	
+	@MockBean
 	private FoodOfferService foodOfferService;
 	
 	@MockBean
-	private ClientService clientService;
+	private NuOfferService nuOfferService;
+	
+	@MockBean
+	private SpeedOfferService	speedOfferService;
+	
+	@MockBean
+	private TimeOfferService	timeOfferService;
 
 	private FoodOffer fo1;
 	private Client clientTest;
-	private Client clientTest2;
-	private List<FoodOffer> foodOfferLs;
 
 	@BeforeEach
 	void setup() {
@@ -76,109 +83,67 @@ class FoodOfferControllerTest {
 		client1.setDescription("client1");
 		client1.setFood("client1");
 		client1.setUsuar(user1);
-		this.clientTest = client1;
+		clientTest = client1;
 		BDDMockito.given(this.clientService.getCurrentClient()).willReturn(client1);
 		
-		User user2 = new User();
-		user2.setUsername("user2");
-		user2.setPassword("user2");
-		Client client2 = new Client();
-		client2.setId(TEST_CLIENT_2_ID);
-		client2.setName("client2");
-		client2.setEmail("client2");
-		client2.setAddress("client2");
-		client2.setInit(LocalTime.of(01, 00));
-		client2.setFinish(LocalTime.of(01, 01));
-		client2.setTelephone("123456789");
-		client2.setDescription("client2");
-		client2.setFood("client2");
-		client2.setUsuar(user2);
-		this.clientTest2 = client2;
-		
-		FoodOffer fo1test = new FoodOffer();
-		fo1test.setId(TEST_FOODOFFER_ID);
-		fo1test.setStart(LocalDateTime.of(2021, 12, 23, 12, 30));
-		fo1test.setEnd(LocalDateTime.of(2022, 12, 23, 12, 30));
-		fo1test.setFood("fo1test");
-		fo1test.setDiscount(1);
-		fo1test.setPrice(10.0);
-		fo1test.setStatus(StatusOffer.hidden);
-		fo1test.setCode("");
-		fo1test.setClient(client1);
-		this.fo1 = fo1test;
-		BDDMockito.given(this.foodOfferService.findFoodOfferById(TEST_FOODOFFER_ID)).willReturn(this.fo1);
-		
-		List<FoodOffer> foodOfferLsTest = new ArrayList<>();
-		foodOfferLsTest.add(fo1test);
-		this.foodOfferLs = foodOfferLsTest;
-		BDDMockito.given(this.foodOfferService.findActiveFoodOffer(PageRequest.of(0, 5))).willReturn(this.foodOfferLs);
+	}
+
+	@WithMockUser(value = "spring", authorities = "client")
+	@Test
+	void testInitCreationFormByName() throws Exception {
+		mockMvc.perform(get("/offersByName/{page}?name=bar",0).with(csrf()))
+				.andExpect(status().isOk())
+				.andExpect(model().attributeExists("datos"))
+				.andExpect(view().name("offers/offersListNameSearch"));
 	}
 	
 	@WithMockUser(value = "spring", authorities = "client")
 	@Test
-	void testFind() throws Exception {
-		mockMvc.perform(get("/offers/foodOfferList/{page}", 0))
+	void testInitCreationFormByFood() throws Exception {
+		mockMvc.perform(get("/offersByFood/{page}",0).with(csrf()))
 				.andExpect(status().isOk())
-				.andExpect(model().attributeExists("municipios"))
-				.andExpect(model().attribute("municipios", Municipio.values()))
+				.andExpect(model().attributeExists("datos"))
+				.andExpect(view().name("offers/offersListFoodSearch"));
+	}
+	
+	@WithMockUser(value = "spring", authorities = "client")
+	@Test
+	void testInitCreationFormByPlace() throws Exception {
+		mockMvc.perform(get("/offersByPlace/{page}?municipio={mun}",0,Municipio.Sevilla).with(csrf()))
+				.andExpect(status().isOk())
+				.andExpect(view().name("offers/offersListPlaceSearch"));
+	}
+	
+	@WithMockUser(value = "spring", authorities = "client")
+	@Test
+	void testInitCreationFormByDate() throws Exception {
+		mockMvc.perform(get("/offersByDate/{page}?start={date}",0,"2021-08-16T14:00").with(csrf()))
+				.andExpect(status().isOk())
+				.andExpect(view().name("offers/offersListFoodSearch"));
+	}
+	
+	@WithMockUser(value = "spring", authorities = "client")
+	@Test
+	void processFindForm() throws Exception {
+		mockMvc.perform(get("/offers").with(csrf()))
+				.andExpect(status().isOk())
 				.andExpect(model().attributeExists("foodOfferLs"))
-				.andExpect(model().attribute("foodOfferLs", foodOfferLs))
+				.andExpect(model().attributeExists("nuOfferLs"))
+				.andExpect(model().attributeExists("speedOfferLs"))
+				.andExpect(model().attributeExists("timeOfferLs"))
+				.andExpect(model().attributeExists("municipios"))
 				.andExpect(model().attributeExists("localDateTimeFormat"))
-//				.andExpect(model().attribute("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")))
-				.andExpect(view().name("offers/food/foodOffersList"));
+				.andExpect(view().name("offers/offersList"));
 	}
 	
 	@WithMockUser(value = "spring", authorities = "client")
 	@Test
-	void testShowActive() throws Exception {
-		mockMvc.perform(get("/offers/food/{foodOfferId}", TEST_FOODOFFER_ID))
+	void testMyOffers() throws Exception {
+		mockMvc.perform(get("/myOffers").with(csrf()))
 				.andExpect(status().isOk())
-				.andExpect(model().attributeExists("foodOffer"))
-				.andExpect(model().attribute("foodOffer", fo1))
-				.andExpect(model().attributeExists("newPrice"))
-				.andExpect(model().attribute("newPrice", fo1.getNewPrice()))
-				.andExpect(model().attributeExists("localDateTimeFormat"))
-//				.andExpect(model().attribute("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")))
-				.andExpect(view().name("offers/food/foodOffersShow"));
+				.andExpect(view().name("offers/myOffersList"));
 	}
-	
-	@WithMockUser(value = "spring", authorities = "client")
-	@Test
-	void testShowHiddenSuccess() throws Exception {
-		
-		fo1.setStatus(StatusOffer.hidden);
-		
-		mockMvc.perform(get("/offers/food/{foodOfferId}", TEST_FOODOFFER_ID))
-				.andExpect(status().isOk())
-				.andExpect(model().attributeExists("foodOffer"))
-				.andExpect(model().attribute("foodOffer", fo1))
-				.andExpect(model().attributeExists("newPrice"))
-				.andExpect(model().attribute("newPrice", fo1.getNewPrice()))
-				.andExpect(model().attributeExists("localDateTimeFormat"))
-//				.andExpect(model().attribute("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")))
-				.andExpect(view().name("offers/food/foodOffersShow"));
-	}
-	
-	@WithMockUser(value = "spring", authorities = "client")
-	@Test
-	void testShowHiddenHasErrors() throws Exception {
-		
-		fo1.setStatus(StatusOffer.hidden);
-		fo1.setClient(clientTest2);
-		
-		mockMvc.perform(get("/offers/food/{foodOfferId}", TEST_FOODOFFER_ID))
-				.andExpect(view().name("error"));
-	}
-
-	@WithMockUser(value = "spring", authorities = "client")
-	@Test
-	void testInitCreationForm() throws Exception {
-		mockMvc.perform(get("/offers/food/new"))
-				.andExpect(status().isOk())
-				.andExpect(model().attributeExists("foodOffer"))
-				.andExpect(view().name("offers/food/createOrUpdateFoodOfferForm"));
-	}
-
+/*
 	@WithMockUser(value = "spring", authorities = "client")
 	@Test
 	void testProcessCreationFormSuccess() throws Exception {
@@ -325,5 +290,5 @@ class FoodOfferControllerTest {
 		mockMvc.perform(post("/offers/food/{foodOfferId}/disable", TEST_FOODOFFER_ID)
 				.with(csrf()))
 				.andExpect(view().name("error"));
-	}
+	}*/
 }

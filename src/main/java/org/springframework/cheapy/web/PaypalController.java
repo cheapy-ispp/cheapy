@@ -7,21 +7,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cheapy.model.Authorities;
 import org.springframework.cheapy.model.Client;
 import org.springframework.cheapy.model.Order;
-import org.springframework.cheapy.model.Usuario;
 import org.springframework.cheapy.service.AuthoritiesService;
 import org.springframework.cheapy.service.ClientService;
 import org.springframework.cheapy.service.PaypalService;
-import org.springframework.cheapy.service.UsuarioService;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -52,14 +45,6 @@ public class PaypalController {
 		order.setMethod("paypal");
 		order.setPrice(30);
 		order.setDescription("Suscripción a Cheapy para bares o restaurantes de 1 mes.");
-		
-		Client client = this.clientservice.getCurrentClient();
-		
-		if (true) {
-			//Checkear si el cliente esta suscrito
-		} else {
-			return "redirect:/";
-		}
 
 		model.put("order", order);
 		return "pay/createPaymentForm";

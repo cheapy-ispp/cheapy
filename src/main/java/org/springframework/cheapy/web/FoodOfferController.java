@@ -69,7 +69,7 @@ public class FoodOfferController {
 	@GetMapping("/offers/foodOfferList/{page}")
 	public String processFindForm(@PathVariable("page") final int page, final Map<String, Object> model) {
 		Pageable elements = PageRequest.of(page, 5);
-		Pageable nextPage = PageRequest.of(page+1, 5);
+		Pageable nextPage = PageRequest.of(page + 1, 5);
 
 		List<FoodOffer> foodOfferLs = this.foodOfferService.findActiveFoodOffer(elements);
 		for(int i=0; i<foodOfferLs.size();i++) {
@@ -80,9 +80,9 @@ public class FoodOfferController {
 			foodOfferLs.set(i, fo);
 		}
 		Integer next = this.foodOfferService.findActiveFoodOffer(nextPage).size();
-		
+
 		model.put("municipios", Municipio.values());
-		
+
 		model.put("foodOfferLs", foodOfferLs);
 		model.put("nextPage", next);
 		model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
@@ -104,12 +104,12 @@ public class FoodOfferController {
 			result.rejectValue("end", "", "La fecha de fin debe ser posterior a la fecha de inicio");
 
 		}
-		
-		if (foodOffer.getStart()==null || foodOffer.getStart().isBefore(LocalDateTime.now())) {
+
+		if (foodOffer.getStart() == null || foodOffer.getStart().isBefore(LocalDateTime.now())) {
 			result.rejectValue("start", "", "La fecha de inicio debe ser futura");
 
 		}
-		
+
 		if (result.hasErrors()) {
 			return FoodOfferController.VIEWS_FOOD_OFFER_CREATE_OR_UPDATE_FORM;
 		}
@@ -125,13 +125,12 @@ public class FoodOfferController {
 	public String activateFoodOffer(@PathVariable("foodOfferId") final int foodOfferId, final ModelMap modelMap) {
 		FoodOffer foodOffer = this.foodOfferService.findFoodOfferById(foodOfferId);
 		Client client = this.clientService.getCurrentClient();
-		if (foodOffer.getClient().equals(client)) {
+		if (foodOffer.getClient().equals(client) && !foodOffer.isInactive()) {
 			foodOffer.setStatus(StatusOffer.active);
 			foodOffer.setCode("FO-" + foodOfferId);
 			this.foodOfferService.saveFoodOffer(foodOffer);
-		} else {
-			modelMap.addAttribute("message", "You don't have access to this food offer");
 		}
+
 		return "redirect:/offers/food/" + foodOfferId;
 
 	}
@@ -140,17 +139,13 @@ public class FoodOfferController {
 	public String processShowForm(@PathVariable("foodOfferId") final int foodOfferId, final Map<String, Object> model) {
 
 		FoodOffer foodOffer = this.foodOfferService.findFoodOfferById(foodOfferId);
-		if (foodOffer.getStatus().equals(StatusOffer.active)) {
+		if ((foodOffer.getStatus().equals(StatusOffer.active)) ||
+				(foodOffer.getStatus().equals(StatusOffer.hidden) && this.checkIdentity(foodOfferId))) {
 			model.put("foodOffer", foodOffer);
 			model.put("newPrice", foodOffer.getNewPrice());
 			model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 			return "offers/food/foodOffersShow";
-
-		} else if (foodOffer.getStatus().equals(StatusOffer.hidden) && this.checkIdentity(foodOfferId)) {
-			model.put("foodOffer", foodOffer);
-			model.put("newPrice", foodOffer.getNewPrice());
-			model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-			return "offers/food/foodOffersShow";
+			
 		} else {
 			return "error";
 		}
@@ -181,6 +176,11 @@ public class FoodOfferController {
 		FoodOffer foodOffer = this.foodOfferService.findFoodOfferById(id);
 		if (!this.checkOffer(foodOffer, foodOfferEdit)) {
 			return "error";
+		}
+
+		if (foodOfferEdit.getStart() == null || foodOfferEdit.getStart().isBefore(LocalDateTime.now())) {
+			result.rejectValue("start", "", "La fecha de inicio debe ser futura");
+
 		}
 
 		if (!this.checkDates(foodOfferEdit)) {

@@ -44,10 +44,7 @@
             <td><c:out value="${client.description}"/> </td>
         </tr><tr>
             <th><fmt:message key="foodClient"/></th>
-            <td><c:out value="${client.food}"/> </td>
-   
-        
-        
+            <td><c:out value="${client.food}"/> </td>      
         
         </thead>
     </table>
@@ -75,6 +72,23 @@
     	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(reviewsCreateUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 		Valorar</button>
  	
+ 	</sec:authorize>
+ 	
+ 	<sec:authorize access="hasAnyAuthority('usuario')">
+ 	    <c:if test="${favoritos == 1}">
+    	<spring:url value="/usuarios/favoritos/{clientId}/remove" var="favoritosUrl">
+    		<spring:param name="clientId" value="${client.id}"/>
+    	</spring:url>
+    	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(favoritosUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+		Quitar de favoritos</button>
+ 		</c:if>
+ 		<c:if test="${favoritos == 2}">
+    	<spring:url value="/usuarios/favoritos/{clientId}/add" var="favoritosUrl">
+    		<spring:param name="clientId" value="${client.id}"/>
+    	</spring:url>
+    	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(favoritosUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+		Añadir a favoritos</button>
+ 		</c:if>
  	</sec:authorize>
   	</div>
   	</div>

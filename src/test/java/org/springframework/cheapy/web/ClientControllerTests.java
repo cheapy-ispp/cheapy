@@ -26,12 +26,14 @@ import org.springframework.cheapy.model.NuOffer;
 import org.springframework.cheapy.model.SpeedOffer;
 import org.springframework.cheapy.model.TimeOffer;
 import org.springframework.cheapy.model.User;
+import org.springframework.cheapy.model.Usuario;
 import org.springframework.cheapy.service.ClientService;
 import org.springframework.cheapy.service.FoodOfferService;
 import org.springframework.cheapy.service.NuOfferService;
 import org.springframework.cheapy.service.SpeedOfferService;
 import org.springframework.cheapy.service.TimeOfferService;
 import org.springframework.cheapy.service.UserService;
+import org.springframework.cheapy.service.UsuarioService;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
@@ -55,6 +57,9 @@ class ClientControllerTest {
 	
 	@MockBean
 	private UserService userService;
+	
+	@MockBean
+	private UsuarioService usuarioService;
 	
 	@MockBean
 	private FoodOfferService foodOfferService;
@@ -89,6 +94,11 @@ class ClientControllerTest {
 		BDDMockito.given(this.clientService.getCurrentClient()).willReturn(client1);
 		BDDMockito.given(this.clientService.findById(TEST_CLIENT_ID)).willReturn(client1);
 		
+		Usuario usuario = new Usuario();
+		usuario.getFavoritos().add(client1);
+		BDDMockito.given(usuarioService.getCurrentUsuario()).willReturn(usuario);
+		BDDMockito.given(this.clientService.mediaValoraciones(client1)).willReturn(1);
+		
 		BDDMockito.given(this.foodOfferService.findFoodOfferActOclByUserId(1)).willReturn(new ArrayList<FoodOffer>());
 		BDDMockito.given(this.nuOfferService.findNuOfferActOclByUserId(1)).willReturn(new ArrayList<NuOffer>());
 		BDDMockito.given(this.speedOfferService.findSpeedOfferActOclByUserId(1)).willReturn(new ArrayList<SpeedOffer>());
@@ -119,7 +129,6 @@ class ClientControllerTest {
 	void testProcessUpdateFormSuccess() throws Exception {
 		mockMvc.perform(post("/clients/edit")
 					.with(csrf())
-					.param("usuar.password", "Contrasenya123")
 					.param("init", "11:30")
 					.param("finish", "23:30")
 					.param("expiration", "3000-12-30")
@@ -140,7 +149,6 @@ class ClientControllerTest {
 	void testProcessUpdateFormHasErrors() throws Exception {
 		mockMvc.perform(post("/clients/edit")
 					.with(csrf())
-					.param("usuar.password", "")
 					.param("init", "24:30")
 					.param("finish", "a:30")
 					.param("name", "")
@@ -152,7 +160,6 @@ class ClientControllerTest {
 					.param("food", "")
 					.param("municipio", "Dos Hermanas"))
 				.andExpect(model().attributeHasErrors("client"))
-				.andExpect(model().attributeHasFieldErrors("client", "usuar.password"))
 				.andExpect(model().attributeHasFieldErrors("client", "init"))
 				.andExpect(model().attributeHasFieldErrors("client", "finish"))
 				.andExpect(model().attributeHasFieldErrors("client", "expiration"))
@@ -213,5 +220,69 @@ class ClientControllerTest {
 		Assertions.assertTrue(cliente.getTelephone()=="000000000");	
 		Assertions.assertTrue(cliente.getMunicipio()==Municipio.Sevilla);
 		Assertions.assertTrue(cliente.getUsuar()==null);
+	}
+	
+	@WithMockUser(value = "spring", authorities = "client")
+	@Test
+	void testProcessUpdatePassClientSuccess() throws Exception {
+		mockMvc.perform(get("/clients/edit/password")
+				.with(csrf()))
+				.andExpect(model().attributeExists("client"))
+				.andExpect(status().isOk())
+				.andExpect(view().name("clients/password"));
+	}
+	
+	@WithMockUser(value = "spring", authorities = "client")
+	@Test
+	void testUpdatePassUsuarioSuccess() throws Exception {
+		mockMvc.perform(post("/clients/edit/password")
+				.with(csrf())
+				.param("init", "11:30")
+				.param("finish", "23:30")
+				.param("expiration", "3000-12-30")
+				.param("name", "Restaurante Pepe")
+				.param("email", "pepe@hotmail.es")
+				.param("address", "Pirineos 10")
+				.param("telephone", "654999999")
+				.param("description", "Comida al mejor precio")
+				.param("food", "Americana")
+				.param("municipio", "Dos_Hermanas")
+				.param("usuar.password", "testSuccess"))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/clients/show"));
+	}
+	
+	@WithMockUser(value = "spring", authorities = "client")
+	@Test
+	void testUpdatePassUsuarioError() throws Exception {
+		mockMvc.perform(post("/clients/edit/password")
+				.with(csrf())
+				.param("init", "11:30")
+				.param("finish", "23:30")
+				.param("expiration", "3000-12-30")
+				.param("name", "Restaurante Pepe")
+				.param("email", "pepe@hotmail.es")
+				.param("address", "Pirineos 10")
+				.param("telephone", "654999999")
+				.param("description", "Comida al mejor precio")
+				.param("food", "Americana")
+				.param("municipio", "Dos_Hermanas")
+				.param("usuar.password", ""))
+				.andExpect(model().attributeHasFieldErrors("client","usuar.password"))
+				.andExpect(status().isOk())
+				.andExpect(view().name("clients/password"));
+	}
+	
+	@WithMockUser(value = "spring", authorities = "client")
+	@Test
+	void testShowRestaurant() throws Exception {
+		mockMvc.perform(get("/restaurant/"+TEST_CLIENT_ID)
+				.with(csrf()))
+				.andExpect(model().attributeExists("favoritos"))
+				.andExpect(model().attribute("favoritos",1))	
+				.andExpect(model().attributeExists("client"))
+				.andExpect(model().attributeExists("reviews"))
+				.andExpect(status().isOk())
+				.andExpect(view().name("clients/restaurantShow"));
 	}
 }

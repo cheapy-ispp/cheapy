@@ -1,5 +1,6 @@
 package org.springframework.cheapy.web;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -52,6 +53,7 @@ public class ReviewClientController {
 		Client bar = this.clientService.findByUsername(client);
 		return (bar == null||user==null)? false: true;
 	}
+	
 	@GetMapping("/reviewsClient/new/{idClient}")
 	public String initCreationForm(final Map<String, Object> model, @PathVariable("idClient") final String idClient) {
 		if(!checkClient(idClient)) {
@@ -96,8 +98,14 @@ public class ReviewClientController {
 
 		List<ReviewClient> reviewsLs = this.reviewService.findAllReviewsByBar(elements,client);
 		Integer next = this.reviewService.findAllReviewsByBar(nextPage,client).size();
+		
+		List<Object[]> datos = new ArrayList<Object[]>();
+        for(ReviewClient re: reviewsLs) {
+            Object[] r = {re, re.getMedia()};
+            datos.add(r);
+        }
+		model.put("datos", datos);
 		model.put("nextPage", next);
-		model.put("reviewsLs", reviewsLs);
 		model.put("client", idClient);
 		model.put("restaurant", client.getName());
 
@@ -108,17 +116,8 @@ public class ReviewClientController {
 	@GetMapping("/myClientReviews")
 	public String processFindMyReviewsForm(final Map<String, Object> model) {
 		
-		Pageable elements = PageRequest.of(0, 6);
-		Pageable nextPage = PageRequest.of(0+1, 6);
 		Client client = this.clientService.getCurrentClient();
-
-		List<ReviewClient> reviewsLs = this.reviewService.findAllReviewsByBar(elements,client);
-		Integer next = this.reviewService.findAllReviewsByBar(nextPage,client).size();
 		model.put("page", 0);
-		model.put("nextPage", next);
-		model.put("reviewsLs", reviewsLs);
-		model.put("client", client.getUsuar().getUsername());
-		model.put("restaurant", client.getName());
 
 		return processFindForm(0, client.getUsuar().getUsername(), model);
 
