@@ -9,7 +9,7 @@
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
 <cheapy:layout pageName="cliente">
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px">
+    <h2 class="titulo" style="font-family: 'Lobster'; text-align:center; font-size:200%;  padding:10px">
         <fmt:message key="CambiarContraseña"/>
     </h2>
     
@@ -25,7 +25,7 @@
 	        <form:hidden path="description"/>
 	       	<form:hidden path="food"/>	
             <input hidden="true" readonly name="expiration" value="${client.expiration}" />	  	       	      
-            <cheapy:passwordField label="Nueva contraseña"  name="usuar.password"/>
+            <cheapy:passwordEditField label="Nueva contraseña"  name="usuar.password"/>
 					        
             
         </div>

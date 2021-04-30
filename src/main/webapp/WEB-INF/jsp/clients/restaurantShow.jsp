@@ -10,7 +10,7 @@
 
 <cheapy:layout pageName="client">
 
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px; text-transform: uppercase;"><c:out value="${client.name}"/></h2>
+    <h2 class="titulo" style="font-family: 'Lobster'; text-align:center; font-size:200%; padding:10px; text-transform: uppercase;"><c:out value="${client.name}"/></h2>
 
 
 	

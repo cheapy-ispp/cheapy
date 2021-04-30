@@ -93,6 +93,13 @@ public class NuOfferController {
 		Pageable nextPage = PageRequest.of(page + 1, 5);
 
 		List<NuOffer> foodOfferLs = this.nuOfferService.findActiveNuOffer(elements);
+		for(int i=0; i<foodOfferLs.size();i++) {
+			NuOffer fo= foodOfferLs.get(i);
+			String aux=fo.getClient().getName().substring(0, 1).toUpperCase();
+			fo.getClient().setName(aux+fo.getClient().getName().substring(1));
+			
+			foodOfferLs.set(i, fo);
+		}
 		Integer next = this.nuOfferService.findActiveNuOffer(nextPage).size();
 
 		model.put("municipios", Municipio.values());

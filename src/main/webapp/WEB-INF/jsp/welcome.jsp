@@ -11,7 +11,7 @@
  
 
 <cheapy:layout pageName="home"> 
-    <h2 class="text-center" style="font-family: 'Lobster'; font-size: 300%; color: rgb(0, 64, 128); padding:30px"><fmt:message key="welcome"/></h2>
+    <h2 class="titulo" style="font-family: 'Lobster'; font-size: 300%; color: #325a80; padding:30px"><fmt:message key="welcome"/></h2>
     <div class="row">
         <div class="col-md-12">
             <div class="img-home">
@@ -20,7 +20,7 @@
             </div>
             <div class="btn-home-max">
 	            <div class="btn-home">
-	                <button type="button" role="link" onclick="window.location='/offers'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
+	                <button type="button" role="link" onclick="window.location='/offers'" style="font-family: 'Lobster'; background-color: #325a80; font-size: 20px;margin:5px;" class="btn-block">
 	                <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
 	                <fmt:message key="listOffers"/> </button>
 	            </div>

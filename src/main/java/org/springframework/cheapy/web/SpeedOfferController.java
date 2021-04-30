@@ -93,6 +93,13 @@ public class SpeedOfferController {
 		Pageable nextPage = PageRequest.of(page + 1, 5);
 
 		List<SpeedOffer> speedOfferLs = this.speedOfferService.findActiveSpeedOffer(elements);
+		for(int i=0; i<speedOfferLs.size();i++) {
+			SpeedOffer fo= speedOfferLs.get(i);
+			String aux=fo.getClient().getName().substring(0, 1).toUpperCase();
+			fo.getClient().setName(aux+fo.getClient().getName().substring(1));
+			
+			speedOfferLs.set(i, fo);
+		}
 		Integer next = this.speedOfferService.findActiveSpeedOffer(nextPage).size();
 
 		model.put("municipios", Municipio.values());

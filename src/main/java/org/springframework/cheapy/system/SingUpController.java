@@ -61,7 +61,7 @@ public class SingUpController {
 		return res;
 	}
 
-	@GetMapping("/users/new")
+	@GetMapping("/sign-up-user/new")
 	public String singUpUserForm(Map<String, Object> model) {
 		Map<Object, String> municipios = new HashMap<Object, String>();
 		
@@ -83,7 +83,7 @@ public class SingUpController {
 		return "singup/singUpUser";
 	}
 
-	@PostMapping("/users/new")
+	@PostMapping("/sign-up-user/new")
 	public String singUpUserForm(@Valid Usuario usuario, BindingResult result, Map<String, Object> model) {
 		Authorities auth=new Authorities();
 		User user= usuario.getUsuar();
@@ -135,7 +135,7 @@ public class SingUpController {
 		}
 	}
 
-	@GetMapping("/clients/new")
+	@GetMapping("/sign-up-client/new")
 	public String singUpClientForm(Map<String, Object> model) {
 		Map<Object, String> municipios = new HashMap<Object, String>();
 		
@@ -159,7 +159,7 @@ public class SingUpController {
 		return "singup/singUpClient";
 	}
 
-	@PostMapping("/clients/new")
+	@PostMapping("/sign-up-client/new")
 	public String singUpClientForm(@ModelAttribute("cliente") @Valid Client cliente, BindingResult result,  Map<String, Object> model) {
 		Authorities auth=new Authorities();
 		User user= cliente.getUsuar();

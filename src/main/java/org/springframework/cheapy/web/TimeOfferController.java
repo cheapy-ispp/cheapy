@@ -79,6 +79,13 @@ public class TimeOfferController {
 		Pageable nextPage = PageRequest.of(page + 1, 5);
 
 		List<TimeOffer> timeOfferLs = this.timeOfferService.findActiveTimeOffer(elements);
+		for(int i=0; i<timeOfferLs.size();i++) {
+			TimeOffer fo= timeOfferLs.get(i);
+			String aux=fo.getClient().getName().substring(0, 1).toUpperCase();
+			fo.getClient().setName(aux+fo.getClient().getName().substring(1));
+			
+			timeOfferLs.set(i, fo);
+		}
 		Integer next = this.timeOfferService.findActiveTimeOffer(nextPage).size();
 
 		model.put("municipios", Municipio.values());

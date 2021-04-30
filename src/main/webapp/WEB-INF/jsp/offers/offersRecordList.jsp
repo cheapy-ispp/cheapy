@@ -21,7 +21,7 @@
 	
 	</script>
 
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px">Historial de Ofertas</h2>
+    <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%; padding:10px">Historial de Ofertas</h2>
 	<c:if test="${empty datos }">
 		<p id="vacio" >No hay ninguna oferta creada.</p>
 	</c:if>
@@ -56,7 +56,7 @@
 		                    	<c:out value="Por número de comensales"/>
 		                    </c:if>
 		                    <c:if test="${datos[1] == 'speed'}">
-		                    	<c:out value="Por rapidez"/>
+		                    	<c:out value="Por velocidad"/>
 		                    </c:if>
 		                    <c:if test="${datos[1] == 'food'}">
 		                    	<c:out value="Por plato específico"/>

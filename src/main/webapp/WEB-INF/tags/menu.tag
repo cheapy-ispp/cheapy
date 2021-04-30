@@ -132,13 +132,13 @@
 					<!--<li><a href="<c:url value="/login" />">Iniciar sesi�n</a></li>-->
 				</sec:authorize>
 				<sec:authorize access="!isAuthenticated()">
-					<cheapy:menuItem active="${name eq 'singUpUser'}" url="/users/new" title="singUpUser">
+					<cheapy:menuItem active="${name eq 'singUpUser'}" url="/sign-up-user/new" title="singUpUser">
 						<span>Registrarse Usuario</span>
 					</cheapy:menuItem> 
 					<!--<li><a href="<c:url value="/users/new" />">Registrarse Usuario</a></li>-->
 				</sec:authorize>
 				<sec:authorize access="!isAuthenticated()">
-					<cheapy:menuItem active="${name eq 'singUpClient'}" url="/clients/new" title="singUpClient">
+					<cheapy:menuItem active="${name eq 'singUpClient'}" url="/sign-up-client/new" title="singUpClient">
 						<span>Registrarse Cliente</span>
 					</cheapy:menuItem> 
 					<!--<li><a href="<c:url value="/clients/new" />">Registrarse Cliente</a></li>-->
@@ -154,7 +154,7 @@
 								<div class="navbar-login">
 									<div class="row" >
 										<div class="col-lg-4" style="">
-											<p class="text-center">
+											<p class="titulo">
 												<span class="glyphicon glyphicon-user icon-size" ></span>
 											</p>
 										</div>
@@ -164,7 +164,7 @@
 											</p>
 											<form action="/logout" method=post>
 												<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-												<input type="submit" value="Salir" style="align-content:center;color:white;background-color:#004080;padding:10px; border:none; text-align:center;margin:auto">
+												<input  type="submit" value="Salir" style="align-content:center; padding:10px; border:none; text-align:center;margin:auto; background-color: #325a80">
 											</form>
 										</div>
 									</div>

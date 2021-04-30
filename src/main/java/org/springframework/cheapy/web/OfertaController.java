@@ -50,9 +50,37 @@ public class OfertaController {
 		Pageable elements = PageRequest.of(0, 3);
 
 		List<FoodOffer> foodOfferLs = this.foodOfferService.findActiveFoodOffer(elements);
+		for(int i=0; i<foodOfferLs.size();i++) {
+			FoodOffer fo= foodOfferLs.get(i);
+			String aux=fo.getClient().getName().substring(0, 1).toUpperCase();
+			fo.getClient().setName(aux+fo.getClient().getName().substring(1));
+			
+			foodOfferLs.set(i, fo);
+		}
 		List<NuOffer> nuOfferLs = this.nuOfferService.findActiveNuOffer(elements);
+		for(int i=0; i<nuOfferLs.size();i++) {
+			NuOffer fo= nuOfferLs.get(i);
+			String aux=fo.getClient().getName().substring(0, 1).toUpperCase();
+			fo.getClient().setName(aux+fo.getClient().getName().substring(1));
+			
+			nuOfferLs.set(i, fo);
+		}
 		List<SpeedOffer> speedOfferLs = this.speedOfferService.findActiveSpeedOffer(elements);
+		for(int i=0; i<speedOfferLs.size();i++) {
+			SpeedOffer fo= speedOfferLs.get(i);
+			String aux=fo.getClient().getName().substring(0, 1).toUpperCase();
+			fo.getClient().setName(aux+fo.getClient().getName().substring(1));
+			
+			speedOfferLs.set(i, fo);
+		}
 		List<TimeOffer> timeOfferLs = this.timeOfferService.findActiveTimeOffer(elements);
+		for(int i=0; i<timeOfferLs.size();i++) {
+			TimeOffer fo= timeOfferLs.get(i);
+			String aux=fo.getClient().getName().substring(0, 1).toUpperCase();
+			fo.getClient().setName(aux+fo.getClient().getName().substring(1));
+			
+			timeOfferLs.set(i, fo);
+		}
 
 		model.put("foodOfferLs", foodOfferLs);
 		model.put("nuOfferLs", nuOfferLs);

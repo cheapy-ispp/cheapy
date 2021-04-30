@@ -9,7 +9,7 @@
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
 <cheapy:layout pageName="usuarios">
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px">
+    <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%; padding:10px">
         <fmt:message key="CambiarContraseña"/>
     </h2>
     
@@ -20,7 +20,7 @@
 	        <form:hidden path="municipio"/>
 	        <form:hidden path="direccion"/>
 	        <form:hidden path="email"/>
-            <cheapy:passwordField label="Nueva contraseña"  name="usuar.password"/>
+            <cheapy:passwordEditField label="Nueva contraseña"  name="usuar.password"/>
 					        
             
         </div>

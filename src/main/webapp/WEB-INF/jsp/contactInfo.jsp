@@ -50,8 +50,8 @@
 
 <cheapy:layout pageName="contactInfo">
 
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px; margin-bottom:20px;">Información de contacto</h2>
-    <p style="font-family: 'Lobster'; text-align:center; font-size:150%;  color: rgb(0, 64, 128); padding:10px; margin-bottom:20px;">
+    <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%; padding:10px; margin-bottom:20px;">Información de contacto</h2>
+    <p style="font-family: 'Lobster'; text-align:center; font-size:150%;  color: #325a80; padding:10px; margin-bottom:20px;">
     ¿Tienes alguna duda? Puedes hacérnosla llegar a través de los siguientes medios:</p>
     
     <div style="text-align: center;">
