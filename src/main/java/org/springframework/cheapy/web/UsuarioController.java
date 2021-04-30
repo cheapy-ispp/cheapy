@@ -45,24 +45,24 @@ public class UsuarioController {
 		model.put("usuario", usuario);
 		return "usuarios/usuariosShow";
 	}
-	
+
 	@GetMapping("/usuarios/favoritos/{page}")
 	public String listFavorite(@PathVariable("page") final int page, final Map<String, Object> model) {
 		List<Client> client = this.usuarioService.getCurrentUsuario().getFavoritos();
 		List<Client> res = new ArrayList<>();
-		
-		for(int i=page*5; i<page*5+5; i++) {
-			if(client.size()<=i) {
+
+		for (int i = page * 5; i < page * 5 + 5; i++) {
+			if (client.size() <= i) {
 				break;
 			}
 			res.add(client.get(i));
 		}
-		
+
 		Boolean next = true;
-		if(page*5+5>client.size()) {
+		if (page * 5 + 5 > client.size()) {
 			next = false;
 		}
-		
+
 		model.put("municipios", Municipio.values());
 		model.put("clientLs", res);
 		model.put("nextPage", next);
@@ -70,30 +70,30 @@ public class UsuarioController {
 		return "usuarios/favoritos";
 
 	}
-	
+
 	@GetMapping(value = "/usuarios/favoritos/{clientId}/add")
 	public String addFavorite(@PathVariable("clientId") final int clientId, final ModelMap modelMap) {
 		Client client = this.clientService.findById(clientId);
 		Usuario usuario = this.usuarioService.getCurrentUsuario();
-		if(usuario==null || usuario.getFavoritos().contains(client)) {
+		if (usuario == null || usuario.getFavoritos().contains(client)) {
 			return "error";
 		}
 		usuario.getFavoritos().add(client);
 		this.usuarioService.saveUsuario(usuario);
-		return "redirect:/restaurant/"+clientId;
+		return "redirect:/restaurant/" + clientId;
 
 	}
-	
+
 	@GetMapping(value = "/usuarios/favoritos/{clientId}/remove")
 	public String removeFavorite(@PathVariable("clientId") final int clientId, final ModelMap modelMap) {
 		Client client = this.clientService.findById(clientId);
 		Usuario usuario = this.usuarioService.getCurrentUsuario();
-		if(usuario==null || !usuario.getFavoritos().contains(client)) {
+		if (usuario == null || !usuario.getFavoritos().contains(client)) {
 			return "error";
 		}
 		usuario.getFavoritos().remove(client);
 		this.usuarioService.saveUsuario(usuario);
-		return "redirect:/restaurant/"+clientId;
+		return "redirect:/restaurant/" + clientId;
 
 	}
 
@@ -210,10 +210,9 @@ public class UsuarioController {
 		if (result.hasErrors()) {
 			return "usuarios/password";
 		}
-		BeanUtils.copyProperties(usuario, usuarioEdit, "usuar");
-		usuarioEdit.getUsuar().setUsername(usuario.getUsuar().getUsername());
-		usuarioEdit.getUsuar().setPassword(MD5.md5(usuarioEdit.getUsuar().getPassword()));
-		usuarioEdit.getUsuar().setEnabled(true);
+		String pass = MD5.md5(usuarioEdit.getUsuar().getPassword());
+		BeanUtils.copyProperties(usuario, usuarioEdit);
+		usuarioEdit.getUsuar().setPassword(pass);
 		this.usuarioService.saveUsuario(usuarioEdit);
 		return "redirect:/usuarios/show";
 	}
