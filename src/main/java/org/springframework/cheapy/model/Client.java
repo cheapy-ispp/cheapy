@@ -31,7 +31,7 @@ public class Client extends BaseEntity {
 	@NotEmpty(message = "No debe estar vacío")
 	private String				name;
 
-	@Pattern(regexp = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")
+	@Pattern(message = "El formato no es correcto", regexp = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")
 	@NotEmpty(message = "No debe estar vacío")
 	private String				email;
 

@@ -39,7 +39,7 @@ public class Usuario extends BaseEntity {
 	@Enumerated(value = EnumType.STRING)
 	private Municipio			municipio;
 
-	@Pattern(regexp = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")
+	@Pattern(message = "El formato no es correcto", regexp = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")
 	@NotBlank(message = "No debe estar vacío")
 	private String				email;
 
