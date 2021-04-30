@@ -13,7 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -29,17 +28,17 @@ public class Client extends BaseEntity {
 	// (id, name, email, address, init, finish, telephone, description, code, food,
 	// usuar)
 
-	@NotEmpty(message="No debe estar vacío")
+	@NotEmpty(message = "No debe estar vacío")
 	private String				name;
 
-	@Email
-	@NotEmpty(message="No debe estar vacío")
+	@Pattern(regexp = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")
+	@NotEmpty(message = "No debe estar vacío")
 	private String				email;
 
-	@NotEmpty(message="No debe estar vacío")
+	@NotEmpty(message = "No debe estar vacío")
 	private String				address;
 
-	@NotNull(message="No debe estar vacío")
+	@NotNull(message = "No debe estar vacío")
 	@Enumerated(value = EnumType.STRING)
 	private Municipio			municipio;
 
@@ -53,24 +52,24 @@ public class Client extends BaseEntity {
 	@NotNull(message = "Debe introducir una hora de cierre")
 	private LocalTime			finish;
 
-	@NotEmpty(message="No debe estar vacío")
-	@Pattern(regexp="\\d{9}",message="Debe tener 9 dígitos")
+	@NotEmpty(message = "No debe estar vacío")
+	@Pattern(regexp = "\\d{9}", message = "Debe tener 9 dígitos")
 	private String				telephone;
 
-	@NotEmpty(message="No debe estar vacía")
+	@NotEmpty(message = "No debe estar vacía")
 	private String				description;
 
-	@NotEmpty(message="No debe estar vacío")
+	@NotEmpty(message = "No debe estar vacío")
 	private String				food;
-	
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull
-	private LocalDate expiration;
+	private LocalDate			expiration;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "username", referencedColumnName = "username")
 	private User				usuar;
-	
+
 	@OneToMany
 	private List<FoodOffer>		foodOffers;
 
@@ -83,7 +82,7 @@ public class Client extends BaseEntity {
 	@OneToMany
 	private List<TimeOffer>		timeOffers;
 
-	
+
 	public String getName() {
 		return this.name;
 	}
@@ -107,7 +106,7 @@ public class Client extends BaseEntity {
 	public void setAddress(final String address) {
 		this.address = address;
 	}
-	
+
 	public Municipio getMunicipio() {
 		return this.municipio;
 	}
@@ -197,10 +196,10 @@ public class Client extends BaseEntity {
 	}
 
 	public LocalDate getExpiration() {
-		return expiration;
+		return this.expiration;
 	}
 
-	public void setExpiration(LocalDate expiration) {
+	public void setExpiration(final LocalDate expiration) {
 		this.expiration = expiration;
 	}
 
