@@ -25,7 +25,6 @@ import org.springframework.cheapy.model.Authorities;
 import org.springframework.cheapy.model.Client;
 import org.springframework.cheapy.service.AuthoritiesService;
 import org.springframework.cheapy.service.ClientService;
-import org.springframework.cheapy.service.FoodOfferService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 

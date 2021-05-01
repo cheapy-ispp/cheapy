@@ -28,7 +28,7 @@ import org.springframework.cheapy.service.SpeedOfferService;
 import org.springframework.cheapy.service.TimeOfferService;
 import org.springframework.cheapy.service.UserService;
 import org.springframework.cheapy.service.UsuarioService;
-import org.springframework.cheapy.utils.MD5;
+import org.springframework.cheapy.utils.Md5;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -209,7 +209,7 @@ public class ClientController {
 			return "clients/password";
 		}
 
-		String pass = MD5.md5(clientEdit.getUsuar().getPassword());
+		String pass = Md5.md5(clientEdit.getUsuar().getPassword());
 		BeanUtils.copyProperties(clienteSesion, clientEdit);
 		clientEdit.getUsuar().setPassword(pass);
 		this.clientService.saveClient(clientEdit);

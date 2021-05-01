@@ -73,11 +73,6 @@ class AdministratorControllerTest {
 	
 	@MockBean
 	private TimeOfferService timeOfferService;
-	
-	private FoodOffer fo1;
-	private NuOffer nu1;
-	private SpeedOffer sp1;
-	private TimeOffer time1;
 
 	@BeforeEach
 	void setup() {
@@ -127,8 +122,7 @@ class AdministratorControllerTest {
 		fo1test.setStatus(StatusOffer.hidden);
 		fo1test.setCode("");
 		fo1test.setClient(client1);
-		this.fo1 = fo1test;
-		BDDMockito.given(this.foodOfferService.findFoodOfferById(TEST_FOODOFFER_ID)).willReturn(this.fo1);
+		BDDMockito.given(this.foodOfferService.findFoodOfferById(TEST_FOODOFFER_ID)).willReturn(fo1test);
 		
 		NuOffer nu1test = new NuOffer();
 		nu1test.setId(TEST_NUOFFER_ID);
@@ -143,8 +137,7 @@ class AdministratorControllerTest {
 		nu1test.setClient(client1);
 		nu1test.setStatus(StatusOffer.hidden);
 		nu1test.setCode("");
-		this.nu1 = nu1test;
-		BDDMockito.given(this.nuOfferService.findNuOfferById(TEST_NUOFFER_ID)).willReturn(this.nu1);
+		BDDMockito.given(this.nuOfferService.findNuOfferById(TEST_NUOFFER_ID)).willReturn(nu1test);
 		
 		SpeedOffer sp1test = new SpeedOffer();
 		sp1test.setId(TEST_SPEEDOFFER_ID);
@@ -159,8 +152,7 @@ class AdministratorControllerTest {
 		sp1test.setClient(client1);
 		sp1test.setStatus(StatusOffer.hidden);
 		sp1test.setCode("");
-		this.sp1 = sp1test;
-		BDDMockito.given(this.speedOfferService.findSpeedOfferById(TEST_SPEEDOFFER_ID)).willReturn(this.sp1);
+		BDDMockito.given(this.speedOfferService.findSpeedOfferById(TEST_SPEEDOFFER_ID)).willReturn(sp1test);
 		
 		TimeOffer time1test = new TimeOffer();
 		time1test.setId(TEST_TIMEOFFER_ID);
@@ -172,8 +164,7 @@ class AdministratorControllerTest {
 		time1test.setClient(client1);
 		time1test.setStatus(StatusOffer.hidden);
 		time1test.setCode("");
-		this.time1 = time1test;
-		BDDMockito.given(this.timeOfferService.findTimeOfferById(TEST_TIMEOFFER_ID)).willReturn(this.time1);
+		BDDMockito.given(this.timeOfferService.findTimeOfferById(TEST_TIMEOFFER_ID)).willReturn(time1test);
 	}
 	
 	@WithMockUser(value = "spring", authorities = "administrator")

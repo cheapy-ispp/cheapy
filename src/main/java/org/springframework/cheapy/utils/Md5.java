@@ -1,6 +1,6 @@
 package org.springframework.cheapy.utils;
 
-public class MD5 {
+public class Md5 {
 	
 	public static String md5(String md5) {
 		   try {

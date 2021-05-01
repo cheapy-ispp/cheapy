@@ -16,7 +16,7 @@ import org.springframework.cheapy.service.AuthoritiesService;
 import org.springframework.cheapy.service.ClientService;
 import org.springframework.cheapy.service.UserService;
 import org.springframework.cheapy.service.UsuarioService;
-import org.springframework.cheapy.utils.MD5;
+import org.springframework.cheapy.utils.Md5;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -126,7 +126,7 @@ public class SingUpController {
 			
 			//auth.setId(1);
 			//this.authoritiesService.saveAuthorities(auth);
-			usuario.getUsuar().setPassword(MD5.md5(usuario.getUsuar().getPassword())); //MD5 a la contraseña para que no circule en claro por la red
+			usuario.getUsuar().setPassword(Md5.md5(usuario.getUsuar().getPassword())); //MD5 a la contraseña para que no circule en claro por la red
 			this.usuarioService.saveUsuario(usuario);
 			this.userService.saveUser(user);
 			this.authoritiesService.saveAuthorities(usuario.getUsuar().getUsername(), "usuario");
@@ -215,7 +215,7 @@ public class SingUpController {
 			}
 				return "singup/singUpClient";
 		 }else {
-			cliente.getUsuar().setPassword(MD5.md5(cliente.getUsuar().getPassword())); //MD5 a la contraseña para que no circule en claro por la red
+			cliente.getUsuar().setPassword(Md5.md5(cliente.getUsuar().getPassword())); //MD5 a la contraseña para que no circule en claro por la red
 			this.clientService.saveClient(cliente);
 			this.userService.saveUser(user);
 			this.authoritiesService.saveAuthorities(cliente.getUsuar().getUsername(), "notsubscribed");

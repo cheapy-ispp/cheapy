@@ -259,7 +259,6 @@
 		    <table id="speedOfferTable" class="table table-striped">
 		        <thead>
 		        <tr>
-		        	<!-- <th style="width: 150px;">Restaurante</th> -->
 		            <th><fmt:message key="name"/></th>
 		            <th><fmt:message key="startDate"/></th>
 		            <th><fmt:message key="endDate"/></th>
