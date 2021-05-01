@@ -212,7 +212,7 @@ class ClientControllerTest {
 		Client cliente = clientService.findById(TEST_CLIENT_ID);
 		Assertions.assertTrue(cliente.getAddress()=="Eliminado");
 		Assertions.assertTrue(cliente.getDescription()=="Eliminado");
-		Assertions.assertTrue(cliente.getEmail()=="e@liminado");
+		Assertions.assertTrue(cliente.getEmail()=="eliminado@gmail.com");
 		Assertions.assertTrue(cliente.getExpiration().equals(LocalDate.now()));
 		Assertions.assertTrue(cliente.getFinish()==LocalTime.of(00, 00));
 		Assertions.assertTrue(cliente.getInit()==LocalTime.of(00, 00));
