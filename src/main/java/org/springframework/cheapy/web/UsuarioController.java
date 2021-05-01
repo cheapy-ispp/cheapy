@@ -59,7 +59,7 @@ public class UsuarioController {
 		}
 
 		Boolean next = true;
-		if (page * 5 + 5 > client.size()) {
+		if (page * 5 + 5 >= client.size()) {
 			next = false;
 		}
 
