@@ -67,7 +67,17 @@ public class SpeedOfferController {
 		return res;
 	}
 
-	private boolean checkConditions(final SpeedOffer speedOffer) {
+	private boolean checkConditionsGold(final SpeedOffer speedOffer) {
+		boolean res = false;
+		if (speedOffer.getGold() == null || speedOffer.getSilver() == null || speedOffer.getBronze() == null) {
+			res = true;
+		} else if (speedOffer.getGold().isBefore(speedOffer.getSilver()) && speedOffer.getGold().isBefore(speedOffer.getBronze())) {
+			res = true;
+		}
+		return res;
+	}
+	
+	private boolean checkConditionsSilver(final SpeedOffer speedOffer) {
 		boolean res = false;
 		if (speedOffer.getGold() == null || speedOffer.getSilver() == null || speedOffer.getBronze() == null) {
 			res = true;
@@ -76,12 +86,42 @@ public class SpeedOfferController {
 		}
 		return res;
 	}
+	
+	private boolean checkConditionsBronze(final SpeedOffer speedOffer) {
+		boolean res = false;
+		if (speedOffer.getGold() == null || speedOffer.getSilver() == null || speedOffer.getBronze() == null) {
+			res = true;
+		} else if (speedOffer.getGold().isBefore(speedOffer.getBronze()) && speedOffer.getSilver().isBefore(speedOffer.getBronze())) {
+			res = true;
+		}
+		return res;
+	}
 
-	private boolean checkDiscounts(final SpeedOffer speedOffer) {
+	private boolean checkDiscountsGold(final SpeedOffer speedOffer) {
+		boolean res = false;
+		if (speedOffer.getDiscountGold() == null || speedOffer.getDiscountSilver() == null || speedOffer.getDiscountBronze() == null) {
+			res = true;
+		} else if (speedOffer.getDiscountGold() >= speedOffer.getDiscountSilver() && speedOffer.getDiscountGold() >= speedOffer.getDiscountBronze()) {
+			res = true;
+		}
+		return res;
+	}
+	
+	private boolean checkDiscountsSilver(final SpeedOffer speedOffer) {
 		boolean res = false;
 		if (speedOffer.getDiscountGold() == null || speedOffer.getDiscountSilver() == null || speedOffer.getDiscountBronze() == null) {
 			res = true;
 		} else if (speedOffer.getDiscountGold() >= speedOffer.getDiscountSilver() && speedOffer.getDiscountSilver() >= speedOffer.getDiscountBronze()) {
+			res = true;
+		}
+		return res;
+	}
+	
+	private boolean checkDiscountsBronze(final SpeedOffer speedOffer) {
+		boolean res = false;
+		if (speedOffer.getDiscountGold() == null || speedOffer.getDiscountSilver() == null || speedOffer.getDiscountBronze() == null) {
+			res = true;
+		} else if (speedOffer.getDiscountGold() >= speedOffer.getDiscountBronze() && speedOffer.getDiscountSilver() >= speedOffer.getDiscountBronze()) {
 			res = true;
 		}
 		return res;
@@ -125,12 +165,28 @@ public class SpeedOfferController {
 			result.rejectValue("end", "", "La fecha de fin debe ser posterior a la fecha de inicio");
 
 		}
-		if (!this.checkConditions(speedOffer)) {
-			result.rejectValue("gold", "", "Oro debe ser menor o igual que plata, y plata menor o igual que bronce");
+		if (!this.checkConditionsGold(speedOffer)) {
+			result.rejectValue("gold", "", "Debe ser menor que plata y bronce");
 
 		}
-		if (!this.checkDiscounts(speedOffer)) {
-			result.rejectValue("discountGold", "", "El descuento de Oro debe ser menor o igual que el de plata, y el de plata menor o igual que el de bronce");
+		if (!this.checkConditionsSilver(speedOffer)) {
+			result.rejectValue("silver", "", "Debe ser menor que bronce");
+
+		}
+		if (!this.checkConditionsBronze(speedOffer)) {
+			result.rejectValue("bronze", "", "Debe ser mayor que plata y oro");
+
+		}
+		if (!this.checkDiscountsGold(speedOffer)) {
+			result.rejectValue("discountGold", "", "Debe ser mayor o igual que el de plata y bronce");
+
+		}
+		if (!this.checkDiscountsSilver(speedOffer)) {
+			result.rejectValue("discountSilver", "", "Debe ser mayor o igual que el de bronce");
+
+		}
+		if (!this.checkDiscountsBronze(speedOffer)) {
+			result.rejectValue("discountBronze", "", "Debe ser menor o igual que el de plata y el de oro");
 
 		}
 
@@ -230,13 +286,29 @@ public class SpeedOfferController {
 			result.rejectValue("start", "", "La fecha de inicio debe ser futura");
 
 		}
-
-		if (!this.checkConditions(speedOfferEdit)) {
-			result.rejectValue("gold", "", "Los minutos de Oro deben ser menores o iguales que los de plata, y los de plata menores o iguales que los de bronce");
+		
+		if (!this.checkConditionsGold(speedOffer)) {
+			result.rejectValue("gold", "", "Debe ser menor que el de plata y bronce");
 
 		}
-		if (!this.checkDiscounts(speedOfferEdit)) {
-			result.rejectValue("discountGold", "", "El descuento de Oro debe ser mayor o igual que el de plata, y el de plata mayor o igual que el de bronce");
+		if (!this.checkConditionsSilver(speedOffer)) {
+			result.rejectValue("silver", "", "Debe ser menorque bronce");
+
+		}
+		if (!this.checkConditionsBronze(speedOffer)) {
+			result.rejectValue("bronze", "", "Debe ser mayorque plata y oro");
+
+		}
+		if (!this.checkDiscountsGold(speedOffer)) {
+			result.rejectValue("discountGold", "", "Debe ser mayor o igual que el de plata y bronce");
+
+		}
+		if (!this.checkDiscountsSilver(speedOffer)) {
+			result.rejectValue("discountSilver", "", "Debe ser mayor o igual que el de bronce");
+
+		}
+		if (!this.checkDiscountsBronze(speedOffer)) {
+			result.rejectValue("discountBronze", "", "Debe ser menor o igual que el de plata y el de oro");
 
 		}
 

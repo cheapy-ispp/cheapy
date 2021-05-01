@@ -109,7 +109,7 @@
 	</form>
 
     <h2 class="titulo" style="font-family: 'Lobster';  font-size:200%; padding:10px"><fmt:message key="foodOffers"/>
-    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir el plato indicado en la oferta">
+    	<a title="Información" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir el plato indicado en la oferta">
     	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px; color:#325a80 "> </span></a>
     </h2>
     
@@ -179,7 +179,7 @@
     
     </c:if>
     <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%; padding:10px"><fmt:message key="nuOffers"/>
-    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir con más comensales que alguno de los tres posibles objetivos">
+    	<a title="Información" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir con más comensales que alguno de los tres posibles objetivos">
     	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px; color:#325a80 "> </span></a>
     </h2>
 	<c:if test="${empty nuOfferLs }">
@@ -247,7 +247,7 @@
     </c:if>
     
     <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%; padding:10px"><fmt:message key="speedOffers"/>
-    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir en menos de alguno de los tres posibles tiempos">
+    	<a title="Información" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir en menos de alguno de los tres posibles tiempos">
     	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px; color:#325a80 "> </span></a>
     </h2>
 	<c:if test="${empty speedOfferLs }">
@@ -318,7 +318,7 @@
     </c:if>
     
     <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%; padding:10px"><fmt:message key="timeOffers"/> 
-    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir en el local durante el intervalo indicado">
+    	<a title="Información" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir en el local durante el intervalo indicado">
     	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px; color:#325a80 "> </span></a>
     </h2>
 	<c:if test="${empty timeOfferLs }">

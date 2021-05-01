@@ -21,8 +21,8 @@
             <cheapy:dateField label="Fecha de Inicio" placeholder="dd/MM/yyyy HH:mm" name="start"/>
             <cheapy:dateField label="Fecha de Fin" placeholder="dd/MM/yyyy HH:mm" name="end"/>
             <cheapy:inputField label="Plato" placeholder="Ej. Macarrones" name="food"/>
-            <cheapy:inputField label="Precio Original" placeholder="50.50" name="price"/>
-            <cheapy:inputField label="Descuento" placeholder="Ej. 50" name="discount"/>  
+            <cheapy:inputField label="Precio Original" placeholder="XX€ (Ej.6)" name="price"/>
+            <cheapy:inputField label="Descuento" placeholder="XX% (Ej.15)" name="discount"/>  
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

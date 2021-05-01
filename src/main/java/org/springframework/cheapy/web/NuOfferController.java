@@ -67,21 +67,61 @@ public class NuOfferController {
 		return res;
 	}
 
-	private boolean checkConditions(final NuOffer nuOffer) {
+	private boolean checkConditionsGold(final NuOffer nuOffer) {
+		boolean res = false;
+		if (nuOffer.getGold() == null || nuOffer.getSilver() == null) {
+			res = true;
+		} else if (nuOffer.getGold() >= nuOffer.getSilver()) {
+			res = true;
+		}
+		return res;
+	}
+	
+	private boolean checkConditionsSilver(final NuOffer nuOffer) {
+		boolean res = false;
+		if (nuOffer.getGold() == null || nuOffer.getSilver() == null) {
+			res = true;
+		} else if (nuOffer.getSilver() >= nuOffer.getBronze()) {
+			res = true;
+		}
+		return res;
+	}
+	
+	private boolean checkConditionsBronze(final NuOffer nuOffer) {
 		boolean res = false;
 		if (nuOffer.getGold() == null || nuOffer.getSilver() == null || nuOffer.getBronze() == null) {
 			res = true;
-		} else if (nuOffer.getGold() >= nuOffer.getSilver() && nuOffer.getSilver() >= nuOffer.getBronze()) {
+		} else if (nuOffer.getGold() >= nuOffer.getBronze() && nuOffer.getSilver() >= nuOffer.getBronze()) {
 			res = true;
 		}
 		return res;
 	}
 
-	private boolean checkDiscounts(final NuOffer NuOffer) {
+	private boolean checkDiscountsGold(final NuOffer NuOffer) {
+		boolean res = false;
+		if (NuOffer.getDiscountGold() == null || NuOffer.getDiscountSilver() == null) {
+			res = true;
+		} else if (NuOffer.getDiscountGold() >= NuOffer.getDiscountSilver()) {
+			res = true;
+		}
+		return res;
+	}
+	
+	private boolean checkDiscountsSilver(final NuOffer NuOffer) {
+		boolean res = false;
+		if (NuOffer.getDiscountSilver() == null || NuOffer.getDiscountBronze() == null) {
+			res = true;
+		} else if (NuOffer.getDiscountSilver() >= NuOffer.getDiscountBronze()) {
+			res = true;
+		}
+		return res;
+	}
+	
+	private boolean checkDiscountsBronze(final NuOffer NuOffer) {
 		boolean res = false;
 		if (NuOffer.getDiscountGold() == null || NuOffer.getDiscountSilver() == null || NuOffer.getDiscountBronze() == null) {
 			res = true;
-		} else if (NuOffer.getDiscountGold() >= NuOffer.getDiscountSilver() && NuOffer.getDiscountSilver() >= NuOffer.getDiscountBronze()) {
+		} else if (NuOffer.getDiscountGold() >= NuOffer.getDiscountBronze() && NuOffer.getDiscountSilver() >= NuOffer.getDiscountBronze()) {
 			res = true;
 		}
 		return res;
@@ -125,12 +165,28 @@ public class NuOfferController {
 			result.rejectValue("end", "", "La fecha de fin debe ser posterior a la fecha de inicio");
 
 		}
-		if (!this.checkConditions(nuOffer)) {
-			result.rejectValue("gold", "", "Oro debe ser mayor o igual que plata, y plata mayor o igual que bronce");
+		if (!this.checkConditionsGold(nuOffer)) {
+			result.rejectValue("gold", "", "Debe ser mayor o igual que plata");
 
 		}
-		if (!this.checkDiscounts(nuOffer)) {
-			result.rejectValue("discountGold", "", "El descuento de Oro debe ser mayor o igual que el de plata, y el de plata mayor o igual que el de bronce");
+		if (!this.checkConditionsSilver(nuOffer)) {
+			result.rejectValue("silver", "", "Debe ser mayor o igual que bronce");
+
+		}
+		if (!this.checkConditionsBronze(nuOffer)) {
+			result.rejectValue("bronze", "", "Debe ser menor o igual que plata y oro");
+
+		}
+		if (!this.checkDiscountsGold(nuOffer)) {
+			result.rejectValue("discountGold", "", "Debe ser mayor o igual que el de plata");
+
+		}
+		if (!this.checkDiscountsSilver(nuOffer)) {
+			result.rejectValue("discountSilver", "", "Debe ser mayor o igual que el de bronce");
+
+		}
+		if (!this.checkDiscountsBronze(nuOffer)) {
+			result.rejectValue("discountBronze", "", "Debe ser menor o igual que el de plata y el de oro");
 
 		}
 
@@ -218,12 +274,28 @@ public class NuOfferController {
 
 		}
 
-		if (!this.checkConditions(nuOfferEdit)) {
-			result.rejectValue("gold", "", "Oro debe ser mayor o igual que plata, y plata mayor o igual que bronce");
+		if (!this.checkConditionsGold(nuOfferEdit)) {
+			result.rejectValue("gold", "", "Debe ser mayor o igual que plata");
 
 		}
-		if (!this.checkDiscounts(nuOfferEdit)) {
-			result.rejectValue("discountGold", "", "El descuento de Oro debe ser mayor o igual que el de plata, y el de plata mayor o igual que el de bronce");
+		if (!this.checkConditionsSilver(nuOfferEdit)) {
+			result.rejectValue("silver", "", "Debe ser mayor o igual que bronce");
+
+		}
+		if (!this.checkConditionsBronze(nuOfferEdit)) {
+			result.rejectValue("bronze", "", "Debe ser menor o igual que plata y oro");
+
+		}
+		if (!this.checkDiscountsGold(nuOfferEdit)) {
+			result.rejectValue("discountGold", "", "Debe ser mayor o igual que el de plata");
+
+		}
+		if (!this.checkDiscountsSilver(nuOfferEdit)) {
+			result.rejectValue("discountSilver", "", "Debe ser mayor o igual que el de bronce");
+
+		}
+		if (!this.checkDiscountsBronze(nuOfferEdit)) {
+			result.rejectValue("discountBronze", "", "Debe ser menor o igual que el de plata y el de oro");
 
 		}
 
