@@ -283,7 +283,7 @@
 		                    <c:out value="${localDateTimeFormat.format(speedOffer.end)}"/>
 		                </td>
 		                <td>
-		                    <c:out value="${speedOffer.gold} minutos"/>
+		                    <c:out value="${speedOffer.gold.getHour()*60+speedOffer.gold.getMinute()} minutos y"/><c:out value=" ${speedOffer.gold.getSecond()} segundos"/>
 		                </td>
 		                <td>
 		                    <c:out value="${speedOffer.discountGold}%"/>

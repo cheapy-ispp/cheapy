@@ -204,6 +204,21 @@ public class SpeedOfferController {
 			return "error";
 		}
 
+		if (speedOffer.getGold() != null) {
+			LocalTime a = speedOffer.getGold();
+			model.put("gold", a);
+		}
+
+		if (speedOffer.getSilver() != null) {
+			LocalTime b = speedOffer.getSilver();
+			model.put("silver", b);
+		}
+
+		if (speedOffer.getBronze() != null) {
+			LocalTime c = speedOffer.getBronze();
+			model.put("bronze", c);
+		}
+		
 		model.addAttribute("speedOffer", speedOffer);
 		request.getSession().setAttribute("idSpeed", speedOfferId);
 		return SpeedOfferController.VIEWS_SPEED_OFFER_CREATE_OR_UPDATE_FORM;

@@ -39,7 +39,7 @@
         </tr>
         <tr>
             <th><fmt:message key="goldGoal"/></th>
-            <td><c:out value="${speedOffer.gold} minutos"/></td>
+            <td><c:out value="${speedOffer.gold.getHour()*60+speedOffer.gold.getMinute()} minutos y"/><c:out value=" ${speedOffer.gold.getSecond()} segundos"/></td>
         </tr>
         <tr>
             <th><fmt:message key="goldDiscount"/></th>
@@ -47,7 +47,7 @@
         </tr>
         <tr>
             <th><fmt:message key="silverGoal"/></th>
-            <td><c:out value="${speedOffer.silver} minutos"/></td>
+            <td><c:out value="${speedOffer.silver.getHour()*60+speedOffer.silver.getMinute()} minutos y"/><c:out value=" ${speedOffer.silver.getSecond()} segundos"/></td>
         </tr>
         <tr>
             <th><fmt:message key="silverDiscount"/></th>
@@ -55,7 +55,7 @@
         </tr>
         <tr>
             <th><fmt:message key="bronzeGoal"/></th>
-            <td><c:out value="${speedOffer.bronze} minutos"/></td>
+            <td><c:out value="${speedOffer.bronze.getHour()*60+speedOffer.bronze.getMinute()} minutos y"/><c:out value=" ${speedOffer.bronze.getSecond()} segundos"/></td>
         </tr>
         <tr>
             <th><fmt:message key="bronzeDiscount"/></th>
