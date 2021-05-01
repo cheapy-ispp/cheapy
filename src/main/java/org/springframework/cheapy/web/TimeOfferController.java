@@ -79,11 +79,11 @@ public class TimeOfferController {
 		Pageable nextPage = PageRequest.of(page + 1, 5);
 
 		List<TimeOffer> timeOfferLs = this.timeOfferService.findActiveTimeOffer(elements);
-		for(int i=0; i<timeOfferLs.size();i++) {
-			TimeOffer fo= timeOfferLs.get(i);
-			String aux=fo.getClient().getName().substring(0, 1).toUpperCase();
-			fo.getClient().setName(aux+fo.getClient().getName().substring(1));
-			
+		for (int i = 0; i < timeOfferLs.size(); i++) {
+			TimeOffer fo = timeOfferLs.get(i);
+			String aux = fo.getClient().getName().substring(0, 1).toUpperCase();
+			fo.getClient().setName(aux + fo.getClient().getName().substring(1));
+
 			timeOfferLs.set(i, fo);
 		}
 		Integer next = this.timeOfferService.findActiveTimeOffer(nextPage).size();
@@ -153,8 +153,7 @@ public class TimeOfferController {
 	@GetMapping("/offers/time/{timeOfferId}")
 	public String processShowForm(@PathVariable("timeOfferId") final int timeOfferId, final Map<String, Object> model) {
 		TimeOffer timeOffer = this.timeOfferService.findTimeOfferById(timeOfferId);
-		if ((timeOffer.getStatus().equals(StatusOffer.active)) ||
-				(timeOffer.getStatus().equals(StatusOffer.hidden) && this.checkIdentity(timeOfferId))) {
+		if (timeOffer.getStatus().equals(StatusOffer.active) || timeOffer.getStatus().equals(StatusOffer.hidden) && this.checkIdentity(timeOfferId)) {
 			model.put("timeOffer", timeOffer);
 			model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 			return "offers/time/timeOffersShow";
@@ -192,8 +191,8 @@ public class TimeOfferController {
 			return "error";
 		}
 
-		if (timeOfferEdit.getStart() == null || timeOfferEdit.getStart().isBefore(LocalDateTime.now())) {
-			result.rejectValue("start", "", "La fecha de inicio debe ser futura");
+		if (timeOfferEdit.getStart() == null || timeOfferEdit.getStart().isBefore(LocalDateTime.now()) && !timeOfferEdit.getStart().equals(timeOffer.getStart())) {
+			result.rejectValue("start", "", "La fecha de inicio debe ser futura o la original");
 
 		}
 

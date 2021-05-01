@@ -93,11 +93,11 @@ public class NuOfferController {
 		Pageable nextPage = PageRequest.of(page + 1, 5);
 
 		List<NuOffer> foodOfferLs = this.nuOfferService.findActiveNuOffer(elements);
-		for(int i=0; i<foodOfferLs.size();i++) {
-			NuOffer fo= foodOfferLs.get(i);
-			String aux=fo.getClient().getName().substring(0, 1).toUpperCase();
-			fo.getClient().setName(aux+fo.getClient().getName().substring(1));
-			
+		for (int i = 0; i < foodOfferLs.size(); i++) {
+			NuOffer fo = foodOfferLs.get(i);
+			String aux = fo.getClient().getName().substring(0, 1).toUpperCase();
+			fo.getClient().setName(aux + fo.getClient().getName().substring(1));
+
 			foodOfferLs.set(i, fo);
 		}
 		Integer next = this.nuOfferService.findActiveNuOffer(nextPage).size();
@@ -169,8 +169,7 @@ public class NuOfferController {
 	@GetMapping("/offers/nu/{nuOfferId}")
 	public String processShowForm(@PathVariable("nuOfferId") final int nuOfferId, final Map<String, Object> model) {
 		NuOffer nuOffer = this.nuOfferService.findNuOfferById(nuOfferId);
-		if ((nuOffer.getStatus().equals(StatusOffer.active)) ||
-				(nuOffer.getStatus().equals(StatusOffer.hidden) && this.checkIdentity(nuOfferId))) {
+		if (nuOffer.getStatus().equals(StatusOffer.active) || nuOffer.getStatus().equals(StatusOffer.hidden) && this.checkIdentity(nuOfferId)) {
 			model.put("nuOffer", nuOffer);
 			model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 			return "offers/nu/nuOffersShow";
@@ -213,8 +212,8 @@ public class NuOfferController {
 
 		}
 
-		if (nuOfferEdit.getStart() == null || nuOfferEdit.getStart().isBefore(LocalDateTime.now())) {
-			result.rejectValue("start", "", "La fecha de inicio debe ser futura");
+		if (nuOfferEdit.getStart() == null || nuOfferEdit.getStart().isBefore(LocalDateTime.now()) && !nuOfferEdit.getStart().equals(nuOffer.getStart())) {
+			result.rejectValue("start", "", "La fecha de inicio debe ser futura o la original");
 
 		}
 
