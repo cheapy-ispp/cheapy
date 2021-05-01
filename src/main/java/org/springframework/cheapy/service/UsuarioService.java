@@ -42,8 +42,8 @@ public class UsuarioService {
 	}
 
 	@Transactional
-	public List<Usuario> findAllUsuario() throws DataAccessException {
-		return this.usuarioRepository.findAllUsuario();
+	public List<Usuario> findAllUsuario(final Pageable page) throws DataAccessException {
+		return this.usuarioRepository.findAllUsuario(page);
 	}
 
 	@Transactional
