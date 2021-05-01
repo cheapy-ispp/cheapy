@@ -72,11 +72,11 @@ public class FoodOfferController {
 		Pageable nextPage = PageRequest.of(page + 1, 5);
 
 		List<FoodOffer> foodOfferLs = this.foodOfferService.findActiveFoodOffer(elements);
-		for(int i=0; i<foodOfferLs.size();i++) {
-			FoodOffer fo= foodOfferLs.get(i);
-			String aux=fo.getClient().getName().substring(0, 1).toUpperCase();
-			fo.getClient().setName(aux+fo.getClient().getName().substring(1));
-			
+		for (int i = 0; i < foodOfferLs.size(); i++) {
+			FoodOffer fo = foodOfferLs.get(i);
+			String aux = fo.getClient().getName().substring(0, 1).toUpperCase();
+			fo.getClient().setName(aux + fo.getClient().getName().substring(1));
+
 			foodOfferLs.set(i, fo);
 		}
 		Integer next = this.foodOfferService.findActiveFoodOffer(nextPage).size();
@@ -139,13 +139,12 @@ public class FoodOfferController {
 	public String processShowForm(@PathVariable("foodOfferId") final int foodOfferId, final Map<String, Object> model) {
 
 		FoodOffer foodOffer = this.foodOfferService.findFoodOfferById(foodOfferId);
-		if ((foodOffer.getStatus().equals(StatusOffer.active)) ||
-				(foodOffer.getStatus().equals(StatusOffer.hidden) && this.checkIdentity(foodOfferId))) {
+		if (foodOffer.getStatus().equals(StatusOffer.active) || foodOffer.getStatus().equals(StatusOffer.hidden) && this.checkIdentity(foodOfferId)) {
 			model.put("foodOffer", foodOffer);
 			model.put("newPrice", foodOffer.getNewPrice());
 			model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 			return "offers/food/foodOffersShow";
-			
+
 		} else {
 			return "error";
 		}
@@ -178,8 +177,8 @@ public class FoodOfferController {
 			return "error";
 		}
 
-		if (foodOfferEdit.getStart() == null || foodOfferEdit.getStart().isBefore(LocalDateTime.now())) {
-			result.rejectValue("start", "", "La fecha de inicio debe ser futura");
+		if (foodOfferEdit.getStart() == null || foodOfferEdit.getStart().isBefore(LocalDateTime.now()) && !foodOfferEdit.getStart().equals(foodOffer.getStart())) {
+			result.rejectValue("start", "", "La fecha de inicio debe ser futura o la original");
 
 		}
 
