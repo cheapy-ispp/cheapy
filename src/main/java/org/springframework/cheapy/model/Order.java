@@ -12,6 +12,9 @@ public class Order{
     private String method;
 
     private String intent;
+    
+	@NotBlank
+    private String description;
 	
 	public Order() {
 
@@ -26,9 +29,6 @@ public class Order{
 		this.intent = intent;
 		this.description = description;
 	}
-
-	@NotBlank
-    private String description;
 
 	public double getPrice() {
 		return price;

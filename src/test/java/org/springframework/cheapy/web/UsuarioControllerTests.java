@@ -44,8 +44,6 @@ class UsuarioControllerTest {
 	
 	@MockBean
 	private ClientService clientService;
-	
-	private Usuario usuario;
 
 	@BeforeEach
 	void setup() {
@@ -64,8 +62,7 @@ class UsuarioControllerTest {
 		Client client1 = new Client();
 		client1.setId(1);
 		usuario.getFavoritos().add(client1);
-		this.usuario = usuario;
-		BDDMockito.given(this.usuarioService.getCurrentUsuario()).willReturn(this.usuario);
+		BDDMockito.given(this.usuarioService.getCurrentUsuario()).willReturn(usuario);
 		
 		Client client = new Client();
 		client.setId(0);

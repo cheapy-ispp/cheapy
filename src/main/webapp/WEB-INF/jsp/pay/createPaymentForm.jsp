@@ -11,8 +11,8 @@
 	<center>
 	
 		<c:if test="${payCham==true}">
-			<h2>${order.price}${order.currency}</h2>
-			<h2>${order.description}</h2>		
+			<h2>${fn:escapeXml(order.price)}${fn:escapeXml(order.currency)}</h2>
+			<h2>${fn:escapeXml(order.description)}</h2>		
 		</c:if>
 		
 		<form:form commandName="order" modelAttribute="order" method="post" action="/pay">
@@ -26,8 +26,8 @@
 				<div class="form-group">
 					<div class="infoPago">
 						<p> Precio de la suscripción: </p>
-						<p><br><strong>${order.price} €</strong></p>
-						<p><br><em>${order.description} </em></p>
+						<p><br><strong>${fn:escapeXml(order.price)} €</strong></p>
+						<p><br><em>${fn:escapeXml(order.description)} </em></p>
 					</div>
 					<button class="boton" value="Pagar" type="submit">
 						<spring:url value="/resources/images/paypal240.png" htmlEscape="true" var="paypal240"/>

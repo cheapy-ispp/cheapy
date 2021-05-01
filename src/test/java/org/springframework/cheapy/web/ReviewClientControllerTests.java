@@ -58,7 +58,6 @@ class ReviewClientControllerTest {
 	
 	private User user;
 	private Client client;
-	private List<ReviewClient> reviewClientLs;
 
 	@BeforeEach
 	void setup() {
@@ -93,7 +92,7 @@ class ReviewClientControllerTest {
 		reviewClient.setBar(client);
 		BDDMockito.given(this.reviewClientService.findReviewById(TEST_REVIEW_CLIENT_ID)).willReturn(reviewClient);
 		
-		reviewClientLs = new ArrayList<>();
+		List<ReviewClient> reviewClientLs = new ArrayList<>();
 		reviewClientLs.add(reviewClient);
 		BDDMockito.given(this.reviewClientService.findAllReviewsByBar(PageRequest.of(0, 6), client)).willReturn(reviewClientLs);
 	}

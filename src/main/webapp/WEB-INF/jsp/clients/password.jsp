@@ -24,7 +24,7 @@
 	        <form:hidden path="telephone"/>
 	        <form:hidden path="description"/>
 	       	<form:hidden path="food"/>	
-            <input hidden="true" readonly name="expiration" value="${client.expiration}" />	  	       	      
+            <input hidden="true" readonly name="expiration" value="${fn:escapeXml(client.expiration)}" />	  	       	      
             <cheapy:passwordEditField label="Nueva contraseña"  name="usuar.password"/>
 					        
             
