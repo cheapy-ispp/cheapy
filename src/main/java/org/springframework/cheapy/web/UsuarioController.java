@@ -17,7 +17,7 @@ import org.springframework.cheapy.model.Municipio;
 import org.springframework.cheapy.model.Usuario;
 import org.springframework.cheapy.service.ClientService;
 import org.springframework.cheapy.service.UsuarioService;
-import org.springframework.cheapy.utils.Md5;
+import org.springframework.cheapy.utils.MD5;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -210,7 +210,7 @@ public class UsuarioController {
 		if (result.hasErrors()) {
 			return "usuarios/password";
 		}
-		String pass = Md5.md5(usuarioEdit.getUsuar().getPassword());
+		String pass = MD5.md5(usuarioEdit.getUsuar().getPassword());
 		BeanUtils.copyProperties(usuario, usuarioEdit);
 		usuarioEdit.getUsuar().setPassword(pass);
 		this.usuarioService.saveUsuario(usuarioEdit);
