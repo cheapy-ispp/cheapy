@@ -58,8 +58,8 @@ public class AdministratorController {
 		Pageable elements = PageRequest.of(page, 10);
 		Pageable nextPage = PageRequest.of(page + 1, 10);
 
-		List<Usuario> usuarioLs = this.usuarioService.findUsuarioEnabled(elements);
-		Integer next = this.usuarioService.findUsuarioEnabled(nextPage).size();
+		List<Usuario> usuarioLs = this.usuarioService.findAllUsuario(elements);
+		Integer next = this.usuarioService.findAllUsuario(nextPage).size();
 		model.put("usuarioLs", usuarioLs);
 		model.put("nextPage", next);
 		return "usuarios/usuariosList";

@@ -17,7 +17,7 @@ public interface UsuarioRepository extends PagingAndSortingRepository<Usuario, S
 
 	@Query("SELECT usuario FROM Usuario usuario")
 	@Transactional(readOnly = true)
-	List<Usuario> findAllUsuario();
+	List<Usuario> findAllUsuario(Pageable page);
 
 	@Query("SELECT usuario FROM Usuario usuario WHERE usuario.usuar.enabled = true")
 	@Transactional(readOnly = true)
