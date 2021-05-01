@@ -10,15 +10,12 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "users", uniqueConstraints={@UniqueConstraint(columnNames={"username"})})
 public class User {
 	
-	
-
 	@Id
 	@NotBlank(message="No debe estar vacío")
 	private String username;
 
 	@NotBlank(message="No debe estar vacío")
 	private String password;
-	
 	
 	private Boolean enabled;
 	

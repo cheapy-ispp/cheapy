@@ -47,7 +47,7 @@ public class Usuario extends BaseEntity {
 	@JoinColumn(name = "username", referencedColumnName = "username")
 	private User				usuar;
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(name = "usuario_favoritos", joinColumns = {
 		@JoinColumn(name = "usuario_id", referencedColumnName = "id")
 	}, inverseJoinColumns = {

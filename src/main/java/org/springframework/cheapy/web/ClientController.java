@@ -244,7 +244,7 @@ public class ClientController {
 
 		client.setAddress("Eliminado");
 		client.setDescription("Eliminado");
-		client.setEmail("e@liminado");
+		client.setEmail("eliminado@gmail.com");
 		client.setExpiration(LocalDate.now());
 		client.setFinish(LocalTime.of(00, 00));
 		client.setFood("Eliminado");
@@ -255,6 +255,7 @@ public class ClientController {
 		client.setUsuar(null);
 
 		this.clientService.saveClient(client);
+		
 		this.userService.deleteUser(elim);
 
 		try {
