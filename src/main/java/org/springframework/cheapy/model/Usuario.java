@@ -33,12 +33,6 @@ public class Usuario extends BaseEntity {
 	@NotBlank(message = "No debe estar vacío")
 	private String				apellidos;
 
-	@NotBlank(message = "No debe estar vacío")
-	private String				direccion;
-
-	@Enumerated(value = EnumType.STRING)
-	private Municipio			municipio;
-
 	@Pattern(message = "El formato no es correcto", regexp = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")
 	@NotBlank(message = "No debe estar vacío")
 	private String				email;
@@ -78,22 +72,6 @@ public class Usuario extends BaseEntity {
 
 	public void setApellidos(final String apellidos) {
 		this.apellidos = apellidos;
-	}
-
-	public String getDireccion() {
-		return this.direccion;
-	}
-
-	public void setDireccion(final String direccion) {
-		this.direccion = direccion;
-	}
-
-	public Municipio getMunicipio() {
-		return this.municipio;
-	}
-
-	public void setMunicipio(final Municipio municipio) {
-		this.municipio = municipio;
 	}
 
 	public User getUsuar() {

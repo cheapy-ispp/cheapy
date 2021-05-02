@@ -54,8 +54,6 @@ class UsuarioControllerTest {
 		usuario.setId(0);
 		usuario.setNombre("usuario");
 		usuario.setApellidos("usuario");
-		usuario.setDireccion("usuario");
-		usuario.setMunicipio(Municipio.Sevilla);
 		usuario.setEmail("usuario@gmail.com");
 		usuario.setUsuar(user);
 		
@@ -96,8 +94,6 @@ class UsuarioControllerTest {
 					.param("usuar.password", "Contrasenya123")
 					.param("nombre", "nombre")
 					.param("apellidos", "apellidos")
-					.param("direccion", "direccion")
-					.param("municipio", "Sevilla")
 					.param("email", "email@gmail.com"))
 				.andExpect(status().is3xxRedirection());
 	}
@@ -111,14 +107,10 @@ class UsuarioControllerTest {
 				.param("usuar.password", "")
 				.param("nombre", "")
 				.param("apellidos", "")
-				.param("direccion", "")
-				.param("municipio", "Sevil")
 				.param("email", "email"))
 				.andExpect(model().attributeHasErrors("usuario"))
 				.andExpect(model().attributeHasFieldErrors("usuario", "nombre"))
 				.andExpect(model().attributeHasFieldErrors("usuario", "apellidos"))
-				.andExpect(model().attributeHasFieldErrors("usuario", "direccion"))
-				.andExpect(model().attributeHasFieldErrors("usuario", "municipio"))
 				.andExpect(model().attributeHasFieldErrors("usuario", "email"))
 				.andExpect(view().name("usuarios/createOrUpdateUsuarioForm"));
 	}
@@ -177,8 +169,6 @@ class UsuarioControllerTest {
 				.with(csrf())
 				.param("nombre", "nombre")
 				.param("apellidos", "apellidos")
-				.param("direccion", "direccion")
-				.param("municipio", "Sevilla")
 				.param("email", "email@gmail.com")
 				.param("usuar.password", "testSuccess"))
 				.andExpect(status().is3xxRedirection())
@@ -192,8 +182,6 @@ class UsuarioControllerTest {
 				.with(csrf())
 				.param("nombre", "nombre")
 				.param("apellidos", "apellidos")
-				.param("direccion", "direccion")
-				.param("municipio", "Sevilla")
 				.param("email", "email@gmail.com")
 				.param("usuar.password", ""))
 				.andExpect(model().attributeHasFieldErrors("usuario","usuar.password"))

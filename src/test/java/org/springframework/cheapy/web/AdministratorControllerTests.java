@@ -83,8 +83,6 @@ class AdministratorControllerTest {
 		Usuario usuario = new Usuario();
 		usuario.setNombre("usuario");
 		usuario.setApellidos("usuario");
-		usuario.setDireccion("usuario");
-		usuario.setMunicipio(Municipio.Sevilla);
 		usuario.setEmail("usuario@gmail.com");
 		usuario.setUsuar(user1);
 		BDDMockito.given(this.usuarioService.findByUsername("user1")).willReturn(usuario);
