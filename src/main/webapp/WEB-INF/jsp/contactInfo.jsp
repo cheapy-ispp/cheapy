@@ -55,7 +55,7 @@
     ¿Tienes alguna duda? Puedes hacérnosla llegar a través de los siguientes medios:</p>
     
     <div style="text-align: center;">
-    	<img src="/resources/images/bar-CI.jpg" class = "barImage">
+    	<img src="/resources/images/bar2-CI.png" class = "barImage" style="border-radius: 8px;">
     </div>
     
 
