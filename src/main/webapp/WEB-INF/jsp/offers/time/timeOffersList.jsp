@@ -110,7 +110,7 @@
 	</form>
     
     <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%;padding:10px"><fmt:message key="timeOffers"/>
-    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir en el local durante el intervalo indicado">
+    	<a title="Información" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir en el local durante el intervalo indicado">
     	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
     </h2>
 	<c:if test="${empty timeOfferLs }">
