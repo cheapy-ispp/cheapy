@@ -43,6 +43,9 @@
             <th><fmt:message key="descriptionClient"/></th>
             <td><c:out value="${client.description}"/> </td>
         </tr><tr>
+            <th><fmt:message key="municipio"/></th>
+            <td><c:out value="${client.municipio}"/> </td>
+        </tr><tr>
             <th><fmt:message key="foodClient"/></th>
             <td><c:out value="${client.food}"/> </td>      
         

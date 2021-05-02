@@ -3,6 +3,7 @@ package org.springframework.cheapy.web;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +51,7 @@ public class UsuarioController {
 	public String listFavorite(@PathVariable("page") final int page, final Map<String, Object> model) {
 		List<Client> client = this.usuarioService.getCurrentUsuario().getFavoritos();
 		List<Client> res = new ArrayList<>();
+		Collections.sort(client, (c1, c2) -> c1.getName().compareTo(c2.getName()));
 
 		for (int i = page * 5; i < page * 5 + 5; i++) {
 			if (client.size() <= i) {

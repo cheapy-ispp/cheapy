@@ -21,15 +21,12 @@
             <form:hidden path="status"/>
             <cheapy:dateField label="Fecha de Inicio" placeholder="dd/MM/yyyy HH:mm" name="start"/>
             <cheapy:dateField label="Fecha de Fin"  placeholder="dd/MM/yyyy HH:mm" name="end"/>
-            <c:if test="${gold != null  }"><cheapy:timeSecondsField label="Tiempo para comer (nivel Oro)" value="${gold}" name="gold"/></c:if>
-            <c:if test="${gold == null  }"><cheapy:timeSecondsField label="Tiempo para comer (nivel Oro)" value="00:00:00" name="gold"/></c:if>
+			<cheapy:timeSecondsField label="Tiempo para comer (nivel Oro)" name="gold"/>
             <cheapy:inputField label="Descuento nivel Oro" placeholder="XX% (Ej. 35)" name="discountGold"/>
-            <c:if test="${silver != null  }"><cheapy:timeSecondsField label="Tiempo para comer (nivel Plata)" value="${silver}" name="silver"/></c:if>
-            <c:if test="${silver == null  }"><cheapy:timeSecondsField label="Tiempo para comer (nivel Plata)" value="00:00:00" name="silver"/></c:if>
+            <cheapy:timeSecondsField label="Tiempo para comer (nivel Plata)" name="silver"/>
             
             <cheapy:inputField label="Descuento nivel Plata" placeholder="XX% (Ej. 15)" name="discountSilver"/>
-            <c:if test="${bronze != null  }"><cheapy:timeSecondsField label="Tiempo para comer (nivel Bronce)" value="${bronze}" name="bronze"/></c:if>
-            <c:if test="${bronze == null  }"><cheapy:timeSecondsField label="Tiempo para comer (nivel Bronce)" value="00:00:00" name="bronze"/></c:if>
+            <cheapy:timeSecondsField label="Tiempo para comer (nivel Bronce)" name="bronze"/>
             <cheapy:inputField label="Descuento nivel Bronce" placeholder="XX% (Ej. 5)" name="discountBronze"/>
         </div>
         <div class="form-group">
