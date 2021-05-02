@@ -31,6 +31,7 @@ import org.springframework.cheapy.service.FoodOfferService;
 import org.springframework.cheapy.service.NuOfferService;
 import org.springframework.cheapy.service.SpeedOfferService;
 import org.springframework.cheapy.service.TimeOfferService;
+import org.springframework.cheapy.service.UserService;
 import org.springframework.cheapy.service.UsuarioService;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
@@ -72,6 +73,9 @@ class AdministratorControllerTest {
 	
 	@MockBean
 	private TimeOfferService timeOfferService;
+	
+	@MockBean
+	private UserService userService;
 
 	@BeforeEach
 	void setup() {

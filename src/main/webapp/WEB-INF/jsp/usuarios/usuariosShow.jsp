@@ -65,6 +65,14 @@
 		         Desactivar usuario</button>  
     		</div>
     	</c:if>
+    		<div class="eliminar">
+		        <spring:url value="/administrators/usuarios/{usuarioId}/delete" var="eliminateUrl">
+		        	<spring:param name="usuarioId" value="${usuario.id}"/>
+		        </spring:url>
+		        <button type="button" role="link" onclick="window.location='${fn:escapeXml(eliminateUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+		        	<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
+		         Eliminar usuario</button>  
+    		</div>
     </sec:authorize>
     </div>
   	
