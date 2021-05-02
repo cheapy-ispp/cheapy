@@ -81,7 +81,7 @@ public class SpeedOfferController {
 		boolean res = false;
 		if (speedOffer.getDiscountGold() == null || speedOffer.getDiscountSilver() == null || speedOffer.getDiscountBronze() == null) {
 			res = true;
-		} else if (speedOffer.getDiscountGold() >= speedOffer.getDiscountSilver() && speedOffer.getDiscountSilver() >= speedOffer.getDiscountBronze()) {
+		} else if (speedOffer.getDiscountGold() > speedOffer.getDiscountSilver() && speedOffer.getDiscountSilver() > speedOffer.getDiscountBronze()) {
 			res = true;
 		}
 		return res;
