@@ -259,7 +259,6 @@
 		    <table id="speedOfferTable" class="table table-striped">
 		        <thead>
 		        <tr>
-		        	<!-- <th style="width: 150px;">Restaurante</th> -->
 		            <th><fmt:message key="name"/></th>
 		            <th><fmt:message key="startDate"/></th>
 		            <th><fmt:message key="endDate"/></th>
@@ -283,7 +282,7 @@
 		                    <c:out value="${localDateTimeFormat.format(speedOffer.end)}"/>
 		                </td>
 		                <td>
-		                    <c:out value="${speedOffer.gold} minutos"/>
+		                    <c:out value="${speedOffer.gold.getHour()*60+speedOffer.gold.getMinute()} minutos y"/><c:out value=" ${speedOffer.gold.getSecond()} segundos"/>
 		                </td>
 		                <td>
 		                    <c:out value="${speedOffer.discountGold}%"/>
@@ -330,7 +329,6 @@
 		    <table id="timeOfferTable" class="table table-striped">
 		        <thead>
 		        <tr>
-		        	<!-- <th style="width: 150px;">Restaurante</th> -->
 		            <th><fmt:message key="name"/></th>
 		            <th><fmt:message key="startDate"/></th>
 		            <th><fmt:message key="endDate"/></th>

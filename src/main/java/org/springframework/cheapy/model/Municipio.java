@@ -27,5 +27,30 @@ public enum Municipio {
 		}
 		
 	}
+	, Gerena{
+		@Override
+		public String toString() {
+			return "Gerena";
+		}
+		
+	}
+	
+	, Guillena{
+		@Override
+		public String toString() {
+			return "Guillena";
+			
+		}
+		
+	}
+	
+	, Jerez_de_la_frontera{
+		@Override
+		public String toString() {
+			return "Jerez de la frontera";
+			
+		}
+		
+	}
 	
 }

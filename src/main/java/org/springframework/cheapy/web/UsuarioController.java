@@ -3,6 +3,7 @@ package org.springframework.cheapy.web;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +51,7 @@ public class UsuarioController {
 	public String listFavorite(@PathVariable("page") final int page, final Map<String, Object> model) {
 		List<Client> client = this.usuarioService.getCurrentUsuario().getFavoritos();
 		List<Client> res = new ArrayList<>();
+		Collections.sort(client, (c1, c2) -> c1.getName().compareTo(c2.getName()));
 
 		for (int i = page * 5; i < page * 5 + 5; i++) {
 			if (client.size() <= i) {
@@ -59,7 +61,7 @@ public class UsuarioController {
 		}
 
 		Boolean next = true;
-		if (page * 5 + 5 > client.size()) {
+		if (page * 5 + 5 >= client.size()) {
 			next = false;
 		}
 
@@ -99,18 +101,10 @@ public class UsuarioController {
 
 	@GetMapping(value = "/usuarios/edit")
 	public String updateUsuario(final ModelMap model, final HttpServletRequest request) {
-		Map<Object, String> municipios = new HashMap<Object, String>();
-
-		Municipio[] a = Municipio.values();
-		int cont = 0;
-		for (Municipio i : Municipio.values()) {
-			municipios.put(a[cont], i.toString());
-			cont++;
-		}
+		
 		Usuario usuario = this.usuarioService.getCurrentUsuario();
 		model.addAttribute("usuario", usuario);
-		model.put("municipios", municipios);
-		model.addAttribute("municipio", usuario.getMunicipio());
+		
 		return UsuarioController.VIEWS_USUARIO_CREATE_OR_UPDATE_FORM;
 	}
 

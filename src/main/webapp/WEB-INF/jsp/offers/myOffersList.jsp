@@ -29,7 +29,7 @@
 		
 		<div class="btn-home-max">
 			<div class="btn-home">
-	            <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;text-align:center;"  class="btn-block">
+	            <button type="button" role="link" onclick="window.location='/offers/food/new'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;text-align:center;"  class="btn-block">
 	            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
 	            <fmt:message key="createOffers"/> </button>
             </div>
@@ -100,7 +100,7 @@
 		<p id="vacio" >No hay ninguna oferta por número de comensales creada.</p>
 		<div class="btn-home-max">
 			<div class="btn-home">
-	            <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
+	            <button type="button" role="link" onclick="window.location='/offers/nu/new'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
 	            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
 	            <fmt:message key="createOffers"/> </button>
             </div>
@@ -169,7 +169,7 @@
 		<p id="vacio" >No hay ninguna oferta por tiempo empleado en comer creada.</p>
 		<div class="btn-home-max">
 			<div class="btn-home">
-	            <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
+	            <button type="button" role="link" onclick="window.location='/offers/speed/new'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
 	            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
 	            <fmt:message key="createOffers"/> </button>
         	</div>
@@ -239,7 +239,7 @@
 		<p id="vacio" >No hay ninguna oferta por franja horaria creada.</p>
 		<div class="btn-home-max">
 			<div class="btn-home">
-	            <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
+	            <button type="button" role="link" onclick="window.location='/offers/time/new'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
 	            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
 	            <fmt:message key="createOffers"/> </button>
 	        </div>

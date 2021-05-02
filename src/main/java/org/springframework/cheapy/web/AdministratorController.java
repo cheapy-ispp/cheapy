@@ -1,6 +1,8 @@
 
 package org.springframework.cheapy.web;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,17 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.cheapy.model.Client;
 import org.springframework.cheapy.model.FoodOffer;
+import org.springframework.cheapy.model.Municipio;
 import org.springframework.cheapy.model.NuOffer;
 import org.springframework.cheapy.model.Offer;
 import org.springframework.cheapy.model.SpeedOffer;
 import org.springframework.cheapy.model.StatusOffer;
 import org.springframework.cheapy.model.TimeOffer;
+import org.springframework.cheapy.model.User;
 import org.springframework.cheapy.model.Usuario;
 import org.springframework.cheapy.service.ClientService;
 import org.springframework.cheapy.service.FoodOfferService;
 import org.springframework.cheapy.service.NuOfferService;
 import org.springframework.cheapy.service.SpeedOfferService;
 import org.springframework.cheapy.service.TimeOfferService;
+import org.springframework.cheapy.service.UserService;
 import org.springframework.cheapy.service.UsuarioService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -36,6 +41,7 @@ public class AdministratorController {
 
 	private final UsuarioService	usuarioService;
 	private final ClientService		clientService;
+	private final UserService		userService;
 
 	private final FoodOfferService	foodOfferService;
 	private final SpeedOfferService	speedOfferService;
@@ -44,13 +50,14 @@ public class AdministratorController {
 
 
 	public AdministratorController(final UsuarioService usuarioService, final ClientService clientService, final FoodOfferService foodOfferService, final SpeedOfferService speedOfferService, final NuOfferService nuOfferService,
-		final TimeOfferService timeOfferService) {
+		final TimeOfferService timeOfferService, final UserService userService) {
 		this.usuarioService = usuarioService;
 		this.clientService = clientService;
 		this.foodOfferService = foodOfferService;
 		this.speedOfferService = speedOfferService;
 		this.nuOfferService = nuOfferService;
 		this.timeOfferService = timeOfferService;
+		this.userService = userService;
 	}
 
 	@GetMapping("/administrators/usuarios/page/{page}")
@@ -58,8 +65,9 @@ public class AdministratorController {
 		Pageable elements = PageRequest.of(page, 10);
 		Pageable nextPage = PageRequest.of(page + 1, 10);
 
-		List<Usuario> usuarioLs = this.usuarioService.findUsuarioEnabled(elements);
-		Integer next = this.usuarioService.findUsuarioEnabled(nextPage).size();
+		List<Usuario> usuarioLs = this.usuarioService.findAllUsuario(elements);
+		
+		Integer next = this.usuarioService.findAllUsuario(nextPage).size();
 		model.put("usuarioLs", usuarioLs);
 		model.put("nextPage", next);
 		return "usuarios/usuariosList";
@@ -70,8 +78,9 @@ public class AdministratorController {
 		Pageable elements = PageRequest.of(page, 10);
 		Pageable nextPage = PageRequest.of(page + 1, 10);
 
-		List<Client> clientLs = this.clientService.findAllClient(elements);
-		Integer next = this.clientService.findAllClient(nextPage).size();
+		List<Client> clientLs = this.clientService.findAllNonDeletedClients(elements);
+		
+		Integer next = this.clientService.findAllNonDeletedClients(nextPage).size();
 		model.put("clientLs", clientLs);
 		model.put("nextPage", next);
 		return "clients/clientsList";
@@ -258,5 +267,60 @@ public class AdministratorController {
 		} else {
 			return "welcome";
 		}
+	}
+	
+	@GetMapping(value = "/administrators/usuarios/{usuarioId}/delete")
+	public String deleteUsuario(@PathVariable("usuarioId") final int usuarioId , final ModelMap model) {
+		Usuario usuario = this.usuarioService.findById(usuarioId);
+		model.put("usuario", usuario);
+		return "usuarios/usuariosDelete";
+	}
+
+	@PostMapping(value = "/administrators/usuarios/{usuarioId}/delete")
+	public String deleteUsuarioForm(@PathVariable("usuarioId") final int usuarioId , final ModelMap model, final HttpServletRequest request) {
+		Usuario usuario = this.usuarioService.findById(usuarioId);
+		this.usuarioService.deleteUsuario(usuario);
+		return "redirect:/administrators/usuarios/page/0";
+	}
+	
+	@GetMapping(value = "/administrators/clients/{clientId}/delete")
+	public String deleteClient(@PathVariable("clientId") final int clientId, final ModelMap model) {
+		Client client = this.clientService.findById(clientId);
+		model.put("client", client);
+		return "/clients/clientDelete";
+	}
+
+	@PostMapping(value = "/administrators/clients/{clientId}/delete")
+	public String deleteClientForm(@PathVariable("clientId") final int clientId, final ModelMap model, final HttpServletRequest request) {
+		Client client = this.clientService.findById(clientId);
+
+		List<FoodOffer> foodOffers = this.foodOfferService.findFoodOfferByUserId(client.getId());
+		List<SpeedOffer> speedOffers = this.speedOfferService.findSpeedOfferByUserId(client.getId());
+		List<NuOffer> nuOffers = this.nuOfferService.findNuOfferByUserId(client.getId());
+		List<TimeOffer> timeOffers = this.timeOfferService.findTimeOfferByUserId(client.getId());
+
+		foodOffers.stream().forEach(f -> f.setStatus(StatusOffer.inactive));
+
+		speedOffers.stream().forEach(s -> s.setStatus(StatusOffer.inactive));
+
+		nuOffers.stream().forEach(n -> n.setStatus(StatusOffer.inactive));
+
+		timeOffers.stream().forEach(t -> t.setStatus(StatusOffer.inactive));
+
+		client.setAddress("Eliminado");
+		client.setDescription("Eliminado");
+		client.setEmail("eliminado@gmail.com");
+		client.setExpiration(LocalDate.now());
+		client.setFinish(LocalTime.of(00, 00));
+		client.setFood("Eliminado");
+		client.setInit(LocalTime.of(00, 00));
+		client.setMunicipio(Municipio.Sevilla);
+		client.setTelephone("000000000");
+		User elim = client.getUsuar();
+		client.setUsuar(null);
+		this.clientService.saveClient(client);	
+		this.userService.deleteUser(elim);
+		return "redirect:/administrators/clients/page/0";
+
 	}
 }

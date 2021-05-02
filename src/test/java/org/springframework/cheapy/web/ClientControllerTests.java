@@ -40,8 +40,6 @@ import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
-
-
 @WebMvcTest(value = ClientController.class, 
 excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class),
 excludeAutoConfiguration = SecurityConfiguration.class)
@@ -96,7 +94,7 @@ class ClientControllerTest {
 		
 		Usuario usuario = new Usuario();
 		usuario.getFavoritos().add(client1);
-		BDDMockito.given(usuarioService.getCurrentUsuario()).willReturn(usuario);
+		BDDMockito.given(this.usuarioService.getCurrentUsuario()).willReturn(usuario);
 		BDDMockito.given(this.clientService.mediaValoraciones(client1)).willReturn(1);
 		
 		BDDMockito.given(this.foodOfferService.findFoodOfferActOclByUserId(1)).willReturn(new ArrayList<FoodOffer>());
@@ -210,15 +208,15 @@ class ClientControllerTest {
 				.andExpect(view().name("redirect:/login"));
 		
 		Client cliente = clientService.findById(TEST_CLIENT_ID);
-		Assertions.assertTrue(cliente.getAddress()=="Eliminado");
-		Assertions.assertTrue(cliente.getDescription()=="Eliminado");
-		Assertions.assertTrue(cliente.getEmail()=="e@liminado");
+		Assertions.assertTrue(cliente.getAddress().equals("Eliminado"));
+		Assertions.assertTrue(cliente.getDescription().equals("Eliminado"));
+		Assertions.assertTrue(cliente.getEmail().equals("eliminado@gmail.com"));
 		Assertions.assertTrue(cliente.getExpiration().equals(LocalDate.now()));
-		Assertions.assertTrue(cliente.getFinish()==LocalTime.of(00, 00));
-		Assertions.assertTrue(cliente.getInit()==LocalTime.of(00, 00));
-		Assertions.assertTrue(cliente.getFood()=="Eliminado");
-		Assertions.assertTrue(cliente.getTelephone()=="000000000");	
-		Assertions.assertTrue(cliente.getMunicipio()==Municipio.Sevilla);
+		Assertions.assertTrue(cliente.getFinish().equals(LocalTime.of(00, 00)));
+		Assertions.assertTrue(cliente.getInit().equals(LocalTime.of(00, 00)));
+		Assertions.assertTrue(cliente.getFood().equals("Eliminado"));
+		Assertions.assertTrue(cliente.getTelephone().equals("000000000"));	
+		Assertions.assertTrue(cliente.getMunicipio().equals(Municipio.Sevilla));
 		Assertions.assertTrue(cliente.getUsuar()==null);
 	}
 	

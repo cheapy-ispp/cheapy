@@ -20,18 +20,18 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cheapy.configuration.SecurityConfiguration;
 import org.springframework.cheapy.model.Client;
 import org.springframework.cheapy.model.FoodOffer;
-import org.springframework.cheapy.model.User;
-import org.springframework.cheapy.model.Municipio;
 import org.springframework.cheapy.model.NuOffer;
 import org.springframework.cheapy.model.SpeedOffer;
 import org.springframework.cheapy.model.StatusOffer;
 import org.springframework.cheapy.model.TimeOffer;
+import org.springframework.cheapy.model.User;
 import org.springframework.cheapy.model.Usuario;
 import org.springframework.cheapy.service.ClientService;
 import org.springframework.cheapy.service.FoodOfferService;
 import org.springframework.cheapy.service.NuOfferService;
 import org.springframework.cheapy.service.SpeedOfferService;
 import org.springframework.cheapy.service.TimeOfferService;
+import org.springframework.cheapy.service.UserService;
 import org.springframework.cheapy.service.UsuarioService;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
@@ -74,10 +74,8 @@ class AdministratorControllerTest {
 	@MockBean
 	private TimeOfferService timeOfferService;
 	
-	private FoodOffer fo1;
-	private NuOffer nu1;
-	private SpeedOffer sp1;
-	private TimeOffer time1;
+	@MockBean
+	private UserService userService;
 
 	@BeforeEach
 	void setup() {
@@ -88,8 +86,6 @@ class AdministratorControllerTest {
 		Usuario usuario = new Usuario();
 		usuario.setNombre("usuario");
 		usuario.setApellidos("usuario");
-		usuario.setDireccion("usuario");
-		usuario.setMunicipio(Municipio.Sevilla);
 		usuario.setEmail("usuario@gmail.com");
 		usuario.setUsuar(user1);
 		BDDMockito.given(this.usuarioService.findByUsername("user1")).willReturn(usuario);
@@ -127,8 +123,7 @@ class AdministratorControllerTest {
 		fo1test.setStatus(StatusOffer.hidden);
 		fo1test.setCode("");
 		fo1test.setClient(client1);
-		this.fo1 = fo1test;
-		BDDMockito.given(this.foodOfferService.findFoodOfferById(TEST_FOODOFFER_ID)).willReturn(this.fo1);
+		BDDMockito.given(this.foodOfferService.findFoodOfferById(TEST_FOODOFFER_ID)).willReturn(fo1test);
 		
 		NuOffer nu1test = new NuOffer();
 		nu1test.setId(TEST_NUOFFER_ID);
@@ -143,8 +138,7 @@ class AdministratorControllerTest {
 		nu1test.setClient(client1);
 		nu1test.setStatus(StatusOffer.hidden);
 		nu1test.setCode("");
-		this.nu1 = nu1test;
-		BDDMockito.given(this.nuOfferService.findNuOfferById(TEST_NUOFFER_ID)).willReturn(this.nu1);
+		BDDMockito.given(this.nuOfferService.findNuOfferById(TEST_NUOFFER_ID)).willReturn(nu1test);
 		
 		SpeedOffer sp1test = new SpeedOffer();
 		sp1test.setId(TEST_SPEEDOFFER_ID);
@@ -159,8 +153,7 @@ class AdministratorControllerTest {
 		sp1test.setClient(client1);
 		sp1test.setStatus(StatusOffer.hidden);
 		sp1test.setCode("");
-		this.sp1 = sp1test;
-		BDDMockito.given(this.speedOfferService.findSpeedOfferById(TEST_SPEEDOFFER_ID)).willReturn(this.sp1);
+		BDDMockito.given(this.speedOfferService.findSpeedOfferById(TEST_SPEEDOFFER_ID)).willReturn(sp1test);
 		
 		TimeOffer time1test = new TimeOffer();
 		time1test.setId(TEST_TIMEOFFER_ID);
@@ -172,8 +165,7 @@ class AdministratorControllerTest {
 		time1test.setClient(client1);
 		time1test.setStatus(StatusOffer.hidden);
 		time1test.setCode("");
-		this.time1 = time1test;
-		BDDMockito.given(this.timeOfferService.findTimeOfferById(TEST_TIMEOFFER_ID)).willReturn(this.time1);
+		BDDMockito.given(this.timeOfferService.findTimeOfferById(TEST_TIMEOFFER_ID)).willReturn(time1test);
 	}
 	
 	@WithMockUser(value = "spring", authorities = "administrator")

@@ -23,15 +23,6 @@
             <th><fmt:message key="surname"/></th>
             <td><c:out value="${usuario.apellidos}"/></td>
         </tr>
-		<tr>
-            <th><fmt:message key="municipio"/></th>
-            <td><c:out value="${usuario.municipio}"/></td>
-        </tr>
-        <tr>
-            <th><fmt:message key="addressUser"/></th>
-            <td><c:out value="${usuario.direccion}"/> </td>
-        </tr>
-
         <tr>
             <th><fmt:message key="email"/></th>
             <td><c:out value="${usuario.email}"/></td>
@@ -64,15 +55,24 @@
     </sec:authorize>
     <sec:authorize access="hasAnyAuthority('admin')">
 		<sec:authentication var="principal" property="principal" />
-    	<div class="btns-edit">
-		
-	        <spring:url value="/administrators/usuarios/{username}/disable" var="deactivateUrl">
-	        	<spring:param name="username" value="${usuario.usuar.username}"/>
-	        </spring:url>
-	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deactivateUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-	        	<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
-	         Desactivar usuario</button>
-    	</div>
+    	<c:if test="${usuario.usuar.enabled == 'true'}">
+    		<div class="btns-edit">
+		        <spring:url value="/administrators/usuarios/{username}/disable" var="deactivateUrl">
+		        	<spring:param name="username" value="${usuario.usuar.username}"/>
+		        </spring:url>
+		        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deactivateUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+		        	<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
+		         Desactivar usuario</button>  
+    		</div>
+    	</c:if>
+    		<div class="eliminar">
+		        <spring:url value="/administrators/usuarios/{usuarioId}/delete" var="eliminateUrl">
+		        	<spring:param name="usuarioId" value="${usuario.id}"/>
+		        </spring:url>
+		        <button type="button" role="link" onclick="window.location='${fn:escapeXml(eliminateUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+		        	<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
+		         Eliminar usuario</button>  
+    		</div>
     </sec:authorize>
     </div>
   	

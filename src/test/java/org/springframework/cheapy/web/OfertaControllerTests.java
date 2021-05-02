@@ -1,17 +1,13 @@
 package org.springframework.cheapy.web;
 
-import static org.hamcrest.Matchers.hasProperty;
-import static org.hamcrest.Matchers.is;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Date;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +19,9 @@ import org.springframework.cheapy.configuration.SecurityConfiguration;
 import org.springframework.cheapy.model.Client;
 import org.springframework.cheapy.model.FoodOffer;
 import org.springframework.cheapy.model.Municipio;
-import org.springframework.cheapy.model.StatusOffer;
+import org.springframework.cheapy.model.NuOffer;
+import org.springframework.cheapy.model.SpeedOffer;
+import org.springframework.cheapy.model.TimeOffer;
 import org.springframework.cheapy.model.User;
 import org.springframework.cheapy.service.ClientService;
 import org.springframework.cheapy.service.FoodOfferService;
@@ -44,7 +42,6 @@ excludeAutoConfiguration = SecurityConfiguration.class)
 class OfertaControllerTest {
 
 	private static final int TEST_CLIENT_ID = 1;
-	private static final int TEST_FOODOFFER_ID = 1;
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -64,9 +61,6 @@ class OfertaControllerTest {
 	@MockBean
 	private TimeOfferService	timeOfferService;
 
-	private FoodOffer fo1;
-	private Client clientTest;
-
 	@BeforeEach
 	void setup() {
 		User user1 = new User();
@@ -83,8 +77,11 @@ class OfertaControllerTest {
 		client1.setDescription("client1");
 		client1.setFood("client1");
 		client1.setUsuar(user1);
-		clientTest = client1;
 		BDDMockito.given(this.clientService.getCurrentClient()).willReturn(client1);
+		BDDMockito.given(this.foodOfferService.findFoodOfferActOclByUserId(1)).willReturn(new ArrayList<FoodOffer>());
+		BDDMockito.given(this.nuOfferService.findNuOfferActOclByUserId(1)).willReturn(new ArrayList<NuOffer>());
+		BDDMockito.given(this.speedOfferService.findSpeedOfferActOclByUserId(1)).willReturn(new ArrayList<SpeedOffer>());
+		BDDMockito.given(this.timeOfferService.findTimeOfferActOclByUserId(1)).willReturn(new ArrayList<TimeOffer>());
 		
 	}
 
@@ -143,152 +140,4 @@ class OfertaControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(view().name("offers/myOffersList"));
 	}
-/*
-	@WithMockUser(value = "spring", authorities = "client")
-	@Test
-	void testProcessCreationFormSuccess() throws Exception {
-		mockMvc.perform(post("/offers/food/new")
-					.with(csrf())
-					.param("start", "2021-12-23T12:30")
-					.param("end", "2022-12-23T12:30")
-					.param("food", "food")
-					.param("discount", "10")
-					.param("price", "10.5"))
-				.andExpect(status().is3xxRedirection());
-	}
-
-	@WithMockUser(value = "spring", authorities = "client")
-	@Test
-	void testProcessCreationFormHasErrors() throws Exception {
-		mockMvc.perform(post("/offers/food/new")
-					.with(csrf())
-					.param("start", "2020-12-23T12:30")
-					.param("end", "2020-12-22T12:30")
-					.param("food", "")
-					.param("discount", "")
-					.param("price", ""))
-				.andExpect(model().attributeHasErrors("foodOffer"))
-				.andExpect(model().attributeHasFieldErrors("foodOffer", "start"))
-				.andExpect(model().attributeHasFieldErrors("foodOffer", "end"))
-				.andExpect(model().attributeHasFieldErrors("foodOffer", "food"))
-				.andExpect(model().attributeHasFieldErrors("foodOffer", "discount"))
-				.andExpect(model().attributeHasFieldErrors("foodOffer", "price"))
-				.andExpect(view().name("offers/food/createOrUpdateFoodOfferForm"));
-	}
-	
-	@WithMockUser(value = "spring", authorities = "client")
-	@Test
-	void testInitUpdateFoodOfferSuccess() throws Exception {
-		mockMvc.perform(get("/offers/food/{foodOfferId}/edit",TEST_FOODOFFER_ID)
-					.with(csrf()))
-				.andExpect(model().attributeExists("foodOffer"))
-				.andExpect(model().attribute("foodOffer", hasProperty("start", is(LocalDateTime.of(2021, 12, 23, 12, 30)))))
-				.andExpect(model().attribute("foodOffer", hasProperty("end", is(LocalDateTime.of(2022, 12, 23, 12, 30)))))
-				.andExpect(model().attribute("foodOffer", hasProperty("food",is("fo1test"))))
-				.andExpect(model().attribute("foodOffer", hasProperty("discount", is(1))))
-				.andExpect(model().attribute("foodOffer", hasProperty("price", is(10.0))))
-				.andExpect(model().attribute("foodOffer", hasProperty("client", is(clientTest))))
-				.andExpect(status().isOk())
-				.andExpect(view().name("offers/food/createOrUpdateFoodOfferForm"));
-	}
-	
-	@WithMockUser(value = "spring", authorities = "client")
-	@Test
-	void testInitUpdateFoodOfferError() throws Exception {
-		fo1.setStatus(StatusOffer.inactive);
-		mockMvc.perform(get("/offers/food/{foodOfferId}/edit",TEST_FOODOFFER_ID)
-					.with(csrf()))
-				.andExpect(status().isOk())
-				.andExpect(view().name("error"));
-	}
-	
-	@WithMockUser(value = "spring", authorities = "client")
-	@Test
-	void testUpdateFoodOfferSuccess() throws Exception {
-		mockMvc.perform(post("/offers/food/{foodOfferId}/edit",TEST_FOODOFFER_ID)
-					.with(csrf())
-					.param("id","1")
-					.param("start", "2021-12-23T12:30")
-					.param("end", "2022-12-23T12:30")
-					.param("food", "food1test")
-					.param("status", "hidden")
-					.param("discount", "10")
-					.param("price", "10.5")
-					.param("code", "")
-					.sessionAttr("idFood", TEST_FOODOFFER_ID))
-				.andExpect(status().is3xxRedirection())
-				.andExpect(view().name("redirect:/offers/food/"+TEST_FOODOFFER_ID));
-	}
-	
-	@WithMockUser(value = "spring", authorities = "client")
-	@Test
-	void testUpdateFoodOfferError() throws Exception {
-		mockMvc.perform(post("/offers/food/{foodOfferId}/edit",TEST_FOODOFFER_ID)
-					.with(csrf())
-					.param("id","1")
-					.param("start", "2021-12-23T12:30")
-					.param("end", "2021-12-22T12:30")
-					.param("food", "food1test")
-					.param("status", "hidden")
-					.param("discount", "10")
-					.param("price", "manoli")
-					.param("code", "")
-					.sessionAttr("idFood", TEST_FOODOFFER_ID))
-				.andExpect(model().attributeExists("foodOffer"))
-				.andExpect(status().isOk())
-				.andExpect(view().name("offers/food/createOrUpdateFoodOfferForm"));
-	}
-	
-	@WithMockUser(value = "user1", authorities = "client")
-	@Test
-	void testActivateSuccess() throws Exception {
-		mockMvc.perform(get("/offers/food/{foodOfferId}/activate", TEST_FOODOFFER_ID))
-				.andExpect(status().is3xxRedirection())
-				.andExpect(view().name("redirect:/offers/food/"+TEST_FOODOFFER_ID));
-	}
-	
-	@WithMockUser(value = "spring", authorities = "client")
-	@Test
-	void testActivateHasErrors() throws Exception {
-		mockMvc.perform(get("/offers/food/{foodOfferId}/activate", TEST_FOODOFFER_ID+1))
-				.andExpect(view().name("exception"));
-	}
-	
-	@WithMockUser(value = "user1", authorities = "client")
-	@Test
-	void testDisableInitSuccess() throws Exception {
-		this.mockMvc.perform(get("/offers/food/{foodOfferId}/disable", TEST_FOODOFFER_ID))
-					.andExpect(status().isOk())
-					.andExpect(view().name("offers/food/foodOffersDisable"));
-	}
-	
-	@WithMockUser(value = "user1", authorities = "client")
-    @Test
-    void testDisableFormSuccess() throws Exception {
-        this.mockMvc.perform(post("/offers/food/{foodOfferId}/disable", TEST_FOODOFFER_ID)
-                    .with(csrf()))
-                    .andExpect(status().is3xxRedirection())
-                    .andExpect(view().name("redirect:/myOffers"));
-    }
-
-	@WithMockUser(value = "user1", authorities = "client")
-	@Test
-	void testDisableInitHasErrors() throws Exception {
-		Client c = new Client();
-        c.setId(2);
-        fo1.setClient(c);
-		mockMvc.perform(get("/offers/food/{foodOfferId}/disable", TEST_FOODOFFER_ID))
-				.andExpect(view().name("error"));
-	}
-	
-	@WithMockUser(value = "user1", authorities = "client")
-	@Test
-	void testDisableFormHasErrors() throws Exception {
-		Client c = new Client();
-        c.setId(2);
-        fo1.setClient(c);
-		mockMvc.perform(post("/offers/food/{foodOfferId}/disable", TEST_FOODOFFER_ID)
-				.with(csrf()))
-				.andExpect(view().name("error"));
-	}*/
 }

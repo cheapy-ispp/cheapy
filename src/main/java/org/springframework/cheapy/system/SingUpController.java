@@ -63,14 +63,6 @@ public class SingUpController {
 
 	@GetMapping("/sign-up-user/new")
 	public String singUpUserForm(Map<String, Object> model) {
-		Map<Object, String> municipios = new HashMap<Object, String>();
-		
-		Municipio[] a = Municipio.values();
-		int cont = 0;
-		for (Municipio i : Municipio.values()) {
-		    municipios.put(a[cont], i.toString());
-		    cont++;
-		}
 		
 		Usuario usuario = new Usuario();
 		
@@ -78,33 +70,28 @@ public class SingUpController {
 		
 		usuario.setUsuar(user);
 		model.put("usuario", usuario);
-		model.put("municipios", municipios);
-		//model.put("user", user);
+		
 		return "singup/singUpUser";
 	}
 
 	@PostMapping("/sign-up-user/new")
 	public String singUpUserForm(@Valid Usuario usuario, BindingResult result, Map<String, Object> model) {
+		
 		Authorities auth=new Authorities();
+		
 		User user= usuario.getUsuar();
 		user.setEnabled(true);
-		
 		usuario.setUsuar(user);
+		
 		auth.setUsername(user.getUsername());
 		auth.setAuthority("usuario");
+		
 		Boolean duplicate=this.userService.duplicateUsername(usuario.getUsuar().getUsername());
+		
 		if(duplicate) {
 			result.rejectValue("usuar.username","" ,"El nombre de usuario ya esta registrado");
 		}
 		if (result.hasErrors()) {
-			Map<Object, String> municipios = new HashMap<Object, String>();
-			Municipio[] a = Municipio.values();
-			int cont = 0;
-			for (Municipio i : Municipio.values()) {
-			    municipios.put(a[cont], i.toString());
-			    cont++;
-			}
-			model.put("municipios", municipios);
 			
 			if(usuario.getUsuar().getPassword().equals("")) {
 				result.rejectValue("usuar.password","" ,"La contraseña no puede estar vacía");
@@ -114,7 +101,7 @@ public class SingUpController {
 			}
 			return "singup/singUpUser";
 		 }else if(usuario.getUsuar().getPassword().equals("")||usuario.getUsuar().getUsername().equals("")) {
-			 model.put("municipio", Municipio.values());
+			 
 			 if(usuario.getUsuar().getPassword().equals("")) {
 					result.rejectValue("usuar.password","" ,"La contraseña no puede estar vacía");
 				}
@@ -124,8 +111,6 @@ public class SingUpController {
 				return "singup/singUpUser";
 		 }else {
 			
-			//auth.setId(1);
-			//this.authoritiesService.saveAuthorities(auth);
 			usuario.getUsuar().setPassword(MD5.md5(usuario.getUsuar().getPassword())); //MD5 a la contraseña para que no circule en claro por la red
 			this.usuarioService.saveUsuario(usuario);
 			this.userService.saveUser(user);
@@ -155,28 +140,35 @@ public class SingUpController {
 		cliente.setExpiration(ayer);
 		model.put("municipios", municipios);
 		model.put("cliente", cliente);
-		//model.put("user", user);
+		
 		return "singup/singUpClient";
 	}
 
 	@PostMapping("/sign-up-client/new")
 	public String singUpClientForm(@ModelAttribute("cliente") @Valid Client cliente, BindingResult result,  Map<String, Object> model) {
+		
 		Authorities auth=new Authorities();
+		
 		User user= cliente.getUsuar();
 		user.setEnabled(true);
+		
 		cliente.setUsuar(user);
 		auth.setUsername(user.getUsername());
 		auth.setAuthority("client");
+		
 		LocalDate ayer= LocalDate.now().minusDays(2);
 		cliente.setExpiration(ayer);
+		
 		if(!this.checkTimes(cliente)) {
 			result.rejectValue("finish","" ,"La hora de cierre debe ser posterior a la hora de apertura");
-			
 		}
+		
 		Boolean duplicate=this.userService.duplicateUsername(cliente.getUsuar().getUsername());
+		
 		if(duplicate) {
 			result.rejectValue("usuar.username","" ,"El nombre de usuario ya esta registrado");
 		}
+		
 		if (result.hasErrors()) {
 			Map<Object, String> municipios = new HashMap<Object, String>();
 			Municipio[] a = Municipio.values();
@@ -185,41 +177,49 @@ public class SingUpController {
 			    municipios.put(a[cont], i.toString());
 			    cont++;
 			}
+			
 			model.put("municipios", municipios);
-			
-			
 			model.put("cliente", cliente);
+			
 			if(cliente.getUsuar().getPassword().equals("")) {
 				result.rejectValue("usuar.password","" ,"La contraseña no puede estar vacía");
 			}
+			
 			if(cliente.getUsuar().getUsername().equals("")) {
 				result.rejectValue("usuar.username","" ,"El nombre de usuario no puede estar vacío");
 			}
+			
 			return "singup/singUpClient";
+			
 		}else if(cliente.getUsuar().getPassword().equals("")||cliente.getUsuar().getUsername().equals("")) {
+			
 			Map<Object, String> municipios = new HashMap<Object, String>();
+			
 			Municipio[] a = Municipio.values();
 			int cont = 0;
 			for (Municipio i : Municipio.values()) {
 			    municipios.put(a[cont], i.toString());
 			    cont++;
 			}
-			municipios.put("null", "Seleccione uno de los municipios");
+			
 			model.put("municipios", municipios);
-			model.put("cliente", cliente); 
+			model.put("cliente", cliente);
+			
 			 if(cliente.getUsuar().getPassword().equals("")) {
 					result.rejectValue("usuar.password","" ,"La contraseña no puede estar vacía");
 			}
+			 
 			if(cliente.getUsuar().getUsername().equals("")) {
 					result.rejectValue("usuar.username","" ,"El nombre de usuario no puede estar vacío");
 			}
-				return "singup/singUpClient";
+			
+			return "singup/singUpClient";
 		 }else {
+			 
 			cliente.getUsuar().setPassword(MD5.md5(cliente.getUsuar().getPassword())); //MD5 a la contraseña para que no circule en claro por la red
 			this.clientService.saveClient(cliente);
 			this.userService.saveUser(user);
 			this.authoritiesService.saveAuthorities(cliente.getUsuar().getUsername(), "notsubscribed");
-			
 			
 			return "redirect:/";
 		}

@@ -28,7 +28,8 @@
 	        <tr>
 	        	<th><fmt:message key="nameUser"/></th>
 	        	<th><fmt:message key="surname"/></th>
-	        	<th><fmt:message key="user"/></th>  
+	        	<th><fmt:message key="user"/></th>
+	        	<th><fmt:message key="enabled"/></th>     
 	            <th> </th>
 	        </tr>
 	        </thead>
@@ -43,6 +44,14 @@
 	                </td>
 	                <td>
 	                    <c:out value="${usuario.usuar.username}"/>
+	                </td>
+	               	<td>
+	                	<c:if test="${usuario.usuar.enabled == 'true'}">
+			            	<c:out value="Si"/>
+			            </c:if>	
+			            <c:if test="${usuario.usuar.enabled == 'false'}">
+			                 <c:out value="No"/>
+			             </c:if>
 	                </td>
 	                <td>
 		                <spring:url value="/administrators/usuarios/{username}" var="usuarioUrl">

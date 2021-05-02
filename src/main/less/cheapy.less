@@ -70,14 +70,17 @@
   -moz-transition: border 0.15s;
   -o-transition: border 0.15s;
   -ms-transition: border 0.15s;
-
+  background:	#325a80;
+  color: white;
   &:hover,
   &:focus,
   &:active,
   &.active,
   .open .dropdown-toggle& {
-    background-color: @spring-brown;
-    border-color: @spring-brown;
+   // background-color: @spring-brown;
+   // border-color: @spring-brown;
+    background:	#B9D8EF;
+    color: black;
   }
 }
 
@@ -229,9 +232,17 @@ img.img-responsive{
 }
 
 .btn-block {
+  background:	#325a80;
+  color: white;
+  border: none;
   display: block;
   width: 25%;
 }
+
+.btn-block:hover {
+	background:	#B9D8EF;
+    color: black;
+	}
 
 .btn-filter{
 	background:	#325a80;
@@ -339,9 +350,9 @@ img.img-responsive{
 }
 
 
-.btn-home button:hover {
-  background-color: rgb(40, 140, 215);
-}
+//.btn-home button:hover {
+//  background-color: rgb(40, 140, 215);
+//}
 
 .createOffer button {
   background-color: #325a80; 

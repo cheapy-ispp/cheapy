@@ -103,6 +103,14 @@
 	         Activar cliente</button>
     	 </c:if>
     	</div>
+    	<div class="eliminar">   
+	        <spring:url value="/administrators/clients/{clientId}/delete" var="deleteUrl">
+	        	<spring:param name="clientId" value="${client.id}"/>
+	        </spring:url>
+	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deleteUrl)}'" >
+	            <span class="glyphicon 	glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
+	          Eliminar cuenta</button>
+      	</div>
     </sec:authorize>
     </div>
   	

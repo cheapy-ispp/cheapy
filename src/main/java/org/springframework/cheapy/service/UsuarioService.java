@@ -40,10 +40,15 @@ public class UsuarioService {
 	public Usuario findByUsername(final String username) throws DataAccessException {
 		return this.usuarioRepository.findByUsername(username);
 	}
+	
+	@Transactional
+	public Usuario findById(final Integer id) throws DataAccessException {
+		return this.usuarioRepository.findById(id).get();
+	}
 
 	@Transactional
-	public List<Usuario> findAllUsuario() throws DataAccessException {
-		return this.usuarioRepository.findAllUsuario();
+	public List<Usuario> findAllUsuario(final Pageable page) throws DataAccessException {
+		return this.usuarioRepository.findAllUsuario(page);
 	}
 
 	@Transactional

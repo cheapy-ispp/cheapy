@@ -17,45 +17,8 @@
         <div class="form-group has-feedback">
             <cheapy:inputField label="Nombre" name="nombre"/>
             <cheapy:inputField label="Apellidos" name="apellidos"/>
-			<cheapy:selectMunicipio label="Municipio" name="municipio" size="1" items="${municipios}" ></cheapy:selectMunicipio>
-            <cheapy:inputField label="Direccion" name="direccion"/>
             <cheapy:inputField label="Email" name="email"/>
 
-					
-					<script>
-
-						function setSelectedIndex(s, valsearch)
-						
-						{
-						
-							// Loop through all the items in drop down list
-							
-							for (i = 0; i< s.options.length; i++)
-							
-							{ 
-							
-								if (s.options[i].value == valsearch)
-								
-								{
-								
-								// Item is found. Set its property and exit
-								
-								s.options[i].selected = true;
-								
-								break;
-								
-								}
-							
-							}
-						
-						return;
-						
-						}
-						
-						setSelectedIndex(document.getElementById("selectMunicipio"),"${municipio}");
-						
-					</script>           
-            
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

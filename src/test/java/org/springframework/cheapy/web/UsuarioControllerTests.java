@@ -16,7 +16,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cheapy.configuration.SecurityConfiguration;
 import org.springframework.cheapy.model.Client;
-import org.springframework.cheapy.model.Municipio;
 import org.springframework.cheapy.model.User;
 import org.springframework.cheapy.model.Usuario;
 import org.springframework.cheapy.service.ClientService;
@@ -44,8 +43,6 @@ class UsuarioControllerTest {
 	
 	@MockBean
 	private ClientService clientService;
-	
-	private Usuario usuario;
 
 	@BeforeEach
 	void setup() {
@@ -56,16 +53,13 @@ class UsuarioControllerTest {
 		usuario.setId(0);
 		usuario.setNombre("usuario");
 		usuario.setApellidos("usuario");
-		usuario.setDireccion("usuario");
-		usuario.setMunicipio(Municipio.Sevilla);
 		usuario.setEmail("usuario@gmail.com");
 		usuario.setUsuar(user);
 		
 		Client client1 = new Client();
 		client1.setId(1);
 		usuario.getFavoritos().add(client1);
-		this.usuario = usuario;
-		BDDMockito.given(this.usuarioService.getCurrentUsuario()).willReturn(this.usuario);
+		BDDMockito.given(this.usuarioService.getCurrentUsuario()).willReturn(usuario);
 		
 		Client client = new Client();
 		client.setId(0);
@@ -99,8 +93,6 @@ class UsuarioControllerTest {
 					.param("usuar.password", "Contrasenya123")
 					.param("nombre", "nombre")
 					.param("apellidos", "apellidos")
-					.param("direccion", "direccion")
-					.param("municipio", "Sevilla")
 					.param("email", "email@gmail.com"))
 				.andExpect(status().is3xxRedirection());
 	}
@@ -114,14 +106,10 @@ class UsuarioControllerTest {
 				.param("usuar.password", "")
 				.param("nombre", "")
 				.param("apellidos", "")
-				.param("direccion", "")
-				.param("municipio", "Sevil")
 				.param("email", "email"))
 				.andExpect(model().attributeHasErrors("usuario"))
 				.andExpect(model().attributeHasFieldErrors("usuario", "nombre"))
 				.andExpect(model().attributeHasFieldErrors("usuario", "apellidos"))
-				.andExpect(model().attributeHasFieldErrors("usuario", "direccion"))
-				.andExpect(model().attributeHasFieldErrors("usuario", "municipio"))
 				.andExpect(model().attributeHasFieldErrors("usuario", "email"))
 				.andExpect(view().name("usuarios/createOrUpdateUsuarioForm"));
 	}
@@ -180,8 +168,6 @@ class UsuarioControllerTest {
 				.with(csrf())
 				.param("nombre", "nombre")
 				.param("apellidos", "apellidos")
-				.param("direccion", "direccion")
-				.param("municipio", "Sevilla")
 				.param("email", "email@gmail.com")
 				.param("usuar.password", "testSuccess"))
 				.andExpect(status().is3xxRedirection())
@@ -195,8 +181,6 @@ class UsuarioControllerTest {
 				.with(csrf())
 				.param("nombre", "nombre")
 				.param("apellidos", "apellidos")
-				.param("direccion", "direccion")
-				.param("municipio", "Sevilla")
 				.param("email", "email@gmail.com")
 				.param("usuar.password", ""))
 				.andExpect(model().attributeHasFieldErrors("usuario","usuar.password"))

@@ -53,6 +53,11 @@ public class ClientService {
 	public List<Client> findAllClient(final Pageable page) throws DataAccessException {
 		return this.clientRepository.findAllClient(page);
 	}
+	
+	@Transactional
+	public List<Client> findAllNonDeletedClients(final Pageable page) throws DataAccessException {
+		return this.clientRepository.findAllNonDeletedClients(page);
+	}
 
 	public Integer mediaValoraciones(final Client client) {
 		List<ReviewClient> valoraciones = this.reviewRepositoy.findAllReviewClientByBar(client);

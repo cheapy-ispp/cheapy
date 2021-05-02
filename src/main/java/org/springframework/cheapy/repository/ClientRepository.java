@@ -18,5 +18,8 @@ public interface ClientRepository extends PagingAndSortingRepository<Client, Int
 	@Query("SELECT client FROM Client client")
 	@Transactional(readOnly = true)
 	List<Client> findAllClient(Pageable page);
-
+	
+	@Query("SELECT client FROM Client client where client.usuar is not null")
+	@Transactional(readOnly = true)
+	List<Client> findAllNonDeletedClients(Pageable page);
 }

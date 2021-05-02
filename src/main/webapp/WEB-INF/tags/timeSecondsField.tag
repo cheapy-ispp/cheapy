@@ -17,7 +17,7 @@
         <label class="col-sm-2 control-label">${label}</label>
 		
         <div class="col-sm-10">
-        	<form:input type="time" step='1' value="${value }" class="time"  path="${name}" style="width:70%" />
+        	<form:input type="time" step='1' value="${value }" class="form-control" max="02:00:00"  path="${name}" style="width:70%" />
             <c:if test="${valid}">
                 <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
             </c:if>

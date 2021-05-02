@@ -240,6 +240,9 @@ public class OfertaController {
 	@GetMapping("/offersByDate/{page}")
     public String processFindFormByDate(@PathVariable("page") final int page, final Map<String, Object> model,
     		final String start) {
+		if(start.equals("")) {
+			return "redirect:/offers/";
+		}
 		LocalDateTime inic = LocalDateTime.parse(start,
 		        DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")); 
 		
