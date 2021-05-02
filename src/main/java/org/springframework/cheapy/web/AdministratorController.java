@@ -59,6 +59,7 @@ public class AdministratorController {
 		Pageable nextPage = PageRequest.of(page + 1, 10);
 
 		List<Usuario> usuarioLs = this.usuarioService.findAllUsuario(elements);
+		
 		Integer next = this.usuarioService.findAllUsuario(nextPage).size();
 		model.put("usuarioLs", usuarioLs);
 		model.put("nextPage", next);
@@ -70,8 +71,9 @@ public class AdministratorController {
 		Pageable elements = PageRequest.of(page, 10);
 		Pageable nextPage = PageRequest.of(page + 1, 10);
 
-		List<Client> clientLs = this.clientService.findAllClient(elements);
-		Integer next = this.clientService.findAllClient(nextPage).size();
+		List<Client> clientLs = this.clientService.findAllNonDeletedClients(elements);
+		
+		Integer next = this.clientService.findAllNonDeletedClients(nextPage).size();
 		model.put("clientLs", clientLs);
 		model.put("nextPage", next);
 		return "clients/clientsList";

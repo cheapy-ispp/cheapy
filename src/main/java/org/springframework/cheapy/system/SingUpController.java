@@ -161,7 +161,6 @@ public class SingUpController {
 		
 		if(!this.checkTimes(cliente)) {
 			result.rejectValue("finish","" ,"La hora de cierre debe ser posterior a la hora de apertura");
-			
 		}
 		
 		Boolean duplicate=this.userService.duplicateUsername(cliente.getUsuar().getUsername());
