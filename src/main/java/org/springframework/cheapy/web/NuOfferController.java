@@ -71,7 +71,7 @@ public class NuOfferController {
 		boolean res = false;
 		if (nuOffer.getGold() == null || nuOffer.getSilver() == null || nuOffer.getBronze() == null) {
 			res = true;
-		} else if (nuOffer.getGold() >= nuOffer.getSilver() && nuOffer.getSilver() >= nuOffer.getBronze()) {
+		} else if (nuOffer.getGold() > nuOffer.getSilver() && nuOffer.getSilver() > nuOffer.getBronze()) {
 			res = true;
 		}
 		return res;
@@ -81,7 +81,7 @@ public class NuOfferController {
 		boolean res = false;
 		if (NuOffer.getDiscountGold() == null || NuOffer.getDiscountSilver() == null || NuOffer.getDiscountBronze() == null) {
 			res = true;
-		} else if (NuOffer.getDiscountGold() >= NuOffer.getDiscountSilver() && NuOffer.getDiscountSilver() >= NuOffer.getDiscountBronze()) {
+		} else if (NuOffer.getDiscountGold() > NuOffer.getDiscountSilver() && NuOffer.getDiscountSilver() > NuOffer.getDiscountBronze()) {
 			res = true;
 		}
 		return res;
