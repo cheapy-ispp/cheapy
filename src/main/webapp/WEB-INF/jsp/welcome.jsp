@@ -11,7 +11,7 @@
  
 
 <cheapy:layout pageName="home"> 
-    <h2 class="titulo" style="font-family: 'Lobster'; font-size: 300%; color: #325a80; padding:30px"><fmt:message key="welcome"/></h2>
+    <h2 class="titulo" style="font-family: 'Lobster'; font-size: 300%;  padding:30px"><fmt:message key="welcome"/></h2>
     <div class="row">
         <div class="col-md-12">
             <div class="img-home">
@@ -20,19 +20,19 @@
             </div>
             <div class="btn-home-max">
 	            <div class="btn-home">
-	                <button type="button" role="link" onclick="window.location='/offers'" style="font-family: 'Lobster'; background-color: #325a80; font-size: 20px;margin:5px;" class="btn-block">
+	                <button  class="btn-block" type="button" role="link" onclick="window.location='/offers'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" >
 	                <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
 	                <fmt:message key="listOffers"/> </button>
 	            </div>
 	            
               <sec:authorize access="hasAnyAuthority('client')">
               <div class="btn-home">
-                      <button type="button" role="link" onclick="window.location='/myOffers'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
+                      <button class="btn-block" type="button" role="link" onclick="window.location='/myOffers'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
                       <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
                       <fmt:message key="myOffers"/> </button>
                   </div>
                 <div class="btn-home">
-                      <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
+                      <button class="btn-block" type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" >
                       <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
                       <fmt:message key="createOffers"/> </button>
                   </div>
