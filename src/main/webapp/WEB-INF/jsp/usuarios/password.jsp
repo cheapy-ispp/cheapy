@@ -17,8 +17,6 @@
         <div class="form-group has-feedback">
             <form:hidden path="nombre"/>
 	        <form:hidden path="apellidos"/>
-	        <form:hidden path="municipio"/>
-	        <form:hidden path="direccion"/>
 	        <form:hidden path="email"/>
             <cheapy:passwordEditField label="Nueva contraseña"  name="usuar.password"/>
 					        

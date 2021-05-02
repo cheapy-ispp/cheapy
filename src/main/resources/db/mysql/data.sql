@@ -16,9 +16,9 @@ INSERT INTO users (username,password,enabled) VALUES ('pepe',MD5('pepe'), TRUE )
 INSERT INTO authorities (username,authority) VALUES ('pepe','usuario');
 
 INSERT INTO administrators (id, username) VALUES (1, 'admin');
-INSERT INTO usuarios (id, nombre, apellidos, direccion, municipio, email, username) VALUES (2, 'Paco', 'Naranjo', 'C/Esperanza', 'Sevilla', 'Paco@gmail.com','paco');
-INSERT INTO usuarios (id, nombre, apellidos, direccion, municipio, email, username) VALUES (3, 'Lolo', 'Lopez',  'C/Macarena', 'Dos_Hermanas', 'Lolo@gmail.com','lolo');
-INSERT INTO usuarios (id, nombre, apellidos, direccion, municipio, email, username) VALUES (4, 'Pepe', 'Lopez', 'C/Macarena', 'Carmona', 'Pepe@gmail.com','pepe');
+INSERT INTO usuarios (id, nombre, apellidos, email, username) VALUES (2, 'Paco', 'Naranjo', 'Paco@gmail.com','paco');
+INSERT INTO usuarios (id, nombre, apellidos, email, username) VALUES (3, 'Lolo', 'Lopez', 'Lolo@gmail.com','lolo');
+INSERT INTO usuarios (id, nombre, apellidos, email, username) VALUES (4, 'Pepe', 'Lopez', 'Pepe@gmail.com','pepe');
 
 INSERT INTO clients (id, name, email, address, municipio, init, finish, telephone, description, food, expiration, username) VALUES (1,'bar manoli','manoli@gmail.com','C/Betis', 'Sevilla','10:00:00','22:00:00','608726190', 'description 1', 'ESPAÑOLA', '2029-08-15' ,'manoli');
 INSERT INTO clients (id, name, email, address, municipio, init, finish, telephone, description, food, expiration, username) VALUES (2,'bar david','david@gmail.com', 'C/Sevilla', 'Dos_Hermanas','09:30:00','22:00:00','608726190', 'description 2', 'americana', '2029-08-15','david');

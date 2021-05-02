@@ -25,8 +25,6 @@
 				name="nombre" />
 			<cheapy:inputField label="Apellidos" placeholder="Ponga aqui sus apellidos"
 				name="apellidos" />
-			<cheapy:inputField label="Direccion" placeholder="Ponga aqui su dirección"
-				name="direccion" />
 			
 			<cheapy:inputField label="Email" placeholder="Ponga aqui su email"
 				name="email" />
@@ -35,7 +33,6 @@
 			<cheapy:passwordField label="Contraseña" placeholder="Ponga aqui su contraseña" 
 				name="usuar.password" />
 			
-	        <cheapy:selectMunicipio label="Municipio" name="municipio" size="1" items="${municipios}" ></cheapy:selectMunicipio>
 	        <div class="text-center">
 	        <label id="terminos"  class="">Acepto los <a href="/termAndCondition"  target="_blank" >términos y condiciones</a></label>
 	        <input id="terminos"   name="terminos" type="checkbox" required="required">
