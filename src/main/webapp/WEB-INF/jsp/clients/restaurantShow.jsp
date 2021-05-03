@@ -10,7 +10,7 @@
 
 <cheapy:layout pageName="client">
 
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px; text-transform: uppercase;"><c:out value="${client.name}"/></h2>
+    <h2 class="titulo" style="font-family: 'Lobster'; text-align:center; font-size:200%; padding:10px; text-transform: uppercase;"><c:out value="${client.name}"/></h2>
 
 
 	
@@ -43,11 +43,11 @@
             <th><fmt:message key="descriptionClient"/></th>
             <td><c:out value="${client.description}"/> </td>
         </tr><tr>
+            <th><fmt:message key="municipio"/></th>
+            <td><c:out value="${client.municipio}"/> </td>
+        </tr><tr>
             <th><fmt:message key="foodClient"/></th>
-            <td><c:out value="${client.food}"/> </td>
-   
-        
-        
+            <td><c:out value="${client.food}"/> </td>      
         
         </thead>
     </table>
@@ -58,15 +58,15 @@
 		</sec:authorize>
 	</div>
     <div class="btn-menu">
-  
     
-      <div class="text-left">
+    <div class="text-left">
+    <c:if test="${client.usuar.username != null}">
     	<spring:url value="/reviewsClientList/{client}/0" var="reviewsListUrl">
     		<spring:param name="client" value="${client.usuar.username}"/>
     	</spring:url>
     	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(reviewsListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 		Valoraciones</button>
- 	
+ 	</c:if>
  	<sec:authorize access="hasAnyAuthority('usuario')">
  	     
     	<spring:url value="/reviewsClient/new/{client}/" var="reviewsCreateUrl">
@@ -75,6 +75,23 @@
     	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(reviewsCreateUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 		Valorar</button>
  	
+ 	</sec:authorize>
+ 	
+ 	<sec:authorize access="hasAnyAuthority('usuario')">
+ 	    <c:if test="${favoritos == 1}">
+    	<spring:url value="/usuarios/favoritos/{clientId}/remove" var="favoritosUrl">
+    		<spring:param name="clientId" value="${client.id}"/>
+    	</spring:url>
+    	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(favoritosUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+		Quitar de favoritos</button>
+ 		</c:if>
+ 		<c:if test="${favoritos == 2}">
+    	<spring:url value="/usuarios/favoritos/{clientId}/add" var="favoritosUrl">
+    		<spring:param name="clientId" value="${client.id}"/>
+    	</spring:url>
+    	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(favoritosUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+		Añadir a favoritos</button>
+ 		</c:if>
  	</sec:authorize>
   	</div>
   	</div>

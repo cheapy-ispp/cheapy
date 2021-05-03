@@ -19,8 +19,8 @@
 		});
 	</script>
 
-    <h2 style="font-family: 'Lobster'; text-align:left; font-size:200%;  color: rgb(0, 64, 128); padding:10px; margin-bottom:20px;"><fmt:message key="foodOffer"/>
-    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir el plato indicado en la oferta">
+    <h2 class="titulo" style="font-family: 'Lobster'; text-align:left; font-size:200%; padding:10px; margin-bottom:20px;"><fmt:message key="foodOffer"/>
+    	<a title="Información" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir el plato indicado en la oferta">
     	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
     </h2>
 
@@ -45,8 +45,16 @@
             <td><c:out value="${foodOffer.food}"/></td>
         </tr>
         <tr>
+            <th><fmt:message key="price"/></th>
+            <td><c:out value="${foodOffer.price}€"/> </td>
+        </tr>
+        <tr>
             <th><fmt:message key="discount"/></th>
             <td><c:out value="${foodOffer.discount}%"/> </td>
+        </tr>
+        <tr>
+            <th><fmt:message key="newPrice"/></th>
+            <td><c:out value="${foodOffer.newPrice}€"/> </td>
         </tr>
         <tr>
             <th><fmt:message key="municipio"/></th>

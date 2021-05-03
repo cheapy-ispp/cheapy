@@ -15,13 +15,13 @@
         <label class="col-sm-2 control-label">${label}</label>
 		
         <div class="col-sm-10">
-        	<form:input type="datetime-local" class="time"  path="${name}"/>
+        	<form:input type="datetime-local" class="form-control"  path="${name}" style="width:70%"/>
             <c:if test="${valid}">
                 <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
             </c:if>
             <c:if test="${status.error}">
                 <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-                <span class="help-inline">${status.errorMessage}</span>
+                <span class="help-inline" >${status.errorMessage}</span>
             </c:if>
         </div>
     </div>

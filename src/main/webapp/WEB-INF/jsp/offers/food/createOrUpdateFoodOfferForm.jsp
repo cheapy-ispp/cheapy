@@ -9,7 +9,7 @@
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
 <cheapy:layout pageName="foodOffers">
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px">
+    <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%; padding:10px">
         <c:if test="${foodOffer['new']}"><fmt:message key="new"/> </c:if> <fmt:message key="foodOffer"/>
     </h2>
     
@@ -21,7 +21,8 @@
             <cheapy:dateField label="Fecha de Inicio" placeholder="dd/MM/yyyy HH:mm" name="start"/>
             <cheapy:dateField label="Fecha de Fin" placeholder="dd/MM/yyyy HH:mm" name="end"/>
             <cheapy:inputField label="Plato" placeholder="Ej. Macarrones" name="food"/>
-            <cheapy:inputField label="Descuento" placeholder="Ej. 50" name="discount"/>
+            <cheapy:inputField label="Precio Original" placeholder="XX€ (Ej.6)" name="price"/>
+            <cheapy:inputField label="Descuento" placeholder="XX% (Ej.15)" name="discount"/>  
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

@@ -1,5 +1,6 @@
 package org.springframework.cheapy.web;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -52,6 +53,7 @@ public class ReviewClientController {
 		Client bar = this.clientService.findByUsername(client);
 		return (bar == null||user==null)? false: true;
 	}
+	
 	@GetMapping("/reviewsClient/new/{idClient}")
 	public String initCreationForm(final Map<String, Object> model, @PathVariable("idClient") final String idClient) {
 		if(!checkClient(idClient)) {
@@ -96,11 +98,28 @@ public class ReviewClientController {
 
 		List<ReviewClient> reviewsLs = this.reviewService.findAllReviewsByBar(elements,client);
 		Integer next = this.reviewService.findAllReviewsByBar(nextPage,client).size();
+		
+		List<Object[]> datos = new ArrayList<Object[]>();
+        for(ReviewClient re: reviewsLs) {
+            Object[] r = {re, re.getMedia()};
+            datos.add(r);
+        }
+		model.put("datos", datos);
 		model.put("nextPage", next);
-		model.put("reviewsLs", reviewsLs);
 		model.put("client", idClient);
+		model.put("restaurant", client.getName());
 
 		return "reviewsClient/reviewsList";
+
+	}
+	
+	@GetMapping("/myClientReviews")
+	public String processFindMyReviewsForm(final Map<String, Object> model) {
+		
+		Client client = this.clientService.getCurrentClient();
+		model.put("page", 0);
+
+		return processFindForm(0, client.getUsuar().getUsername(), model);
 
 	}
 	

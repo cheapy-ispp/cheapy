@@ -15,7 +15,7 @@ public class NuOffer extends Offer {
 	//Oferta por numero de comensales
 	private static final long serialVersionUID = 1L;
   
-	@NotNull(message = "Debe rellenar el tiempo del rango oro")
+	@NotNull(message = "Debe rellenar el campo de rango oro")
 	@Min(1)
 	private Integer	gold;
 
@@ -24,7 +24,7 @@ public class NuOffer extends Offer {
 	@Range(min = 1, max = 100, message = "El descuento debe estar entre 1 y 100 %")
 	private Integer	discountGold;
 
-	@NotNull(message = "Debe rellenar el tiempo del rango plata")
+	@NotNull(message = "Debe rellenar el campo de rango plata")
 	@Min(1)
 	private Integer	silver;
 
@@ -33,7 +33,7 @@ public class NuOffer extends Offer {
 	@Range(min = 1, max = 100, message = "El descuento debe estar entre 1 y 100 %")
 	private Integer	discountSilver;
 
-	@NotNull(message = "Debe rellenar el tiempo del rango bronce")
+	@NotNull(message = "Debe rellenar el campo de rango bronce")
 	@Min(1)
 	private Integer	bronze;
 

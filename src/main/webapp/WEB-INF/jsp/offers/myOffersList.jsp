@@ -19,16 +19,20 @@
 	<script type="text/javascript">
 		
 	</script>
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="foodOffers"/>
-    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir el plato indicado en la oferta">
+	<div class="text-center">
+    <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%; padding:10px"><fmt:message key="foodOffers"/>
+    	<a title="Información" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir el plato indicado en la oferta">
     	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
     </h2>
 	<c:if test="${empty foodOfferLs }">
 		<p id="vacio" >No hay ninguna oferta por plato específico creada.</p>
-		<div class="createOffer">
-            <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
-            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
-            <fmt:message key="createOffers"/> </button>
+		
+		<div class="btn-home-max">
+			<div class="btn-home">
+	            <button type="button" role="link" onclick="window.location='/offers/food/new'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;text-align:center;"  class="btn-block">
+	            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
+	            <fmt:message key="createOffers"/> </button>
+            </div>
         </div>
 	</c:if>
 	<c:if test="${not empty foodOfferLs }">
@@ -36,7 +40,6 @@
 		    <table id="foodOfferTable" class="table table-striped">
 		        <thead>
 		        <tr>
-		        	<!-- <th style="width: 150px;">Restaurante</th> -->
 		        	<th><fmt:message key="food"/></th>
 		            <th><fmt:message key="startDate"/></th>
 		            <th><fmt:message key="endDate"/></th>
@@ -44,7 +47,6 @@
 		            <th><fmt:message key="municipio"/></th>
 		            <th> <spring:url value="/offers/food/new" var="newFoodUrl">
 		    </spring:url>
-		    <!--  <a href="${fn:escapeXml(newFoodUrl)}" class="btn btn-default">Nueva oferta</a></th>-->
 		        </tr>
 		        </thead>
 		        <tbody>
@@ -90,16 +92,18 @@
 		    </table>
 		</div>
     </c:if>
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="nuOffers"/>
-    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir con más comensales que alguno de los tres posibles objetivos">
+    <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%; padding:10px"><fmt:message key="nuOffers"/>
+    	<a title="Información" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir con más comensales que alguno de los tres posibles objetivos">
     	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
     </h2>
 	<c:if test="${empty nuOfferLs }">
 		<p id="vacio" >No hay ninguna oferta por número de comensales creada.</p>
-		<div class="createOffer">
-            <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
-            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
-            <fmt:message key="createOffers"/> </button>
+		<div class="btn-home-max">
+			<div class="btn-home">
+	            <button type="button" role="link" onclick="window.location='/offers/nu/new'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
+	            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
+	            <fmt:message key="createOffers"/> </button>
+            </div>
         </div>
 	</c:if>
 	<c:if test="${not empty nuOfferLs }">
@@ -107,14 +111,12 @@
 		    <table id="nuOfferTable" class="table table-striped">
 		        <thead>
 		        <tr>
-		        	<!-- <th style="width: 150px;">Restaurante</th> -->
 		            <th><fmt:message key="startDate"/></th>
 		            <th><fmt:message key="endDate"/></th>
 		            <th><fmt:message key="status"/></th>
 		            <th><fmt:message key="municipio"/></th>
 		            <th> <spring:url value="/offers/nu/new" var="newNuUrl">
 		    </spring:url>
-		    <!--  <a href="${fn:escapeXml(newNuUrl)}" class="btn btn-default">Nueva oferta</a></th>-->
 		            
 		        </tr>
 		        </thead>
@@ -159,16 +161,18 @@
     	</div>
     </c:if>
     
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="speedOffers"/>
-    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir en menos de alguno de los tres posibles tiempos">
+    <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%; padding:10px"><fmt:message key="speedOffers"/>
+    	<a title="Información" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir en menos de alguno de los tres posibles tiempos">
     	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
     </h2>
 	<c:if test="${empty speedOfferLs }">
 		<p id="vacio" >No hay ninguna oferta por tiempo empleado en comer creada.</p>
-		<div class="createOffer">
-            <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
-            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
-            <fmt:message key="createOffers"/> </button>
+		<div class="btn-home-max">
+			<div class="btn-home">
+	            <button type="button" role="link" onclick="window.location='/offers/speed/new'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
+	            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
+	            <fmt:message key="createOffers"/> </button>
+        	</div>
         </div>
 	</c:if>
 	<c:if test="${not empty speedOfferLs }">
@@ -176,14 +180,12 @@
 		    <table id="speedOfferTable" class="table table-striped">
 		        <thead>
 		        <tr>
-		        	<!-- <th style="width: 150px;">Restaurante</th> -->
 		            <th><fmt:message key="startDate"/></th>
 		            <th><fmt:message key="endDate"/></th>
 		            <th><fmt:message key="status"/></th>
 		            <th><fmt:message key="municipio"/></th>
 		            <th> <spring:url value="/offers/speed/new" var="newSpeedUrl">
 		    </spring:url>
-		   <!-- <a href="${fn:escapeXml(newSpeedUrl)}" class="btn btn-default">Nueva oferta</a></th>-->
 		            
 		        </tr>
 		        </thead>
@@ -229,16 +231,18 @@
     	</div>
     </c:if>
     
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="timeOffers"/>
-    	<a title="Informacion" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir en el local durante el intervalo indicado">
+    <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%; padding:10px"><fmt:message key="timeOffers"/>
+    	<a title="Información" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir en el local durante el intervalo indicado">
     	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
     </h2>
 	<c:if test="${empty timeOfferLs }">
 		<p id="vacio" >No hay ninguna oferta por franja horaria creada.</p>
-		<div class="createOffer">
-            <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
-            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
-            <fmt:message key="createOffers"/> </button>
+		<div class="btn-home-max">
+			<div class="btn-home">
+	            <button type="button" role="link" onclick="window.location='/offers/time/new'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
+	            <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
+	            <fmt:message key="createOffers"/> </button>
+	        </div>
         </div>
 	</c:if>
 	<c:if test="${not empty timeOfferLs }">
@@ -246,14 +250,12 @@
 		    <table id="timeOfferTable" class="table table-striped">
 		        <thead>
 		        <tr>
-		        	<!-- <th style="width: 150px;">Restaurante</th> -->
 		            <th><fmt:message key="startDate"/></th>
 		            <th><fmt:message key="endDate"/></th>
 		            <th><fmt:message key="status"/></th>
 		            <th><fmt:message key="municipio"/></th>
 		            <th><spring:url value="/offers/time/new" var="newTimeUrl">
 		    </spring:url>
-		    <!--<a href="${fn:escapeXml(newTimeUrl)}" class="btn btn-default">Nueva oferta</a> </th>-->
 		        </tr>
 		        </thead>
 		        <tbody>
@@ -296,4 +298,5 @@
 		    </table>
     	</div>
     </c:if>
+    </div>
 </cheapy:layout>

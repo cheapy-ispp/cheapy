@@ -1,10 +1,10 @@
 
 package org.springframework.cheapy.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.cheapy.model.Municipio;
-
 import org.springframework.cheapy.model.StatusOffer;
 import org.springframework.cheapy.model.TimeOffer;
 import org.springframework.data.domain.Pageable;
@@ -26,7 +26,7 @@ public interface TimeOfferRepository extends PagingAndSortingRepository<TimeOffe
 
 	//void save(TimeOffer timeOffer);
 
-	@Query("SELECT timeOffer FROM TimeOffer timeOffer WHERE timeOffer.status =:status")
+	@Query("SELECT timeOffer FROM TimeOffer timeOffer WHERE timeOffer.status =:status AND timeOffer.client.expiration > CURRENT_DATE()")
 	@Transactional(readOnly = true)
 	List<TimeOffer> findActiveTimeOffer(StatusOffer status, Pageable p);
 
@@ -38,15 +38,19 @@ public interface TimeOfferRepository extends PagingAndSortingRepository<TimeOffe
 	@Transactional(readOnly = true)
 	List<TimeOffer> findTimeOfferActOclByUserId(@Param("id") Integer id);
 
-	@Query("SELECT timeOffer FROM TimeOffer timeOffer WHERE timeOffer.client.name LIKE :name AND timeOffer.status= 'active'")
+	@Query("SELECT timeOffer FROM TimeOffer timeOffer WHERE timeOffer.client.name LIKE :name AND timeOffer.status= 'active' AND timeOffer.client.expiration > CURRENT_DATE()")
 	@Transactional(readOnly = true)
 	List<TimeOffer> findTimeOfferByClientName(String name, Pageable p);
 
-	@Query("SELECT timeOffer FROM TimeOffer timeOffer WHERE timeOffer.client.food LIKE :name AND timeOffer.status= 'active'")
+	@Query("SELECT timeOffer FROM TimeOffer timeOffer WHERE timeOffer.client.food LIKE :name AND timeOffer.status= 'active' AND timeOffer.client.expiration > CURRENT_DATE()")
 	@Transactional(readOnly = true)
 	List<TimeOffer> findTimeOfferByClientFood(String name, Pageable p);
 
-	@Query("SELECT timeOffer FROM TimeOffer timeOffer WHERE timeOffer.client.municipio =:municipio AND timeOffer.status= 'active'")
+	@Query("SELECT timeOffer FROM TimeOffer timeOffer WHERE timeOffer.client.municipio =:municipio AND timeOffer.status= 'active' AND timeOffer.client.expiration > CURRENT_DATE()")
 	@Transactional(readOnly = true)
 	List<TimeOffer> findTimeOfferByClientPlace(Municipio municipio, Pageable p);
+	
+	@Query("SELECT timeOffer FROM TimeOffer timeOffer WHERE timeOffer.status= 'active' AND :start BETWEEN timeOffer.start AND timeOffer.end")
+	@Transactional(readOnly = true)
+	List<TimeOffer> findTimeOfferByDate(final LocalDateTime start, Pageable p);
 }

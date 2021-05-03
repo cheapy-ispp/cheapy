@@ -1,6 +1,7 @@
 
 package org.springframework.cheapy.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.cheapy.model.Municipio;
@@ -24,7 +25,7 @@ public interface SpeedOfferRepository extends PagingAndSortingRepository<SpeedOf
 
 	//void save(SpeedOffer speedOffer);
 
-	@Query("SELECT speedOffer FROM SpeedOffer speedOffer WHERE speedOffer.status =:status")
+	@Query("SELECT speedOffer FROM SpeedOffer speedOffer WHERE speedOffer.status =:status AND speedOffer.client.expiration > CURRENT_DATE()")
 	@Transactional(readOnly = true)
 	List<SpeedOffer> findActiveSpeedOffer(StatusOffer status, Pageable p);
 
@@ -36,15 +37,19 @@ public interface SpeedOfferRepository extends PagingAndSortingRepository<SpeedOf
 	@Transactional(readOnly = true)
 	List<SpeedOffer> findSpeedOfferActOclByUserId(@Param("id") Integer id);
 
-	@Query("SELECT speedOffer FROM SpeedOffer speedOffer WHERE speedOffer.client.name LIKE :name AND speedOffer.status= 'active'")
+	@Query("SELECT speedOffer FROM SpeedOffer speedOffer WHERE speedOffer.client.name LIKE :name AND speedOffer.status= 'active' AND speedOffer.client.expiration > CURRENT_DATE()")
 	@Transactional(readOnly = true)
 	List<SpeedOffer> findSpeedOfferByClientName(String name, Pageable p);
 
-	@Query("SELECT speedOffer FROM SpeedOffer speedOffer WHERE speedOffer.client.food LIKE :name AND speedOffer.status= 'active'")
+	@Query("SELECT speedOffer FROM SpeedOffer speedOffer WHERE speedOffer.client.food LIKE :name AND speedOffer.status= 'active' AND speedOffer.client.expiration > CURRENT_DATE()")
 	@Transactional(readOnly = true)
 	List<SpeedOffer> findSpeedOfferByClientFood(String name, Pageable p);
 
-	@Query("SELECT speedOffer FROM SpeedOffer speedOffer WHERE speedOffer.client.municipio =:municipio AND speedOffer.status= 'active'")
+	@Query("SELECT speedOffer FROM SpeedOffer speedOffer WHERE speedOffer.client.municipio =:municipio AND speedOffer.status= 'active' AND speedOffer.client.expiration > CURRENT_DATE()")
 	@Transactional(readOnly = true)
 	List<SpeedOffer> findSpeedOfferByClientPlace(Municipio municipio, Pageable p);
+	
+	@Query("SELECT speedOffer FROM SpeedOffer speedOffer WHERE speedOffer.status= 'active' AND :start BETWEEN speedOffer.start AND speedOffer.end")
+	@Transactional(readOnly = true)
+	List<SpeedOffer> findSpeedOfferByDate(final LocalDateTime start, Pageable p);
 }

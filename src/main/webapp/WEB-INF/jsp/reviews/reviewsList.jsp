@@ -17,12 +17,11 @@
 		}
 	</script>
     <div class="text-center">
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="reviews"/></h2>
+    <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%;   padding:10px"><fmt:message key="reviewsCheapy"/></h2>
 	<div class="table-responsive">
 	    <table id="reviewTable" class="table table-striped">
 	        <thead>
 		        <tr>
-		        	<!-- <th style="width: 150px;">Restaurante</th> -->
 		        	<th><fmt:message key="user"/></th>
 		        	<th><fmt:message key="stars"/></th>
 		            <th><fmt:message key="opinion"/></th>
@@ -38,15 +37,10 @@
 		        <c:forEach items="${reviewsLs}" var="review">
 		       
 		            <tr>
-		<!--                 <td> -->
-		<%--                     <c:out value="nombre por definir"/> <!-- ${review.usuario.nombre},${review.usuario.apellidos}  --> --%>
-		<!--                 </td> -->
 		                <td>
 		                    <c:out value="${review.escritor.username}"/>
 		                </td>
 		                <td>
-		                
-		                    <!--<c:out value="${review.stars}"/> -->
 		                    <div style="display: inline-block; margin: auto;">
 		                    	<cheapy:showStars value='${review.stars}'></cheapy:showStars>
 							</div>
@@ -80,28 +74,28 @@
 								
 		</script>
     </div>
-    <div>
-	    <c:if test='${page!=0}'>
-		    <div class="text-left">
-		    	<spring:url value="/reviewsList/{page}" var="reviewsListUrl">
-		    		<spring:param name="page" value="${page-1}"/>
-		    	</spring:url>
-		    	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(reviewsListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-				<span class="glyphicon 	glyphicon glyphicon-arrow-left" aria-hidden="true" style="padding: 5px"> </span>
-				Pág. anterior</button>
-		 	</div>
-	    </c:if>
-	    
-	    <c:if test="${fn:length(reviewsLs) == 6}">
-		    <div class="text-right">
+    <div class="row-pag-btn">
+	    <div class="column-pag-btn" style="text-align: left;">
+	    	<c:if test='${page!=0}'>
+			    	<spring:url value="/reviewsList/{page}" var="reviewsListUrl">
+			    		<spring:param name="page" value="${page-1}"/>
+			    	</spring:url>
+			    	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(reviewsListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+					<span class="glyphicon 	glyphicon glyphicon-arrow-left" aria-hidden="true" style="padding: 5px"> </span>
+					Pág. anterior</button>
+		    </c:if>
+	    	​
+	    </div>
+	    <div class="column-pag-btn" style="text-align: right;">
+	    	<c:if test="${nextPage > 0}">
 		    	<spring:url value="/reviewsList/{page}" var="reviewsListUrl">
 		    		<spring:param name="page" value="${page+1}"/>
 		    	</spring:url>
 		    	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(reviewsListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 				Pág. siguiente
 				<span class="glyphicon 	glyphicon glyphicon-arrow-right" aria-hidden="true" style="padding: 5px"> </span></button>
-			</div>
-		</c:if>
+		</c:if>​
+		</div>
 	</div>
 	</div>
 </cheapy:layout>

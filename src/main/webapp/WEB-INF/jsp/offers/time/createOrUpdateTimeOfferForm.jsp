@@ -9,7 +9,7 @@
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
 <cheapy:layout pageName="TimeOffers">
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px">
+    <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%; padding:10px">
         <c:if test="${timeOffer['new']}"><fmt:message key="new"/> </c:if> <fmt:message key="timeOffer"/>
     </h2>
     <form:form modelAttribute="timeOffer" class="form-horizontal" id="add-timeOffer-form">
@@ -20,8 +20,8 @@
             <cheapy:dateField label="Fecha de inicio" placeholder="dd/MM/yyyy HH:mm" name="start"/>
             <cheapy:dateField label="Fecha de fin" placeholder="dd/MM/yyyy HH:mm" name="end"/>
 
-            <cheapy:inputField label="Hora de inicio" placeholder="HH:mm" name="init"/>
-            <cheapy:inputField label="Hora de final" placeholder="HH:mm" name="finish"/>
+            <cheapy:timeField label="Hora de inicio" placeholder="HH:mm" name="init"/>
+            <cheapy:timeField label="Hora de final" placeholder="HH:mm" name="finish"/>
             <cheapy:inputField label="Descuento" placeholder="XX% (Ej.15)" name="discount"/>
 
 

@@ -15,8 +15,13 @@
  */
 package org.springframework.cheapy.model;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -35,6 +40,37 @@ public class FoodOffer extends Offer {
 	@NotNull(message = "Debe rellenar el descuento que proporciona")
 	@Range(min = 1, max = 100, message = "El descuento debe estar entre 1 y 100 %")
 	private Integer discount;
+	
+	@NotNull(message = "Debe rellenar el precio del plato")
+	@Min(1)
+	@Max(500000)
+	private Double price;
+	
+	public Double getNewPrice() {
+		Double cuenta = this.price - (this.price*this.discount)/100;
+		BigDecimal bd = new BigDecimal(cuenta).setScale(2, RoundingMode.HALF_UP);
+	    double val2 = bd.doubleValue();
+		return val2;
+	}
+	
+	public Double getPrice() {
+		double val2 = 0.0;
+		if(price != null) {
+			BigDecimal bd = new BigDecimal(price).setScale(2, RoundingMode.HALF_UP);
+		    val2 = bd.doubleValue();
+			return val2;
+		}
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		if(price != null) {
+			BigDecimal bd = new BigDecimal(price).setScale(2, RoundingMode.HALF_UP);
+		    double val2 = bd.doubleValue();
+			this.price = val2;
+		}
+		
+	}
 
 	public String getFood() {
 		return food;

@@ -11,6 +11,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.cheapy.model.Client;
+import org.springframework.cheapy.model.Municipio;
 import org.springframework.cheapy.model.StatusOffer;
 import org.springframework.cheapy.model.TimeOffer;
 import org.springframework.cheapy.service.ClientService;
@@ -50,7 +51,7 @@ public class TimeOfferController {
 
 	private boolean checkOffer(final TimeOffer session, final TimeOffer offer) {
 		boolean res = false;
-		if (session.getId() == offer.getId() && session.getStatus() == offer.getStatus() && (session.getCode() == null ? offer.getCode() == "" : session.getCode().equals(offer.getCode())) && !session.getStatus().equals(StatusOffer.inactive)) {
+		if (session.getId() == offer.getId() && session.getStatus().equals(offer.getStatus()) && (session.getCode() == null ? offer.getCode().equals("") : session.getCode().equals(offer.getCode())) && !session.getStatus().equals(StatusOffer.inactive)) {
 			res = true;
 		}
 		return res;
@@ -75,11 +76,20 @@ public class TimeOfferController {
 	@GetMapping("/offers/timeOfferList/{page}")
 	public String processFindForm(@PathVariable("page") final int page, final Map<String, Object> model) {
 		Pageable elements = PageRequest.of(page, 5);
-		Pageable nextPage = PageRequest.of(page+1, 5);
+		Pageable nextPage = PageRequest.of(page + 1, 5);
 
 		List<TimeOffer> timeOfferLs = this.timeOfferService.findActiveTimeOffer(elements);
+		for (int i = 0; i < timeOfferLs.size(); i++) {
+			TimeOffer fo = timeOfferLs.get(i);
+			String aux = fo.getClient().getName().substring(0, 1).toUpperCase();
+			fo.getClient().setName(aux + fo.getClient().getName().substring(1));
+
+			timeOfferLs.set(i, fo);
+		}
 		Integer next = this.timeOfferService.findActiveTimeOffer(nextPage).size();
-		
+
+		model.put("municipios", Municipio.values());
+
 		model.put("timeOfferLs", timeOfferLs);
 		model.put("nextPage", next);
 		model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
@@ -106,8 +116,8 @@ public class TimeOfferController {
 			result.rejectValue("finish", "", "La hora de fin debe ser posterior a la de inicio");
 
 		}
-		
-		if (timeOffer.getStart()==null || timeOffer.getStart().isBefore(LocalDateTime.now())) {
+
+		if (timeOffer.getStart() == null || timeOffer.getStart().isBefore(LocalDateTime.now())) {
 			result.rejectValue("start", "", "La fecha de inicio debe ser futura");
 
 		}
@@ -131,13 +141,10 @@ public class TimeOfferController {
 	public String activateTimeOffer(@PathVariable("timeOfferId") final int timeOfferId, final ModelMap modelMap) {
 		Client client = this.clientService.getCurrentClient();
 		TimeOffer timeOffer = this.timeOfferService.findTimeOfferById(timeOfferId);
-		if (timeOffer.getClient().equals(client)) {
+		if (timeOffer.getClient().equals(client) && !timeOffer.isInactive()) {
 			timeOffer.setStatus(StatusOffer.active);
 			timeOffer.setCode("TI-" + timeOfferId);
 			this.timeOfferService.saveTimeOffer(timeOffer);
-
-		} else {
-			modelMap.addAttribute("message", "You don't have access to this time offer");
 		}
 		return "redirect:/offers/time/" + timeOffer.getId();
 
@@ -146,12 +153,7 @@ public class TimeOfferController {
 	@GetMapping("/offers/time/{timeOfferId}")
 	public String processShowForm(@PathVariable("timeOfferId") final int timeOfferId, final Map<String, Object> model) {
 		TimeOffer timeOffer = this.timeOfferService.findTimeOfferById(timeOfferId);
-		if (timeOffer.getStatus().equals(StatusOffer.active)) {
-			model.put("timeOffer", timeOffer);
-			model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-			return "offers/time/timeOffersShow";
-
-		} else if (timeOffer.getStatus().equals(StatusOffer.hidden) && this.checkIdentity(timeOfferId)) {
+		if (timeOffer.getStatus().equals(StatusOffer.active) || timeOffer.getStatus().equals(StatusOffer.hidden) && this.checkIdentity(timeOfferId)) {
 			model.put("timeOffer", timeOffer);
 			model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 			return "offers/time/timeOffersShow";
@@ -178,15 +180,20 @@ public class TimeOfferController {
 	}
 
 	@PostMapping(value = "/offers/time/{timeOfferId}/edit")
-	public String updateTimeOffer(@Valid final TimeOffer timeOfferEdit, final BindingResult result, final ModelMap model, final HttpServletRequest request) {
+	public String updateTimeOffer(@PathVariable("timeOfferId") final int timeOfferId, @Valid final TimeOffer timeOfferEdit, final BindingResult result, final ModelMap model, final HttpServletRequest request) {
 
-		if (!this.checkIdentity(timeOfferEdit.getId())) {
+		if (!this.checkIdentity(timeOfferId)) {
 			return "error";
 		}
 		Integer id = (Integer) request.getSession().getAttribute("idTime");
 		TimeOffer timeOffer = this.timeOfferService.findTimeOfferById(id);
 		if (!this.checkOffer(timeOffer, timeOfferEdit)) {
 			return "error";
+		}
+
+		if (timeOfferEdit.getStart() == null || timeOfferEdit.getStart().isBefore(LocalDateTime.now()) && !timeOfferEdit.getStart().equals(timeOffer.getStart())) {
+			result.rejectValue("start", "", "La fecha de inicio debe ser futura o la original");
+
 		}
 
 		if (!this.checkDates(timeOfferEdit)) {

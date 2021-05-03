@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-public interface UsuarioRepository extends PagingAndSortingRepository<Usuario, String> {
+public interface UsuarioRepository extends PagingAndSortingRepository<Usuario, Integer> {
 
 	@Query("SELECT usuario FROM Usuario usuario WHERE username =:username")
 	@Transactional(readOnly = true)
@@ -17,12 +17,10 @@ public interface UsuarioRepository extends PagingAndSortingRepository<Usuario, S
 
 	@Query("SELECT usuario FROM Usuario usuario")
 	@Transactional(readOnly = true)
-	List<Usuario> findAllUsuario();
+	List<Usuario> findAllUsuario(Pageable page);
 
 	@Query("SELECT usuario FROM Usuario usuario WHERE usuario.usuar.enabled = true")
 	@Transactional(readOnly = true)
 	List<Usuario> findUsuarioEnabled(Pageable page);
-
-	//void save(Usuario usuario);
 
 }

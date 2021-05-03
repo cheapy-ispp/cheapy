@@ -7,6 +7,11 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
+<style>
+
+
+</style>
+
 <cheapy:layout pageName="registro">
 	<script>
 		function pagNum(pagina) {
@@ -16,7 +21,7 @@
 	
 	</script>
 
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px">Historial de Ofertas</h2>
+    <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%; padding:10px">Historial de Ofertas</h2>
 	<c:if test="${empty datos }">
 		<p id="vacio" >No hay ninguna oferta creada.</p>
 	</c:if>
@@ -38,7 +43,7 @@
 		        <c:forEach items="${datos}" var="datos">
 		            <tr>
 		                <td>
-		                    <a href="/restaurant/${datos[0].client.id}"><c:out value="${datos[0].client.name}"/></a>
+		                    <a href="/restaurant/${fn:escapeXml(datos[0].client.id)}"><c:out value="${datos[0].client.name}"/></a>
 		                </td>
 		                <td>
 		                    <c:out value="${datos[0].id}"/>
@@ -51,7 +56,7 @@
 		                    	<c:out value="Por número de comensales"/>
 		                    </c:if>
 		                    <c:if test="${datos[1] == 'speed'}">
-		                    	<c:out value="Por rapidez"/>
+		                    	<c:out value="Por velocidad"/>
 		                    </c:if>
 		                    <c:if test="${datos[1] == 'food'}">
 		                    	<c:out value="Por plato específico"/>
@@ -90,6 +95,7 @@
 		        </c:forEach>
 		        </tbody>
 		    </table>
+	</div>
 	<div class="text-center">
     	<script type="text/javascript">
 			          
@@ -97,29 +103,33 @@
 								
 		</script>
     </div>
-	<div style="display:inline">
-	<c:if test='${page!=0}'>
+	<div class="row-pag-btn">
+	    <div class="column-pag-btn" style="text-align: left;">
+	    	<c:if test='${page!=0}'>
 	
-    	<spring:url value="/administrators/offersRecord{page}" var="SearchOfferListUrl">
-    		<spring:param name="page" value="${page-1}"/>
-    	</spring:url>
-    	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(SearchOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-		<span class="glyphicon 	glyphicon glyphicon-arrow-left" aria-hidden="true" style="padding: 5px"> </span>
-		Pág. anterior</button>
+		    	<spring:url value="/administrators/offersRecord{page}" var="SearchOfferListUrl">
+		    		<spring:param name="page" value="${page-1}"/>
+		    	</spring:url>
+		    	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(SearchOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+				<span class="glyphicon 	glyphicon glyphicon-arrow-left" aria-hidden="true" style="padding: 5px"> </span>
+				Pág. anterior</button>
 
-    </c:if>
-    
-    <c:if test="${nextPage > 0}">
+   			</c:if>
+	    	​
+	    </div>
+	    <div class="column-pag-btn" style="text-align: right;">
+	    	<c:if test="${nextPage > 0}">
 
-    	<spring:url value="/administrators/offersRecord{page}" var="SearchOfferListUrl">
-    		<spring:param name="page" value="${page+1}"/>
-    	</spring:url>
-    	<button type="button" class="btn-pag"  role="link" onclick="window.location='${fn:escapeXml(SearchOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-		<span class="glyphicon 	glyphicon glyphicon-arrow-right" aria-hidden="true" style="padding: 5px"> </span>
-		Pág. siguiente</button>
+		    	<spring:url value="/administrators/offersRecord{page}" var="SearchOfferListUrl">
+		    		<spring:param name="page" value="${page+1}"/>
+		    	</spring:url>
+		    	<button type="button" class="btn-pag"  role="link" onclick="window.location='${fn:escapeXml(SearchOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+				<span class="glyphicon 	glyphicon glyphicon-arrow-right" aria-hidden="true" style="padding: 5px"> </span>
+				Pág. siguiente</button>
 
-	</c:if>
-	</div>
+			</c:if>​
 		</div>
+	</div>
+		
     </c:if>
 </cheapy:layout>

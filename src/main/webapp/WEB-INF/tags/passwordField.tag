@@ -15,7 +15,7 @@
         <label class="col-sm-2 control-label">${label}</label>
 		
         <div class="col-sm-10">
-            <form:input type="password" class="form-control" placeholder="${placeholder }" path="${name}"/>
+            <form:input type="password" class="form-control" id="myInput" placeholder="${placeholder }" path="${name}" style="width:70%"/>
             <c:if test="${valid}">
                 <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
             </c:if>
@@ -25,4 +25,7 @@
             </c:if>
         </div>
     </div>
+    
+    
+
 </spring:bind>

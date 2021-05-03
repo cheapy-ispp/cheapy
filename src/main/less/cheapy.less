@@ -13,7 +13,7 @@
  */
 @icon-font-path:    "../../webjars/bootstrap/fonts/";
 
-@spring-blue:      rgb(0, 64, 128);
+@spring-blue:      rgb(50, 90, 128);
 @spring-dark-blue: rgb(0, 0, 128);
 @spring-brown:      #34302D;
 @spring-grey:       #838789;
@@ -70,14 +70,17 @@
   -moz-transition: border 0.15s;
   -o-transition: border 0.15s;
   -ms-transition: border 0.15s;
-
+  background:	#325a80;
+  color: white;
   &:hover,
   &:focus,
   &:active,
   &.active,
   .open .dropdown-toggle& {
-    background-color: @spring-brown;
-    border-color: @spring-brown;
+   // background-color: @spring-brown;
+   // border-color: @spring-brown;
+    background:	#B9D8EF;
+    color: black;
   }
 }
 
@@ -144,7 +147,16 @@ h1 {
   margin: 30px 0 0;
 }
 
+.has-error .form-control{
+	border:solid;
+	margin-left: 10px;
+	padding:10px;
+	border-radius: 5px;
+	border-color: #a94442;;
+}
+
 table td {
+  
   vertical-align: middle;
 }
 
@@ -220,24 +232,32 @@ img.img-responsive{
 }
 
 .btn-block {
+  background:	#325a80;
+  color: white;
+  border: none;
   display: block;
   width: 25%;
 }
 
+.btn-block:hover {
+	background:	#B9D8EF;
+    color: black;
+	}
+
 .btn-filter{
-	background:	rgb(40, 140, 215);
+	background:	#325a80;
 	color: white;
 	border: none;
 }
 
 .btn-filter:hover{
-	background:	rgb(0, 64, 128);
-	color: white;
+	background:	#B9D8EF;
+	color: black;
 }
 
 .btn-filter-active{
-	background:	rgb(0, 64, 128);
-	color: white;
+	background:	#B9D8EF;
+	color: black;
 	border: none;
 	
 }
@@ -256,7 +276,7 @@ img.img-responsive{
 }
 
 .btn-mas{
-	background:	rgb(40, 140, 215);
+	background:	#325a80;
 	color: white;
 	padding: 10px;
 	margin:10px;
@@ -264,12 +284,12 @@ img.img-responsive{
 }
 
 .btn-mas:hover{
-	background:	rgb(0, 64, 128);
-	color: white;
+	background:	#B9D8EF;
+	color: black;
 }
 
 .btn-pag{
-	background:	rgb(40, 140, 215);
+	background:	#325a80;
 	color: white;
 	padding: 10px;
 	margin:10px;
@@ -277,12 +297,26 @@ img.img-responsive{
 }
 
 .btn-pag:hover{
-	background:	rgb(0, 64, 128);
-	color: white;
+	background:	#B9D8EF;
+	color: black;
+}
+
+.column-pag-btn {
+  float: left;
+  width: 50%;
+  margin-top: 6px;
+  padding: 20px;
+  display:inline;
+}
+
+.row-pag-btn:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
 .btn-search{
-	background:	rgb(40, 140, 215);
+	background: #325a80;
 	color: white;
 	padding: 5px;
 	margin:10px;
@@ -291,8 +325,8 @@ img.img-responsive{
 }
 
 .btn-search:hover{
-	background:	rgb(0, 64, 128);
-	color: white;
+	background:	#B9D8EF;
+	color: black;
 }
 
 
@@ -303,8 +337,8 @@ img.img-responsive{
 }
 
 .btn-home button {
-  background-color: rgb(0, 64, 128); 
-  border: 1px solid rgb(0, 0, 160); 
+  background-color: #325a80; 
+  border: 1px solid #27445F; 
   color: white; 
   padding: 10px 24px; 
   cursor: pointer; 
@@ -316,17 +350,18 @@ img.img-responsive{
 }
 
 
-.btn-home button:hover {
-  background-color: rgb(40, 140, 215);
-}
+//.btn-home button:hover {
+//  background-color: rgb(40, 140, 215);
+//}
 
 .createOffer button {
-  background-color: rgb(0, 64, 128); 
-  border: 1px solid rgb(0, 0, 160); 
+  background-color: #325a80; 
+  border: 1px solid #27445F;  
   color: white; 
   padding: 10px 24px; 
   cursor: pointer; 
   display: block; 
+  text-align: center;
 }
 
 .createOffer button:hover {
@@ -341,8 +376,8 @@ img.img-responsive{
 }
 
 .btn-create button {
-  background-color: rgb(40, 140, 215); 
-  border: 1px solid rgb(0, 0, 160); 
+  background-color: #325a80; 
+  border: 1px solid #27445F;  
   color: white; 
   padding: 10px 24px; 
   cursor: pointer; 
@@ -357,7 +392,8 @@ img.img-responsive{
 
 
 .btn-create button:hover {
-  background-color: rgb(0, 64, 128)
+    background:	#B9D8EF;
+	color: black;
 }
 
 .btn-create-max button {
@@ -374,8 +410,8 @@ img.img-responsive{
 }
 
 .btn-mod button {
-  background-color: rgb(0, 64, 128); 
-  border: 1px solid rgb(0, 0, 160); 
+  background-color: #325a80; 
+  border: 1px solid #27445F; 
   color: white; 
   padding: 10px 24px; 
   cursor: pointer;  
@@ -402,32 +438,42 @@ img.img-responsive{
 
 #foodOfferTable th {
   width: 15%;
+  background-color: #325a80;
   text-align: center;
-
+  vertical-align: middle;
   
 }
 
 #nuOfferTable th {
   width: 15%;
+background-color: #325a80;
 text-align: center;
 vertical-align: middle;
 }
 
+#offerTable th{
+	width: 15%;
+background-color: #325a80;
+text-align: center;
+vertical-align: middle;
+}
 #speedOfferTable th {
   width: 15%;
+background-color: #325a80;
 text-align: center;
 vertical-align: middle;
 }
 
 #timeOfferTable th {
   width: 15%;
+background-color: #325a80;
 text-align: center;
 vertical-align: middle;
 }
 
 .btn-detalles button {
-  background-color: rgb(0, 64, 128); 
-  border: 1px solid rgb(0, 0, 160); 
+  background-color: #325a80; 
+  border: 1px solid #27445F; 
   color: white; 
   padding: 10px 24px; 
   cursor: pointer; 
@@ -441,7 +487,8 @@ vertical-align: middle;
 
 
 .btn-detalles button:hover {
-  background-color: rgb(40, 140, 215);
+  background-color: #B9D8EF;
+  color: #000;
 }
 
 .btn-return{
@@ -464,8 +511,8 @@ vertical-align: middle;
 }
 
 .btns-edit button{
-  background-color: rgb(0, 64, 128); 
-  border: 1px solid rgb(0, 0, 160); 
+  background-color: #325a80; 
+  border: 1px solid #27445F; 
   color: white; 
   padding: 10px 24px; 
   cursor: pointer; 
@@ -473,7 +520,8 @@ vertical-align: middle;
 
 
 .btns-edit button:hover {
-  background-color: rgb(40, 140, 215);
+  background-color: #B9D8EF;
+  color: #000;
 }
 
 .btns-edit2{
@@ -483,8 +531,8 @@ vertical-align: middle;
 }
 
 .btns-edit2 button{
-  background-color: rgb(0, 64, 128); 
-  border: 1px solid rgb(0, 0, 160); 
+  background-color: #325a80; 
+  border: 1px solid #27445F;  
   color: white; 
   padding: 10px 24px; 
   cursor: pointer; 
@@ -496,13 +544,15 @@ vertical-align: middle;
 
 
 .btns-edit2 button:hover {
-  background-color: rgb(40, 140, 215);
+  background-color: #B9D8EF;
+  color: #000;
 }
 
 .btns-delete{
   display: table;
   margin: 0 auto;
   float:left;
+ 
 }
 
 .btns-delete button{
@@ -520,10 +570,21 @@ vertical-align: middle;
 .btns-delete button:hover {
   background-color: rgb(40, 140, 215);
 }
+.fadeIn.fourth {
+	background-color: #325a80;
+	color: white;
+	box-shadow:0 10px 30px 0 #B9D8EF;
+}
+
+.fadeIn.fourth:hover {
+	background-color: #B9D8EF;
+	color: black;
+	box-shadow:0 10px 30px 0 #325a80;
+}
 
 .btn-return button {
-  background-color: rgb(0, 64, 128); 
-  border: 1px solid rgb(0, 0, 160); 
+  background-color: #325a80; 
+  border: 1px solid #27445F; 
   color: white; 
   padding: 10px 24px; 
   cursor: pointer; 
@@ -536,6 +597,15 @@ vertical-align: middle;
 
 .btn-return button:hover {
   background-color: rgb(40, 140, 215);
+}
+
+.boton {
+	width:30%;
+	border:solid;
+	padding:0px;
+	border-radius: 30px;
+	border-color: rgb(0, 0, 160);
+	background-color: rgb(255, 255, 0);
 }
 
 #foodOfferTable td{
@@ -624,6 +694,7 @@ text-align: center;
 
 #clientTable th{
 	width: 30%;
+	background-color: #325a80;
 	text-align: center;
 }
 
@@ -634,6 +705,7 @@ text-align: center;
 
 #reviewTable th{
 	width: 30%;
+	background-color: #325a80;
 	text-align: center;
 }
 
@@ -644,6 +716,7 @@ text-align: center;
 
 #usuarioTable th{
 	width: 20%;
+	background-color: #325a80;
 	text-align: center;
 	vertical-align:middle;
 }
@@ -658,9 +731,65 @@ text-align: center;
 	text-align:center;
 	font-size: 120%;
 	padding:10px;
-	color: rgb(29, 142, 226);
+	color: #325a80;
 }
 
+.infoPago {
+	font-size: 130%;
+	margin:20px;
+	
+}
+
+.eliminar{
+  display: table;
+  margin:auto;
+  float:left;
+}
+
+.eliminar button{
+  	width: auto;
+  	border: 1px solid; 
+  	color: white; 
+  	padding: 10px 24px; 
+  	cursor: pointer; 
+	font-family: 'Lobster'; 
+	font-size: 20px;
+	background-color: rgb(157, 0, 0); 
+	border-color:rgb(255, 0, 0)
+}
+
+.eliminar button:not(:last-child) {
+  border-bottom: none; 
+}
+
+
+.eliminar button:hover {
+  background-color: rgb(255, 0, 0);
+}
+
+.btn.btn-default{
+	background-color: #325a80; 
+  border: 1px solid #27445F; 
+  color: white; 
+  padding: 10px 24px; 
+  cursor: pointer; 
+  
+}
+
+.btn.btn-default:hover{
+	background-color: #B9D8EF;
+  color: #000;
+}
+
+.glyphicon.glyphicon-question-sign{
+	color:#325a80;
+}
+
+
+input::-webkit-calendar-picker-indicator:hover {
+  
+  cursor: pointer;
+}
 
 
  .row-full{
@@ -669,6 +798,9 @@ text-align: center;
  margin-left: -50vw;
  height: 100px;
  left: 50%;
+min-height: 20vh;
+  display: flex;
+  flex-direction: column;
 }
 
 html {
@@ -687,6 +819,11 @@ html {
 .alert-danger {
   .alert-variant(fade(@alert-danger-bg, 70%); @alert-danger-border; @alert-danger-text);
 }
+
+h2.titulo {
+	color: #325a80;
+	text-align: center;
+	}
 
 .myspinner {
   animation-name: spinner;
@@ -708,4 +845,6 @@ hr {
 @import "typography.less";
 @import "header.less";
 @import "responsive.less";
-@import "starRating.less"
+@import "starRating.less";
+@import "socialButton.less";
+@import "transiction.less";

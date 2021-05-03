@@ -1,6 +1,7 @@
 
 package org.springframework.cheapy.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,5 +60,9 @@ public class TimeOfferService {
 
 	public List<TimeOffer> findTimeOfferByClientPlace(final Municipio mun, final Pageable p) {
 		return this.timeOfferRepository.findTimeOfferByClientPlace(mun, p);
+	}
+	
+	public List<TimeOffer> findTimeOfferByDate(final LocalDateTime start, final Pageable p) {
+		return this.timeOfferRepository.findTimeOfferByDate(start, p);
 	}
 }

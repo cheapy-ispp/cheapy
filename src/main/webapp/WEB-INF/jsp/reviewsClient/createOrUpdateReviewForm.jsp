@@ -9,15 +9,16 @@
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
 <cheapy:layout pageName="reviewsClientN">
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px">
+    <h2 class="titulo" style="font-family: 'Lobster'; text-align:center; font-size:200%;   padding:10px">
     	<c:if test="${review['new']}">Nueva </c:if> Reseña
     </h2>
     <form:form modelAttribute="reviewClient" class="form-horizontal" id="add-review-form">
         <div class="form-group has-feedback">
         	<form:hidden path="id"/>
             <cheapy:textAreaField label="Opinión" name="opinion"/>
-           <!-- <cheapy:inputField label="Estrellas" name="stars"/>  -->
-            <cheapy:ratingStar label="Valoración" name="stars" disabled="false"></cheapy:ratingStar>
+            <cheapy:ratingStar label="Servicio" name="service" disabled="false"></cheapy:ratingStar>
+            <cheapy:ratingStar label="Comida" name="food" disabled="false"></cheapy:ratingStar>
+            <cheapy:ratingStar label="Calidad/Precio" name="qualityPrice" disabled="false"></cheapy:ratingStar>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
@@ -29,7 +30,9 @@
 	                        Crear reseña</button>
                     </c:when>
                     <c:otherwise>
-                        <button class="btn btn-default" type="submit">Modificar Reseña</button>
+                        <button class="btn btn-default" type="submit" style="font-family: 'Lobster'; font-size: 20px;">
+                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true" style="padding: 5px"> </span>
+                        Modificar Reseña</button>
                     </c:otherwise>
                 </c:choose>
                 </div>

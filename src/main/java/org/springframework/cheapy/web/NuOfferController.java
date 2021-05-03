@@ -12,6 +12,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.cheapy.model.Client;
+import org.springframework.cheapy.model.Municipio;
 import org.springframework.cheapy.model.NuOffer;
 import org.springframework.cheapy.model.StatusOffer;
 import org.springframework.cheapy.service.ClientService;
@@ -33,6 +34,7 @@ public class NuOfferController {
 	private final NuOfferService	nuOfferService;
 	private final ClientService		clientService;
 
+
 	public NuOfferController(final NuOfferService nuOfferService, final ClientService clientService) {
 		this.nuOfferService = nuOfferService;
 		this.clientService = clientService;
@@ -51,7 +53,7 @@ public class NuOfferController {
 
 	private boolean checkOffer(final NuOffer session, final NuOffer offer) {
 		boolean res = false;
-		if (session.getId() == offer.getId() && session.getStatus() == offer.getStatus() && (session.getCode() == null ? offer.getCode() == "" : session.getCode().equals(offer.getCode())) && !session.getStatus().equals(StatusOffer.inactive)) {
+		if (session.getId() == offer.getId() && session.getStatus().equals(offer.getStatus()) && (session.getCode() == null ? offer.getCode().equals("") : session.getCode().equals(offer.getCode())) && !session.getStatus().equals(StatusOffer.inactive)) {
 			res = true;
 		}
 		return res;
@@ -65,20 +67,61 @@ public class NuOfferController {
 		return res;
 	}
 
-	private boolean checkConditions(final NuOffer nuOffer) {
+	private boolean checkConditionsGold(final NuOffer nuOffer) {
+		boolean res = false;
+		if (nuOffer.getGold() == null || nuOffer.getSilver() == null) {
+			res = true;
+		} else if (nuOffer.getGold() > nuOffer.getSilver()) {
+			res = true;
+		}
+		return res;
+	}
+	
+	private boolean checkConditionsSilver(final NuOffer nuOffer) {
+		boolean res = false;
+		if (nuOffer.getBronze() == null || nuOffer.getSilver() == null ) {
+			res = true;
+		} else if (nuOffer.getSilver() > nuOffer.getBronze()) {
+			res = true;
+		}
+		return res;
+	}
+	
+	private boolean checkConditionsBronze(final NuOffer nuOffer) {
 		boolean res = false;
 		if (nuOffer.getGold() == null || nuOffer.getSilver() == null || nuOffer.getBronze() == null) {
-
-		} else if (nuOffer.getGold() >= nuOffer.getSilver() && nuOffer.getSilver() >= nuOffer.getBronze()) {
+			res = true;
+		} else if (nuOffer.getGold() > nuOffer.getBronze() && nuOffer.getSilver() > nuOffer.getBronze()) {
 			res = true;
 		}
 		return res;
 	}
 
-	private boolean checkDiscounts(final NuOffer NuOffer) {
+	private boolean checkDiscountsGold(final NuOffer NuOffer) {
+		boolean res = false;
+		if (NuOffer.getDiscountGold() == null || NuOffer.getDiscountSilver() == null) {
+			res = true;
+		} else if (NuOffer.getDiscountGold() > NuOffer.getDiscountSilver()) {
+			res = true;
+		}
+		return res;
+	}
+	
+	private boolean checkDiscountsSilver(final NuOffer NuOffer) {
+		boolean res = false;
+		if (NuOffer.getDiscountSilver() == null || NuOffer.getDiscountBronze() == null) {
+			res = true;
+		} else if (NuOffer.getDiscountSilver() > NuOffer.getDiscountBronze()) {
+			res = true;
+		}
+		return res;
+	}
+	
+	private boolean checkDiscountsBronze(final NuOffer NuOffer) {
 		boolean res = false;
 		if (NuOffer.getDiscountGold() == null || NuOffer.getDiscountSilver() == null || NuOffer.getDiscountBronze() == null) {
-		} else if (NuOffer.getDiscountGold() >= NuOffer.getDiscountSilver() && NuOffer.getDiscountSilver() >= NuOffer.getDiscountBronze()) {
+			res = true;
+		} else if (NuOffer.getDiscountGold() > NuOffer.getDiscountBronze() && NuOffer.getDiscountSilver() > NuOffer.getDiscountBronze()) {
 			res = true;
 		}
 		return res;
@@ -87,11 +130,20 @@ public class NuOfferController {
 	@GetMapping("/offers/nuOfferList/{page}")
 	public String processFindForm(@PathVariable("page") final int page, final Map<String, Object> model) {
 		Pageable elements = PageRequest.of(page, 5);
-		Pageable nextPage = PageRequest.of(page+1, 5);
-		
+		Pageable nextPage = PageRequest.of(page + 1, 5);
+
 		List<NuOffer> foodOfferLs = this.nuOfferService.findActiveNuOffer(elements);
+		for (int i = 0; i < foodOfferLs.size(); i++) {
+			NuOffer fo = foodOfferLs.get(i);
+			String aux = fo.getClient().getName().substring(0, 1).toUpperCase();
+			fo.getClient().setName(aux + fo.getClient().getName().substring(1));
+
+			foodOfferLs.set(i, fo);
+		}
 		Integer next = this.nuOfferService.findActiveNuOffer(nextPage).size();
-		
+
+		model.put("municipios", Municipio.values());
+
 		model.put("nuOfferLs", foodOfferLs);
 		model.put("nextPage", next);
 		model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
@@ -113,16 +165,32 @@ public class NuOfferController {
 			result.rejectValue("end", "", "La fecha de fin debe ser posterior a la fecha de inicio");
 
 		}
-		if (!this.checkConditions(nuOffer)) {
-			result.rejectValue("gold", "", "Oro debe ser mayor o igual que plata, y plata mayor o igual que bronce");
+		if (!this.checkConditionsGold(nuOffer)) {
+			result.rejectValue("gold", "", "Debe ser mayor que plata");
 
 		}
-		if (!this.checkDiscounts(nuOffer)) {
-			result.rejectValue("discountGold", "", "El descuento de Oro debe ser mayor o igual que el de plata, y el de plata mayor o igual que el de bronce");
+		if (!this.checkConditionsSilver(nuOffer)) {
+			result.rejectValue("silver", "", "Debe ser mayor que bronce");
 
 		}
-		
-		if (nuOffer.getStart()==null || nuOffer.getStart().isBefore(LocalDateTime.now())) {
+		if (!this.checkConditionsBronze(nuOffer)) {
+			result.rejectValue("bronze", "", "Debe ser menor que plata y oro");
+
+		}
+		if (!this.checkDiscountsGold(nuOffer)) {
+			result.rejectValue("discountGold", "", "Debe ser mayor que el de plata");
+
+		}
+		if (!this.checkDiscountsSilver(nuOffer)) {
+			result.rejectValue("discountSilver", "", "Debe ser mayor que el de bronce");
+
+		}
+		if (!this.checkDiscountsBronze(nuOffer)) {
+			result.rejectValue("discountBronze", "", "Debe ser menor que el de plata y el de oro");
+
+		}
+
+		if (nuOffer.getStart() == null || nuOffer.getStart().isBefore(LocalDateTime.now())) {
 			result.rejectValue("start", "", "La fecha de inicio debe ser futura");
 
 		}
@@ -145,13 +213,10 @@ public class NuOfferController {
 	public String activateNuOffer(@PathVariable("nuOfferId") final int nuOfferId, final ModelMap modelMap) {
 		Client client = this.clientService.getCurrentClient();
 		NuOffer nuOffer = this.nuOfferService.findNuOfferById(nuOfferId);
-		if (nuOffer.getClient().equals(client)) {
+		if (nuOffer.getClient().equals(client) && !nuOffer.isInactive()) {
 			nuOffer.setStatus(StatusOffer.active);
 			nuOffer.setCode("NU-" + nuOfferId);
 			this.nuOfferService.saveNuOffer(nuOffer);
-
-		} else {
-			modelMap.addAttribute("message", "You don't have access to this number offer");
 		}
 		return "redirect:/offers/nu/" + nuOffer.getId();
 
@@ -160,11 +225,7 @@ public class NuOfferController {
 	@GetMapping("/offers/nu/{nuOfferId}")
 	public String processShowForm(@PathVariable("nuOfferId") final int nuOfferId, final Map<String, Object> model) {
 		NuOffer nuOffer = this.nuOfferService.findNuOfferById(nuOfferId);
-		if (nuOffer.getStatus().equals(StatusOffer.active)) {
-			model.put("nuOffer", nuOffer);
-			model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-			return "offers/nu/nuOffersShow";
-		} else if (nuOffer.getStatus().equals(StatusOffer.hidden) && this.checkIdentity(nuOfferId)) {
+		if (nuOffer.getStatus().equals(StatusOffer.active) || nuOffer.getStatus().equals(StatusOffer.hidden) && this.checkIdentity(nuOfferId)) {
 			model.put("nuOffer", nuOffer);
 			model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 			return "offers/nu/nuOffersShow";
@@ -191,9 +252,9 @@ public class NuOfferController {
 	}
 
 	@PostMapping(value = "/offers/nu/{nuOfferId}/edit")
-	public String updateNuOffer(@Valid final NuOffer nuOfferEdit, final BindingResult result, final ModelMap model, final HttpServletRequest request) {
+	public String updateNuOffer(@PathVariable("nuOfferId") final int nuOfferId, @Valid final NuOffer nuOfferEdit, final BindingResult result, final ModelMap model, final HttpServletRequest request) {
 
-		if (!this.checkIdentity(nuOfferEdit.getId())) {
+		if (!this.checkIdentity(nuOfferId)) {
 			return "error";
 		}
 		Integer id = (Integer) request.getSession().getAttribute("idNu");
@@ -206,12 +267,34 @@ public class NuOfferController {
 			result.rejectValue("end", "", "La fecha de fin debe ser posterior a la fecha de inicio");
 
 		}
-		if (!this.checkConditions(nuOfferEdit)) {
-			result.rejectValue("gold", "", "Oro debe ser mayor o igual que plata, y plata mayor o igual que bronce");
+
+		if (nuOfferEdit.getStart() == null || nuOfferEdit.getStart().isBefore(LocalDateTime.now()) && !nuOfferEdit.getStart().equals(nuOffer.getStart())) {
+			result.rejectValue("start", "", "La fecha de inicio debe ser futura o la original");
 
 		}
-		if (!this.checkDiscounts(nuOfferEdit)) {
-			result.rejectValue("discountGold", "", "El descuento de Oro debe ser mayor o igual que el de plata, y el de plata mayor o igual que el de bronce");
+
+		if (!this.checkConditionsGold(nuOfferEdit)) {
+			result.rejectValue("gold", "", "Debe ser mayor que plata");
+
+		}
+		if (!this.checkConditionsSilver(nuOfferEdit)) {
+			result.rejectValue("silver", "", "Debe ser mayor que bronce");
+
+		}
+		if (!this.checkConditionsBronze(nuOfferEdit)) {
+			result.rejectValue("bronze", "", "Debe ser menor que plata y oro");
+
+		}
+		if (!this.checkDiscountsGold(nuOfferEdit)) {
+			result.rejectValue("discountGold", "", "Debe ser mayor que el de plata");
+
+		}
+		if (!this.checkDiscountsSilver(nuOfferEdit)) {
+			result.rejectValue("discountSilver", "", "Debe ser mayor que el de bronce");
+
+		}
+		if (!this.checkDiscountsBronze(nuOfferEdit)) {
+			result.rejectValue("discountBronze", "", "Debe ser menor que el de plata y el de oro");
 
 		}
 

@@ -16,7 +16,7 @@
 			document.write("Página " + paginaAct + " <br />");
 		}
 	</script>
-    <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px"><fmt:message key="users"/></h2>
+    <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%; padding:10px"><fmt:message key="users"/></h2>
     
 	<c:if test="${empty usuarioLs }">
 		<p id="vacio" >No hay ningún usuario.</p>
@@ -29,7 +29,7 @@
 	        	<th><fmt:message key="nameUser"/></th>
 	        	<th><fmt:message key="surname"/></th>
 	        	<th><fmt:message key="user"/></th>
-	        	<th><fmt:message key="enabled"/></th>   
+	        	<th><fmt:message key="enabled"/></th>     
 	            <th> </th>
 	        </tr>
 	        </thead>
@@ -45,7 +45,7 @@
 	                <td>
 	                    <c:out value="${usuario.usuar.username}"/>
 	                </td>
-	                <td>
+	               	<td>
 	                	<c:if test="${usuario.usuar.enabled == 'true'}">
 			            	<c:out value="Si"/>
 			            </c:if>	
@@ -75,29 +75,29 @@
 								
 		</script>
     </div>
-    <div>
-    <c:if test='${page!=0}'>
-   	<div class="text-left">
-    	<spring:url value="/administrators/usuarios/page/{page}" var="usuarioListUrl">
-    		<spring:param name="page" value="${page-1}"/>
-    	</spring:url>
-    	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(usuarioListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-		<span class="glyphicon 	glyphicon glyphicon-arrow-left" aria-hidden="true" style="padding: 5px"> </span>
-		Pág. anterior</button>
-	</div>	
-    </c:if>
-    
-    <c:if test="${fn:length(usuarioLs) == 10 && nextPage > 0}">
-    <div class="text-right">
-    	
-    	<spring:url value="/administrators/usuarios/page/{page}" var="usuarioListUrl">
-    		<spring:param name="page" value="${page+1}"/>
-    	</spring:url>
-    	<button type="button" class="btn-pag"  role="link" onclick="window.location='${fn:escapeXml(usuarioListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-		<span class="glyphicon 	glyphicon glyphicon-arrow-right" aria-hidden="true" style="padding: 5px"> </span>
-		Pág. siguiente</button>
-	</div>	
-	</c:if>
+    <div class="row-pag-btn">
+	    <div class="column-pag-btn" style="text-align: left;">
+	    	<c:if test='${page!=0}'>
+		    	<spring:url value="/administrators/usuarios/page/{page}" var="usuarioListUrl">
+		    		<spring:param name="page" value="${page-1}"/>
+		    	</spring:url>
+		    	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(usuarioListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+				<span class="glyphicon 	glyphicon glyphicon-arrow-left" aria-hidden="true" style="padding: 5px"> </span>
+				Pág. anterior</button>
+		    </c:if>
+	    	​
+	    </div>
+	    <div class="column-pag-btn" style="text-align: right;">
+	    	<c:if test="${fn:length(usuarioLs) == 10 && nextPage > 0}">
+		    	
+		    	<spring:url value="/administrators/usuarios/page/{page}" var="usuarioListUrl">
+		    		<spring:param name="page" value="${page+1}"/>
+		    	</spring:url>
+		    	<button type="button" class="btn-pag"  role="link" onclick="window.location='${fn:escapeXml(usuarioListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+				<span class="glyphicon 	glyphicon glyphicon-arrow-right" aria-hidden="true" style="padding: 5px"> </span>
+				Pág. siguiente</button>
+			</c:if>​
+		</div>
 	</div>
     </c:if>
 </cheapy:layout>
