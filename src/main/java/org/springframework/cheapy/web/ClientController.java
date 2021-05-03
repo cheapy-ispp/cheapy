@@ -174,6 +174,9 @@ public class ClientController {
 		Client client = this.clientService.findById(id);
 		Integer valoraciones = this.clientService.mediaValoraciones(client);
 		Usuario usuario = this.usuarioService.getCurrentUsuario();
+		if(client.getUsuar()==null) {
+            return "error";
+        }
 
 		if (usuario == null) {
 			model.put("favoritos", 0);
