@@ -17,7 +17,7 @@
       		
       		 <form:form modelAttribute="usuario" class="form-horizontal">
 
-        		<div class="eliminar">
+        		<div class="eliminar" style="float:none;">
 
         			<button type="submit">
         			<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
