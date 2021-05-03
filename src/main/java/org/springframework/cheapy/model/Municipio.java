@@ -47,7 +47,7 @@ public enum Municipio {
 	, Jerez_de_la_frontera{
 		@Override
 		public String toString() {
-			return "Jerez de la frontera";
+			return "Jerez de la Frontera";
 			
 		}
 		

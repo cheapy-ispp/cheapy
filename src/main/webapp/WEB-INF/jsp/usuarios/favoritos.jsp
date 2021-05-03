@@ -27,7 +27,7 @@
 	        <tr>
 	
 	        	<th><fmt:message key="name"/></th>
-	        	<th><fmt:message key="food"/></th> 
+	        	<th><fmt:message key="foodClient"/></th> 
 	            <th> </th>
 	        </tr>
 	        </thead>

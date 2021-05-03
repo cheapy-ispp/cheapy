@@ -71,7 +71,7 @@ public class NuOfferController {
 		boolean res = false;
 		if (nuOffer.getGold() == null || nuOffer.getSilver() == null) {
 			res = true;
-		} else if (nuOffer.getGold() >= nuOffer.getSilver()) {
+		} else if (nuOffer.getGold() > nuOffer.getSilver()) {
 			res = true;
 		}
 		return res;
@@ -79,9 +79,9 @@ public class NuOfferController {
 	
 	private boolean checkConditionsSilver(final NuOffer nuOffer) {
 		boolean res = false;
-		if (nuOffer.getGold() == null || nuOffer.getSilver() == null) {
+		if (nuOffer.getBronze() == null || nuOffer.getSilver() == null ) {
 			res = true;
-		} else if (nuOffer.getSilver() >= nuOffer.getBronze()) {
+		} else if (nuOffer.getSilver() > nuOffer.getBronze()) {
 			res = true;
 		}
 		return res;
@@ -91,7 +91,7 @@ public class NuOfferController {
 		boolean res = false;
 		if (nuOffer.getGold() == null || nuOffer.getSilver() == null || nuOffer.getBronze() == null) {
 			res = true;
-		} else if (nuOffer.getGold() > nuOffer.getSilver() && nuOffer.getSilver() > nuOffer.getBronze()) {
+		} else if (nuOffer.getGold() > nuOffer.getBronze() && nuOffer.getSilver() > nuOffer.getBronze()) {
 			res = true;
 		}
 		return res;
@@ -101,7 +101,7 @@ public class NuOfferController {
 		boolean res = false;
 		if (NuOffer.getDiscountGold() == null || NuOffer.getDiscountSilver() == null) {
 			res = true;
-		} else if (NuOffer.getDiscountGold() >= NuOffer.getDiscountSilver()) {
+		} else if (NuOffer.getDiscountGold() > NuOffer.getDiscountSilver()) {
 			res = true;
 		}
 		return res;
@@ -111,7 +111,7 @@ public class NuOfferController {
 		boolean res = false;
 		if (NuOffer.getDiscountSilver() == null || NuOffer.getDiscountBronze() == null) {
 			res = true;
-		} else if (NuOffer.getDiscountSilver() >= NuOffer.getDiscountBronze()) {
+		} else if (NuOffer.getDiscountSilver() > NuOffer.getDiscountBronze()) {
 			res = true;
 		}
 		return res;
@@ -121,7 +121,7 @@ public class NuOfferController {
 		boolean res = false;
 		if (NuOffer.getDiscountGold() == null || NuOffer.getDiscountSilver() == null || NuOffer.getDiscountBronze() == null) {
 			res = true;
-		} else if (NuOffer.getDiscountGold() > NuOffer.getDiscountSilver() && NuOffer.getDiscountSilver() > NuOffer.getDiscountBronze()) {
+		} else if (NuOffer.getDiscountGold() > NuOffer.getDiscountBronze() && NuOffer.getDiscountSilver() > NuOffer.getDiscountBronze()) {
 			res = true;
 		}
 		return res;
@@ -166,27 +166,27 @@ public class NuOfferController {
 
 		}
 		if (!this.checkConditionsGold(nuOffer)) {
-			result.rejectValue("gold", "", "Debe ser mayor o igual que plata");
+			result.rejectValue("gold", "", "Debe ser mayor que plata");
 
 		}
 		if (!this.checkConditionsSilver(nuOffer)) {
-			result.rejectValue("silver", "", "Debe ser mayor o igual que bronce");
+			result.rejectValue("silver", "", "Debe ser mayor que bronce");
 
 		}
 		if (!this.checkConditionsBronze(nuOffer)) {
-			result.rejectValue("bronze", "", "Debe ser menor o igual que plata y oro");
+			result.rejectValue("bronze", "", "Debe ser menor que plata y oro");
 
 		}
 		if (!this.checkDiscountsGold(nuOffer)) {
-			result.rejectValue("discountGold", "", "Debe ser mayor o igual que el de plata");
+			result.rejectValue("discountGold", "", "Debe ser mayor que el de plata");
 
 		}
 		if (!this.checkDiscountsSilver(nuOffer)) {
-			result.rejectValue("discountSilver", "", "Debe ser mayor o igual que el de bronce");
+			result.rejectValue("discountSilver", "", "Debe ser mayor que el de bronce");
 
 		}
 		if (!this.checkDiscountsBronze(nuOffer)) {
-			result.rejectValue("discountBronze", "", "Debe ser menor o igual que el de plata y el de oro");
+			result.rejectValue("discountBronze", "", "Debe ser menor que el de plata y el de oro");
 
 		}
 
@@ -274,27 +274,27 @@ public class NuOfferController {
 		}
 
 		if (!this.checkConditionsGold(nuOfferEdit)) {
-			result.rejectValue("gold", "", "Debe ser mayor o igual que plata");
+			result.rejectValue("gold", "", "Debe ser mayor que plata");
 
 		}
 		if (!this.checkConditionsSilver(nuOfferEdit)) {
-			result.rejectValue("silver", "", "Debe ser mayor o igual que bronce");
+			result.rejectValue("silver", "", "Debe ser mayor que bronce");
 
 		}
 		if (!this.checkConditionsBronze(nuOfferEdit)) {
-			result.rejectValue("bronze", "", "Debe ser menor o igual que plata y oro");
+			result.rejectValue("bronze", "", "Debe ser menor que plata y oro");
 
 		}
 		if (!this.checkDiscountsGold(nuOfferEdit)) {
-			result.rejectValue("discountGold", "", "Debe ser mayor o igual que el de plata");
+			result.rejectValue("discountGold", "", "Debe ser mayor que el de plata");
 
 		}
 		if (!this.checkDiscountsSilver(nuOfferEdit)) {
-			result.rejectValue("discountSilver", "", "Debe ser mayor o igual que el de bronce");
+			result.rejectValue("discountSilver", "", "Debe ser mayor que el de bronce");
 
 		}
 		if (!this.checkDiscountsBronze(nuOfferEdit)) {
-			result.rejectValue("discountBronze", "", "Debe ser menor o igual que el de plata y el de oro");
+			result.rejectValue("discountBronze", "", "Debe ser menor que el de plata y el de oro");
 
 		}
 

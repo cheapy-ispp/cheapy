@@ -51,14 +51,21 @@ public class UsuarioController {
 	public String listFavorite(@PathVariable("page") final int page, final Map<String, Object> model) {
 		List<Client> client = this.usuarioService.getCurrentUsuario().getFavoritos();
 		List<Client> res = new ArrayList<>();
+		List<Client> lista = new ArrayList<Client>();
+        for (Client cli:client) {
+            if(cli.getUsuar()!=null) {
+                lista.add(cli);
+            }
+        }
 		Collections.sort(client, (c1, c2) -> c1.getName().compareTo(c2.getName()));
 
-		for (int i = page * 5; i < page * 5 + 5; i++) {
-			if (client.size() <= i) {
-				break;
-			}
-			res.add(client.get(i));
-		}
+		  for (int i = page * 5; i < page * 5 + 5; i++) {
+	            if (lista.size() <= i) {
+	                break;
+	            }
+	            res.add(lista.get(i));
+	        }
+
 
 		Boolean next = true;
 		if (page * 5 + 5 >= client.size()) {
@@ -77,9 +84,9 @@ public class UsuarioController {
 	public String addFavorite(@PathVariable("clientId") final int clientId, final ModelMap modelMap) {
 		Client client = this.clientService.findById(clientId);
 		Usuario usuario = this.usuarioService.getCurrentUsuario();
-		if (usuario == null || usuario.getFavoritos().contains(client)) {
-			return "error";
-		}
+		if (usuario == null || usuario.getFavoritos().contains(client) || client.getUsuar()==null) {
+            return "error";
+        }
 		usuario.getFavoritos().add(client);
 		this.usuarioService.saveUsuario(usuario);
 		return "redirect:/restaurant/" + clientId;
@@ -90,8 +97,8 @@ public class UsuarioController {
 	public String removeFavorite(@PathVariable("clientId") final int clientId, final ModelMap modelMap) {
 		Client client = this.clientService.findById(clientId);
 		Usuario usuario = this.usuarioService.getCurrentUsuario();
-		if (usuario == null || !usuario.getFavoritos().contains(client)) {
-			return "error";
+		if (usuario == null || !usuario.getFavoritos().contains(client) || client.getUsuar()==null) {
+            return "error";
 		}
 		usuario.getFavoritos().remove(client);
 		this.usuarioService.saveUsuario(usuario);
@@ -201,6 +208,10 @@ public class UsuarioController {
 			result.rejectValue("usuar.password", "", "La contraseña no puede estar vacía");
 		}
 
+		if(!usuarioEdit.getUsuar().getPassword().matches("^[A-Za-z0-9]{4,}+") ) {
+            result.rejectValue("usuar.password","" ,"La contraseña debe contener al menos cuatro caracteres (letras y números)");
+        }
+		
 		if (result.hasErrors()) {
 			return "usuarios/password";
 		}
