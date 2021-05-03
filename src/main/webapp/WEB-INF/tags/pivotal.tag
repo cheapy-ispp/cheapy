@@ -5,8 +5,8 @@
 <br/>
 <div class="row-full">
     <div class="row" >
-        <div class="col-12 titulo" style="text-align:center"><img src="<spring:url value="/resources/images/eslogan.png" htmlEscape="true" />"
-                                             alt="Eat fast, eat cheapy"/>
+    	<div class="text-center">
+        <div class="col-12 titulo"><h2 class="titulo" style="font-family: 'Lobster'; font-size:200%; padding:10px; margin:80px;">Eat fast, eat Cheapy</h2>
 	        
 		<div style="margin-bottom:10px; text-align:center">
 			<a href="https://twitter.com/cheapyispp" target="_blank" class="fa fa-twitter"></a>
@@ -16,6 +16,6 @@
 		</div>	
 		
 		</div>  	
-		                       
+		</div>                       
     </div>
 </div>

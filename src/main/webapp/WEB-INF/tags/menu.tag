@@ -20,7 +20,7 @@
 			</button>
 		</div>
 		<div class="navbar-collapse collapse" id="main-navbar">
-			<ul class="nav navbar-nav">
+			<ul class="nav navbar-nav" style="text-align: center">
 
 				<cheapy:menuItem active="${name eq 'home'}" url="/"
 					title="Inicio">
@@ -111,7 +111,7 @@
 				</cheapy:menuItem>
 			</ul>
 			
-			<ul class="nav navbar-nav navbar-right">
+			<ul class="nav navbar-nav navbar-right" style="text-align: center">
 	   
                 <sec:authorize access="hasAnyAuthority('client')">
 					<cheapy:menuItem active="${name eq 'miPerfil'}" url="/clients/show" title="Mi Perfil">
@@ -150,16 +150,11 @@
 							class="glyphicon glyphicon-chevron-down"></span>
 					</a>
 						<ul class="dropdown-menu">
-							<li>
+							<li style="text-align: center">
 								<div class="navbar-login">
-									<div class="row" >
-										<div class="col-lg-4" style="">
-											<p class="titulo">
-												<span class="glyphicon glyphicon-user icon-size" ></span>
-											</p>
-										</div>
+									<div class="row" >										
 										<div class="col-lg-8">
-											<p class="text-left">
+											<p class="text-center">
 												<strong><sec:authentication property="name" /></strong>
 											</p>
 											<form action="/logout" method=post>
