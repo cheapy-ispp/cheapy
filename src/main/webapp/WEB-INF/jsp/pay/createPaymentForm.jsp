@@ -7,6 +7,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
+<link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
+
 <cheapy:layout pageName="payment">
 	<center>
 	

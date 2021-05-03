@@ -201,6 +201,10 @@ public class UsuarioController {
 			result.rejectValue("usuar.password", "", "La contraseña no puede estar vacía");
 		}
 
+		if(!usuarioEdit.getUsuar().getPassword().matches("^[A-Za-z0-9]{4,}+") ) {
+            result.rejectValue("usuar.password","" ,"La contraseña debe contener al menos cuatro caracteres (letras y números)");
+        }
+		
 		if (result.hasErrors()) {
 			return "usuarios/password";
 		}

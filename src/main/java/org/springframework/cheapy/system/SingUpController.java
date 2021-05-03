@@ -91,14 +91,22 @@ public class SingUpController {
 		if(duplicate) {
 			result.rejectValue("usuar.username","" ,"El nombre de usuario ya esta registrado");
 		}
+		if(!usuario.getUsuar().getPassword().matches("^[A-Za-z0-9]{4,}+") ) {
+            result.rejectValue("usuar.password","" ,"La contraseña debe contener al menos cuatro caracteres (letras y números)");
+        }
+		if(!usuario.getUsuar().getUsername().matches("^[A-Za-z0-9]{4,}+") ) {
+            result.rejectValue("usuar.username","" ,"El nombre de usuario debe contener al menos cuatro caracteres (letras y números)");
+        }
 		if (result.hasErrors()) {
 			
 			if(usuario.getUsuar().getPassword().equals("")) {
 				result.rejectValue("usuar.password","" ,"La contraseña no puede estar vacía");
 			}
+			
 			if(usuario.getUsuar().getUsername().equals("")) {
 				result.rejectValue("usuar.username","" ,"El nombre de usuario no puede estar vacío");
 			}
+			
 			return "singup/singUpUser";
 		 }else if(usuario.getUsuar().getPassword().equals("")||usuario.getUsuar().getUsername().equals("")) {
 			 
@@ -168,7 +176,12 @@ public class SingUpController {
 		if(duplicate) {
 			result.rejectValue("usuar.username","" ,"El nombre de usuario ya esta registrado");
 		}
-		
+		if(!cliente.getUsuar().getPassword().matches("^[A-Za-z0-9]{4,}+") ) {
+            result.rejectValue("usuar.password","" ,"La contraseña debe contener al menos cuatro caracteres (letras y números)");
+        }
+		if(!cliente.getUsuar().getUsername().matches("^[A-Za-z0-9]{4,}+") ) {
+            result.rejectValue("usuar.username","" ,"El nombre de usuario debe contener al menos cuatro caracteres (letras y números)");
+        }
 		if (result.hasErrors()) {
 			Map<Object, String> municipios = new HashMap<Object, String>();
 			Municipio[] a = Municipio.values();

@@ -69,9 +69,9 @@ public class SpeedOfferController {
 
 	private boolean checkConditionsGold(final SpeedOffer speedOffer) {
 		boolean res = false;
-		if (speedOffer.getGold() == null || speedOffer.getSilver() == null || speedOffer.getBronze() == null) {
+		if (speedOffer.getGold() == null || speedOffer.getSilver() == null ) {
 			res = true;
-		} else if (speedOffer.getGold().isBefore(speedOffer.getSilver()) && speedOffer.getGold().isBefore(speedOffer.getBronze())) {
+		} else if (speedOffer.getGold().isBefore(speedOffer.getSilver())) {
 			res = true;
 		}
 		return res;
@@ -79,9 +79,9 @@ public class SpeedOfferController {
 	
 	private boolean checkConditionsSilver(final SpeedOffer speedOffer) {
 		boolean res = false;
-		if (speedOffer.getGold() == null || speedOffer.getSilver() == null || speedOffer.getBronze() == null) {
+		if (speedOffer.getBronze() == null || speedOffer.getSilver() == null) {
 			res = true;
-		} else if (speedOffer.getGold().isBefore(speedOffer.getSilver()) && speedOffer.getSilver().isBefore(speedOffer.getBronze())) {
+		} else if (speedOffer.getSilver().isBefore(speedOffer.getBronze())) {
 			res = true;
 		}
 		return res;
@@ -99,9 +99,10 @@ public class SpeedOfferController {
 
 	private boolean checkDiscountsGold(final SpeedOffer speedOffer) {
 		boolean res = false;
-		if (speedOffer.getDiscountGold() == null || speedOffer.getDiscountSilver() == null || speedOffer.getDiscountBronze() == null) {
+		if (speedOffer.getDiscountGold() == null || speedOffer.getDiscountSilver() == null) {
 			res = true;
-		} else if (speedOffer.getDiscountGold() >= speedOffer.getDiscountSilver() && speedOffer.getDiscountGold() >= speedOffer.getDiscountBronze()) {
+		} else if (speedOffer.getDiscountGold() > speedOffer.getDiscountSilver()) {
+			
 			res = true;
 		}
 		return res;
@@ -109,9 +110,9 @@ public class SpeedOfferController {
 	
 	private boolean checkDiscountsSilver(final SpeedOffer speedOffer) {
 		boolean res = false;
-		if (speedOffer.getDiscountGold() == null || speedOffer.getDiscountSilver() == null || speedOffer.getDiscountBronze() == null) {
+		if (speedOffer.getDiscountBronze() == null || speedOffer.getDiscountSilver() == null ) {
 			res = true;
-		} else if (speedOffer.getDiscountGold() > speedOffer.getDiscountSilver() && speedOffer.getDiscountSilver() > speedOffer.getDiscountBronze()) {
+		} else if (speedOffer.getDiscountSilver() > speedOffer.getDiscountBronze()) {
 			res = true;
 		}
 		return res;
@@ -121,7 +122,7 @@ public class SpeedOfferController {
 		boolean res = false;
 		if (speedOffer.getDiscountGold() == null || speedOffer.getDiscountSilver() == null || speedOffer.getDiscountBronze() == null) {
 			res = true;
-		} else if (speedOffer.getDiscountGold() >= speedOffer.getDiscountBronze() && speedOffer.getDiscountSilver() >= speedOffer.getDiscountBronze()) {
+		} else if (speedOffer.getDiscountGold() > speedOffer.getDiscountBronze() && speedOffer.getDiscountSilver() > speedOffer.getDiscountBronze()) {
 			res = true;
 		}
 		return res;
@@ -258,21 +259,6 @@ public class SpeedOfferController {
 		if (speedOffer.getStatus().equals(StatusOffer.inactive)) {
 			return "error";
 		}
-
-		if (speedOffer.getGold() != null) {
-			LocalTime a = speedOffer.getGold();
-			model.put("gold", a);
-		}
-
-		if (speedOffer.getSilver() != null) {
-			LocalTime b = speedOffer.getSilver();
-			model.put("silver", b);
-		}
-
-		if (speedOffer.getBronze() != null) {
-			LocalTime c = speedOffer.getBronze();
-			model.put("bronze", c);
-		}
 		
 		model.addAttribute("speedOffer", speedOffer);
 		request.getSession().setAttribute("idSpeed", speedOfferId);
@@ -301,28 +287,28 @@ public class SpeedOfferController {
 
 		}
 		
-		if (!this.checkConditionsGold(speedOffer)) {
+		if (!this.checkConditionsGold(speedOfferEdit)) {
 			result.rejectValue("gold", "", "Debe ser menor que el de plata y bronce");
 
 		}
-		if (!this.checkConditionsSilver(speedOffer)) {
-			result.rejectValue("silver", "", "Debe ser menorque bronce");
+		if (!this.checkConditionsSilver(speedOfferEdit)) {
+			result.rejectValue("silver", "", "Debe ser menor que bronce");
 
 		}
-		if (!this.checkConditionsBronze(speedOffer)) {
-			result.rejectValue("bronze", "", "Debe ser mayorque plata y oro");
+		if (!this.checkConditionsBronze(speedOfferEdit)) {
+			result.rejectValue("bronze", "", "Debe ser mayor que plata y oro");
 
 		}
-		if (!this.checkDiscountsGold(speedOffer)) {
-			result.rejectValue("discountGold", "", "Debe ser mayor o igual que el de plata y bronce");
+		if (!this.checkDiscountsGold(speedOfferEdit)) {
+			result.rejectValue("discountGold", "", "Debe ser mayor que el de plata y bronce");
 
 		}
-		if (!this.checkDiscountsSilver(speedOffer)) {
-			result.rejectValue("discountSilver", "", "Debe ser mayor o igual que el de bronce");
+		if (!this.checkDiscountsSilver(speedOfferEdit)) {
+			result.rejectValue("discountSilver", "", "Debe ser mayor que el de bronce");
 
 		}
-		if (!this.checkDiscountsBronze(speedOffer)) {
-			result.rejectValue("discountBronze", "", "Debe ser menor o igual que el de plata y el de oro");
+		if (!this.checkDiscountsBronze(speedOfferEdit)) {
+			result.rejectValue("discountBronze", "", "Debe ser menor que el de plata y el de oro");
 
 		}
 

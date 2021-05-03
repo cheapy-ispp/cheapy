@@ -13,7 +13,7 @@
 
 	<jsp:body>
         <h2 class="titulo" style="font-family: 'Lobster'; font-size: 25px; padding:30px">¿Está seguro de que quiere eliminar su cuenta? 
-        No podrás recuperarla y todas sus reseñas desaparecerán.</h2>
+        No podrá recuperarla y todas sus reseñas desaparecerán.</h2>
       		
       		 <form:form modelAttribute="usuario" class="form-horizontal">
 
