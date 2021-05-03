@@ -7,10 +7,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
@@ -20,6 +22,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cheapy.configuration.SecurityConfiguration;
 import org.springframework.cheapy.model.Client;
 import org.springframework.cheapy.model.FoodOffer;
+import org.springframework.cheapy.model.Municipio;
 import org.springframework.cheapy.model.NuOffer;
 import org.springframework.cheapy.model.SpeedOffer;
 import org.springframework.cheapy.model.StatusOffer;
@@ -89,6 +92,8 @@ class AdministratorControllerTest {
 		usuario.setEmail("usuario@gmail.com");
 		usuario.setUsuar(user1);
 		BDDMockito.given(this.usuarioService.findByUsername("user1")).willReturn(usuario);
+		BDDMockito.given(this.usuarioService.findById(1)).willReturn(usuario);
+		
     
     User user2 = new User();
 		user2.setUsername("user1");
@@ -107,6 +112,7 @@ class AdministratorControllerTest {
 		
 		BDDMockito.given(this.clientService.getCurrentClient()).willReturn(client1);
 		BDDMockito.given(this.clientService.findByUsername(TEST_CLIENT_USERNAME)).willReturn(client1);
+		BDDMockito.given(this.clientService.findById(1)).willReturn(client1);
 		
 		BDDMockito.given(this.foodOfferService.findFoodOfferActOclByUserId(1)).willReturn(new ArrayList<FoodOffer>());
 		BDDMockito.given(this.nuOfferService.findNuOfferActOclByUserId(1)).willReturn(new ArrayList<NuOffer>());
@@ -306,4 +312,54 @@ class AdministratorControllerTest {
 		.andExpect(model().attributeExists("timeOffer"))
 		.andExpect(view().name("offers/time/timeOffersShow"));
 	}
+	@WithMockUser(value = "user1", authorities = "client")
+	@Test
+	void testInitDeleteClientForm() throws Exception {
+		mockMvc.perform(get("/administrators/clients/1/delete"))
+				.andExpect(status().isOk())
+				.andExpect(model().attributeExists("client"))
+				.andExpect(view().name("/clients/clientDelete"));
+	}
+	
+	@WithMockUser(value = "spring", authorities = "client")
+	@Test
+	void testProcessDeleteClientFormSuccess() throws Exception {
+		mockMvc.perform(post("/administrators/clients/1/delete")
+				.with(csrf()))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/administrators/clients/page/0"));
+		
+		Client cliente = clientService.findById(1);
+		Assertions.assertTrue(cliente.getAddress().equals("Eliminado"));
+		Assertions.assertTrue(cliente.getDescription().equals("Eliminado"));
+		Assertions.assertTrue(cliente.getEmail().equals("eliminado@gmail.com"));
+		Assertions.assertTrue(cliente.getExpiration().equals(LocalDate.now()));
+		Assertions.assertTrue(cliente.getFinish().equals(LocalTime.of(00, 00)));
+		Assertions.assertTrue(cliente.getInit().equals(LocalTime.of(00, 00)));
+		Assertions.assertTrue(cliente.getFood().equals("Eliminado"));
+		Assertions.assertTrue(cliente.getTelephone().equals("000000000"));	
+		Assertions.assertTrue(cliente.getMunicipio().equals(Municipio.Sevilla));
+		Assertions.assertTrue(cliente.getUsuar()==null);
+	}
+	
+	
+	@WithMockUser(value = "spring", authorities = "usuario")
+	@Test
+	void testInitDeleteUsuario() throws Exception {
+		mockMvc.perform(get("/administrators/usuarios/1/delete"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeExists("usuario"))
+			.andExpect(view().name("usuarios/usuariosDelete"));
+	}
+	
+	@WithMockUser(value = "spring", authorities = "usuario")
+	@Test
+	void testProcessDeleteUsuarioSuccess() throws Exception {
+		mockMvc.perform(post("/administrators/usuarios/1/delete")
+				.with(csrf()))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/administrators/usuarios/page/0"));
+		Assertions.assertTrue(usuarioService.findByUsername("user") == null);
+	}
+	
 }
