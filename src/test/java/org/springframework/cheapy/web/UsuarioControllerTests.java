@@ -58,10 +58,20 @@ class UsuarioControllerTest {
 		
 		Client client1 = new Client();
 		client1.setId(1);
+		User user1 = new User();
+		user.setUsername("user1");
+		user.setPassword("user1");
+		client1.setUsuar(user1);
 		usuario.getFavoritos().add(client1);
+
+		
 		BDDMockito.given(this.usuarioService.getCurrentUsuario()).willReturn(usuario);
 		
 		Client client = new Client();
+		User user2 = new User();
+		user.setUsername("user2");
+		user.setPassword("user2");
+		client.setUsuar(user2);
 		client.setId(0);
 		BDDMockito.given(this.clientService.findById(0)).willReturn(client);
 		BDDMockito.given(this.clientService.findById(1)).willReturn(client1);
