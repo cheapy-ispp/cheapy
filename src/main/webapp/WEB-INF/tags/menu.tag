@@ -41,6 +41,13 @@
 				</sec:authorize>
 				
 				<sec:authorize access="hasAnyAuthority('client')">
+				<cheapy:menuItem active="${name eq 'ofertasM'}" url="/offersCreate" title="Mis Ofertas">
+					<span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>
+					<span>Crear oferta</span>
+				</cheapy:menuItem>
+				</sec:authorize>
+				
+				<sec:authorize access="hasAnyAuthority('client')">
 				<cheapy:menuItem active="${name eq 'ofertasM'}" url="/myOffers" title="Mis Ofertas">
 					<span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>
 					<span>Mis ofertas</span>
