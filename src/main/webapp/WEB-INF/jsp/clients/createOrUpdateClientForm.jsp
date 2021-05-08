@@ -16,7 +16,8 @@
     <form:form modelAttribute="client" class="form-horizontal" id="add-client-form">
         <div class="form-group has-feedback">
 			<cheapy:inputField label="Nombre" placeholder="Restaurante pepito" name="name"/>                
-            <cheapy:inputField label="Dirección" placeholder="" name="address"/>		
+            <cheapy:inputField label="Dirección" placeholder="" name="address"/>
+            <cheapy:inputField label="Posee facil aparcamiento?" placeholder="" name="parking"/>		
             <cheapy:timeField label="Hora de inicio" placeholder="HH:mm" name="init"/>
             <cheapy:timeField label="Hora de fin" placeholder="HH:mm" name="finish"/>
             <cheapy:selectMunicipio label="Municipio" name="municipio" size="1" items="${municipios}" ></cheapy:selectMunicipio>

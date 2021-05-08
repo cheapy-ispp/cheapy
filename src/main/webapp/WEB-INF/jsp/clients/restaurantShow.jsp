@@ -36,6 +36,10 @@
         <tr>
             <th><fmt:message key="addressClient"/></th>
             <td><c:out value="${client.address}"/> </td>
+        </tr>
+        <tr>
+            <th><fmt:message key="parking"/></th>
+            <td><c:out value="${client.parking}"/> </td>
         </tr><tr>
             <th><fmt:message key="telephone"/></th>
             <td><c:out value="${client.telephone}"/> </td>
