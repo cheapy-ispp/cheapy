@@ -25,6 +25,31 @@
 	                <fmt:message key="listOffers"/> </button>
 	            </div>
 	            
+	           <sec:authorize access="!isAuthenticated()">
+              <div class="btn-home">
+                      <button class="btn-block" type="button" role="link" onclick="window.location='/login'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
+                      Iniciar sesión </button>
+                  </div>
+                <div class="btn-home">
+                      <button class="btn-block" type="button" role="link" onclick="window.location='/sign-up-user/new'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" >
+                      Registrar Usuario </button>
+                  </div>
+                  <div class="btn-home">
+                      <button class="btn-block" type="button" role="link" onclick="window.location='/sign-up-client/new'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" >
+                      Registrarse Cliente </button>
+                  </div>
+                    
+              </sec:authorize>
+              
+              <sec:authorize access="hasAnyAuthority('usuario')">
+              <div class="btn-home">
+                      <button class="btn-block" type="button" role="link" onclick="window.location='/usuarios/favoritos/0'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
+                      <span class="glyphicon glyphicon-heart" aria-hidden="true" style="padding: 5px"></span>
+                      Mis Favoritos </button>
+                  </div>
+                    
+              </sec:authorize>
+	            
               <sec:authorize access="hasAnyAuthority('client')">
               <div class="btn-home">
                       <button class="btn-block" type="button" role="link" onclick="window.location='/myOffers'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
@@ -36,8 +61,23 @@
                       <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
                       <fmt:message key="createOffers"/> </button>
                   </div>
+                   <div class="btn-home">
+                      <button class="btn-block" type="button" role="link" onclick="window.location='/myClientReviews'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" >
+                      <span class="glyphicon glyphicon-star" aria-hidden="true" style="padding: 5px"></span>
+                      Mis Reseñas </button>
+                  </div>
                     
               </sec:authorize>
+              
+              <sec:authorize access="hasAnyAuthority('notsubscribed')">
+              <div class="btn-home">
+                      <button class="btn-block" type="button" role="link" onclick="window.location='/usuarios/favoritos/0'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
+                      <span class="glyphicon glyphicon-euro " aria-hidden="true"></span>
+                      Renovar suscripción </button>
+                  </div>
+                    
+              </sec:authorize>
+              
             </div>
 	        
 

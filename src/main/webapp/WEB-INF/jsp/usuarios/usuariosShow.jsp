@@ -40,10 +40,10 @@
 		    	<span class="glyphicon 	glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
 		    Editar usuario</button>
 		
-	        <spring:url value="disable" var="deactivateUrl"/>
+	        <%-- <spring:url value="disable" var="deactivateUrl"/>
 	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deactivateUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 	        	<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
-	         Desactivar usuario</button>
+	         Desactivar usuario</button> --%>
 	     </div>   
 	     
 	     <div class="eliminar">
