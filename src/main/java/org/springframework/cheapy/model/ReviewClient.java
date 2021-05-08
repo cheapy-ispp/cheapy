@@ -33,6 +33,9 @@ private static final long serialVersionUID = 1L;
 	@Range(min = 1, max = 5,message="Las estrellas deben ir entre 1 y 5")
 	private Integer qualityPrice;
 
+	@Range(min = 1, max = 5,message="Media entre 1 y 5")
+	private Integer media;
+	
 	@ManyToOne
 	@JoinColumn(name = "username", referencedColumnName = "username")
 	private User escritor;
@@ -41,10 +44,6 @@ private static final long serialVersionUID = 1L;
 	@JoinColumn(name = "client", referencedColumnName = "id")
 	private Client bar;
 	
-	public Integer getMedia() {
-		Double media = (((double)this.service + (double)this.food + (double)this.qualityPrice)/3);
-		return (int) Math.round(media);	
-	}
 	
 	public User getEscritor() {
 		return escritor;
@@ -94,4 +93,14 @@ private static final long serialVersionUID = 1L;
 		this.qualityPrice = qualityPrice;
 	}
 
+	public Integer getMedia() {
+		return media;
+	}
+
+	public void setMedia() {
+		Double media = (((double)this.service + (double)this.food + (double)this.qualityPrice)/3);
+		this.media = (int) Math.round(media);	
+	}
+
+	
 }

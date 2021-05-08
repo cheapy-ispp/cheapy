@@ -13,11 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface ReviewRepository extends PagingAndSortingRepository<Review, Integer> {
 
-	@Query("SELECT r FROM Review r")
+	@Query("SELECT r FROM Review r ORDER BY r.stars DESC")
 	@Transactional(readOnly = true)
 	List<Review> findAllReviews(Pageable p);
 
-	//void save(Review review);
 
 	@Query("SELECT r FROM Review r WHERE id =:id")
 	@Transactional(readOnly = true)

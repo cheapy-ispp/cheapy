@@ -75,6 +75,7 @@ public class ReviewClientController {
 			reviewClient.setEscritor(escritor);
 			Client bar = this.clientService.findByUsername(idClient);
 			reviewClient.setBar(bar);
+			reviewClient.setMedia();
 		
 			this.reviewService.saveReview(reviewClient);
 			return "redirect:/reviewsClient/" + reviewClient.getId();
@@ -148,6 +149,7 @@ public class ReviewClientController {
 			User escritor = this.userService.getCurrentUser();
 			reviewEdit.setEscritor(escritor);
 			reviewEdit.setBar(bar);
+			reviewEdit.setMedia();
 
 			this.reviewService.saveReview(reviewEdit);
 			return "redirect:/reviewsClient/" + reviewEdit.getId();
