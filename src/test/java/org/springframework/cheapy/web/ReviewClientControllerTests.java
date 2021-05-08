@@ -73,6 +73,7 @@ class ReviewClientControllerTest {
 		client.setName("client1");
 		client.setEmail("client1");
 		client.setAddress("client1");
+		client.setParking(true);
 		client.setInit(LocalTime.of(01, 00));
 		client.setFinish(LocalTime.of(01, 01));
 		client.setExpiration(LocalDate.of(3000,12,30));

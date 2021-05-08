@@ -308,6 +308,7 @@ public class AdministratorController {
 		timeOffers.stream().forEach(t -> t.setStatus(StatusOffer.inactive));
 
 		client.setAddress("Eliminado");
+		client.setParking(false);
 		client.setDescription("Eliminado");
 		client.setEmail("eliminado@gmail.com");
 		client.setExpiration(LocalDate.now());

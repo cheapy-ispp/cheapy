@@ -68,6 +68,7 @@ class TimeOfferControllerTest {
 		client1.setName("client1");
 		client1.setEmail("client1");
 		client1.setAddress("client1");
+		client1.setParking(true);
 		client1.setInit(LocalTime.of(12, 00));
 		client1.setFinish(LocalTime.of(01, 01));
 		client1.setTelephone("123456789");
@@ -85,6 +86,7 @@ class TimeOfferControllerTest {
 		client2.setName("client2");
 		client2.setEmail("client2");
 		client2.setAddress("client2");
+		client2.setParking(true);
 		client2.setInit(LocalTime.of(01, 00));
 		client2.setFinish(LocalTime.of(01, 01));
 		client2.setTelephone("123456789");
