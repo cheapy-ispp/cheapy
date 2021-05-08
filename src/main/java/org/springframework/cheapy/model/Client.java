@@ -28,6 +28,7 @@ public class Client extends BaseEntity {
 	// (id, name, email, address, init, finish, telephone, description, code, food,
 	// usuar)
 
+	@Pattern(message = "La primera letra debe estar en mayúscula", regexp = "^[A-Z][a-zA-Z0-9 ]+$")
 	@NotEmpty(message = "No debe estar vacío")
 	private String				name;
 
@@ -37,6 +38,9 @@ public class Client extends BaseEntity {
 
 	@NotEmpty(message = "No debe estar vacío")
 	private String				address;
+	
+	@NotNull(message = "No debe estar vacío")
+	private Boolean				parking;
 
 	@NotNull(message = "No debe estar vacío")
 	@Enumerated(value = EnumType.STRING)
@@ -105,6 +109,14 @@ public class Client extends BaseEntity {
 
 	public void setAddress(final String address) {
 		this.address = address;
+	}
+	
+	public Boolean getParking() {
+		return parking;
+	}
+
+	public void setParking(Boolean parking) {
+		this.parking = parking;
 	}
 
 	public Municipio getMunicipio() {

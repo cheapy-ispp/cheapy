@@ -82,6 +82,7 @@ class ClientControllerTest {
 		client1.setName("client1");
 		client1.setEmail("client1");
 		client1.setAddress("client1");
+		client1.setParking(true);
 		client1.setInit(LocalTime.of(01, 00));
 		client1.setFinish(LocalTime.of(01, 01));
 		client1.setExpiration(LocalDate.of(3000,12,30));
@@ -133,6 +134,7 @@ class ClientControllerTest {
 					.param("name", "Restaurante Pepe")
 					.param("email", "pepe@hotmail.es")
 					.param("address", "Pirineos 10")
+					.param("parking", "true")
 					.param("telephone", "654999999")
 					.param("description", "Comida al mejor precio")
 					.param("food", "Americana")
@@ -153,6 +155,7 @@ class ClientControllerTest {
 					.param("expiration", "")
 					.param("email", "")
 					.param("address", "")
+					.param("parking", "")
 					.param("telephone", "654999")
 					.param("description", "")
 					.param("food", "")
@@ -164,6 +167,7 @@ class ClientControllerTest {
 				.andExpect(model().attributeHasFieldErrors("client", "name"))
 				.andExpect(model().attributeHasFieldErrors("client", "email"))
 				.andExpect(model().attributeHasFieldErrors("client", "address"))
+				.andExpect(model().attributeHasFieldErrors("client", "parking"))
 				.andExpect(model().attributeHasFieldErrors("client", "telephone"))
 				.andExpect(model().attributeHasFieldErrors("client", "description"))
 				.andExpect(model().attributeHasFieldErrors("client", "food"))
@@ -209,6 +213,7 @@ class ClientControllerTest {
 		
 		Client cliente = clientService.findById(TEST_CLIENT_ID);
 		Assertions.assertTrue(cliente.getAddress().equals("Eliminado"));
+		Assertions.assertTrue(cliente.getParking().equals(false));
 		Assertions.assertTrue(cliente.getDescription().equals("Eliminado"));
 		Assertions.assertTrue(cliente.getEmail().equals("eliminado@gmail.com"));
 		Assertions.assertTrue(cliente.getExpiration().equals(LocalDate.now()));
@@ -241,6 +246,7 @@ class ClientControllerTest {
 				.param("name", "Restaurante Pepe")
 				.param("email", "pepe@hotmail.es")
 				.param("address", "Pirineos 10")
+				.param("parking", "true")
 				.param("telephone", "654999999")
 				.param("description", "Comida al mejor precio")
 				.param("food", "Americana")
@@ -261,6 +267,7 @@ class ClientControllerTest {
 				.param("name", "Restaurante Pepe")
 				.param("email", "pepe@hotmail.es")
 				.param("address", "Pirineos 10")
+				.param("parking", "true")
 				.param("telephone", "654999999")
 				.param("description", "Comida al mejor precio")
 				.param("food", "Americana")

@@ -20,9 +20,9 @@ INSERT INTO usuarios (id, nombre, apellidos, email, username) VALUES (2, 'Paco',
 INSERT INTO usuarios (id, nombre, apellidos, email, username) VALUES (3, 'Lolo', 'Lopez', 'Lolo@gmail.com','lolo');
 INSERT INTO usuarios (id, nombre, apellidos, email, username) VALUES (4, 'Pepe', 'Lopez', 'Pepe@gmail.com','pepe');
 
-INSERT INTO clients (id, name, email, address, municipio, init, finish, telephone, description, food, expiration, username) VALUES (1,'Bar manoli','manoli@gmail.com','C/Betis', 'Sevilla','10:00:00','22:00:00','608726190', 'description 1', 'ESPAÑOLA', '2029-08-15' ,'manoli');
-INSERT INTO clients (id, name, email, address, municipio, init, finish, telephone, description, food, expiration, username) VALUES (2,'Bar david','david@gmail.com', 'C/Sevilla', 'Dos_Hermanas','09:30:00','22:00:00','608726190', 'description 2', 'americana', '2029-08-15','david');
-INSERT INTO clients (id, name, email, address, municipio, init, finish, telephone, description, food, expiration, username) VALUES (3,'Bar lopez','loez@gmail.com', 'C/Sevilla', 'Dos_Hermanas','09:30:00','22:00:00','608726191', 'description 3', 'americana y mexicana', '2019-08-15','lopez');
+INSERT INTO clients (id, name, email, address, parking, municipio, init, finish, telephone, description, food, expiration, username) VALUES (1,'Bar manoli','manoli@gmail.com','C/Betis', TRUE,'Sevilla','10:00:00','22:00:00','608726190', 'description 1', 'ESPAÑOLA', '2029-08-15' ,'manoli');
+INSERT INTO clients (id, name, email, address, parking, municipio, init, finish, telephone, description, food, expiration, username) VALUES (2,'Bar david','david@gmail.com', 'C/Sevilla', FALSE, 'Dos_Hermanas','09:30:00','22:00:00','608726190', 'description 2', 'americana', '2029-08-15','david');
+INSERT INTO clients (id, name, email, address, parking, municipio, init, finish, telephone, description, food, expiration, username) VALUES (3,'Bar lopez','loez@gmail.com', 'C/Sevilla', FALSE, 'Dos_Hermanas','09:30:00','22:00:00','608726191', 'description 3', 'americana y mexicana', '2019-08-15','lopez');
 
 INSERT INTO food_offers(start, end, code, status, client_id, food, discount, price) VALUES ('2021-04-29 12:00:00', '2021-05-10 12:00:00', 'FO-1', 'inactive', 1, 'Macarrones', 15, 10.0);
 INSERT INTO food_offers(start, end, code, status, client_id, food, discount, price) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'FO-2', 'active', 3, 'Macarrones con tomate', 10, 20.0);
