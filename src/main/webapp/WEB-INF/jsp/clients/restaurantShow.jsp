@@ -39,7 +39,14 @@
         </tr>
         <tr>
             <th><fmt:message key="parking"/></th>
-            <td><c:out value="${client.parking}"/> </td>
+            <td>
+            <c:if test="${client.parking == 'true'}">
+				<c:out value="Si"/>
+			</c:if>	
+			<c:if test="${client.parking == 'false'}">
+				<c:out value="No"/>
+			</c:if>
+            </td>
         </tr><tr>
             <th><fmt:message key="telephone"/></th>
             <td><c:out value="${client.telephone}"/> </td>

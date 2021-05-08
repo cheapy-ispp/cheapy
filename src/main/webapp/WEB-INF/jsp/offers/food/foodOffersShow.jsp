@@ -60,11 +60,12 @@
             <th><fmt:message key="municipio"/></th>
             <td><c:out value="${foodOffer.client.municipio}"/> </td>
         </tr>
-
+		<sec:authorize access="isAuthenticated()">
         <tr>
             <th><fmt:message key="offerCode"/></th>
             <td><c:out value="${foodOffer.code}"/></td>
         </tr>
+        </sec:authorize>
         </thead>
     </table>
 

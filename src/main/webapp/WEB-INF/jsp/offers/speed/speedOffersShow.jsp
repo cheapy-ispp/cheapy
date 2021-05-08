@@ -62,13 +62,15 @@
             <td><c:out value="${speedOffer.discountBronze}%"/></td>
         </tr>
         <tr>
-            <th><fmt:message key="offerCode"/></th>
-            <td><c:out value="${speedOffer.code}"/></td>
-        </tr>
-        <tr>
             <th><fmt:message key="municipio"/></th>
             <td><c:out value="${speedOffer.client.municipio}"/></td>
         </tr>
+        <sec:authorize access="isAuthenticated()">
+        <tr>
+            <th><fmt:message key="offerCode"/></th>
+            <td><c:out value="${speedOffer.code}"/></td>
+        </tr>
+        </sec:authorize>
     </table>
 
     <div class="btn-menu">

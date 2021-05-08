@@ -61,13 +61,16 @@
             <td><c:out value="${nuOffer.discountBronze}%"/></td>
         </tr>
         <tr>
-            <th><fmt:message key="offerCode"/></th>
-            <td><c:out value="${nuOffer.code}"/></td>
-        </tr>
-        <tr>
             <th><fmt:message key="municipio"/></th>
             <td><c:out value="${nuOffer.client.municipio}"/></td>
         </tr>
+        <sec:authorize access="isAuthenticated()">
+        <tr>
+            <th><fmt:message key="offerCode"/></th>
+            <td><c:out value="${nuOffer.code}"/></td>
+        </tr>
+        </sec:authorize>
+       
                     
                 
     </table>

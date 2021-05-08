@@ -44,7 +44,7 @@
 }
 
 .barImage {
-	width: 60%;
+	width: 30%;
 }
 </style>
 

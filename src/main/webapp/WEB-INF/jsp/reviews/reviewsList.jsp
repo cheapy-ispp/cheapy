@@ -97,5 +97,11 @@
 		</c:if>​
 		</div>
 	</div>
+	    <div class="text-center">
+		    <button type="button" class="btn-cheapyReview" role="link" onclick="window.location='/reviews/new'" style="font-family: 'Lobster'; font-size: 20px;">
+			<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+			Valóranos</button>
+		</div>
+	
 	</div>
 </cheapy:layout>
