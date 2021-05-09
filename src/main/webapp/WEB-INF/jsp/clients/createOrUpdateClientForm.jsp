@@ -13,7 +13,7 @@
         <fmt:message key="client"/>
     </h2>
     
-    <form:form modelAttribute="client" class="form-horizontal" id="add-client-form">
+    <form:form modelAttribute="client" class="form-horizontal" enctype="multipart/form-data" id="add-client-form">
         <div class="form-group has-feedback">
 			<cheapy:inputField label="Nombre" placeholder="Restaurante pepito" name="name"/>                
             <cheapy:inputField label="Dirección" placeholder="" name="address"/>
@@ -25,6 +25,7 @@
             <cheapy:inputField label="Teléfono" placeholder="" name="telephone"/>
             <cheapy:inputField label="Descripción" placeholder="" name="description"/>
             <cheapy:inputField label="Comida" placeholder="food" name="food"/>
+            <cheapy:inputFileField label="Imagen" placeholder="Sube archivo" name="file"/>
             <input type="hidden" readonly name="expiration" value="${fn:escapeXml(client.expiration)}" />
             
             
@@ -74,6 +75,8 @@
 	                        <button class="btn btn-default" type="button"  style="font-family: 'Lobster'; font-size: 20px;">
 	                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true" style="padding: 5px"> </span>
 	                        Cambiar contraseña</button></a>
+	                        
+	                        
                 </div>
             </div>
         </div>

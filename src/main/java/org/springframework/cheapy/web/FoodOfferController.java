@@ -1,6 +1,10 @@
 
 package org.springframework.cheapy.web;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -24,6 +28,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class FoodOfferController {
@@ -98,7 +104,7 @@ public class FoodOfferController {
 	}
 
 	@PostMapping("/offers/food/new")
-	public String processCreationForm(@Valid final FoodOffer foodOffer, final BindingResult result) {
+	public String processCreationForm(@RequestParam("file") MultipartFile imagen, @Valid final FoodOffer foodOffer, final BindingResult result) {
 
 		if (!this.checkDates(foodOffer)) {
 			result.rejectValue("end", "", "La fecha de fin debe ser posterior a la fecha de inicio");
@@ -116,6 +122,19 @@ public class FoodOfferController {
 		Client client = this.clientService.getCurrentClient();
 		foodOffer.setClient(client);
 		foodOffer.setStatus(StatusOffer.hidden);
+		if(!imagen.isEmpty()) {
+			Path directorio = Paths.get("src//main//resources//static//resources//imagenesSubidas");
+			String rutaAbsoluta = directorio.toFile().getAbsolutePath();
+			try {
+				byte[] bytesImg = imagen.getBytes();
+				Path rutaCompleta = Paths.get(rutaAbsoluta+"//"+imagen.getOriginalFilename());
+				Files.write(rutaCompleta, bytesImg);
+				foodOffer.setImage(imagen.getOriginalFilename());
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		this.foodOfferService.saveFoodOffer(foodOffer);
 		return "redirect:/offers/food/" + foodOffer.getId();
 
@@ -166,7 +185,7 @@ public class FoodOfferController {
 	}
 
 	@PostMapping(value = "/offers/food/{foodOfferId}/edit")
-	public String updateFoodOffer(@PathVariable("foodOfferId") final int foodOfferId, @Valid final FoodOffer foodOfferEdit, final BindingResult result, final ModelMap model, final HttpServletRequest request) {
+	public String updateFoodOffer(@RequestParam("file") MultipartFile imagen, @PathVariable("foodOfferId") final int foodOfferId, @Valid final FoodOffer foodOfferEdit, final BindingResult result, final ModelMap model, final HttpServletRequest request) {
 
 		if (!this.checkIdentity(foodOfferId)) {
 			return "error";
@@ -192,10 +211,59 @@ public class FoodOfferController {
 			return FoodOfferController.VIEWS_FOOD_OFFER_CREATE_OR_UPDATE_FORM;
 
 		}
+
+		
 		BeanUtils.copyProperties(this.foodOfferService.findFoodOfferById(foodOfferEdit.getId()), foodOfferEdit, "start", "end", "food", "discount", "price");
+		
+		if(!imagen.isEmpty()) {
+			
+			Path directorio = Paths.get("src//main//resources//static//resources//imagenesSubidas");
+			String rutaAbsoluta = directorio.toFile().getAbsolutePath();
+			try {
+				byte[] bytesImg = imagen.getBytes();
+				Path rutaCompleta = Paths.get(rutaAbsoluta+"//"+imagen.getOriginalFilename());
+				Files.write(rutaCompleta, bytesImg);
+				if(foodOfferEdit.getImage() != null) {
+					Path rutaAntigua = Paths.get(rutaAbsoluta+"//"+foodOfferEdit.getImage());
+					Files.delete(rutaAntigua);
+				}
+				foodOfferEdit.setImage(imagen.getOriginalFilename());
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			}
+		
 		this.foodOfferService.saveFoodOffer(foodOfferEdit);
 		return "redirect:/offers/food/" + foodOfferEdit.getId();
 
+	}
+	
+	@GetMapping(value = "/offers/food/{foodOfferId}/delete/image")
+	public String deleteImageFoodOffer(@PathVariable("foodOfferId") final int foodOfferId, final ModelMap model) {
+
+		if (!this.checkIdentity(foodOfferId)) {
+			return "error";
+		}
+
+		FoodOffer foodOffer = this.foodOfferService.findFoodOfferById(foodOfferId);
+			if(foodOffer.getImage() != null ) {
+			
+			Path directorio = Paths.get("src//main//resources//static//resources//imagenesSubidas");
+			String rutaAbsoluta = directorio.toFile().getAbsolutePath();
+			try {
+				
+				Path rutaAntigua = Paths.get(rutaAbsoluta+"//"+foodOffer.getImage());
+				Files.delete(rutaAntigua);
+				
+				foodOffer.setImage(null);
+				this.foodOfferService.saveFoodOffer(foodOffer);
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			}
+		return "redirect:/offers/food/" + foodOffer.getId();
 	}
 
 	@GetMapping(value = "/offers/food/{foodOfferId}/disable")

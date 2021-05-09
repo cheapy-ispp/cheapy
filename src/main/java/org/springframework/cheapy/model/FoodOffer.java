@@ -46,6 +46,8 @@ public class FoodOffer extends Offer {
 	@Max(500000)
 	private Double price;
 	
+	private String image;
+	
 	public Double getNewPrice() {
 		Double cuenta = this.price - (this.price*this.discount)/100;
 		BigDecimal bd = new BigDecimal(cuenta).setScale(2, RoundingMode.HALF_UP);
@@ -87,5 +89,15 @@ public class FoodOffer extends Offer {
 	public void setDiscount(Integer discount) {
 		this.discount = discount;
 	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
+	
 
 }

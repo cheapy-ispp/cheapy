@@ -120,7 +120,7 @@
 			
 			<ul class="nav navbar-nav navbar-right" style="text-align: center">
 	   
-                <sec:authorize access="hasAnyAuthority('client')">
+                <sec:authorize access="hasAnyAuthority('client','notsubscribed')">
 					<cheapy:menuItem active="${name eq 'miPerfil'}" url="/clients/show" title="Mi Perfil">
 						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
 						<span>Mi perfil</span>

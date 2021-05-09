@@ -69,6 +69,8 @@ public class Client extends BaseEntity {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull
 	private LocalDate			expiration;
+	
+	private String 				image;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "username", referencedColumnName = "username")
@@ -214,5 +216,15 @@ public class Client extends BaseEntity {
 	public void setExpiration(final LocalDate expiration) {
 		this.expiration = expiration;
 	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
+	
 
 }

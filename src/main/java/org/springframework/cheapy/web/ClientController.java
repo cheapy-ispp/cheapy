@@ -1,6 +1,10 @@
 
 package org.springframework.cheapy.web;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashMap;
@@ -35,6 +39,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class ClientController {
@@ -105,9 +111,9 @@ public class ClientController {
 	}
 
 	@PostMapping(value = "/clients/edit")
-	public String updateClient(@Valid final Client clientEdit, final BindingResult result, final ModelMap model, final HttpServletRequest request) {
+	public String updateClient(@RequestParam("file") MultipartFile imagen, @Valid final Client clientEdit, final BindingResult result, final ModelMap model, final HttpServletRequest request) {
 		Client clienteSesion = this.clientService.getCurrentClient();
-		BeanUtils.copyProperties(clienteSesion, clientEdit, "name", "email", "address", "parking", "init", "municipio", "finish", "telephone", "description", "food");
+		BeanUtils.copyProperties(clienteSesion, clientEdit, "name", "email", "address", "parking", "init", "municipio", "finish", "telephone", "description", "food","image");
 		if (!this.checkTimes(clientEdit)) {
 			result.rejectValue("finish", "", "La hora de cierre debe ser posterior a la hora de apertura");
 
@@ -125,6 +131,25 @@ public class ClientController {
 			model.put("municipios", municipios);
 			return ClientController.VIEWS_CREATE_OR_UPDATE_CLIENT;
 		}
+		
+			if(!imagen.isEmpty()) {
+			
+			Path directorio = Paths.get("src//main//resources//static//resources//imagenesSubidas");
+			String rutaAbsoluta = directorio.toFile().getAbsolutePath();
+			try {
+				byte[] bytesImg = imagen.getBytes();
+				Path rutaCompleta = Paths.get(rutaAbsoluta+"//"+imagen.getOriginalFilename());
+				Files.write(rutaCompleta, bytesImg);
+				if(clientEdit.getImage() != null) {
+					Path rutaAntigua = Paths.get(rutaAbsoluta+"//"+clientEdit.getImage());
+					Files.delete(rutaAntigua);
+				}
+				clientEdit.setImage(imagen.getOriginalFilename());
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			}
 
 		this.clientService.saveClient(clientEdit);
 		return "redirect:/clients/show";
@@ -220,6 +245,42 @@ public class ClientController {
 		BeanUtils.copyProperties(clienteSesion, clientEdit);
 		clientEdit.getUsuar().setPassword(pass);
 		this.clientService.saveClient(clientEdit);
+		return "redirect:/clients/show";
+	}
+	
+	@GetMapping(value = "/clients/delete/image")
+	public String deleteImageClient(final ModelMap model) {
+
+		Client clienteSesion = this.clientService.getCurrentClient();
+		
+		model.addAttribute("client", clienteSesion);
+		return "clients/clientImageDelete";
+	}
+
+	@PostMapping(value = "/clients/delete/image")
+	public String deleteImageClient(final ModelMap model, final HttpServletRequest request) {
+
+		Client cliente = this.clientService.getCurrentClient();
+		
+			if(cliente.getImage() != null ) {
+			
+			Path directorio = Paths.get("src//main//resources//static//resources//imagenesSubidas");
+			String rutaAbsoluta = directorio.toFile().getAbsolutePath();
+			try {
+				
+				Path rutaAntigua = Paths.get(rutaAbsoluta+"//"+cliente.getImage());
+				Files.delete(rutaAntigua);
+				
+				cliente.setImage(null);
+				this.clientService.saveClient(cliente);
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			}
+		
+		
+
 		return "redirect:/clients/show";
 	}
 
