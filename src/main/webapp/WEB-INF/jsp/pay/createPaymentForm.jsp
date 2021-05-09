@@ -17,7 +17,7 @@
 			<h2>${fn:escapeXml(order.description)}</h2>		
 		</c:if>
 		
-		<form:form commandName="order" modelAttribute="order" method="post" action="/pay">
+		<form:form commandName="order" modelAttribute="order" method="post" action="/pay/month">
 			<div>
 				<form:input type="hidden" path="price" />
 				<form:input type="hidden" path="currency" />

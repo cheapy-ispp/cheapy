@@ -34,11 +34,12 @@ public class PaypalController {
 	@Autowired
 	private AuthoritiesService authoritiesService;
 
-	public static final String SUCCESS_URL = "pay/success";
+	public static final String SUCCESS_URL_MONTH = "pay/successMonth";
+	public static final String SUCCESS_URL_YEAR = "pay/successYear";
 	public static final String CANCEL_URL = "pay/cancel";
 	
-	@GetMapping("/pay")
-	public String formPaymentPremium(final Map<String, Object> model) {
+	@GetMapping("/pay/month")
+	public String formPaymentPremiumMonth(final Map<String, Object> model) {
 		Order order = new Order();
 		order.setIntent("sale");
 		order.setCurrency("EUR");
@@ -49,13 +50,45 @@ public class PaypalController {
 		model.put("order", order);
 		return "pay/createPaymentForm";
 	}
+	
+	@GetMapping("/pay/year")
+	public String formPaymentPremiumYear(final Map<String, Object> model) {
+		Order order = new Order();
+		order.setIntent("sale");
+		order.setCurrency("EUR");
+		order.setMethod("paypal");
+		order.setPrice(320);
+		order.setDescription("Suscripción a Cheapy para bares o restaurantes de 1 año.");
 
-	@PostMapping("/pay")
-	public String payment(@ModelAttribute("order") Order order) {
+		model.put("order", order);
+		return "pay/createPaymentForm";
+	}
+
+	@PostMapping("/pay/month")
+	public String paymentMonth(@ModelAttribute("order") Order order) {
 		try {
 			Payment payment = payPalService.createPayment(Double.valueOf(order.getPrice()), order.getCurrency(),
 					order.getMethod(), order.getIntent(), order.getDescription(), "http://localhost:8080/" + CANCEL_URL,
-					"http://localhost:8080/" + SUCCESS_URL);
+					"http://localhost:8080/" + SUCCESS_URL_MONTH);
+			for (Links link : payment.getLinks()) {
+				if (link.getRel().equals("approval_url")) {
+					
+					return "redirect:" + link.getHref();
+				}
+			}
+		} catch (PayPalRESTException e) {
+
+			e.printStackTrace();
+		}
+		return "redirect:/";
+	}
+	
+	@PostMapping("/pay/year")
+	public String paymentYear(@ModelAttribute("order") Order order) {
+		try {
+			Payment payment = payPalService.createPayment(Double.valueOf(order.getPrice()), order.getCurrency(),
+					order.getMethod(), order.getIntent(), order.getDescription(), "http://localhost:8080/" + CANCEL_URL,
+					"http://localhost:8080/" + SUCCESS_URL_YEAR);
 			for (Links link : payment.getLinks()) {
 				if (link.getRel().equals("approval_url")) {
 					
@@ -74,15 +107,16 @@ public class PaypalController {
 		return "pay/cancel";
 	}
 
-	@GetMapping(value = SUCCESS_URL)
-	public String successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId, final HttpServletRequest request) throws ServletException {
+	@GetMapping(value = SUCCESS_URL_MONTH)
+	public String successPayMonth(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId, final HttpServletRequest request) throws ServletException {
 		try {
 			Payment payment = payPalService.executePayment(paymentId, payerId);
 			if (payment.getState().equals("approved")) {
 				Client client = this.clientservice.getCurrentClient();
 				String username=client.getUsuar().getUsername();
 				this.authoritiesService.saveAuthorities(username, "client");
-				client.setExpiration(LocalDate.now().plusMonths(1));
+				LocalDate expiration = client.getExpiration().isAfter(LocalDate.now()) ? client.getExpiration() : LocalDate.now();
+				client.setExpiration(expiration.plusMonths(1));
 				this.clientservice.saveClient(client);
 				//return SUCCESS_URL;
 			}
@@ -91,4 +125,25 @@ public class PaypalController {
 		request.logout();
 		return "redirect:/login";
 	}
+	
+	@GetMapping(value = SUCCESS_URL_YEAR)
+	public String successPayYear(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId, final HttpServletRequest request) throws ServletException {
+		try {
+			Payment payment = payPalService.executePayment(paymentId, payerId);
+			if (payment.getState().equals("approved")) {
+				Client client = this.clientservice.getCurrentClient();
+				String username=client.getUsuar().getUsername();
+				this.authoritiesService.saveAuthorities(username, "client");
+				LocalDate expiration = client.getExpiration().isAfter(LocalDate.now()) ? client.getExpiration() : LocalDate.now();
+				client.setExpiration(expiration.plusYears(1));
+				this.clientservice.saveClient(client);
+				//return SUCCESS_URL;
+			}
+		} catch (PayPalRESTException e) {
+		}
+		request.logout();
+		return "redirect:/login";
+	}
+	
+	
 }
