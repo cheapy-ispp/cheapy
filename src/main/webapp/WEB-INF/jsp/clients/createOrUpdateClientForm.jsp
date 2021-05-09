@@ -25,6 +25,8 @@
             <cheapy:inputField label="Teléfono" placeholder="" name="telephone"/>
             <cheapy:inputField label="Descripción" placeholder="" name="description"/>
             <cheapy:inputField label="Comida" placeholder="food" name="food"/>
+            <cheapy:inputField label="Pregunta segura 1: ¿Cuál es su plato de comida favorito?" placeholder="preguntaSegura1" name="preguntaSegura1"/>
+            <cheapy:inputField label="Pregunta segura 2: ¿Cuál es su ciudad de nacimiento?" placeholder="preguntaSegura2" name="preguntaSegura2"/>
             <input type="hidden" readonly name="expiration" value="${fn:escapeXml(client.expiration)}" />
             
             
