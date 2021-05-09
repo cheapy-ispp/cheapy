@@ -37,7 +37,12 @@ public class ReviewService {
 	public void saveReview(final Review Review) throws DataAccessException {
 		this.reviewRepository.save(Review);
 	}
-
+	
+	@Transactional
+	public void deleteReview(Review review) {
+		this.reviewRepository.delete(review);
+	}
+	
 	public void deleteReviewsByUser(final User user) {
 		List<Review> reviews = this.reviewRepository.findByEscritor(user);
 		if (reviews.size() > 0) {

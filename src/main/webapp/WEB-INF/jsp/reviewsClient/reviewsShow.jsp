@@ -49,9 +49,17 @@
 		    <spring:param name="reviewId" value="${review.id}"/>
 		    </spring:url>
 		    
+		    <spring:url value="{reviewId}/delete" var="deleteUrl">
+		    <spring:param name="reviewId" value="${review.id}"/>
+		    </spring:url>
+		    
 			<button type="button" role="link" onclick="window.location='${fn:escapeXml(editUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 	        <span class="glyphicon glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
 		        Editar reseña</button>
+		        
+		    <button type="button" role="link" onclick="window.location='${fn:escapeXml(deleteUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+	        <span class="glyphicon glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
+		        Borrar reseña</button>
     	</c:if>
     	
     </div>
