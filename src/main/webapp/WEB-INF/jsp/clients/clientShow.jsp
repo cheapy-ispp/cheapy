@@ -57,7 +57,10 @@
             <td><c:out value="${client.food}"/> </td>
         </tr>
         
-        
+        <tr>
+            <th><fmt:message key="expiration"/></th>
+            <td><c:out value="${client.expiration}"/> </td>
+        </tr>
         
         </thead>
     </table>
