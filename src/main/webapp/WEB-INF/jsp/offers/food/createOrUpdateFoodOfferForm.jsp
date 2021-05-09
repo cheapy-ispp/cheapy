@@ -13,7 +13,7 @@
         <c:if test="${foodOffer['new']}"><fmt:message key="new"/> </c:if> <fmt:message key="foodOffer"/>
     </h2>
     
-    <form:form modelAttribute="foodOffer" class="form-horizontal" id="add-foodOffer-form">
+    <form:form modelAttribute="foodOffer" class="form-horizontal" enctype="multipart/form-data" id="add-foodOffer-form">
         <div class="form-group has-feedback">
         	<form:hidden path="id"/>
             <form:hidden path="code"/>
@@ -22,7 +22,8 @@
             <cheapy:dateField label="Fecha de Fin" placeholder="dd/MM/yyyy HH:mm" name="end"/>
             <cheapy:inputField label="Plato" placeholder="Ej. Macarrones" name="food"/>
             <cheapy:inputField label="Precio Original" placeholder="XX€ (Ej.6)" name="price"/>
-            <cheapy:inputField label="Descuento" placeholder="XX% (Ej.15)" name="discount"/>  
+            <cheapy:inputField label="Descuento" placeholder="XX% (Ej.15)" name="discount"/>
+            <cheapy:inputField label="Imagen" placeholder="Copiar la url de una imagen aquí" name="image"/>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

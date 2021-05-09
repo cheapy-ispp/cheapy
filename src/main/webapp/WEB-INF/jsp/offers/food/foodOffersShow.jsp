@@ -65,6 +65,12 @@
             <th><fmt:message key="offerCode"/></th>
             <td><c:out value="${foodOffer.code}"/></td>
         </tr>
+       <c:if test="${!(foodOffer.image eq null)}">
+        <tr>
+            <th><fmt:message key="image"/></th>
+            <td><img src="${foodOffer.image}" alt="La imagen no es válida" height="400px" style="border-radius: 8px;"></td>
+        </tr>
+         </c:if>
         </thead>
     </table>
 
@@ -102,6 +108,16 @@
 	          Desactivar oferta</button>
          </c:if>
         </c:if>
+      </div>
+     <div class="eliminar">
+      <c:if test="${!(foodOffer.image eq null)}">
+	        <spring:url value="{foodOfferId}/delete/image" var="deleteImageUrl">
+	        <spring:param name="foodOfferId" value="${foodOffer.id}"/>
+	        </spring:url>
+	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deleteImageUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+	            <span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
+	          Eliminar imagen</button>
+         </c:if>
       </div>
       </sec:authorize>
     </div>

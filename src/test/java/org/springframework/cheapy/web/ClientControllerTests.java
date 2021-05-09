@@ -128,8 +128,9 @@ class ClientControllerTest {
 	@WithMockUser(value = "spring", authorities = "client")
 	@Test
 	void testProcessUpdateFormSuccess() throws Exception {
-		mockMvc.perform(post("/clients/edit")
-					.with(csrf())
+		
+	    mockMvc.perform(post("/clients/edit")	
+	    		.with(csrf())
 					.param("init", "11:30")
 					.param("finish", "23:30")
 					.param("expiration", "3000-12-30")
@@ -140,6 +141,8 @@ class ClientControllerTest {
 					.param("telephone", "654999999")
 					.param("description", "Comida al mejor precio")
 					.param("food", "Americana")
+					.param("municipio", "Dos_Hermanas")
+					.param("image", "")
 					.param("preguntaSegura1", "test")
 					.param("preguntaSegura2", "test")
 					.param("municipio", "Dos_Hermanas"))
@@ -151,8 +154,9 @@ class ClientControllerTest {
 	@WithMockUser(value = "spring", authorities = "client")
 	@Test
 	void testProcessUpdateFormHasErrors() throws Exception {
-		mockMvc.perform(post("/clients/edit")
-					.with(csrf())
+
+	    mockMvc.perform(post("/clients/edit")	
+	    			.with(csrf())
 					.param("init", "24:30")
 					.param("finish", "a:30")
 					.param("name", "")
@@ -163,6 +167,8 @@ class ClientControllerTest {
 					.param("telephone", "654999")
 					.param("description", "")
 					.param("food", "")
+					.param("municipio", "Dos Hermanas")
+					.param("image", "")
 					.param("preguntaSegura1", "")
 					.param("preguntaSegura2", "")
 					.param("municipio", "Dos Hermanas"))

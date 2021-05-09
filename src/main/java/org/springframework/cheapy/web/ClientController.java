@@ -107,7 +107,9 @@ public class ClientController {
 	@PostMapping(value = "/clients/edit")
 	public String updateClient(@Valid final Client clientEdit, final BindingResult result, final ModelMap model, final HttpServletRequest request) {
 		Client clienteSesion = this.clientService.getCurrentClient();
-		BeanUtils.copyProperties(clienteSesion, clientEdit, "name", "email", "address", "parking", "init", "municipio", "finish", "telephone", "description", "food", "preguntaSegura1", "preguntaSegura2");
+
+		BeanUtils.copyProperties(clienteSesion, clientEdit, "name", "email", "address", "parking", "init", "municipio", "finish", "telephone", "description", "food", "preguntaSegura1", "preguntaSegura2", "image");
+
 		if (!this.checkTimes(clientEdit)) {
 			result.rejectValue("finish", "", "La hora de cierre debe ser posterior a la hora de apertura");
 
@@ -124,6 +126,9 @@ public class ClientController {
 			}
 			model.put("municipios", municipios);
 			return ClientController.VIEWS_CREATE_OR_UPDATE_CLIENT;
+		}
+		if(clientEdit.getImage().isEmpty()) {
+			clientEdit.setImage(null);
 		}
 
 		this.clientService.saveClient(clientEdit);
@@ -220,6 +225,31 @@ public class ClientController {
 		BeanUtils.copyProperties(clienteSesion, clientEdit);
 		clientEdit.getUsuar().setPassword(pass);
 		this.clientService.saveClient(clientEdit);
+		return "redirect:/clients/show";
+	}
+	
+	@GetMapping(value = "/clients/delete/image")
+	public String deleteImageClient(final ModelMap model) {
+
+		Client clienteSesion = this.clientService.getCurrentClient();
+		
+		model.addAttribute("client", clienteSesion);
+		return "clients/clientImageDelete";
+	}
+
+	@PostMapping(value = "/clients/delete/image")
+	public String deleteImageClient(final ModelMap model, final HttpServletRequest request) {
+
+		Client cliente = this.clientService.getCurrentClient();
+		
+			if(cliente.getImage() != null ) {
+			cliente.setImage(null);
+			this.clientService.saveClient(cliente);
+			
+			}
+		
+		
+
 		return "redirect:/clients/show";
 	}
 
