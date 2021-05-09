@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cheapy.model.Client;
+import org.springframework.cheapy.model.Review;
 import org.springframework.cheapy.model.ReviewClient;
 import org.springframework.cheapy.model.User;
 import org.springframework.cheapy.repository.ReviewClientRepository;
@@ -32,7 +33,12 @@ public class ReviewClientService {
 	public List<ReviewClient> findByClient(final String idClient) {
 		return this.repo.findByBar(idClient);
 	}
-
+	
+	@Transactional
+	public void deleteReviewClient(ReviewClient rc) {
+		this.repo.delete(rc);
+	}
+	
 	@Transactional
 	public void deleteReviewsByUser(final User user) {
 		List<ReviewClient> reviews = this.repo.findByEscritor(user);
