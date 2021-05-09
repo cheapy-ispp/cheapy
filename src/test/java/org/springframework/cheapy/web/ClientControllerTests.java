@@ -7,7 +7,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import java.io.FileInputStream;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -37,11 +36,9 @@ import org.springframework.cheapy.service.UserService;
 import org.springframework.cheapy.service.UsuarioService;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 @WebMvcTest(value = ClientController.class, 
 excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class),
@@ -129,11 +126,8 @@ class ClientControllerTest {
 	@WithMockUser(value = "spring", authorities = "client")
 	@Test
 	void testProcessUpdateFormSuccess() throws Exception {
-		FileInputStream fis = new FileInputStream("src//main//resources//static//resources//images//bar.jpg");
-	    MockMultipartFile multipartFile = new MockMultipartFile("file",fis);
 		
-	    mockMvc.perform(MockMvcRequestBuilders.multipart("/clients/edit")
-	    		.file(multipartFile)	
+	    mockMvc.perform(post("/clients/edit")	
 	    		.with(csrf())
 					.param("init", "11:30")
 					.param("finish", "23:30")
@@ -145,7 +139,8 @@ class ClientControllerTest {
 					.param("telephone", "654999999")
 					.param("description", "Comida al mejor precio")
 					.param("food", "Americana")
-					.param("municipio", "Dos_Hermanas"))
+					.param("municipio", "Dos_Hermanas")
+					.param("image", ""))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(view().name("redirect:/clients/show"));
 	}
@@ -154,11 +149,8 @@ class ClientControllerTest {
 	@WithMockUser(value = "spring", authorities = "client")
 	@Test
 	void testProcessUpdateFormHasErrors() throws Exception {
-		FileInputStream fis = new FileInputStream("src//main//resources//static//resources//images//bar.jpg");
-	    MockMultipartFile multipartFile = new MockMultipartFile("file",fis);
-		
-	    mockMvc.perform(MockMvcRequestBuilders.multipart("/clients/edit")
-	    			.file(multipartFile)	
+
+	    mockMvc.perform(post("/clients/edit")	
 	    			.with(csrf())
 					.param("init", "24:30")
 					.param("finish", "a:30")
@@ -170,7 +162,8 @@ class ClientControllerTest {
 					.param("telephone", "654999")
 					.param("description", "")
 					.param("food", "")
-					.param("municipio", "Dos Hermanas"))
+					.param("municipio", "Dos Hermanas")
+					.param("image", ""))
 				.andExpect(model().attributeHasErrors("client"))
 				.andExpect(model().attributeHasFieldErrors("client", "init"))
 				.andExpect(model().attributeHasFieldErrors("client", "finish"))

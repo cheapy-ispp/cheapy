@@ -9,7 +9,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import java.io.FileInputStream;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -32,11 +31,9 @@ import org.springframework.cheapy.service.FoodOfferService;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 
 
@@ -187,34 +184,29 @@ class FoodOfferControllerTest {
 	@WithMockUser(value = "spring", authorities = "client")
 	@Test
 	void testProcessCreationFormSuccess() throws Exception {
-		FileInputStream fis = new FileInputStream("src//main//resources//static//resources//images//bar.jpg");
-	    MockMultipartFile multipartFile = new MockMultipartFile("file",fis);
-	    
-		mockMvc.perform(MockMvcRequestBuilders.multipart("/offers/food/new")
-					.file(multipartFile)
+		
+		mockMvc.perform(post("/offers/food/new")
 					.with(csrf())
 					.param("start", "2021-12-23T12:30")
 					.param("end", "2022-12-23T12:30")
 					.param("food", "food")
 					.param("discount", "10")
-					.param("price", "10.5"))
+					.param("price", "10.5")
+					.param("image", ""))
 				.andExpect(status().is3xxRedirection());
 	}
 
 	@WithMockUser(value = "spring", authorities = "client")
 	@Test
 	void testProcessCreationFormHasErrors() throws Exception {
-		FileInputStream fis = new FileInputStream("src//main//resources//static//resources//images//bar.jpg");
-	    MockMultipartFile multipartFile = new MockMultipartFile("file",fis);
-	    
-		mockMvc.perform(MockMvcRequestBuilders.multipart("/offers/food/new")
-					.file(multipartFile)
+		mockMvc.perform(post("/offers/food/new")
 					.with(csrf())
 					.param("start", "2020-12-23T12:30")
 					.param("end", "2020-12-22T12:30")
 					.param("food", "")
 					.param("discount", "")
-					.param("price", ""))
+					.param("price", "")
+					.param("image", ""))
 				.andExpect(model().attributeHasErrors("foodOffer"))
 				.andExpect(model().attributeHasFieldErrors("foodOffer", "start"))
 				.andExpect(model().attributeHasFieldErrors("foodOffer", "end"))
@@ -253,11 +245,8 @@ class FoodOfferControllerTest {
 	@WithMockUser(value = "spring", authorities = "client")
 	@Test
 	void testUpdateFoodOfferSuccess() throws Exception {
-		FileInputStream fis = new FileInputStream("src//main//resources//static//resources//images//bar.jpg");
-	    MockMultipartFile multipartFile = new MockMultipartFile("file",fis);
-	    
-		mockMvc.perform(MockMvcRequestBuilders.multipart("/offers/food/{foodOfferId}/edit",TEST_FOODOFFER_ID)
-					.file(multipartFile)	
+
+		mockMvc.perform(post("/offers/food/{foodOfferId}/edit",TEST_FOODOFFER_ID)
 					.with(csrf())
 					.param("id","1")
 					.param("start", "2021-12-23T12:30")
@@ -267,6 +256,7 @@ class FoodOfferControllerTest {
 					.param("discount", "10")
 					.param("price", "10.5")
 					.param("code", "")
+					.param("image", "")
 					.sessionAttr("idFood", TEST_FOODOFFER_ID))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(view().name("redirect:/offers/food/"+TEST_FOODOFFER_ID));
@@ -275,11 +265,8 @@ class FoodOfferControllerTest {
 	@WithMockUser(value = "spring", authorities = "client")
 	@Test
 	void testUpdateFoodOfferError() throws Exception {
-		FileInputStream fis = new FileInputStream("src//main//resources//static//resources//images//bar.jpg");
-	    MockMultipartFile multipartFile = new MockMultipartFile("file",fis);
-	    
-		mockMvc.perform(MockMvcRequestBuilders.multipart("/offers/food/{foodOfferId}/edit",TEST_FOODOFFER_ID)
-					.file(multipartFile)
+		
+		mockMvc.perform(post("/offers/food/{foodOfferId}/edit",TEST_FOODOFFER_ID)
 					.with(csrf())
 					.param("id","1")
 					.param("start", "2021-12-23T12:30")
@@ -289,6 +276,7 @@ class FoodOfferControllerTest {
 					.param("discount", "10")
 					.param("price", "manoli")
 					.param("code", "")
+					.param("image", "")
 					.sessionAttr("idFood", TEST_FOODOFFER_ID))
 				.andExpect(model().attributeExists("foodOffer"))
 				.andExpect(status().isOk())
