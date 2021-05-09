@@ -16,7 +16,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -70,6 +72,8 @@ public class Client extends BaseEntity {
 	@NotNull
 	private LocalDate			expiration;
 	
+	@URL(message="Debe introducir una url")
+	@Size(max=2000, message="La url es demasiado grande")
 	private String 				image;
 
 	@OneToOne(cascade = CascadeType.ALL)

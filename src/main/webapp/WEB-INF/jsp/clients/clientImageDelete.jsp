@@ -11,8 +11,7 @@
 <cheapy:layout pageName="client">
 
 	<jsp:body>
-        <h2 class="titulo" style="font-family: 'Lobster'; font-size: 25px;  padding:30px">¿Está seguro de que quiere eliminar su imagen? 
-        Deberá subir de nuevo la imagen si desea recuperarla.</h2>
+        <h2 class="titulo" style="font-family: 'Lobster'; font-size: 25px;  padding:30px">¿Está seguro de que quiere eliminar su imagen? </h2>
       		
       		<form:form modelAttribute="client" class="form-horizontal">
             

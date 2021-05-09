@@ -68,7 +68,7 @@
        <c:if test="${!(foodOffer.image eq null)}">
         <tr>
             <th><fmt:message key="image"/></th>
-            <td><img src="/resources/imagenesSubidas/${foodOffer.image}" height="400px" style="border-radius: 8px;"></td>
+            <td><img src="${foodOffer.image}" alt="La imagen no es válida" height="400px" style="border-radius: 8px;"></td>
         </tr>
          </c:if>
         </thead>

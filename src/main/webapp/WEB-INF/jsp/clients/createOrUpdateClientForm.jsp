@@ -25,7 +25,7 @@
             <cheapy:inputField label="Teléfono" placeholder="" name="telephone"/>
             <cheapy:inputField label="Descripción" placeholder="" name="description"/>
             <cheapy:inputField label="Comida" placeholder="food" name="food"/>
-            <cheapy:inputFileField label="Imagen" placeholder="Sube archivo" name="file"/>
+            <cheapy:inputField label="Imagen" placeholder="Copiar la url de una imagen aquí" name="image"/>
             <input type="hidden" readonly name="expiration" value="${fn:escapeXml(client.expiration)}" />
             
             

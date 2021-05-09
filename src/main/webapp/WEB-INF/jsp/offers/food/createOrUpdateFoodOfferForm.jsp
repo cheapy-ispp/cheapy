@@ -23,7 +23,7 @@
             <cheapy:inputField label="Plato" placeholder="Ej. Macarrones" name="food"/>
             <cheapy:inputField label="Precio Original" placeholder="XX€ (Ej.6)" name="price"/>
             <cheapy:inputField label="Descuento" placeholder="XX% (Ej.15)" name="discount"/>
-            <cheapy:inputFileField label="Imagen" placeholder="Sube archivo" name="file" />
+            <cheapy:inputField label="Imagen" placeholder="Copiar la url de una imagen aquí" name="image"/>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

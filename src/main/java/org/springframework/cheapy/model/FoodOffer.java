@@ -24,8 +24,10 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Table(name = "food_offers")
@@ -46,6 +48,8 @@ public class FoodOffer extends Offer {
 	@Max(500000)
 	private Double price;
 	
+	@URL
+	@Size(max=2000)
 	private String image;
 	
 	public Double getNewPrice() {
