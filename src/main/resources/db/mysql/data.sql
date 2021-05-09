@@ -16,13 +16,13 @@ INSERT INTO users (username,password,enabled) VALUES ('pepe',MD5('pepe'), TRUE )
 INSERT INTO authorities (username,authority) VALUES ('pepe','usuario');
 
 INSERT INTO administrators (id, username) VALUES (1, 'admin');
-INSERT INTO usuarios (id, nombre, apellidos, email, username) VALUES (2, 'Paco', 'Naranjo', 'Paco@gmail.com','paco');
-INSERT INTO usuarios (id, nombre, apellidos, email, username) VALUES (3, 'Lolo', 'Lopez', 'Lolo@gmail.com','lolo');
-INSERT INTO usuarios (id, nombre, apellidos, email, username) VALUES (4, 'Pepe', 'Lopez', 'Pepe@gmail.com','pepe');
+INSERT INTO usuarios (id, nombre, apellidos, email, pregunta_segura1, pregunta_segura2, username) VALUES (2, 'Paco', 'Naranjo', 'Paco@gmail.com', 'paco', 'paco', 'paco');
+INSERT INTO usuarios (id, nombre, apellidos, email, pregunta_segura1, pregunta_segura2, username) VALUES (3, 'Lolo', 'Lopez', 'Lolo@gmail.com', 'lolo', 'lolo','lolo');
+INSERT INTO usuarios (id, nombre, apellidos, email, pregunta_segura1, pregunta_segura2, username) VALUES (4, 'Pepe', 'Lopez', 'Pepe@gmail.com','pepe','pepe','pepe');
 
-INSERT INTO clients (id, name, email, address, parking, municipio, init, finish, telephone, description, food, expiration, username, image) VALUES (1,'Bar manoli','manoli@gmail.com','C/Betis', TRUE,'Sevilla','10:00:00','22:00:00','608726190', 'Bar Manoli, ¡tu bar favorito!', 'española', '2029-08-15' ,'manoli','https://image.freepik.com/foto-gratis/platos-comida-espanola_136346-1889.jpg');
-INSERT INTO clients (id, name, email, address, parking, municipio, init, finish, telephone, description, food, expiration, username,image) VALUES (2,'Bar david','david@gmail.com', 'C/Sevilla', FALSE, 'Dos_Hermanas','09:30:00','22:00:00','608726190', 'Food from USA', 'americana', '2029-08-15','david','https://tse4.mm.bing.net/th?id=OIP.KfMxYWgsSsHUylBxqtc17AHaE8&pid=Api');
-INSERT INTO clients (id, name, email, address, parking, municipio, init, finish, telephone, description, food, expiration, username) VALUES (3,'Bar lopez','loez@gmail.com', 'C/Sevilla', FALSE, 'Dos_Hermanas','09:30:00','22:00:00','608726191', 'Lo mejor de América del Norte y del Sur', 'americana y mexicana', '2019-08-15','lopez');
+INSERT INTO clients (id, name, email, address, parking, municipio, init, finish, telephone, description, food, expiration, pregunta_segura1, pregunta_segura2, username, image) VALUES (1,'Bar manoli','manoli@gmail.com','C/Betis', TRUE,'Sevilla','10:00:00','22:00:00','608726190', 'Bar Manoli, ¡tu bar favorito!', 'española', '2029-08-15' ,'manoli','manoli','manoli',,'https://image.freepik.com/foto-gratis/platos-comida-espanola_136346-1889.jpg');
+INSERT INTO clients (id, name, email, address, parking, municipio, init, finish, telephone, description, food, expiration, pregunta_segura1, pregunta_segura2, username, image) VALUES (2,'Bar david','david@gmail.com', 'C/Sevilla', FALSE, 'Dos_Hermanas','09:30:00','22:00:00','608726190', 'Food from USA', 'americana', '2029-08-15','david', 'david', 'david','https://tse4.mm.bing.net/th?id=OIP.KfMxYWgsSsHUylBxqtc17AHaE8&pid=Api');
+INSERT INTO clients (id, name, email, address, parking, municipio, init, finish, telephone, description, food, expiration, pregunta_segura1, pregunta_segura2, username) VALUES (3,'Bar lopez','loez@gmail.com', 'C/Sevilla', FALSE, 'Dos_Hermanas','09:30:00','22:00:00','608726191', 'Lo mejor de América del Norte y del Sur', 'americana y mexicana', '2019-08-15','lopez', 'lopez', 'lopez');
 
 INSERT INTO food_offers(start, end, code, status, client_id, food, discount, price) VALUES ('2021-04-29 12:00:00', '2021-06-10 12:00:00', 'FO-1', 'inactive', 1, 'Macarrones', 15, 10.0);
 INSERT INTO food_offers(start, end, code, status, client_id, food, discount, price) VALUES ('2021-04-29 12:00:00', '2021-06-10 12:00:00', 'FO-2', 'active', 3, 'Macarrones con tomate', 10, 20.0);

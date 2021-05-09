@@ -76,6 +76,14 @@ public class Client extends BaseEntity {
 	@Size(max=2000, message="La url es demasiado grande")
 	private String 				image;
 
+	@NotEmpty(message = "No debe estar vacío")
+	@JoinColumn(name = "pregunta_segura1")
+	private String				preguntaSegura1;
+	
+	@NotEmpty(message = "No debe estar vacío")
+	@JoinColumn(name = "pregunta_segura2")
+	private String				preguntaSegura2;
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "username", referencedColumnName = "username")
 	private User				usuar;
@@ -171,6 +179,22 @@ public class Client extends BaseEntity {
 
 	public void setFood(final String food) {
 		this.food = food;
+	}
+	
+	public String getPreguntaSegura1() {
+		return preguntaSegura1;
+	}
+
+	public void setPreguntaSegura1(String preguntaSegura1) {
+		this.preguntaSegura1 = preguntaSegura1;
+	}
+
+	public String getPreguntaSegura2() {
+		return preguntaSegura2;
+	}
+
+	public void setPreguntaSegura2(String preguntaSegura2) {
+		this.preguntaSegura2 = preguntaSegura2;
 	}
 
 	public User getUsuar() {

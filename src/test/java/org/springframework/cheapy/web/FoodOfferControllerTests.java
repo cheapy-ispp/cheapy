@@ -76,6 +76,8 @@ class FoodOfferControllerTest {
 		client1.setTelephone("123456789");
 		client1.setDescription("client1");
 		client1.setFood("client1");
+		client1.setPreguntaSegura1("client1");
+		client1.setPreguntaSegura2("client1");
 		client1.setUsuar(user1);
 		this.clientTest = client1;
 		BDDMockito.given(this.clientService.getCurrentClient()).willReturn(client1);
@@ -94,6 +96,8 @@ class FoodOfferControllerTest {
 		client2.setTelephone("123456789");
 		client2.setDescription("client2");
 		client2.setFood("client2");
+		client2.setPreguntaSegura1("client2");
+		client2.setPreguntaSegura2("client2");
 		client2.setUsuar(user2);
 		this.clientTest2 = client2;
 		
