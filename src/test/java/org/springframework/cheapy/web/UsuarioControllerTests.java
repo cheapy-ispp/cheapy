@@ -54,6 +54,8 @@ class UsuarioControllerTest {
 		usuario.setNombre("usuario");
 		usuario.setApellidos("usuario");
 		usuario.setEmail("usuario@gmail.com");
+		usuario.setPreguntaSegura1("usuario");
+		usuario.setPreguntaSegura2("usuario");
 		usuario.setUsuar(user);
 		
 		Client client1 = new Client();
@@ -103,7 +105,9 @@ class UsuarioControllerTest {
 					.param("usuar.password", "Contrasenya123")
 					.param("nombre", "nombre")
 					.param("apellidos", "apellidos")
-					.param("email", "email@gmail.com"))
+					.param("email", "email@gmail.com")
+					.param("preguntaSegura1", "test")
+					.param("preguntaSegura2", "test"))
 				.andExpect(status().is3xxRedirection());
 	}
 	
@@ -116,11 +120,15 @@ class UsuarioControllerTest {
 				.param("usuar.password", "")
 				.param("nombre", "")
 				.param("apellidos", "")
-				.param("email", "email"))
+				.param("email", "email")
+				.param("preguntaSegura1", "")
+				.param("preguntaSegura2", ""))
 				.andExpect(model().attributeHasErrors("usuario"))
 				.andExpect(model().attributeHasFieldErrors("usuario", "nombre"))
 				.andExpect(model().attributeHasFieldErrors("usuario", "apellidos"))
 				.andExpect(model().attributeHasFieldErrors("usuario", "email"))
+				.andExpect(model().attributeHasFieldErrors("usuario", "preguntaSegura1"))
+				.andExpect(model().attributeHasFieldErrors("usuario", "preguntaSegura2"))
 				.andExpect(view().name("usuarios/createOrUpdateUsuarioForm"));
 	}
 	
@@ -179,6 +187,8 @@ class UsuarioControllerTest {
 				.param("nombre", "nombre")
 				.param("apellidos", "apellidos")
 				.param("email", "email@gmail.com")
+				.param("preguntaSegura1", "test")
+				.param("preguntaSegura2", "test")
 				.param("usuar.password", "testSuccess"))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(view().name("redirect:/usuarios/show"));
@@ -192,6 +202,8 @@ class UsuarioControllerTest {
 				.param("nombre", "nombre")
 				.param("apellidos", "apellidos")
 				.param("email", "email@gmail.com")
+				.param("preguntaSegura1", "test")
+				.param("preguntaSegura2", "test")
 				.param("usuar.password", ""))
 				.andExpect(model().attributeHasFieldErrors("usuario","usuar.password"))
 				.andExpect(status().isOk())
