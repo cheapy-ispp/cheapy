@@ -52,7 +52,11 @@ public class NuOfferService {
 	public List<NuOffer> findNuOfferByUserId(final int id) {
 		return this.nuOfferRepository.findByUserId(id);
 	}
-
+	
+	public List<NuOffer> findNuOfferActByUserId(final int id, Pageable pag) {
+		return this.nuOfferRepository.findNuOfferActByUserId(id, pag);
+	}
+	
 	public List<NuOffer> findNuOfferActOclByUserId(final int id) {
 		return this.nuOfferRepository.findNuOfferActOclByUserId(id);
 	}

@@ -4,11 +4,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="cheapy" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-
-<cheapy:layout pageName="registro">
+<cheapy:layout pageName="ofertas">
 	<script>
 		function pagNum(pagina) {
 			paginaAct = pagina + 1;
@@ -31,7 +35,6 @@
 		        	<th>Tipo de oferta</th>
 		            <th><fmt:message key="startDate"/></th>
 		            <th><fmt:message key="endDate"/></th>
-		            <th><fmt:message key="status"/></th>
 		            <th></th>
 		        </tr>
 		        </thead>
@@ -65,20 +68,9 @@
 		                <td>
 		                    <c:out value="${localDateTimeFormat.format(datos[0].end)}"/>
 		                </td>
-		                <td>
-		                	<c:if test="${datos[0].status == 'active'}">
-		                    	<c:out value="Activa"/>
-		                    </c:if>	
-		                    <c:if test="${datos[0].status == 'hidden'}">
-		                    	<c:out value="Oculta"/>
-		                    </c:if>	
-		                    <c:if test="${datos[0].status == 'inactive'}">
-		                    	<c:out value="Inactiva"/>
-		                    </c:if>		                 
-		                </td>
 		                
 		                <td>
-	                	<spring:url value="/administrators/offers/${datos[1]}/${datos[0].id}" var="offerUrl">
+	                	<spring:url value="/offers/${datos[1]}/${datos[0].id}" var="offerUrl">
 	                	</spring:url>
 	               		<div class="btn-detalles">
                 			<button type="button" role="link" onclick="window.location='${fn:escapeXml(offerUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
@@ -86,7 +78,6 @@
 	                		<fmt:message key="details"/></button>
             			</div>
                 		</td>
-		                
 		            </tr>
 		        </c:forEach>
 		        </tbody>
@@ -103,7 +94,8 @@
 	    <div class="column-pag-btn" style="text-align: left;">
 	    	<c:if test='${page!=0}'>
 	
-		    	<spring:url value="/administrators/offersRecord{page}" var="SearchOfferListUrl">
+		    	<spring:url value="/offersFavourite/{clientId}/{page}" var="SearchOfferListUrl">
+		    		<spring:param name="clientId" value="${clientId}"/>
 		    		<spring:param name="page" value="${page-1}"/>
 		    	</spring:url>
 		    	<button type="button" class="btn-pag" role="link" onclick="window.location='${fn:escapeXml(SearchOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
@@ -116,7 +108,8 @@
 	    <div class="column-pag-btn" style="text-align: right;">
 	    	<c:if test="${nextPage > 0}">
 
-		    	<spring:url value="/administrators/offersRecord{page}" var="SearchOfferListUrl">
+		    	<spring:url value="/offersFavourite/{clientId}/{page}" var="SearchOfferListUrl">
+		    		<spring:param name="clientId" value="${clientId}"/>
 		    		<spring:param name="page" value="${page+1}"/>
 		    	</spring:url>
 		    	<button type="button" class="btn-pag"  role="link" onclick="window.location='${fn:escapeXml(SearchOfferListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
