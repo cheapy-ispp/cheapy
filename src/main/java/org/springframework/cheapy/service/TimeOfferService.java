@@ -44,6 +44,10 @@ public class TimeOfferService {
 		return this.timeOfferRepository.findByUserId(id);
 	}
 
+	public List<TimeOffer> findTimeOfferActByUserId(final int id, Pageable pag) {
+		return this.timeOfferRepository.findTimeOfferActByUserId(id, pag);
+	}
+	
 	public List<TimeOffer> findTimeOfferActOclByUserId(final int id) {
 		return this.timeOfferRepository.findTimeOfferActOclByUserId(id);
 	}
