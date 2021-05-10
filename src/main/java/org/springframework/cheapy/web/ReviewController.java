@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.cheapy.model.Review;
 import org.springframework.cheapy.model.User;
+import org.springframework.cheapy.model.Usuario;
 import org.springframework.cheapy.service.ReviewService;
 import org.springframework.cheapy.service.UserService;
 import org.springframework.data.domain.PageRequest;
@@ -115,5 +116,19 @@ public class ReviewController {
 		}
 
 	}
-
+	
+	@GetMapping(value = "/reviews/{reviewId}/delete")
+	public String deleteReview(@PathVariable("reviewId") final int reviewId , final ModelMap model) {
+		
+		User logeado = this.userService.getCurrentUser();
+		Review re = this.reviewService.findReviewById(reviewId);
+		
+		if(logeado.getUsername().equals(re.getEscritor().getUsername())) {
+			this.reviewService.deleteReview(re);
+		
+			return "redirect:/reviewsList/0";
+		}else {
+			return "error";
+		}
+	}
 }

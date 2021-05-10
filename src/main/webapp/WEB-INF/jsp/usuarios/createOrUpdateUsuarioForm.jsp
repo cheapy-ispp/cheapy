@@ -18,6 +18,8 @@
             <cheapy:inputField label="Nombre" name="nombre"/>
             <cheapy:inputField label="Apellidos" name="apellidos"/>
             <cheapy:inputField label="Email" name="email"/>
+            <cheapy:inputField label="Pregunta segura 1: ¿Cuál es su plato de comida favorito?" placeholder="preguntaSegura1" name="preguntaSegura1"/>
+            <cheapy:inputField label="Pregunta segura 2: ¿Cuál es su ciudad de nacimiento" placeholder="preguntaSegura2" name="preguntaSegura2"/>
 
         </div>
         <div class="form-group">

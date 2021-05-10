@@ -58,7 +58,13 @@
             <td><c:out value="${client.municipio}"/> </td>
         </tr><tr>
             <th><fmt:message key="foodClient"/></th>
-            <td><c:out value="${client.food}"/> </td>      
+            <td><c:out value="${client.food}"/> </td>
+        <c:if test="${!(client.image eq null)}">
+        <tr>
+            <th><fmt:message key="image"/></th>
+            <td><img src="${client.image}" alt ="La imagen no es válida" height="400px" style="border-radius: 8px;"></td>
+        </tr>
+         </c:if>      
         
         </thead>
     </table>

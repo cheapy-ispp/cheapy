@@ -80,6 +80,8 @@ class ReviewClientControllerTest {
 		client.setTelephone("123456789");
 		client.setDescription("client1");
 		client.setFood("client1");
+		client.setPreguntaSegura1("client1");
+		client.setPreguntaSegura2("client1");
 		client.setUsuar(userClient);
 		BDDMockito.given(this.clientService.getCurrentClient()).willReturn(client);
 		BDDMockito.given(this.clientService.findByUsername("client")).willReturn(client);

@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.cheapy.model.Client;
+import org.springframework.cheapy.model.Review;
 import org.springframework.cheapy.model.ReviewClient;
 import org.springframework.cheapy.model.User;
 import org.springframework.cheapy.service.ClientService;
@@ -157,5 +158,19 @@ public class ReviewClientController {
 
 	}
 	
-	
+	@GetMapping(value = "/reviewsClient/{reviewId}/delete")
+	public String deleteReview(@PathVariable("reviewId") final int reviewId , final ModelMap model) {
+		
+		User logeado = this.userService.getCurrentUser();
+		ReviewClient rc = this.reviewService.findReviewById(reviewId);
+		
+		if(logeado.getUsername().equals(rc.getEscritor().getUsername())) {
+			this.reviewService.deleteReviewClient(rc);
+			
+			
+			return "welcome";
+		}else {
+			return "error";
+		}
+	}
 }

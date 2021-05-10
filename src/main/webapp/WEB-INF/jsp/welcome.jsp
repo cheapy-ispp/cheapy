@@ -69,9 +69,9 @@
                     
               </sec:authorize>
               
-              <sec:authorize access="hasAnyAuthority('notsubscribed')">
+              <sec:authorize access="hasAnyAuthority('notsubscribed', 'client')">
               <div class="btn-home">
-                      <button class="btn-block" type="button" role="link" onclick="window.location='/usuarios/favoritos/0'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
+                      <button class="btn-block" type="button" role="link" onclick="window.location='/pay/month'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
                       <span class="glyphicon glyphicon-euro " aria-hidden="true"></span>
                       Renovar suscripción </button>
                   </div>

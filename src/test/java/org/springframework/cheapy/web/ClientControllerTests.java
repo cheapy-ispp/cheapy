@@ -89,6 +89,8 @@ class ClientControllerTest {
 		client1.setTelephone("123456789");
 		client1.setDescription("client1");
 		client1.setFood("client1");
+		client1.setPreguntaSegura1("client1");
+		client1.setPreguntaSegura2("client1");
 		client1.setUsuar(user1);
 		BDDMockito.given(this.clientService.getCurrentClient()).willReturn(client1);
 		BDDMockito.given(this.clientService.findById(TEST_CLIENT_ID)).willReturn(client1);
@@ -126,8 +128,9 @@ class ClientControllerTest {
 	@WithMockUser(value = "spring", authorities = "client")
 	@Test
 	void testProcessUpdateFormSuccess() throws Exception {
-		mockMvc.perform(post("/clients/edit")
-					.with(csrf())
+		
+	    mockMvc.perform(post("/clients/edit")	
+	    		.with(csrf())
 					.param("init", "11:30")
 					.param("finish", "23:30")
 					.param("expiration", "3000-12-30")
@@ -138,6 +141,10 @@ class ClientControllerTest {
 					.param("telephone", "654999999")
 					.param("description", "Comida al mejor precio")
 					.param("food", "Americana")
+					.param("municipio", "Dos_Hermanas")
+					.param("image", "")
+					.param("preguntaSegura1", "test")
+					.param("preguntaSegura2", "test")
 					.param("municipio", "Dos_Hermanas"))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(view().name("redirect:/clients/show"));
@@ -147,8 +154,9 @@ class ClientControllerTest {
 	@WithMockUser(value = "spring", authorities = "client")
 	@Test
 	void testProcessUpdateFormHasErrors() throws Exception {
-		mockMvc.perform(post("/clients/edit")
-					.with(csrf())
+
+	    mockMvc.perform(post("/clients/edit")	
+	    			.with(csrf())
 					.param("init", "24:30")
 					.param("finish", "a:30")
 					.param("name", "")
@@ -159,6 +167,10 @@ class ClientControllerTest {
 					.param("telephone", "654999")
 					.param("description", "")
 					.param("food", "")
+					.param("municipio", "Dos Hermanas")
+					.param("image", "")
+					.param("preguntaSegura1", "")
+					.param("preguntaSegura2", "")
 					.param("municipio", "Dos Hermanas"))
 				.andExpect(model().attributeHasErrors("client"))
 				.andExpect(model().attributeHasFieldErrors("client", "init"))
@@ -171,6 +183,8 @@ class ClientControllerTest {
 				.andExpect(model().attributeHasFieldErrors("client", "telephone"))
 				.andExpect(model().attributeHasFieldErrors("client", "description"))
 				.andExpect(model().attributeHasFieldErrors("client", "food"))
+				.andExpect(model().attributeHasFieldErrors("client", "preguntaSegura1"))
+				.andExpect(model().attributeHasFieldErrors("client", "preguntaSegura2"))
 				.andExpect(model().attributeHasFieldErrors("client", "municipio"))
 				
 				.andExpect(view().name("clients/createOrUpdateClientForm"));
@@ -220,6 +234,8 @@ class ClientControllerTest {
 		Assertions.assertTrue(cliente.getFinish().equals(LocalTime.of(00, 00)));
 		Assertions.assertTrue(cliente.getInit().equals(LocalTime.of(00, 00)));
 		Assertions.assertTrue(cliente.getFood().equals("Eliminado"));
+		Assertions.assertTrue(cliente.getPreguntaSegura1().equals("Eliminado"));
+		Assertions.assertTrue(cliente.getPreguntaSegura2().equals("Eliminado"));
 		Assertions.assertTrue(cliente.getTelephone().equals("000000000"));	
 		Assertions.assertTrue(cliente.getMunicipio().equals(Municipio.Sevilla));
 		Assertions.assertTrue(cliente.getUsuar()==null);
@@ -237,7 +253,7 @@ class ClientControllerTest {
 	
 	@WithMockUser(value = "spring", authorities = "client")
 	@Test
-	void testUpdatePassUsuarioSuccess() throws Exception {
+	void testUpdatePassClientSuccess() throws Exception {
 		mockMvc.perform(post("/clients/edit/password")
 				.with(csrf())
 				.param("init", "11:30")
@@ -250,6 +266,8 @@ class ClientControllerTest {
 				.param("telephone", "654999999")
 				.param("description", "Comida al mejor precio")
 				.param("food", "Americana")
+				.param("preguntaSegura1", "test")
+				.param("preguntaSegura2", "test")
 				.param("municipio", "Dos_Hermanas")
 				.param("usuar.password", "testSuccess"))
 				.andExpect(status().is3xxRedirection())
@@ -258,7 +276,7 @@ class ClientControllerTest {
 	
 	@WithMockUser(value = "spring", authorities = "client")
 	@Test
-	void testUpdatePassUsuarioError() throws Exception {
+	void testUpdatePassClientError() throws Exception {
 		mockMvc.perform(post("/clients/edit/password")
 				.with(csrf())
 				.param("init", "11:30")
@@ -271,6 +289,8 @@ class ClientControllerTest {
 				.param("telephone", "654999999")
 				.param("description", "Comida al mejor precio")
 				.param("food", "Americana")
+				.param("preguntaSegura1", "test")
+				.param("preguntaSegura2", "test")
 				.param("municipio", "Dos_Hermanas")
 				.param("usuar.password", ""))
 				.andExpect(model().attributeHasFieldErrors("client","usuar.password"))

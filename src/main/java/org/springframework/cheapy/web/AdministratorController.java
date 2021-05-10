@@ -314,6 +314,8 @@ public class AdministratorController {
 		client.setExpiration(LocalDate.now());
 		client.setFinish(LocalTime.of(00, 00));
 		client.setFood("Eliminado");
+		client.setPreguntaSegura1("Eliminado");
+		client.setPreguntaSegura2("Eliminado");
 		client.setInit(LocalTime.of(00, 00));
 		client.setMunicipio(Municipio.Sevilla);
 		client.setTelephone("000000000");
