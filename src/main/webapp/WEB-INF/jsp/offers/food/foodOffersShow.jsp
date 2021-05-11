@@ -63,7 +63,13 @@
 		<sec:authorize access="isAuthenticated()">
         <tr>
             <th><fmt:message key="offerCode"/></th>
-            <td><c:out value="${foodOffer.code}"/></td>
+            <td><b><c:out value="${foodOffer.code}"/></b></td>
+        </tr>
+        </sec:authorize>
+        <sec:authorize access="!isAuthenticated()">
+        <tr>
+            <th><fmt:message key="offerCode"/></th>
+            <td><b>Para acceder al código debe iniciar sesión</b></td>
         </tr>
         </sec:authorize>
        <c:if test="${!(foodOffer.image eq null)}">

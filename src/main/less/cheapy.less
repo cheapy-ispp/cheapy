@@ -52,6 +52,7 @@
  .table > thead > tr > th {
   background-color: rgb(40, 140, 215);
   color: @spring-light-grey;
+  vertical-align:middle;
 }
 
 .table-filter {
@@ -61,6 +62,19 @@
 
 .nav > li > a {
   color: @spring-grey;
+}
+
+ .dropdown-suscription{
+  background-color: @spring-blue;
+}
+
+ .dropdown-suscription > li > a:hover {
+	background:	#B9D8EF;
+    color: black;
+}
+
+.dropdown-suscription > li > a {
+  color: #f1f1f1;
 }
 
 .btn-default {
@@ -449,36 +463,8 @@ img.img-responsive{
 	text-align: center;
 }
 
-#foodOfferTable th {
-  width: 15%;
-  background-color: #325a80;
-  text-align: center;
-  vertical-align: middle;
-  
-}
-
-#nuOfferTable th {
-  width: 15%;
-background-color: #325a80;
-text-align: center;
-vertical-align: middle;
-}
-
 #offerTable th{
 	width: 15%;
-background-color: #325a80;
-text-align: center;
-vertical-align: middle;
-}
-#speedOfferTable th {
-  width: 15%;
-background-color: #325a80;
-text-align: center;
-vertical-align: middle;
-}
-
-#timeOfferTable th {
-  width: 15%;
 background-color: #325a80;
 text-align: center;
 vertical-align: middle;
@@ -621,88 +607,78 @@ vertical-align: middle;
 	background-color: rgb(255, 255, 0);
 }
 
+#foodOfferTable th{
+	text-align: center;
+	width: 15%;
+    background-color: #325a80;
+    vertical-align: middle;
+    color: #f1f1f1;
+}
+
 #foodOfferTable td{
   vertical-align:middle;
 text-align: center;
 }
 
+#nuOfferTable th{
+	text-align: center;
+	width: 15%;
+    background-color: #325a80;
+    vertical-align: middle;
+    color: #f1f1f1;
+}
+
 #nuOfferTable td{
   vertical-align:middle;
-text-align: center;
+	text-align: center;
+}
+
+#speedOfferTable th{
+	vertical-align:middle;
+	text-align: center;
+	width: 15%;
+    background-color: #325a80;
+    vertical-align: middle;
+    color: #f1f1f1;
 }
 
 #speedOfferTable td{
   vertical-align:middle;
-text-align: center;
+  text-align: center;
+}
+
+#timeOfferTable th{
+	text-align: center;
+	width: 15%;
+    background-color: #325a80;
+    vertical-align: middle;
+    color: #f1f1f1;
 }
 
 #timeOfferTable td{
   vertical-align:middle;
-text-align: center;
+  text-align: center;
 }
 
-#nuOffer-table th{
-	text-align: center;
+#goldGD {
+  font-size:25px;
+  color:rgb(255, 215, 0);
+  text-shadow:2px 2px 4px #000000;
+  float:right
 }
 
-#nuOffer-table td{
-	text-align: center;
+#silverGD {
+  font-size:25px;
+  color:rgb(192, 192, 192);
+  text-shadow:2px 2px 4px #000000;
+  float:right
 }
 
-#speedOffer-table th{
-	text-align: center;
-}
-
-#speedOffer-table td{
-	text-align: center;
-}
-
-#nuOffer-table tr:nth-child(4){
-  background-color: rgb(255, 215, 0);
-}
-
-#nuOffer-table tr:nth-child(5){
-  background-color: rgb(255, 215, 0);
-}
-
-#nuOffer-table tr:nth-child(6){
-  background-color: rgb(192, 192, 192);
-}
-
-#nuOffer-table tr:nth-child(7){
-  background-color: rgb(192, 192, 192);
-}
-
-#nuOffer-table tr:nth-child(8){
-  background-color: rgb(204, 128, 51);
-}
-
-#nuOffer-table tr:nth-child(9){
-  background-color: rgb(204, 128, 51);
-}
-
-#speedOffer-table tr:nth-child(4){
-  background-color: rgb(255, 215, 0);
-}
-
-#speedOffer-table tr:nth-child(5){
-  background-color: rgb(255, 215, 0);
-}
-
-#speedOffer-table tr:nth-child(6){
-  background-color: rgb(192, 192, 192);
-}
-
-#speedOffer-table tr:nth-child(7){
-  background-color: rgb(192, 192, 192);
-}
-
-#speedOffer-table tr:nth-child(8){
-  background-color: rgb(204, 128, 51);
-}
-
-#speedOffer-table tr:nth-child(9){
-  background-color: rgb(204, 128, 51);
+#bronzeGD {
+  font-size:25px;
+  color:rgb(204, 128, 51);
+  text-shadow:2px 2px 4px #000000;
+  float:right
 }
 
 #clientTable th{

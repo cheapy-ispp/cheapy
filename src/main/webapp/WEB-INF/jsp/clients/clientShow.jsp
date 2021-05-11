@@ -81,7 +81,7 @@
         </tr>
         
         <tr>
-            <th><fmt:message key="expiration"/></th>
+            <th><fmt:message key="preguntaSegura2"/></th>
             <td><c:out value="${client.preguntaSegura2}"/> </td>
         </tr>
         

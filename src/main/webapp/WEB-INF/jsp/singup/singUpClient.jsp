@@ -25,7 +25,7 @@
 				name="name" />
 			<cheapy:inputField label="Direccion" placeholder="Ponga aqui su dirección"
 				name="address" />
-			<cheapy:inputField label="Posee facil aparcamiento" placeholder="true / false"
+			<cheapy:inputField label="¿Posee fácil aparcamiento?" placeholder="true / false"
 				name="parking" />			
 			<cheapy:timeField label="Hora de apertura" placeholder="Ponga aqui su hora de apertura (formato HH:mm)"
 				name="init" />

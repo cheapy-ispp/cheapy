@@ -10,6 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
 <cheapy:layout pageName="nuOffer">
 	<script>
@@ -18,12 +19,12 @@
 		});
 	</script>
 	
-	<h2 class="titulo" style="font-family: 'Lobster'; text-align:center; font-size:200%; padding:10px"><fmt:message key="nuOffer" />
+	<h2 class="titulo" style="font-family: 'Lobster'; text-align:left; font-size:200%; padding:10px; margin-bottom:20px;"><fmt:message key="nuOffer" />
 		<a title="Información" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Descuento al consumir con más comensales que alguno de los tres posibles objetivos">
     	<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px"> </span></a>
 	</h2>
 
-    <table class="table table-striped" id="nuOffer-table">
+    <table class="table table-striped" id="nuOfferTable">
     	<tr>
             <th><fmt:message key="client"/></th>
             <td><c:out value="${nuOffer.client.name}"/> </td>
@@ -37,27 +38,39 @@
             <td><c:out value="${localDateTimeFormat.format(nuOffer.end)}"/></td>
         </tr>
         <tr>
-            <th><fmt:message key="goldGoal"/></th>
+            <th><fmt:message key="goldGoal"/>
+            <i class="fas fa-bullseye" id="goldGD"></i>
+            </th>
             <td><c:out value="${nuOffer.gold} comensales" /></td>
         </tr>
         <tr>
-            <th><fmt:message key="goldDiscount"/></th>
+            <th><fmt:message key="goldDiscount"/> 
+            <i class="fas fa-medal" id="goldGD"></i>
+            </th>
             <td><c:out value="${nuOffer.discountGold}%"/></td>
         </tr>
         <tr>
-            <th><fmt:message key="silverGoal"/></th>
+            <th><fmt:message key="silverGoal"/>
+            <i class="fas fa-bullseye" id="silverGD"></i>
+            </th>
             <td><c:out value="${nuOffer.silver} comensales"/></td>
         </tr>
         <tr>
-            <th><fmt:message key="silverDiscount"/></th>
+            <th><fmt:message key="silverDiscount"/>
+            <i class="fas fa-medal" id="silverGD"></i>
+            </th>
             <td><c:out value="${nuOffer.discountSilver}%"/></td>
         </tr>
         <tr>
-            <th>Meta bronce</th>
+            <th><fmt:message key="bronzeGoal"/>
+            <i class="fas fa-bullseye" id="bronzeGD"></i>
+            </th>
             <td><c:out value="${nuOffer.bronze} comensales"/></td>
         </tr>
         <tr>
-            <th><fmt:message key="bronzeDiscount"/></th>
+            <th><fmt:message key="bronzeDiscount"/>
+            <i class="fas fa-medal" id="bronzeGD"></i>
+            </th>
             <td><c:out value="${nuOffer.discountBronze}%"/></td>
         </tr>
         <tr>
@@ -67,7 +80,13 @@
         <sec:authorize access="isAuthenticated()">
         <tr>
             <th><fmt:message key="offerCode"/></th>
-            <td><c:out value="${nuOffer.code}"/></td>
+            <td><b><c:out value="${nuOffer.code}"/></b></td>
+        </tr>
+        </sec:authorize>
+        <sec:authorize access="!isAuthenticated()">
+        <tr>
+            <th><fmt:message key="offerCode"/></th>
+            <td><b>Para acceder al código debe iniciar sesión</b></td>
         </tr>
         </sec:authorize>
        

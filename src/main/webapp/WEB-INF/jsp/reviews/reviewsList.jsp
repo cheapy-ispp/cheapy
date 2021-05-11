@@ -5,6 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="cheapy" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
@@ -97,11 +98,14 @@
 		</c:if>​
 		</div>
 	</div>
-	    <div class="text-center">
+	 <sec:authorize access="!isAuthenticated()">
+		<div class="text-center">
 		    <button type="button" class="btn-cheapyReview" role="link" onclick="window.location='/reviews/new'" style="font-family: 'Lobster'; font-size: 20px;">
 			<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 			Valóranos</button>
 		</div>
+	</sec:authorize>
+	    
 	
 	</div>
 </cheapy:layout>
