@@ -52,13 +52,22 @@
             <td><c:out value="${timeOffer.discount}%"/></td>
         </tr>
         <tr>
-            <th><fmt:message key="offerCode"/></th>
-            <td><c:out value="${timeOffer.code}"/></td>
-        </tr>
-        <tr>
             <th><fmt:message key="municipio"/></th>
             <td><c:out value="${timeOffer.client.municipio}"/> </td>
         </tr>
+        <sec:authorize access="isAuthenticated()">
+        <tr>
+            <th><fmt:message key="offerCode"/></th>
+            <td><b><c:out value="${speedOffer.code}"/></b></td>
+        </tr>
+        </sec:authorize>
+        <sec:authorize access="!isAuthenticated()">
+        <tr>
+            <th><fmt:message key="offerCode"/></th>
+            <td><b>Para acceder al código debe iniciar sesión</b></td>
+        </tr>
+        </sec:authorize>
+        
         </thead>
     </table>
 

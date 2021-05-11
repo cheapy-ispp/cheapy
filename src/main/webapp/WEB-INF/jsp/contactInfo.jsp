@@ -33,6 +33,9 @@
   text-align: center;
 }
 
+.row-info {
+  padding: 20px;
+}
 .row-info:after {
   content: "";
   display: table;
@@ -44,7 +47,7 @@
 }
 
 .barImage {
-	width: 60%;
+	width: 30%;
 }
 </style>
 

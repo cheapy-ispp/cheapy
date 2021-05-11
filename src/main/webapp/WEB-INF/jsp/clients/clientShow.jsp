@@ -40,7 +40,14 @@
         
         <tr>
             <th><fmt:message key="parking"/></th>
-            <td><c:out value="${client.parking}"/> </td>
+            <td>
+            <c:if test="${client.parking == 'true'}">
+				<c:out value="Si"/>
+			</c:if>	
+			<c:if test="${client.parking == 'false'}">
+				<c:out value="No"/>
+			</c:if>
+            </td>
         </tr>
         
         <tr>
@@ -74,7 +81,7 @@
         </tr>
         
         <tr>
-            <th><fmt:message key="expiration"/></th>
+            <th><fmt:message key="preguntaSegura2"/></th>
             <td><c:out value="${client.preguntaSegura2}"/> </td>
         </tr>
         
