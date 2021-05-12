@@ -26,6 +26,9 @@
 	      
 	      </c:if>
 	    </div>
+	    <a class="btn btn-block btn-social btn-google customBtn" th:href="@{/auth/google}">
+    							<span class="fa fa-google width42px"></span> Sign in with Google
+  							</a>
 
 	    <!-- Login Form -->
 	    <form class='form-signin' action="/login" method='POST'>

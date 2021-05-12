@@ -71,10 +71,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/pay/**").hasAnyAuthority("notsubscribed","client")
 		
 
+		
 		.and().formLogin()
 			.loginPage("/login")
 			.failureUrl("/login?error")
+			.and().oauth2Login()
 		    .and().logout().logoutSuccessUrl("/");
+			
 
 		// Configuración para que funcione la consola de administración
 		// de la BD H2 (deshabilitar las cabeceras de protección contra
