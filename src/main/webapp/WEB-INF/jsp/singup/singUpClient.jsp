@@ -50,7 +50,7 @@
 	        	<input id="terminos"   name="terminos" type="checkbox" required="required">
 			</div>	
 			<div class="text-center">
-				<input type="submit" class="fadeIn fourth"  value="Registrarse">
+				<input type="submit" class="registrar"  value="Registrarse">
 			</div>
 		</div>
 	</form:form>

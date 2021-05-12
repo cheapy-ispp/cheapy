@@ -108,9 +108,9 @@
    <p>En caso de cualquier problema, ponemos a su disposición nuestro correo corporativo (cheapy.ispp@gmail.com) donde responderemos al correo con el que se nos haya escrito.  </p>
    <p>Si se detectan campos rellenados con palabras ofensivas o contenido inapropiado, se sancionará dicha cuenta de la forma que se vea apropiada.<p>
    <p>Si desea apelar a cualquiera de los casos descritos en los apartados anteriores, por favor lea con detenimiento las cláusulas y use los asuntos que se describen para una mayor agilidad de nuestro equipo. </p>
-   
+   <br>
   
         
-  
+   <button id='btns-edit' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 15px; align: center;">Volver</button>
     </div>
 </cheapy:layout>	

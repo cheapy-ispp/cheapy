@@ -14,6 +14,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css" />
 
 <style>
 .fa {
@@ -53,12 +54,139 @@
     <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%; padding:10px; margin-bottom:20px;">Información de contacto</h2>
     <p style="font-family: 'Lobster'; text-align:center; font-size:150%;  color: #325a80; padding:10px; margin-bottom:20px;">
     ¿Tienes alguna duda? Puedes hacérnosla llegar a través de los siguientes medios:</p>
+    <section>
+        <div class="containerr" style="text-align: center;">
+            <div class="card-group">
+                <div class="card">
+                    <img src="/resources/images/pablo.jpeg" class="card-img-top" alt="Pablo" style="width: 350px; height: 350px;">
+                    <div class="card-body">
+                    <h5 class="card-title">Pablo</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Franco Sánchez</h6>
+                    <p class="card-text">Computer Engineering student in Software Engineering</p>
+                    <a href="https://github.com/pabfrasan" target="_blank" class="btn btn-outline-dark">
+                        <i class="fa fa-github-alt"></i> GitHub Profile</a>
+                </div>
+                </div>
+                <div class="card">
+                    <img src="/resources/images/abraham.jpeg" class="card-img-top"  alt="Abraham" style="width: 350px; height: 350px;">
+                    <div class="card-body">
+                    <h5 class="card-title">Abraham</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">García Villalobos</h6>
+                    <p class="card-text">Computer Engineering student in Software Engineering</p>
+                    <a href="https://github.com/AbrahamSFC" target="_blank" class="btn btn-outline-dark">
+                        <i class="fa fa-github-alt"></i> GitHub Profile</a>
+                </div>
+                </div>
+                <div class="card">
+                    <img src="/resources/images/martin.jpeg" class="card-img-top" alt="Martin" style="width: 350px; height: 350px;">
+                    <div class="card-body">
+                    <h5 class="card-title">Martín Arturo</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Guerrero Romero</h6>
+                    <p class="card-text">Computer Engineering student in Software Engineering</p>
+                    <a href="https://github.com/Martinagr32" target="_blank" class="btn btn-outline-dark">
+                        <i class="fa fa-github-alt"></i> GitHub Profile</a>
+                </div>
+                </div>
+                </div>
+                <div class="card-group">
+                <div class="columna col card">
+                    <img src="/resources/images/gabo.jpeg" class="card-img-top" alt="Gabriel" style="width: 350px; height: 350px;">
+                    <div class="card-body">
+                    <h5 class="card-title">Gabriel</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Gutiérrez Prieto</h6>
+                    <p class="card-text">Computer Engineering student in Software Engineering</p>
+                    <a href="https://github.com/gabgutpri" target="_blank" class="btn btn-outline-dark">
+                        <i class="fa fa-github-alt"></i> GitHub Profile</a>
+                </div>
+                </div> 
+                <div class="columna col card">
+                    <img src="/resources/images/thibout.jpeg" class="card-img-top" alt="Thibaut" style="width: 350px; height: 350px;">
+                    <div class="card-body">
+                    <h5 class="card-title">Thibaut</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Lopez</h6>
+                    <p class="card-text">Computer Engineering student in Software Engineering</p>
+                    <a href="https://github.com/Thiloparn" target="_blank" class="btn btn-outline-dark">
+                        <i class="fa fa-github-alt"></i> GitHub Profile</a>
+                </div>
+                </div>
+                <div class="columna col card">
+                    <img src="/resources/images/soto.jpeg" class="card-img-top" alt="David" style="width: 350px; height: 350px;">
+                    <div class="card-body">
+                    <h5 class="card-title">David</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Soto Ponce</h6>
+                    <p class="card-text">Computer Engineering student in Software Engineering</p>
+                    <a href="https://github.com/davsotpon" target="_blank" class="btn btn-outline-dark">
+                        <i class="fa fa-github-alt"></i> GitHub Profile</a>
+                </div>
+                </div>
+                </div>
+                <div class="card-group">
+                <div class="columna col card">
+                    <img src="/resources/images/javi.jpeg" class="card-img-top" alt="Javier" style="width: 350px; height: 350px;">
+                    <div class="card-body">
+                    <h5 class="card-title">Javier</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Granja Naranjo</h6>
+                    <p class="card-text">Computer Engineering student in Software Engineering</p>
+                    <a href="https://github.com/javgranar" target="_blank" class="btn btn-outline-dark">
+                        <i class="fa fa-github-alt"></i> GitHub Profile</a>
+                </div>
+                </div>
+                <div class="columna col card">
+                    <img src="/resources/images/flor.jpeg" class="card-img-top" alt="Florentina" style="width: 350px; height: 350px;">
+                    <div class="card-body">
+                    <h5 class="card-title">Florentina</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Correa López</h6>
+                    <p class="card-text">Computer Engineering student in Software Engineering</p>
+                    <a href="https://github.com/flocorlop" target="_blank" class="btn btn-outline-dark">
+                        <i class="fa fa-github-alt"></i> GitHub Profile</a>
+                </div>
+                </div>
+                <div class="columna col card">
+                    <img src="/resources/images/antonio.jpeg" class="card-img-top" alt="Antonio" style="width: 350px; height: 350px;">
+                    <div class="card-body">
+                    <h5 class="card-title">Antonio</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Vidal Pérez</h6>
+                    <p class="card-text">Computer Engineering student in Software Engineering</p>
+                    <a href="https://github.com/davsotpon" target="_blank" class="btn btn-outline-dark">
+                        <i class="fa fa-github-alt"></i> GitHub Profile</a>
+                </div>
+                </div>
+                </div>
+                <div class="card-group">
+                <div class="columna col card">
+                    <img src="/resources/images/angel.jpeg" class="card-img-top" alt="Angel" style="width: 350px; height: 350px;">
+                    <div class="card-body">
+                    <h5 class="card-title">Angel</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Caballero Domínguez</h6>
+                    <p class="card-text">Computer Engineering student in Software Engineering</p>
+                    <a href="https://github.com/angcabdom" target="_blank" class="btn btn-outline-dark">
+                        <i class="fa fa-github-alt"></i> GitHub Profile</a>
+                </div>
+                </div>
+                <div class="columna col card">
+                    <img src="/resources/images/abel.jpeg" class="card-img-top" alt="Abel" style="width: 350px; height: 350px;">
+                    <div class="card-body">
+                    <h5 class="card-title">Abel</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Morante Caraballo</h6>
+                    <p class="card-text">Computer Engineering student in Software Engineering</p>
+                    <a href="https://github.com/abemorcardc" target="_blank" class="btn btn-outline-dark">
+                        <i class="fa fa-github-alt"></i> GitHub Profile</a>
+                </div>
+                </div>
+                <div class="columna col card">
+                    <img src="../../static/images/DavidS.jpeg" class="card-img-top" alt="Cheapy" style="width: 350px; height: 350px;">
+                    <div class="card-body">
+                    <h5 class="card-title">Cheapy</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Eat fast, eat Cheapy</h6>
+                    <p class="card-text">Computer Engineering student in Software Engineering</p>
+                    <a href="https://github.com/cheapy-ispp" target="_blank" class="btn btn-outline-dark">
+                        <i class="fa fa-github-alt"></i> GitHub Profile</a>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
     
-    <div style="text-align: center;">
-    	<img src="/resources/images/bar2-CI.png" class = "barImage" style="border-radius: 8px;">
-    </div>
-    
-
 	<div class="row-info">
 	    <div class="column-info">
 	    	<a href="https://twitter.com/cheapyispp" target="_blank" class="fa fa-twitter"></a>

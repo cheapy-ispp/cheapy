@@ -49,6 +49,7 @@
 		    <button type="button" role="link" onclick="window.location='${fn:escapeXml(deleteUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 	        <span class="glyphicon glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
 		        Borrar reseña</button>
+		    <button id='btns-edit' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 15px;">Volver</button>
     	</c:if>
     </div>
     
