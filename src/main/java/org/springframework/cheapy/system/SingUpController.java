@@ -127,6 +127,8 @@ public class SingUpController {
 			return "redirect:/";
 		}
 	}
+	
+	
 
 	@GetMapping("/sign-up-client/new")
 	public String singUpClientForm(Map<String, Object> model) {

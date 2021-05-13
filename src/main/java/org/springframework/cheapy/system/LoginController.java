@@ -20,18 +20,10 @@ import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
-import org.springframework.cheapy.model.Authorities;
 import org.springframework.cheapy.model.Client;
-import org.springframework.cheapy.model.User;
 import org.springframework.cheapy.model.Usuario;
 import org.springframework.cheapy.service.ClientService;
-import org.springframework.cheapy.service.FoodOfferService;
-import org.springframework.cheapy.service.NuOfferService;
-import org.springframework.cheapy.service.SpeedOfferService;
-import org.springframework.cheapy.service.TimeOfferService;
-import org.springframework.cheapy.service.UserService;
 import org.springframework.cheapy.service.UsuarioService;
 import org.springframework.cheapy.utils.MD5;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -39,7 +31,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -63,6 +54,8 @@ class LoginController {
 		}
 		return "redirect:/";
 	}
+	
+	
 	
 	@GetMapping("/contrasenaOlvidada")
 	public String contrasenaOlvidada(final Map<String, Object> model, final HttpServletRequest request) {
