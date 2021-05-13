@@ -2,9 +2,7 @@
 package org.springframework.cheapy.configuration;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.sql.DataSource;
 
@@ -16,6 +14,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
 import org.springframework.security.crypto.password.MessageDigestPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,7 +23,6 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
-import org.springframework.security.oauth2.core.oidc.IdTokenClaimNames;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -58,7 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/sign-up-client/new/**").anonymous()
 		.antMatchers("/sign-up-user/new/**").anonymous()
 		.antMatchers("/login/**").anonymous()
-		.antMatchers("/oauth_login/**").anonymous()
+		.antMatchers("/googleForm").authenticated()
 		.antMatchers("/logout").authenticated()
 
 		.antMatchers("/usuarios/new").permitAll()
@@ -83,11 +82,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/pay/**").hasAnyAuthority("notsubscribed","client")
 		
 
-		.and().oauth2Login().loginPage("/oauth")//.userInfoEndpoint().userAuthoritiesMapper(this.userAuthoritiesMapper())
-		.and().formLogin()
-			.loginPage("/login")
+		.and().oauth2Login().loginPage("/oauth").userInfoEndpoint().userAuthoritiesMapper(this.userAuthoritiesMapper())
+		.and().defaultSuccessUrl("/googleForm",true)
+		.and().formLogin().loginPage("/login")
 			.failureUrl("/login?error")
 		    .and().logout().logoutSuccessUrl("/");
+		
 		
 			
 
@@ -99,14 +99,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.headers().frameOptions().sameOrigin();
 		}
 		
-//		private GrantedAuthoritiesMapper userAuthoritiesMapper() {
-//	        return (authorities) -> {
-//	            Set<GrantedAuthority> mappedAuthorities = new HashSet<>();
-//	            //fill in your authorities
-//	            return mappedAuthorities;
-//	        };
-//	}
-//	
+		private GrantedAuthoritiesMapper userAuthoritiesMapper() {
+	        return (authorities) -> {
+	        	List<GrantedAuthority> mappedAuthorities= new ArrayList<>();
+	            mappedAuthorities.add(new SimpleGrantedAuthority("usuario"));
+	            return mappedAuthorities;
+	        };
+	}
+	
 	
 
 	@Override
@@ -142,7 +142,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.authorizationUri("https://accounts.google.com/o/oauth2/v2/auth")
 				.tokenUri("https://www.googleapis.com/oauth2/v4/token")
 				.userInfoUri("https://www.googleapis.com/oauth2/v3/userinfo")
-				.userNameAttributeName(IdTokenClaimNames.SUB)
+				.userNameAttributeName("email")
                                 .jwkSetUri("https://www.googleapis.com/oauth2/v3/certs")
 				.clientName("Google").build();
 	}

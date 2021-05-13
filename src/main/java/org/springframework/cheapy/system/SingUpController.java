@@ -17,6 +17,9 @@ import org.springframework.cheapy.service.ClientService;
 import org.springframework.cheapy.service.UserService;
 import org.springframework.cheapy.service.UsuarioService;
 import org.springframework.cheapy.utils.MD5;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -38,6 +41,9 @@ public class SingUpController {
 	private final UsuarioService usuarioService;
 	@Autowired
 	private final AuthoritiesService authoritiesService;
+	
+	@Autowired
+	private OAuth2AuthorizedClientService authorizedClientService;
 
 	public SingUpController(final ClientService clientService, UserService userService, AuthoritiesService authoritiesService,
 			UsuarioService usuarioService) {
@@ -117,6 +123,83 @@ public class SingUpController {
 					result.rejectValue("usuar.username","" ,"El nombre de usuario no puede estar vacío");
 				}
 				return "singup/singUpUser";
+		 }else {
+			
+			usuario.getUsuar().setPassword(MD5.md5(usuario.getUsuar().getPassword())); //MD5 a la contraseña para que no circule en claro por la red
+			this.usuarioService.saveUsuario(usuario);
+			this.userService.saveUser(user);
+			this.authoritiesService.saveAuthorities(usuario.getUsuar().getUsername(), "usuario");
+			
+			return "redirect:/";
+		}
+	}
+	
+	@GetMapping("/googleForm")
+	public String singUpGoogleUserForm(Map<String, Object> model) {
+	
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		
+		if(this.userService.duplicateUsername(username)) {
+			return "error";
+		}
+		
+		Usuario usuario = new Usuario();
+		
+		User user=new User();
+		
+		usuario.setUsuar(user);
+		usuario.setEmail(username);
+		model.put("usuario", usuario);
+		
+		return "singup/singUpGoogleUser";
+	}
+
+	@PostMapping("/googleForm")
+	public String singUpGoogleUserForm(@Valid Usuario usuario, BindingResult result, Map<String, Object> model) {
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		
+		if(this.userService.duplicateUsername(username)) {
+			return "error";
+		}
+		Authorities auth=new Authorities();
+		
+
+		User user= usuario.getUsuar();
+		user.setUsername(username);
+		user.setEnabled(true);
+		usuario.setUsuar(user);
+		usuario.setEmail(username);
+		
+		auth.setUsername(user.getUsername());
+		auth.setAuthority("usuario");
+		
+		Boolean duplicate=this.userService.duplicateUsername(usuario.getUsuar().getUsername());
+		
+		if(duplicate) {
+			result.rejectValue("usuar.username","" ,"El nombre de usuario ya esta registrado");
+		}
+		if(!usuario.getUsuar().getPassword().matches("^[A-Za-z0-9]{4,}+") ) {
+            result.rejectValue("usuar.password","" ,"La contraseña debe contener al menos cuatro caracteres (letras y números)");
+        }
+		
+		if (result.hasErrors()) {
+			
+			if(usuario.getUsuar().getPassword().equals("")) {
+				result.rejectValue("usuar.password","" ,"La contraseña no puede estar vacía");
+			}
+			
+			
+			return "singup/singUpGoogleUser";
+		 }else if(usuario.getUsuar().getPassword().equals("")||usuario.getUsuar().getUsername().equals("")) {
+			 
+			 if(usuario.getUsuar().getPassword().equals("")) {
+					result.rejectValue("usuar.password","" ,"La contraseña no puede estar vacía");
+				}
+				
+				return "singup/singUpGoogleUser";
 		 }else {
 			
 			usuario.getUsuar().setPassword(MD5.md5(usuario.getUsuar().getPassword())); //MD5 a la contraseña para que no circule en claro por la red
