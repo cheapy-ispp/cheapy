@@ -16,13 +16,13 @@ INSERT INTO users (username,password,enabled) VALUES ('pepe',MD5('pepe'), TRUE )
 INSERT INTO authorities (username,authority) VALUES ('pepe','usuario');
 
 INSERT INTO administrators (id, username) VALUES (1, 'admin');
-INSERT INTO usuarios (id, nombre, apellidos, email, username) VALUES (2, 'Paco', 'Naranjo', 'Paco@gmail.com','paco');
-INSERT INTO usuarios (id, nombre, apellidos, email, username) VALUES (3, 'Lolo', 'Lopez', 'Lolo@gmail.com','lolo');
-INSERT INTO usuarios (id, nombre, apellidos, email, username) VALUES (4, 'Pepe', 'Lopez', 'Pepe@gmail.com','pepe');
+INSERT INTO usuarios (id, nombre, apellidos, email, pregunta_segura1, pregunta_segura2, username) VALUES (2, 'Paco', 'Naranjo', 'Paco@gmail.com', 'paco', 'paco', 'paco');
+INSERT INTO usuarios (id, nombre, apellidos, email, pregunta_segura1, pregunta_segura2, username) VALUES (3, 'Lolo', 'Lopez', 'Lolo@gmail.com', 'lolo', 'lolo','lolo');
+INSERT INTO usuarios (id, nombre, apellidos, email, pregunta_segura1, pregunta_segura2, username) VALUES (4, 'Pepe', 'Lopez', 'Pepe@gmail.com','pepe','pepe','pepe');
 
-INSERT INTO clients (id, name, email, address, parking, municipio, init, finish, telephone, description, food, expiration, username) VALUES (1,'Bar manoli','manoli@gmail.com','C/Betis', TRUE,'Sevilla','10:00:00','22:00:00','608726190', 'Bar Manoli, ¡tu bar favorito!', 'española', '2029-08-15' ,'manoli');
-INSERT INTO clients (id, name, email, address, parking, municipio, init, finish, telephone, description, food, expiration, username) VALUES (2,'Bar david','david@gmail.com', 'C/Sevilla', FALSE, 'Dos_Hermanas','09:30:00','22:00:00','608726190', 'Food from USA', 'americana', '2029-08-15','david');
-INSERT INTO clients (id, name, email, address, parking, municipio, init, finish, telephone, description, food, expiration, username) VALUES (3,'Bar lopez','loez@gmail.com', 'C/Sevilla', FALSE, 'Dos_Hermanas','09:30:00','22:00:00','608726191', 'Lo mejor de América del Norte y del Sur', 'americana y mexicana', '2019-08-15','lopez');
+INSERT INTO clients (id, name, email, address, parking, municipio, init, finish, telephone, description, food, expiration, pregunta_segura1, pregunta_segura2, username, image) VALUES (1,'Bar manoli','manoli@gmail.com','C/Betis', TRUE,'Sevilla','10:00:00','22:00:00','608726190', 'Bar Manoli, ¡tu bar favorito!', 'española', '2029-08-15' ,'manoli','manoli','manoli','https://image.freepik.com/foto-gratis/platos-comida-espanola_136346-1889.jpg');
+INSERT INTO clients (id, name, email, address, parking, municipio, init, finish, telephone, description, food, expiration, pregunta_segura1, pregunta_segura2, username, image) VALUES (2,'Bar david','david@gmail.com', 'C/Sevilla', FALSE, 'Dos_Hermanas','09:30:00','22:00:00','608726190', 'Food from USA', 'americana', '2029-08-15','david', 'david', 'david','https://tse4.mm.bing.net/th?id=OIP.KfMxYWgsSsHUylBxqtc17AHaE8&pid=Api');
+INSERT INTO clients (id, name, email, address, parking, municipio, init, finish, telephone, description, food, expiration, pregunta_segura1, pregunta_segura2, username) VALUES (3,'Bar lopez','loez@gmail.com', 'C/Sevilla', FALSE, 'Dos_Hermanas','09:30:00','22:00:00','608726191', 'Lo mejor de América del Norte y del Sur', 'americana y mexicana', '2019-08-15','lopez', 'lopez', 'lopez');
 
 INSERT INTO food_offers(start, end, code, status, client_id, food, discount, price) VALUES ('2021-04-29 12:00:00', '2021-06-10 12:00:00', 'FO-1', 'inactive', 1, 'Macarrones', 15, 10.0);
 INSERT INTO food_offers(start, end, code, status, client_id, food, discount, price) VALUES ('2021-04-29 12:00:00', '2021-06-10 12:00:00', 'FO-2', 'active', 3, 'Macarrones con tomate', 10, 20.0);
@@ -43,14 +43,14 @@ INSERT INTO time_offers(start, end, code, status, client_id, init, finish, disco
 INSERT INTO time_offers(start, end, code, status, client_id, init, finish, discount) VALUES ('2021-08-16 12:00:00', '2021-08-17 12:00:00', null, 'hidden', 1, '12:00:00', '13:00:00', 15);
 
 INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-05-01 12:00:00', '2021-05-20 12:00:00', 'SP-1', 'inactive',1,5,25,10,15,15,10);
-INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-05-01 12:00:00', '2021-05-20 12:00:00', 'SP-2', 'active',1,35,25,40,15,55,10);
-INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'SP-3', 'active',3,25,25,30,15,35,10);
-INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'SP-4', 'active',3,15,25,20,15,35,10);
-INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'SP-5', 'active',2,15,30,20,15,50,5);
-INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'SP-6', 'active',2,15,30,21,15,50,5);
-INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'SP-7', 'active',2,15,30,22,15,50,5);
+INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-05-01 12:00:00', '2021-05-20 12:00:00', 'SP-2', 'active',1,'23:35:00',25,'23:40:00',15,'23:55:00',10);
+INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'SP-3', 'active',3,'23:15:00',25,'23:20:00',15,'23:30:00',10);
+INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'SP-4', 'active',3,'23:15:00',25,'23:20:00',15,'23:30:00',10);
+INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'SP-5', 'active',2,'23:15:00',30,'23:20:00',15,'23:30:00',5);
+INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-05-23 12:00:00', '2021-05-30 12:00:00', 'SP-6', 'active',2,'23:17:00',20,'23:24:00',15,'23:35:00',5);
+INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-06-02 12:00:00', '2021-02-07 12:00:00', 'SP-7', 'active',2,'23:15:00',25,'23:20:00',20,'23:30:00',10);
 INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-08-16 12:00:00', '2021-08-17 12:00:00', null, 'hidden',1,5,25,10,15,15,10);
-
+																																																
 INSERT INTO nu_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-04-30 12:00:00', '2021-05-4 12:00:00', 'NU-1', 'inactive',1,15,25,10,15,5,10);
 INSERT INTO nu_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-04-30 12:00:00', '2021-05-4 12:00:00', 'NU-2', 'active',1,15,25,10,15,5,10);
 INSERT INTO nu_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'NU-3', 'active',3,15,25,12,15,3,5);

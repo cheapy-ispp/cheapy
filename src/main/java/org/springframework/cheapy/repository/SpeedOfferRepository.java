@@ -32,7 +32,11 @@ public interface SpeedOfferRepository extends PagingAndSortingRepository<SpeedOf
 	@Query("SELECT speedOffer FROM SpeedOffer speedOffer WHERE speedOffer.client.id =:id")
 	@Transactional(readOnly = true)
 	List<SpeedOffer> findByUserId(@Param("id") Integer id);
-
+	
+	@Query("SELECT speedOffer FROM SpeedOffer speedOffer WHERE speedOffer.client.id =:id AND speedOffer.status = 'active'")
+	@Transactional(readOnly = true)
+	List<SpeedOffer> findSpeedOfferActByUserId(@Param("id") Integer id, Pageable pag);
+	
 	@Query("SELECT speedOffer FROM SpeedOffer speedOffer WHERE speedOffer.client.id =:id AND speedOffer.status!= 'inactive'")
 	@Transactional(readOnly = true)
 	List<SpeedOffer> findSpeedOfferActOclByUserId(@Param("id") Integer id);

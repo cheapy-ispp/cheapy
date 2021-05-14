@@ -40,7 +40,14 @@
         
         <tr>
             <th><fmt:message key="parking"/></th>
-            <td><c:out value="${client.parking}"/> </td>
+            <td>
+            <c:if test="${client.parking == 'true'}">
+				<c:out value="Si"/>
+			</c:if>	
+			<c:if test="${client.parking == 'false'}">
+				<c:out value="No"/>
+			</c:if>
+            </td>
         </tr>
         
         <tr>
@@ -56,10 +63,26 @@
             <th><fmt:message key="foodClient"/></th>
             <td><c:out value="${client.food}"/> </td>
         </tr>
-        
         <tr>
             <th><fmt:message key="expiration"/></th>
             <td><c:out value="${client.expiration}"/> </td>
+        </tr>
+
+        <c:if test="${!(client.image eq null)}">
+        <tr>
+            <th><fmt:message key="image"/></th>
+            <td><img src="${client.image}" alt="La imagen no es válida" height="400px" style="border-radius: 8px;"></td>
+        </tr>
+         </c:if>
+        
+        <tr>
+            <th><fmt:message key="preguntaSegura1"/></th>
+            <td><c:out value="${client.preguntaSegura1}"/> </td>
+        </tr>
+        
+        <tr>
+            <th><fmt:message key="preguntaSegura2"/></th>
+            <td><c:out value="${client.preguntaSegura2}"/> </td>
         </tr>
         
         </thead>
@@ -67,7 +90,7 @@
 
     <div class="btn-menu" style="float:right">
 	    
-	<sec:authorize access="hasAnyAuthority('client')">
+	<sec:authorize access="hasAnyAuthority('client','notsubscribed')">
 	<sec:authentication var="principal" property="principal" />
       <div class="btns-edit" style="float:left">
       		
@@ -81,13 +104,23 @@
 	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(disableUrl)}'" style="font-family: 'Lobster'; font-size: 20px;width: auto;">
 	            <span class="glyphicon 	glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
 	          Desactivar cuenta</button>
+	        	    
+	        <c:if test="${!(client.image eq null)}">
+	     	<spring:url value="delete/image" var="deleteImageUrl"/>
+	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deleteImageUrl)}'" style="font-family: 'Lobster'; font-size: 20px;width: auto;">
+	            <span class="glyphicon 	glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
+	          Eliminar Imagen actual</button>
+	       </c:if>
+	    
 	     </div>  
 	     
-	     <div class="eliminar">   
+	     <div class="eliminar"> 
 	        <spring:url value="delete" var="deleteUrl"/>
 	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deleteUrl)}'" >
 	            <span class="glyphicon 	glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
 	          Eliminar cuenta</button>
+	          
+
       	</div>
       </sec:authorize>
       <sec:authorize access="hasAnyAuthority('admin')">

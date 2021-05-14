@@ -70,10 +70,15 @@
               </sec:authorize>
               
               <sec:authorize access="hasAnyAuthority('notsubscribed', 'client')">
-              <div class="btn-home">
+              	  <div class="btn-home">
                       <button class="btn-block" type="button" role="link" onclick="window.location='/pay/month'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
                       <span class="glyphicon glyphicon-euro " aria-hidden="true"></span>
-                      Renovar suscripción </button>
+                      Renovar suscripción mensual</button>
+                  </div>
+                  <div class="btn-home">
+                      <button class="btn-block" type="button" role="link" onclick="window.location='/pay/year'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
+                      <span class="glyphicon glyphicon-euro " aria-hidden="true"></span>
+                      Renovar suscripción anual</button>
                   </div>
                     
               </sec:authorize>

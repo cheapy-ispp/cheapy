@@ -4,6 +4,7 @@ package org.springframework.cheapy.web;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -142,7 +143,10 @@ public class NuOfferController {
 		}
 		Integer next = this.nuOfferService.findActiveNuOffer(nextPage).size();
 
-		model.put("municipios", Municipio.values());
+		Municipio[]municipios=Municipio.values();
+		Arrays.sort(municipios);
+		
+		model.put("municipios", municipios);
 
 		model.put("nuOfferLs", foodOfferLs);
 		model.put("nextPage", next);

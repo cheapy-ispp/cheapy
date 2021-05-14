@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.cheapy.model.Client;
-import org.springframework.cheapy.model.Review;
 import org.springframework.cheapy.model.ReviewClient;
 import org.springframework.cheapy.model.User;
 import org.springframework.cheapy.service.ClientService;
@@ -163,12 +162,11 @@ public class ReviewClientController {
 		
 		User logeado = this.userService.getCurrentUser();
 		ReviewClient rc = this.reviewService.findReviewById(reviewId);
-		
+		String clientId=rc.getBar().getUsuar().getUsername();
 		if(logeado.getUsername().equals(rc.getEscritor().getUsername())) {
 			this.reviewService.deleteReviewClient(rc);
 			
-			
-			return "welcome";
+			return "redirect:/reviewsClientList/"+clientId+"/0";
 		}else {
 			return "error";
 		}

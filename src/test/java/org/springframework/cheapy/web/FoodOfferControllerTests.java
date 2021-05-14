@@ -76,6 +76,8 @@ class FoodOfferControllerTest {
 		client1.setTelephone("123456789");
 		client1.setDescription("client1");
 		client1.setFood("client1");
+		client1.setPreguntaSegura1("client1");
+		client1.setPreguntaSegura2("client1");
 		client1.setUsuar(user1);
 		this.clientTest = client1;
 		BDDMockito.given(this.clientService.getCurrentClient()).willReturn(client1);
@@ -94,6 +96,8 @@ class FoodOfferControllerTest {
 		client2.setTelephone("123456789");
 		client2.setDescription("client2");
 		client2.setFood("client2");
+		client2.setPreguntaSegura1("client2");
+		client2.setPreguntaSegura2("client2");
 		client2.setUsuar(user2);
 		this.clientTest2 = client2;
 		
@@ -184,13 +188,15 @@ class FoodOfferControllerTest {
 	@WithMockUser(value = "spring", authorities = "client")
 	@Test
 	void testProcessCreationFormSuccess() throws Exception {
+		
 		mockMvc.perform(post("/offers/food/new")
 					.with(csrf())
 					.param("start", "2021-12-23T12:30")
 					.param("end", "2022-12-23T12:30")
 					.param("food", "food")
 					.param("discount", "10")
-					.param("price", "10.5"))
+					.param("price", "10.5")
+					.param("image", ""))
 				.andExpect(status().is3xxRedirection());
 	}
 
@@ -203,7 +209,8 @@ class FoodOfferControllerTest {
 					.param("end", "2020-12-22T12:30")
 					.param("food", "")
 					.param("discount", "")
-					.param("price", ""))
+					.param("price", "")
+					.param("image", ""))
 				.andExpect(model().attributeHasErrors("foodOffer"))
 				.andExpect(model().attributeHasFieldErrors("foodOffer", "start"))
 				.andExpect(model().attributeHasFieldErrors("foodOffer", "end"))
@@ -242,6 +249,7 @@ class FoodOfferControllerTest {
 	@WithMockUser(value = "spring", authorities = "client")
 	@Test
 	void testUpdateFoodOfferSuccess() throws Exception {
+
 		mockMvc.perform(post("/offers/food/{foodOfferId}/edit",TEST_FOODOFFER_ID)
 					.with(csrf())
 					.param("id","1")
@@ -252,6 +260,7 @@ class FoodOfferControllerTest {
 					.param("discount", "10")
 					.param("price", "10.5")
 					.param("code", "")
+					.param("image", "")
 					.sessionAttr("idFood", TEST_FOODOFFER_ID))
 				.andExpect(status().is3xxRedirection())
 				.andExpect(view().name("redirect:/offers/food/"+TEST_FOODOFFER_ID));
@@ -260,6 +269,7 @@ class FoodOfferControllerTest {
 	@WithMockUser(value = "spring", authorities = "client")
 	@Test
 	void testUpdateFoodOfferError() throws Exception {
+		
 		mockMvc.perform(post("/offers/food/{foodOfferId}/edit",TEST_FOODOFFER_ID)
 					.with(csrf())
 					.param("id","1")
@@ -270,6 +280,7 @@ class FoodOfferControllerTest {
 					.param("discount", "10")
 					.param("price", "manoli")
 					.param("code", "")
+					.param("image", "")
 					.sessionAttr("idFood", TEST_FOODOFFER_ID))
 				.andExpect(model().attributeExists("foodOffer"))
 				.andExpect(status().isOk())

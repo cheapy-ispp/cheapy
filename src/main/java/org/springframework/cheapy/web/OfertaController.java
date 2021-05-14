@@ -4,6 +4,7 @@ package org.springframework.cheapy.web;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -86,7 +87,11 @@ public class OfertaController {
 		model.put("nuOfferLs", nuOfferLs);
 		model.put("speedOfferLs", speedOfferLs);
 		model.put("timeOfferLs", timeOfferLs);
-		model.put("municipios", Municipio.values());
+		
+		Municipio[]municipios=Municipio.values();
+		Arrays.sort(municipios);
+		
+		model.put("municipios", municipios);
 		model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 
 		return "offers/offersList";
@@ -105,7 +110,11 @@ public class OfertaController {
         model.put("nextPage", next);
         model.put("datos", datos);
         model.put("name", name);
-        model.put("municipios", Municipio.values());
+		
+        Municipio[]municipios=Municipio.values();
+		Arrays.sort(municipios);
+		
+		model.put("municipios", municipios);
         model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 
         return "offers/offersListNameSearch";
@@ -152,7 +161,11 @@ public class OfertaController {
         model.put("nextPage", next);
         model.put("datos", datos);
         model.put("name", name);
-        model.put("municipios", Municipio.values());
+
+		Municipio[]municipios=Municipio.values();
+		Arrays.sort(municipios);
+		
+		model.put("municipios", municipios);
         model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 
         return "offers/offersListFoodSearch";
@@ -205,7 +218,11 @@ public class OfertaController {
 		model.put("now", now);
 		model.put("nextPage", next);
 		model.put("datos", datos);
-		model.put("municipios", Municipio.values());
+
+		Municipio[]municipios=Municipio.values();
+		Arrays.sort(municipios);
+		
+		model.put("municipios", municipios);
 		model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 
 		return "offers/offersListPlaceSearch";
@@ -258,7 +275,11 @@ public class OfertaController {
         model.put("now", now);
         model.put("nextPage", next);
         model.put("datos", datos);
-        model.put("municipios", Municipio.values());
+		Municipio[]municipios=Municipio.values();
+		
+		Arrays.sort(municipios);
+		
+		model.put("municipios", municipios);
         model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 
         return "offers/offersListFoodSearch";
@@ -318,32 +339,47 @@ public class OfertaController {
 		return "offers/offersCreate";
 	}
 
-	//	@GetMapping("/owners/{ownerId}/edit")
-	//	public String initUpdateOwnerForm(@PathVariable("ownerId") int ownerId, Model model) {
-	//		Owner owner = this.ownerService.findOwnerById(ownerId);
-	//		model.addAttribute(owner);
-	//		return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
-	//	}
-	//
-	//	@PostMapping("/owners/{ownerId}/edit")
-	//	public String processUpdateOwnerForm(@Valid Owner owner, BindingResult result,
-	//			@PathVariable("ownerId") int ownerId) {
-	//		if (result.hasErrors()) {
-	//			return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
-	//		}
-	//		else {
-	//			owner.setId(ownerId);
-	//			this.ownerService.saveOwner(owner);
-	//			return "redirect:/owners/{ownerId}";
-	//		}
-	//	}
-	//	@GetMapping("/owners/{ownerId}")
-	//	public ModelAndView showOwner(@PathVariable("ownerId") int ownerId) {
-	//		ModelAndView mav = new ModelAndView("owners/ownerDetails");
-	//		Owner owner = this.ownerService.findOwnerById(ownerId);
-	//
-	//		mav.addObject(owner);
-	//		return mav;
-	//	}
+	@GetMapping("/offersFavourite/{clientId}/{page}")
+	public String listFavourites(@PathVariable("page") final int page, @PathVariable("clientId") final int clientId,final Map<String, Object> model) {
 
+		Pageable elements = PageRequest.of(page, 2);
+        Pageable nextPage = PageRequest.of(page+1, 2);
+
+        List<Object[]> datos = ofertasPag(elements, clientId);
+        List<Object[]> datosNext = ofertasPag(nextPage, clientId);
+
+        Integer next = datosNext.size();
+        model.put("clientId", clientId);
+        model.put("nextPage", next);
+        model.put("datos", datos);
+        model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+
+		return "offers/offersFavouriteList";
+	}
+	
+	private List<Object[]> ofertasPag(Pageable pag, int clientId){
+    	List<Object[]> datos = new ArrayList<Object[]>();
+
+        for(Offer of:this.foodOfferService.findFoodOfferActByUserId(clientId, pag)) {
+            Object[] fo = {of, "food"};
+            datos.add(fo);
+        }
+
+        for(Offer of:this.nuOfferService.findNuOfferActByUserId(clientId, pag)) {
+            Object[] nu = {of, "nu"};
+            datos.add(nu);
+        }
+
+        for(Offer of:this.speedOfferService.findSpeedOfferActByUserId(clientId, pag)) {
+            Object[] sp = {of, "speed"};
+            datos.add(sp);
+        }
+
+        for(Offer of:this.timeOfferService.findTimeOfferActByUserId(clientId, pag)) {
+            Object[] ti = {of, "time"};
+            datos.add(ti);
+        }
+        return datos;
+
+    }
 }

@@ -39,7 +39,14 @@
         </tr>
         <tr>
             <th><fmt:message key="parking"/></th>
-            <td><c:out value="${client.parking}"/> </td>
+            <td>
+            <c:if test="${client.parking == 'true'}">
+				<c:out value="Si"/>
+			</c:if>	
+			<c:if test="${client.parking == 'false'}">
+				<c:out value="No"/>
+			</c:if>
+            </td>
         </tr><tr>
             <th><fmt:message key="telephone"/></th>
             <td><c:out value="${client.telephone}"/> </td>
@@ -51,7 +58,13 @@
             <td><c:out value="${client.municipio}"/> </td>
         </tr><tr>
             <th><fmt:message key="foodClient"/></th>
-            <td><c:out value="${client.food}"/> </td>      
+            <td><c:out value="${client.food}"/> </td>
+        <c:if test="${!(client.image eq null)}">
+        <tr>
+            <th><fmt:message key="image"/></th>
+            <td><img src="${client.image}" alt ="La imagen no es válida" height="400px" style="border-radius: 8px;"></td>
+        </tr>
+         </c:if>      
         
         </thead>
     </table>

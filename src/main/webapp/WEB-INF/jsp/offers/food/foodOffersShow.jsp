@@ -60,11 +60,24 @@
             <th><fmt:message key="municipio"/></th>
             <td><c:out value="${foodOffer.client.municipio}"/> </td>
         </tr>
-
+		<sec:authorize access="isAuthenticated()">
         <tr>
             <th><fmt:message key="offerCode"/></th>
-            <td><c:out value="${foodOffer.code}"/></td>
+            <td><b><c:out value="${foodOffer.code}"/></b></td>
         </tr>
+        </sec:authorize>
+        <sec:authorize access="!isAuthenticated()">
+        <tr>
+            <th><fmt:message key="offerCode"/></th>
+            <td><b>Para acceder al código debe iniciar sesión</b></td>
+        </tr>
+        </sec:authorize>
+       <c:if test="${!(foodOffer.image eq null)}">
+        <tr>
+            <th><fmt:message key="image"/></th>
+            <td><img src="${foodOffer.image}" alt="La imagen no es válida" height="400px" style="border-radius: 8px;"></td>
+        </tr>
+         </c:if>
         </thead>
     </table>
 
@@ -104,6 +117,16 @@
          </c:if>
         </c:if>
         
+      </div>
+     <div class="eliminar">
+      <c:if test="${!(foodOffer.image eq null)}">
+	        <spring:url value="{foodOfferId}/delete/image" var="deleteImageUrl">
+	        <spring:param name="foodOfferId" value="${foodOffer.id}"/>
+	        </spring:url>
+	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deleteImageUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+	            <span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
+	          Eliminar imagen</button>
+         </c:if>
       </div>
       </sec:authorize>
       <button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 15px;">Volver</button>

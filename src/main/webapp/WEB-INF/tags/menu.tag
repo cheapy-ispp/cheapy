@@ -41,7 +41,7 @@
 				</sec:authorize>
 				
 				<sec:authorize access="hasAnyAuthority('client')">
-				<cheapy:menuItem active="${name eq 'ofertasM'}" url="/offersCreate" title="Mis Ofertas">
+				<cheapy:menuItem active="${name eq 'crearOfertas'}" url="/offersCreate" title="Crear Ofertas">
 					<span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>
 					<span>Crear oferta</span>
 				</cheapy:menuItem>
@@ -62,10 +62,27 @@
 				</sec:authorize>
 				
 				<sec:authorize access="hasAnyAuthority('notsubscribed')">
-				<cheapy:menuItem active="${name eq 'payment'}" url="/pay" title="Renovar Suscripción">
+				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
 					<span class="glyphicon glyphicon-euro " aria-hidden="true"></span>
-					<span>Renovar suscripción</span>
-				</cheapy:menuItem>
+					Renovar suscripción
+					<span class="glyphicon glyphicon-chevron-down"></span>
+					</a>
+						<ul class="dropdown-menu dropdown-suscription dropdown-menu-right">
+							<li style="text-align: center">
+								<cheapy:menuItem active="${name eq 'paymentM'}" url="/pay/month" title="Renovar Suscripción Mensual">
+									<span class="glyphicon glyphicon-euro " aria-hidden="true"></span>
+									<span>Suscripción mensual</span>
+								</cheapy:menuItem>
+							</li>
+							<li class="divider"></li>
+							<li style="text-align: center">
+								<cheapy:menuItem active="${name eq 'paymentY'}" url="/pay/year" title="Renovar Suscripción Anual">
+									<span class="glyphicon glyphicon-euro " aria-hidden="true"></span>
+									<span>Suscripción anual</span>
+								</cheapy:menuItem>
+							</li>
+						</ul>
+				</li>
 				</sec:authorize>
 				
 				<sec:authorize access="hasAnyAuthority('admin')">
@@ -94,18 +111,6 @@
 						<span>Reseñas</span>
 					</cheapy:menuItem>
 				</sec:authorize>
-				<sec:authorize access="hasAnyAuthority('client')">
-					<cheapy:menuItem active="${name eq 'reviewsN'}" url="/reviews/new" title="Valorar Cheapy">
-						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-						<span>Valóranos</span>
-					</cheapy:menuItem>		           		            
-		        </sec:authorize>
-				<sec:authorize access="hasAnyAuthority('usuario')">
-					<cheapy:menuItem active="${name eq 'reviewsN'}" url="/reviews/new" title="Valorar Cheapy">
-						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-						<span>Valóranos</span>
-					</cheapy:menuItem> 		           		            
-		        </sec:authorize>
 		        <sec:authorize access="hasAnyAuthority('client')">
 					<cheapy:menuItem active="${name eq 'reviewsClient'}" url="/myClientReviews" title="Mis Reseñas">
 						<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
@@ -120,7 +125,7 @@
 			
 			<ul class="nav navbar-nav navbar-right" style="text-align: center">
 	   
-                <sec:authorize access="hasAnyAuthority('client')">
+                <sec:authorize access="hasAnyAuthority('client','notsubscribed')">
 					<cheapy:menuItem active="${name eq 'miPerfil'}" url="/clients/show" title="Mi Perfil">
 						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
 						<span>Mi perfil</span>

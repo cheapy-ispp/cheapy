@@ -27,7 +27,8 @@
 	        <tr>
 	
 	        	<th><fmt:message key="name"/></th>
-	        	<th><fmt:message key="foodClient"/></th> 
+	        	<th><fmt:message key="foodClient"/></th>
+	        	<th> </th>
 	            <th> </th>
 	        </tr>
 	        </thead>
@@ -40,6 +41,16 @@
 	                <td>
 	                    <c:out value="${client.food}"/>
 	                </td>
+	                <td>
+		                <spring:url value="/offersFavourite/{clientId}/0" var="clientUrl">
+		                        <spring:param name="clientId" value="${client.id}"/>
+		                </spring:url>
+		                <div class="btn-detalles">
+	                		<button type="button" role="link" onclick="window.location='${fn:escapeXml(clientUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+	                		<span class="glyphicon glyphicon-info-sign" aria-hidden="true" style="padding: 5px"> </span>
+		                	<fmt:message key="listOffers"/></button>
+	            		</div>
+	                </td>  
 	                <td>
 		                <spring:url value="/restaurant/{clientId}" var="clientUrl">
 		                        <spring:param name="clientId" value="${client.id}"/>

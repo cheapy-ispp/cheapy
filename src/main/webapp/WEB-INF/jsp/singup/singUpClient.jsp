@@ -25,7 +25,7 @@
 				name="name" />
 			<cheapy:inputField label="Direccion" placeholder="Ponga aqui su dirección"
 				name="address" />
-			<cheapy:inputField label="Posee facil aparcamiento" placeholder="true / false"
+			<cheapy:inputField label="¿Posee fácil aparcamiento?" placeholder="true / false"
 				name="parking" />			
 			<cheapy:timeField label="Hora de apertura" placeholder="Ponga aqui su hora de apertura (formato HH:mm)"
 				name="init" />
@@ -39,6 +39,10 @@
 				name="email" />
 			<cheapy:inputField label="Tipo de comida" placeholder="Indique que tipo de comida sirve su negocio"
 				name="food" />
+			<cheapy:inputField label="Pregunta segura 1: ¿Cuál es su plato de comida favorito?" placeholder="Estas preguntas le permitiran recuperar su contraseña en caso de olvido"
+				name="preguntaSegura1" />
+			<cheapy:inputField label="Pregunta segura 2: ¿Cuál es su ciudad de nacimiento?" placeholder="Estas preguntas le permitiran recuperar su contraseña en caso de olvido"
+				name="preguntaSegura2" />
 			<cheapy:inputField label="Nombre de usuario" placeholder="Ponga aqui su nombre de usuario"
 				name="usuar.username" />
 			<cheapy:passwordField label="Contraseña" placeholder="Ponga aqui su contraseña"

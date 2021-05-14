@@ -47,7 +47,11 @@ public class SpeedOfferService {
 	public List<SpeedOffer> findSpeedOfferByUserId(final int id) {
 		return this.speedOfferRepository.findByUserId(id);
 	}
-
+	
+	public List<SpeedOffer> findSpeedOfferActByUserId(final int id, Pageable pag) {
+		return this.speedOfferRepository.findSpeedOfferActByUserId(id, pag);
+	}
+	
 	public List<SpeedOffer> findSpeedOfferActOclByUserId(final int id) {
 		return this.speedOfferRepository.findSpeedOfferActOclByUserId(id);
 	}

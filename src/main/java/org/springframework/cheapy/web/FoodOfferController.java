@@ -3,6 +3,7 @@ package org.springframework.cheapy.web;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -81,7 +82,10 @@ public class FoodOfferController {
 		}
 		Integer next = this.foodOfferService.findActiveFoodOffer(nextPage).size();
 
-		model.put("municipios", Municipio.values());
+		Municipio[]municipios=Municipio.values();
+		Arrays.sort(municipios);
+		
+		model.put("municipios", municipios);
 
 		model.put("foodOfferLs", foodOfferLs);
 		model.put("nextPage", next);
@@ -116,6 +120,7 @@ public class FoodOfferController {
 		Client client = this.clientService.getCurrentClient();
 		foodOffer.setClient(client);
 		foodOffer.setStatus(StatusOffer.hidden);
+		
 		this.foodOfferService.saveFoodOffer(foodOffer);
 		return "redirect:/offers/food/" + foodOffer.getId();
 
@@ -192,10 +197,31 @@ public class FoodOfferController {
 			return FoodOfferController.VIEWS_FOOD_OFFER_CREATE_OR_UPDATE_FORM;
 
 		}
-		BeanUtils.copyProperties(this.foodOfferService.findFoodOfferById(foodOfferEdit.getId()), foodOfferEdit, "start", "end", "food", "discount", "price");
+		if(foodOfferEdit.getImage().isEmpty()) {
+			foodOfferEdit.setImage(null);
+		}
+		
+		BeanUtils.copyProperties(this.foodOfferService.findFoodOfferById(foodOfferEdit.getId()), foodOfferEdit, "start", "end", "food", "discount", "price","image");
+		
 		this.foodOfferService.saveFoodOffer(foodOfferEdit);
 		return "redirect:/offers/food/" + foodOfferEdit.getId();
 
+	}
+	
+	@GetMapping(value = "/offers/food/{foodOfferId}/delete/image")
+	public String deleteImageFoodOffer(@PathVariable("foodOfferId") final int foodOfferId, final ModelMap model) {
+
+		if (!this.checkIdentity(foodOfferId)) {
+			return "error";
+		}
+
+		FoodOffer foodOffer = this.foodOfferService.findFoodOfferById(foodOfferId);
+			if(foodOffer.getImage() != null ) {
+			foodOffer.setImage(null);
+			
+			}
+			this.foodOfferService.saveFoodOffer(foodOffer);
+		return "redirect:/offers/food/" + foodOffer.getId();
 	}
 
 	@GetMapping(value = "/offers/food/{foodOfferId}/disable")
