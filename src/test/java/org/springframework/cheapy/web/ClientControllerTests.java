@@ -30,6 +30,7 @@ import org.springframework.cheapy.model.Usuario;
 import org.springframework.cheapy.service.ClientService;
 import org.springframework.cheapy.service.FoodOfferService;
 import org.springframework.cheapy.service.NuOfferService;
+import org.springframework.cheapy.service.ReviewService;
 import org.springframework.cheapy.service.SpeedOfferService;
 import org.springframework.cheapy.service.TimeOfferService;
 import org.springframework.cheapy.service.UserService;
@@ -55,6 +56,9 @@ class ClientControllerTest {
 	
 	@MockBean
 	private UserService userService;
+	
+	@MockBean
+	private ReviewService reviewService;
 	
 	@MockBean
 	private UsuarioService usuarioService;

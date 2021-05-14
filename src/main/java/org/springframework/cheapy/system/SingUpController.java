@@ -2,7 +2,9 @@ package org.springframework.cheapy.system;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -146,7 +148,15 @@ public class SingUpController {
 		cliente.setUsuar(user);
 		LocalDate ayer= LocalDate.now().minusDays(2);
 		cliente.setExpiration(ayer);
-		model.put("municipios", municipios);
+		
+		Map<Object, String> municipiosOrdenados = municipios.entrySet()
+				  .stream()
+				  .sorted(Map.Entry.comparingByValue())
+				  .collect(Collectors.toMap(
+				    Map.Entry::getKey, 
+				    Map.Entry::getValue, 
+				    (viejo, nuevo) -> viejo, LinkedHashMap::new));
+		model.put("municipios", municipiosOrdenados);
 		model.put("cliente", cliente);
 		
 		return "singup/singUpClient";
@@ -190,8 +200,14 @@ public class SingUpController {
 			    municipios.put(a[cont], i.toString());
 			    cont++;
 			}
-			
-			model.put("municipios", municipios);
+			Map<Object, String> municipiosOrdenados = municipios.entrySet()
+					  .stream()
+					  .sorted(Map.Entry.comparingByValue())
+					  .collect(Collectors.toMap(
+					    Map.Entry::getKey, 
+					    Map.Entry::getValue, 
+					    (viejo, nuevo) -> viejo, LinkedHashMap::new));
+			model.put("municipios", municipiosOrdenados);
 			model.put("cliente", cliente);
 			
 			if(cliente.getUsuar().getPassword().equals("")) {
@@ -215,7 +231,14 @@ public class SingUpController {
 			    cont++;
 			}
 			
-			model.put("municipios", municipios);
+			Map<Object, String> municipiosOrdenados = municipios.entrySet()
+					  .stream()
+					  .sorted(Map.Entry.comparingByValue())
+					  .collect(Collectors.toMap(
+					    Map.Entry::getKey, 
+					    Map.Entry::getValue, 
+					    (viejo, nuevo) -> viejo, LinkedHashMap::new));
+			model.put("municipios", municipiosOrdenados);
 			model.put("cliente", cliente);
 			
 			 if(cliente.getUsuar().getPassword().equals("")) {

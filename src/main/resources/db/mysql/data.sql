@@ -43,14 +43,14 @@ INSERT INTO time_offers(start, end, code, status, client_id, init, finish, disco
 INSERT INTO time_offers(start, end, code, status, client_id, init, finish, discount) VALUES ('2021-08-16 12:00:00', '2021-08-17 12:00:00', null, 'hidden', 1, '12:00:00', '13:00:00', 15);
 
 INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-05-01 12:00:00', '2021-05-20 12:00:00', 'SP-1', 'inactive',1,5,25,10,15,15,10);
-INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-05-01 12:00:00', '2021-05-20 12:00:00', 'SP-2', 'active',1,35,25,40,15,55,10);
-INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'SP-3', 'active',3,25,25,30,15,35,10);
-INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'SP-4', 'active',3,15,25,20,15,35,10);
-INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'SP-5', 'active',2,15,30,20,15,50,5);
-INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'SP-6', 'active',2,15,30,21,15,50,5);
-INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'SP-7', 'active',2,15,30,22,15,50,5);
+INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-05-01 12:00:00', '2021-05-20 12:00:00', 'SP-2', 'active',1,'23:35:00',25,'23:40:00',15,'23:55:00',10);
+INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'SP-3', 'active',3,'23:15:00',25,'23:20:00',15,'23:30:00',10);
+INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'SP-4', 'active',3,'23:15:00',25,'23:20:00',15,'23:30:00',10);
+INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'SP-5', 'active',2,'23:15:00',30,'23:20:00',15,'23:30:00',5);
+INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-05-23 12:00:00', '2021-05-30 12:00:00', 'SP-6', 'active',2,'23:17:00',20,'23:24:00',15,'23:35:00',5);
+INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-06-02 12:00:00', '2021-02-07 12:00:00', 'SP-7', 'active',2,'23:15:00',25,'23:20:00',20,'23:30:00',10);
 INSERT INTO speed_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-08-16 12:00:00', '2021-08-17 12:00:00', null, 'hidden',1,5,25,10,15,15,10);
-
+																																																
 INSERT INTO nu_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-04-30 12:00:00', '2021-05-4 12:00:00', 'NU-1', 'inactive',1,15,25,10,15,5,10);
 INSERT INTO nu_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-04-30 12:00:00', '2021-05-4 12:00:00', 'NU-2', 'active',1,15,25,10,15,5,10);
 INSERT INTO nu_offers(start, end, code, status, client_id, gold, discount_gold, silver, discount_silver, bronze, discount_bronze) VALUES ('2021-08-15 12:00:00', '2021-08-16 12:00:00', 'NU-3', 'active',3,15,25,12,15,3,5);
