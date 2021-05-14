@@ -7,6 +7,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -23,6 +24,7 @@ import org.springframework.security.oauth2.client.registration.ClientRegistratio
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
+import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -39,6 +41,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	DataSource dataSource;
 
+	private String clientId;
+    private String clientSecret;
+	
+    public SecurityConfiguration(@Value("${spring.security.oauth2.client.registration.google.clientId}") String clientId, @Value("${spring.security.oauth2.client.registration.google.clientSecret}") String clientSecret) {
+        this.clientId = clientId;
+        this.clientSecret = clientSecret;
+    }
 
 	@Override
 	protected void configure(final HttpSecurity http) throws Exception {
@@ -82,7 +91,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/pay/**").hasAnyAuthority("notsubscribed","client")
 		
 
-		.and().oauth2Login().loginPage("/oauth").userInfoEndpoint().userAuthoritiesMapper(this.userAuthoritiesMapper())
+		.and().oauth2Login().loginPage("/login").userInfoEndpoint().userAuthoritiesMapper(this.userAuthoritiesMapper())
 		.and().defaultSuccessUrl("/googleForm",true)
 		.and().formLogin().loginPage("/login")
 			.failureUrl("/login?error")
@@ -132,10 +141,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		return new InMemoryClientRegistrationRepository(registrations);
 	}
 	private ClientRegistration googleClientRegistration() {
+		//String prueba = this.env.getProperty("spring.security.oauth2.client.registration.google.client-id");
+//		String prueba2 = this.clientSecreto;
 		return ClientRegistration.withRegistrationId("google")
-                                .clientId("397632660469-p0c41e1s8l2qhjv3dv1cje7q4cpcoef8.apps.googleusercontent.com")
-				.clientSecret("yIrxqVYfKTMQm2fpgjLrl80R")
-                //.clientAuthenticationMethod(ClientAuthenticationMethod.NONE)
+                .clientId(this.clientId)
+				.clientSecret(this.clientSecret)
+                .clientAuthenticationMethod(ClientAuthenticationMethod.BASIC)
 				.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
 				.redirectUriTemplate("{baseUrl}/login/oauth2/code/{registrationId}")
 				.scope("openid", "profile", "email", "address", "phone")

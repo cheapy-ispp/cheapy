@@ -138,7 +138,7 @@ public class SingUpController {
 		String username = authentication.getName();
 		
 		if(this.userService.duplicateUsername(username)) {
-			return "error";
+			return "welcome";
 		}
 		
 		Usuario usuario = new Usuario();
