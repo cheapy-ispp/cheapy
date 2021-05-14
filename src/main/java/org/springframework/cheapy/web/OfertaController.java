@@ -4,12 +4,12 @@ package org.springframework.cheapy.web;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.cheapy.model.Client;
 import org.springframework.cheapy.model.FoodOffer;
 import org.springframework.cheapy.model.Municipio;
 import org.springframework.cheapy.model.NuOffer;
@@ -87,7 +87,11 @@ public class OfertaController {
 		model.put("nuOfferLs", nuOfferLs);
 		model.put("speedOfferLs", speedOfferLs);
 		model.put("timeOfferLs", timeOfferLs);
-		model.put("municipios", Municipio.values());
+		
+		Municipio[]municipios=Municipio.values();
+		Arrays.sort(municipios);
+		
+		model.put("municipios", municipios);
 		model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 
 		return "offers/offersList";
@@ -106,7 +110,11 @@ public class OfertaController {
         model.put("nextPage", next);
         model.put("datos", datos);
         model.put("name", name);
-        model.put("municipios", Municipio.values());
+		
+        Municipio[]municipios=Municipio.values();
+		Arrays.sort(municipios);
+		
+		model.put("municipios", municipios);
         model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 
         return "offers/offersListNameSearch";
@@ -153,7 +161,11 @@ public class OfertaController {
         model.put("nextPage", next);
         model.put("datos", datos);
         model.put("name", name);
-        model.put("municipios", Municipio.values());
+
+		Municipio[]municipios=Municipio.values();
+		Arrays.sort(municipios);
+		
+		model.put("municipios", municipios);
         model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 
         return "offers/offersListFoodSearch";
@@ -206,7 +218,11 @@ public class OfertaController {
 		model.put("now", now);
 		model.put("nextPage", next);
 		model.put("datos", datos);
-		model.put("municipios", Municipio.values());
+
+		Municipio[]municipios=Municipio.values();
+		Arrays.sort(municipios);
+		
+		model.put("municipios", municipios);
 		model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 
 		return "offers/offersListPlaceSearch";
@@ -259,7 +275,11 @@ public class OfertaController {
         model.put("now", now);
         model.put("nextPage", next);
         model.put("datos", datos);
-        model.put("municipios", Municipio.values());
+		Municipio[]municipios=Municipio.values();
+		
+		Arrays.sort(municipios);
+		
+		model.put("municipios", municipios);
         model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 
         return "offers/offersListFoodSearch";

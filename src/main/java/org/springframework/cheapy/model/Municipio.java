@@ -2,24 +2,7 @@
 package org.springframework.cheapy.model;
 
 public enum Municipio {
-	Dos_Hermanas{
-		@Override
-		public String toString() {
-			return "Dos Hermanas";
-		}
-		
-	}
-	
-	, Sevilla{
-		@Override
-		public String toString() {
-			return "Sevilla";
-			
-		}
-		
-	}
-	
-	, Carmona{
+	Carmona{
 		@Override
 		public String toString() {
 			return "Carmona";
@@ -27,6 +10,15 @@ public enum Municipio {
 		}
 		
 	}
+	
+	, Dos_Hermanas{
+		@Override
+		public String toString() {
+			return "Dos Hermanas";
+		}
+		
+	}
+	
 	, Gerena{
 		@Override
 		public String toString() {
@@ -52,5 +44,18 @@ public enum Municipio {
 		}
 		
 	}
+	
+	, Sevilla{
+		@Override
+		public String toString() {
+			return "Sevilla";
+			
+		}
+		
+	}
+	
+
+	
+
 	
 }
