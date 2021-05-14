@@ -19,7 +19,6 @@ import org.springframework.cheapy.service.UsuarioService;
 import org.springframework.cheapy.utils.MD5;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -31,7 +30,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class SingUpController {
 
-	//private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm";
+
 
 	@Autowired
 	private final ClientService clientService;
@@ -42,8 +41,6 @@ public class SingUpController {
 	@Autowired
 	private final AuthoritiesService authoritiesService;
 	
-	@Autowired
-	private OAuth2AuthorizedClientService authorizedClientService;
 
 	public SingUpController(final ClientService clientService, UserService userService, AuthoritiesService authoritiesService,
 			UsuarioService usuarioService) {

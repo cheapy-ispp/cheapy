@@ -15,7 +15,7 @@
 <cheapy:layout pageName="singUpUser">
 <div class="text-center">
     <h2 class="titulo" style="font-family: 'Lobster'; text-align:center; font-size:200%;  padding:10px">
-        <fmt:message key="new"/><fmt:message key="usuario"/>
+        <fmt:message key="googleForm"/>
     </h2>
 </div>
 	<form:form modelAttribute="usuario" class="form-horizontal"
