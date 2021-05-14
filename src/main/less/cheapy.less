@@ -302,14 +302,29 @@ img.img-responsive{
 	color: black;
 }
 
+#volver {
+	background:	#325a80;
+	padding: 15px 26px;
+	color: white;
+	//padding: 10px;
+	//text-align:right;
+	float: right;
+  margin:10px;
+	border: none;
+  }
 .btn-cheapyReview{
 	background:	#325a80;
 	color: white;
 	padding: 10px;
-	margin:10px;
+  margin:10px;
 	border: none;
-}
+  }
 
+
+#volver:hover{
+  background:	#B9D8EF;
+	color: black;
+}
 .btn-cheapyReview:hover{
 	background:	#B9D8EF;
 	color: black;
@@ -569,13 +584,15 @@ vertical-align: middle;
 .btns-delete button:hover {
   background-color: rgb(40, 140, 215);
 }
-.fadeIn.fourth {
+
+input[type=button], input[type=submit], input[type=reset] {
 	background-color: #325a80;
 	color: white;
 	box-shadow:0 10px 30px 0 #B9D8EF;
-}
+	float:center;
+	}
 
-.fadeIn.fourth:hover {
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
 	background-color: #B9D8EF;
 	color: black;
 	box-shadow:0 10px 30px 0 #325a80;
