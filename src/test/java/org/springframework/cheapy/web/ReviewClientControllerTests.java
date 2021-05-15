@@ -56,6 +56,7 @@ class ReviewClientControllerTest {
 	@MockBean
 	private ReviewClientService reviewClientService;
 	
+	
 	private User user;
 	private Client client;
 
@@ -98,6 +99,8 @@ class ReviewClientControllerTest {
 		List<ReviewClient> reviewClientLs = new ArrayList<>();
 		reviewClientLs.add(reviewClient);
 		BDDMockito.given(this.reviewClientService.findAllReviewsByBar(PageRequest.of(0, 6), client)).willReturn(reviewClientLs);
+		
+		BDDMockito.given(this.userService.duplicateUsername("spring")).willReturn(true);
 	}
 	
 	@WithMockUser(value = "spring", authorities = "usuario")

@@ -19,6 +19,7 @@ import org.springframework.cheapy.model.Client;
 import org.springframework.cheapy.model.User;
 import org.springframework.cheapy.model.Usuario;
 import org.springframework.cheapy.service.ClientService;
+import org.springframework.cheapy.service.UserService;
 import org.springframework.cheapy.service.UsuarioService;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
@@ -43,6 +44,9 @@ class UsuarioControllerTest {
 	
 	@MockBean
 	private ClientService clientService;
+	
+	@MockBean
+	private UserService		userService;
 
 	@BeforeEach
 	void setup() {
@@ -77,6 +81,8 @@ class UsuarioControllerTest {
 		client.setId(0);
 		BDDMockito.given(this.clientService.findById(0)).willReturn(client);
 		BDDMockito.given(this.clientService.findById(1)).willReturn(client1);
+		
+		BDDMockito.given(this.userService.duplicateUsername("spring")).willReturn(true);
 	}
 
 	@WithMockUser(value = "spring", authorities = "usuario")

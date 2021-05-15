@@ -26,7 +26,9 @@
 	      
 	      </c:if>
 	    </div>
-
+		<a class="btn btn-block btn-social btn-google customBtn" href="/oauth2/authorization/google">
+    							<span class="fa fa-google width42px"></span> Iniciar sesión con google
+  							</a>
 	    <!-- Login Form -->
 	    <form class='form-signin' action="/login" method='POST'>
 	      <input type="text" id="username" class="fadeIn second" name="username" placeholder="Usuario" required autofocus>
