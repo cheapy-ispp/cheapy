@@ -58,7 +58,7 @@
         <sec:authorize access="isAuthenticated()">
         <tr>
             <th><fmt:message key="offerCode"/></th>
-            <td><b><c:out value="${speedOffer.code}"/></b></td>
+            <td><b><c:out value="${timeOffer.code}"/></b></td>
         </tr>
         </sec:authorize>
         <sec:authorize access="!isAuthenticated()">

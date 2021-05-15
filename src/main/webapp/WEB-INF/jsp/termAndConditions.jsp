@@ -38,7 +38,7 @@
 	cualquier suceso que sea reportado. Los derechos que protegemos para todo aquel que use nuestra aplicación son: </p> 
 	<br>       
 	<ul>
-		<li type="circle"><p><b>Transparencia en el uso de sus datos.</b> Cheapy no dará sus datos a terceros. Si le redireccionará una plataforma de pago en caso de ser cliente, no nos hacemos responsables de los Términos y Condiciones de esas compañías.
+		<li type="circle"><p><b>Transparencia en el uso de sus datos.</b> Cheapy no dará sus datos a terceros. Se le redireccionará a una plataforma de pago en caso de ser cliente, no nos hacemos responsables de los Términos y Condiciones de esas compañías.
 		 Si en algún momento existen dudas del uso que se les da a sus datos, puede escribirnos a nuestro correo; sin embargo, recomendamos encarecidamente leer primero este documento detenidamente, ya que el uso de sus datos se ha definido en él. 
 		 SI desea realizar alguna objeción con respecto a su uso, por favor escríbanos un correo con el asunto “Objeción” más el nombre de su cuenta.  </p></li>
 		 <br>
@@ -106,7 +106,9 @@
 	</ul>
    <h2 class="titulo" style="font-family: 'Lobster'; font-size: 200%; color: rgb(0, 64, 128); padding:30px"><fmt:message key="termAndConditions1.4"/></h2>
    <p>En caso de cualquier problema, ponemos a su disposición nuestro correo corporativo (cheapy.ispp@gmail.com) donde responderemos al correo con el que se nos haya escrito.  </p>
-   <p>Si se detectan campos rellenados con palabras ofensivas o contenido inapropiado, se sancionará dicha cuenta de la forma que se vea apropiada.<p>
+   <p>Si se detectan campos rellenados con palabras ofensivas o contenido inapropiado, se sancionará dicha cuenta de la forma que se vea apropiada.</p>
+   <p>Si su cuenta se viese comprometida por favor póngase en contacto con nosotros de inmediato y procederemos a bloquear la cuenta mientras estudiamos su caso. Se tomarán las medidas necesarias y si el usuario desease que se elimine así se hará.</p>
+   <p>En caso de brecha de seguridad en nuestro sistema, Cheapy detendrá su funcionamiento y avisará a todos los usuarios con un correo. Si las cuentas se viesen comprometidas u otros incidentes se diesen, todo se reflejará en dicho correo. Cheapy cesará su funcionamiento hasta previo aviso en otro correo.</p>
    <p>Si desea apelar a cualquiera de los casos descritos en los apartados anteriores, por favor lea con detenimiento las cláusulas y use los asuntos que se describen para una mayor agilidad de nuestro equipo. </p>
    <br>
   
