@@ -67,6 +67,8 @@ class ReviewControllerTest {
 		reviewLs = new ArrayList<>();
 		reviewLs.add(review);
 		BDDMockito.given(this.reviewService.findAllReviews(PageRequest.of(0, 6))).willReturn(reviewLs);
+		
+		BDDMockito.given(this.userService.duplicateUsername("spring")).willReturn(true);
 	}
 	
 	@WithMockUser(value = "spring", authorities = "usuario")
