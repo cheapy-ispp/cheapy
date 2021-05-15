@@ -35,6 +35,7 @@
 	      <div style="text-align: center;">
 		  	<input type="submit" class="fadeIn fourth"  value="Iniciar sesión">
 		  </div>
+		  <a href="/forgottenPassword"><c:out value="Contraseña olvidada"/></a>
 	    </form>
 	
 	    <!-- Remind Passowrd 

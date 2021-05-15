@@ -27,14 +27,6 @@
             <th><fmt:message key="email"/></th>
             <td><c:out value="${usuario.email}"/></td>
         </tr>
-        <tr>
-            <th><fmt:message key="preguntaSegura1"/></th>
-            <td><c:out value="${usuario.preguntaSegura1}"/></td>
-        </tr>
-        <tr>
-            <th><fmt:message key="preguntaSegura2"/></th>
-            <td><c:out value="${usuario.preguntaSegura2}"/></td>
-        </tr>
         </thead>
     </table>
 

@@ -18,6 +18,8 @@
             <form:hidden path="nombre"/>
 	        <form:hidden path="apellidos"/>
 	        <form:hidden path="email"/>
+	        <form:hidden path="preguntaSegura1"/>
+	        <form:hidden path="preguntaSegura2"/>
             <cheapy:passwordEditField label="Nueva contraseña"  name="usuar.password"/>
 					        
             
