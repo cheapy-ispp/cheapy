@@ -39,14 +39,14 @@
 				name="email" />
 			<cheapy:inputField label="Tipo de comida" placeholder="Indique que tipo de comida sirve su negocio"
 				name="food" />
-			<cheapy:inputField label="Pregunta segura 1: ¿Cuál es su plato de comida favorito?" placeholder="Estas preguntas le permitiran recuperar su contraseña en caso de olvido"
-				name="preguntaSegura1" />
-			<cheapy:inputField label="Pregunta segura 2: ¿Cuál es su ciudad de nacimiento?" placeholder="Estas preguntas le permitiran recuperar su contraseña en caso de olvido"
-				name="preguntaSegura2" />
 			<cheapy:inputField label="Nombre de usuario" placeholder="Ponga aqui su nombre de usuario"
 				name="usuar.username" />
 			<cheapy:passwordField label="Contraseña" placeholder="Ponga aqui su contraseña"
 				name="usuar.password" />
+			<cheapy:inputField label="Pregunta segura 1: ¿Cuál es su plato de comida favorito?" placeholder="Estas preguntas le permitiran recuperar su contraseña en caso de olvido"
+				name="preguntaSegura1" />
+			<cheapy:inputField label="Pregunta segura 2: ¿Cuál es su ciudad de nacimiento?" placeholder="Estas preguntas le permitiran recuperar su contraseña en caso de olvido"
+				name="preguntaSegura2" />
 			<cheapy:selectMunicipio label="Municipio" name="municipio" size="1" items="${municipios}" ></cheapy:selectMunicipio>
 			<form:hidden path="expiration"/>
 			<div class="text-center">
