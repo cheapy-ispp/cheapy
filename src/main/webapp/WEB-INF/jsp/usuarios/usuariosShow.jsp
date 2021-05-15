@@ -27,14 +27,6 @@
             <th><fmt:message key="email"/></th>
             <td><c:out value="${usuario.email}"/></td>
         </tr>
-        <tr>
-            <th><fmt:message key="preguntaSegura1"/></th>
-            <td><c:out value="${usuario.preguntaSegura1}"/></td>
-        </tr>
-        <tr>
-            <th><fmt:message key="preguntaSegura2"/></th>
-            <td><c:out value="${usuario.preguntaSegura2}"/></td>
-        </tr>
         </thead>
     </table>
 
@@ -80,6 +72,7 @@
 		        <button type="button" role="link" onclick="window.location='${fn:escapeXml(eliminateUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 		        	<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
 		         Eliminar usuario</button>  
+		         <button id='btns-edit' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 15px;">Volver</button>
     		</div>
     </sec:authorize>
     </div>

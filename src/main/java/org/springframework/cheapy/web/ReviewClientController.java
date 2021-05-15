@@ -215,12 +215,11 @@ public class ReviewClientController {
 		}
 		User logeado = this.userService.getCurrentUser();
 		ReviewClient rc = this.reviewService.findReviewById(reviewId);
-		
+		String clientId=rc.getBar().getUsuar().getUsername();
 		if(logeado.getUsername().equals(rc.getEscritor().getUsername())) {
 			this.reviewService.deleteReviewClient(rc);
 			
-			
-			return "welcome";
+			return "redirect:/reviewsClientList/"+clientId+"/0";
 		}else {
 			return "error";
 		}

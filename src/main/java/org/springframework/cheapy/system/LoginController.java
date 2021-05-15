@@ -55,9 +55,7 @@ class LoginController {
 		return "redirect:/";
 	}
 	
-	
-	
-	@GetMapping("/contrasenaOlvidada")
+	@GetMapping("/forgottenPassword")
 	public String contrasenaOlvidada(final Map<String, Object> model, final HttpServletRequest request) {
 		
 		String username = "";
@@ -75,7 +73,7 @@ class LoginController {
 		return "contrasenaOlvidada";
 	}
 	
-	@PostMapping("/contrasenaOlvidada")
+	@PostMapping("/forgottenPassword")
 	public String contrasenaOlvidadaForm(final String username, final String preguntaSegura1, final String preguntaSegura2, 
 			final String nuevaContrasena, final ModelMap model, final HttpServletRequest request) throws ServletException {
 		

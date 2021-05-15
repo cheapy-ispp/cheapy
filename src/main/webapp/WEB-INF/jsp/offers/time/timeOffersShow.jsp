@@ -58,7 +58,7 @@
         <sec:authorize access="isAuthenticated()">
         <tr>
             <th><fmt:message key="offerCode"/></th>
-            <td><b><c:out value="${speedOffer.code}"/></b></td>
+            <td><b><c:out value="${timeOffer.code}"/></b></td>
         </tr>
         </sec:authorize>
         <sec:authorize access="!isAuthenticated()">
@@ -105,6 +105,7 @@
 	    </c:if>    
 	    </div>
 	    </sec:authorize>
+	    <button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 15px;">Volver</button>
     </div>
 	
   

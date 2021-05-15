@@ -3,6 +3,7 @@ package org.springframework.cheapy.web;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -81,7 +82,10 @@ public class FoodOfferController {
 		}
 		Integer next = this.foodOfferService.findActiveFoodOffer(nextPage).size();
 
-		model.put("municipios", Municipio.values());
+		Municipio[]municipios=Municipio.values();
+		Arrays.sort(municipios);
+		
+		model.put("municipios", municipios);
 
 		model.put("foodOfferLs", foodOfferLs);
 		model.put("nextPage", next);
@@ -112,6 +116,10 @@ public class FoodOfferController {
 
 		if (result.hasErrors()) {
 			return FoodOfferController.VIEWS_FOOD_OFFER_CREATE_OR_UPDATE_FORM;
+		}
+		
+		if(foodOffer.getImage().isEmpty()) {
+			foodOffer.setImage(null);
 		}
 		Client client = this.clientService.getCurrentClient();
 		foodOffer.setClient(client);

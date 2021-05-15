@@ -113,8 +113,10 @@
 	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deactivateUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 	            <span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
 	          Desactivar oferta</button>
+	        
          </c:if>
         </c:if>
+        
       </div>
      <div class="eliminar">
       <c:if test="${!(foodOffer.image eq null)}">
@@ -127,6 +129,7 @@
          </c:if>
       </div>
       </sec:authorize>
+      <button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 15px;">Volver</button>
     </div>
   	
 
