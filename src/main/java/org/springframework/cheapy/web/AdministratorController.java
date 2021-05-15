@@ -23,6 +23,7 @@ import org.springframework.cheapy.model.Usuario;
 import org.springframework.cheapy.service.ClientService;
 import org.springframework.cheapy.service.FoodOfferService;
 import org.springframework.cheapy.service.NuOfferService;
+import org.springframework.cheapy.service.ReviewService;
 import org.springframework.cheapy.service.SpeedOfferService;
 import org.springframework.cheapy.service.TimeOfferService;
 import org.springframework.cheapy.service.UserService;
@@ -42,6 +43,8 @@ public class AdministratorController {
 	private final UsuarioService	usuarioService;
 	private final ClientService		clientService;
 	private final UserService		userService;
+	
+	private final ReviewService		reviewService;
 
 	private final FoodOfferService	foodOfferService;
 	private final SpeedOfferService	speedOfferService;
@@ -50,7 +53,7 @@ public class AdministratorController {
 
 
 	public AdministratorController(final UsuarioService usuarioService, final ClientService clientService, final FoodOfferService foodOfferService, final SpeedOfferService speedOfferService, final NuOfferService nuOfferService,
-		final TimeOfferService timeOfferService, final UserService userService) {
+		final TimeOfferService timeOfferService, final UserService userService, final ReviewService reviewService) {
 		this.usuarioService = usuarioService;
 		this.clientService = clientService;
 		this.foodOfferService = foodOfferService;
@@ -58,6 +61,7 @@ public class AdministratorController {
 		this.nuOfferService = nuOfferService;
 		this.timeOfferService = timeOfferService;
 		this.userService = userService;
+		this.reviewService=reviewService;
 	}
 
 	@GetMapping("/administrators/usuarios/page/{page}")
@@ -299,6 +303,8 @@ public class AdministratorController {
 		List<NuOffer> nuOffers = this.nuOfferService.findNuOfferByUserId(client.getId());
 		List<TimeOffer> timeOffers = this.timeOfferService.findTimeOfferByUserId(client.getId());
 
+		this.reviewService.deleteReviewsByUser(client.getUsuar());
+		
 		foodOffers.stream().forEach(f -> f.setStatus(StatusOffer.inactive));
 
 		speedOffers.stream().forEach(s -> s.setStatus(StatusOffer.inactive));
@@ -319,6 +325,7 @@ public class AdministratorController {
 		client.setInit(LocalTime.of(00, 00));
 		client.setMunicipio(Municipio.Sevilla);
 		client.setTelephone("000000000");
+		client.setImage(null);
 		User elim = client.getUsuar();
 		client.setUsuar(null);
 		this.clientService.saveClient(client);	
