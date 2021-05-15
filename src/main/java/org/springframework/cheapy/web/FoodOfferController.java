@@ -117,6 +117,10 @@ public class FoodOfferController {
 		if (result.hasErrors()) {
 			return FoodOfferController.VIEWS_FOOD_OFFER_CREATE_OR_UPDATE_FORM;
 		}
+		
+		if(foodOffer.getImage().isEmpty()) {
+			foodOffer.setImage(null);
+		}
 		Client client = this.clientService.getCurrentClient();
 		foodOffer.setClient(client);
 		foodOffer.setStatus(StatusOffer.hidden);
