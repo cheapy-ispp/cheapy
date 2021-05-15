@@ -79,7 +79,7 @@
     </table>
 
     <div class="btn-menu" style="float:right">
-	    
+	   
 	<sec:authorize access="hasAnyAuthority('client','notsubscribed')">
 	<sec:authentication var="principal" property="principal" />
       <div class="btns-edit" style="float:left">
@@ -101,7 +101,7 @@
 	            <span class="glyphicon 	glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
 	          Eliminar Imagen actual</button>
 	       </c:if>
-	    
+	     <button  type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 23.5px;">Volver</button>
 	     </div>  
 	     
 	     <div class="eliminar"> 
@@ -116,7 +116,7 @@
       <sec:authorize access="hasAnyAuthority('admin')">
 		<sec:authentication var="principal" property="principal" />
     	<div class="btns-edit">
-		
+			
 	        <c:if test="${ client.usuar.enabled eq true}">
 	        <spring:url value="/administrators/clients/{username}/disable" var="deactivateUrl">
 	        	<spring:param name="username" value="${client.usuar.username}"/>
@@ -144,6 +144,7 @@
 	          Eliminar cuenta</button>
       	</div>
     </sec:authorize>
+    
     </div>
   	
 

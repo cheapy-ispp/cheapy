@@ -21,7 +21,7 @@
 	
 	</script>
 
-    <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%; padding:10px">Historial de Ofertas</h2>
+    <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%; padding:10px">Ofertas ${clientName}</h2>
 	<c:if test="${empty datos }">
 		<p id="vacio" >No hay ninguna oferta creada.</p>
 	</c:if>
@@ -31,7 +31,6 @@
 		        <thead>
 		        <tr>
 		        	<th>Restaurante</th>
-		        	<th>ID</th>
 		        	<th>Tipo de oferta</th>
 		            <th><fmt:message key="startDate"/></th>
 		            <th><fmt:message key="endDate"/></th>
@@ -43,9 +42,6 @@
 		            <tr>
 		                <td>
 		                    <a href="/restaurant/${fn:escapeXml(datos[0].client.id)}"><c:out value="${datos[0].client.name}"/></a>
-		                </td>
-		                <td>
-		                    <c:out value="${datos[0].id}"/>
 		                </td>
 		                <td>
 		                	<c:if test="${datos[1] == 'time'}">
@@ -121,4 +117,5 @@
 	</div>
 		
     </c:if>
+    <button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>
 </cheapy:layout>

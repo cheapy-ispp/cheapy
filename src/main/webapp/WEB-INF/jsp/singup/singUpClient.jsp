@@ -55,7 +55,9 @@
 			</div>	
 			<div class="text-center">
 				<input type="submit" class="registrar"  value="Registrarse">
+				<button id='volver' class="registrar" type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>
 			</div>
+			
 		</div>
 	</form:form>
 

@@ -75,7 +75,7 @@
 		</sec:authorize>
 	</div>
     <div class="btn-menu">
-    
+    <button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; margin: 0px; margin-top: 10px;">Volver</button>
     <div class="text-left">
     <c:if test="${client.usuar.username != null}">
     	<spring:url value="/reviewsClientList/{client}/0" var="reviewsListUrl">
@@ -110,6 +110,7 @@
 		Añadir a favoritos</button>
  		</c:if>
  	</sec:authorize>
+ 	
   	</div>
   	</div>
 

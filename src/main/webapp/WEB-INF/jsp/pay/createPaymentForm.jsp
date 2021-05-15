@@ -43,6 +43,7 @@
 						<p><em> (Puede pagar usando Paypal o su tarjeta de crédito o débito)</em></p>
 						
 					</div>
+					<button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>
 				</div>
 			</div>
 		</form:form>

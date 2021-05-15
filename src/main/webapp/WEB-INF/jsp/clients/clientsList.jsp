@@ -93,7 +93,8 @@
 		    	<button type="button" class="btn-pag"  role="link" onclick="window.location='${fn:escapeXml(clientListUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 				<span class="glyphicon 	glyphicon glyphicon-arrow-right" aria-hidden="true" style="padding: 5px"> </span>
 				Pág. siguiente</button>
-			</c:if>​
+			</c:if>
+			<button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>​
 		</div>
 	</div>
     </c:if>
