@@ -9,7 +9,7 @@
 
 <cheapy:layout pageName="payment">
 		<div class="text-center">
-			<p class="infoPago"> ¡Enhorabuena! Usted ya tiene la suscripción de un mes para poder utilizar cheapy como bar o restaurante. Puede empezar a crear una oferta pinchando en el siguiente botón:</p>
+			<p class="infoPago"> ¡Enhorabuena! Ronovación realizada con exito para poder utilizar cheapy como bar o restaurante. Puede empezar a crear una oferta pinchando en el siguiente botón:</p>
 			<div class="btn-home">
                 <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
                 <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
