@@ -27,7 +27,6 @@
 		        <thead>
 		        <tr>
 		        	<th>Restaurante</th>
-		        	<th>ID</th>
 		        	<th>Tipo de oferta</th>
 		            <th><fmt:message key="startDate"/></th>
 		            <th><fmt:message key="endDate"/></th>
@@ -40,9 +39,6 @@
 		            <tr>
 		                <td>
 		                    <a href="/restaurant/${fn:escapeXml(datos[0].client.id)}"><c:out value="${datos[0].client.name}"/></a>
-		                </td>
-		                <td>
-		                    <c:out value="${datos[0].id}"/>
 		                </td>
 		                <td>
 		                	<c:if test="${datos[1] == 'time'}">
@@ -128,4 +124,5 @@
 	</div>
 		
     </c:if>
+    <button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>
 </cheapy:layout>

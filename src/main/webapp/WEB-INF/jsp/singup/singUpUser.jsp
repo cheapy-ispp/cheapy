@@ -43,7 +43,9 @@
 		</div>
 			<div class="text-center">
 				<input type="submit"  value="Registrarse">
+				<button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>
 			</div>
+			
 	</form:form>
 
 </cheapy:layout>

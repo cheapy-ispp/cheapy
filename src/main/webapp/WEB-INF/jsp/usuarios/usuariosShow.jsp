@@ -39,10 +39,11 @@
     </table>
 
     <div class="btn-menu" style="float:right">
-	    
+	     
 	<sec:authorize access="hasAnyAuthority('usuario')">
 		<sec:authentication var="principal" property="principal" />
     	<div class="btns-edit" style="float:left">
+			<button  type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 23.5px; ">Volver</button>
 			<spring:url value="edit" var="editUrl"/>
 		    <button type="button" role="link" onclick="window.location='${fn:escapeXml(editUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 		    	<span class="glyphicon 	glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
@@ -80,7 +81,6 @@
 		        <button type="button" role="link" onclick="window.location='${fn:escapeXml(eliminateUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 		        	<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
 		         Eliminar usuario</button>  
-		         <button id='btns-edit' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 15px;">Volver</button>
     		</div>
     </sec:authorize>
     </div>

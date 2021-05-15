@@ -99,6 +99,7 @@
 	<sec:authorize access="hasAnyAuthority('client')">
 	<sec:authentication var="principal" property="principal" />
 		<div class="btns-edit">
+		<button  type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 23.5px;">Volver</button>
 		<c:if test="${ principal.username eq nuOffer.client.usuar.username}">
 			<c:if test="${nuOffer.status eq 'active' || nuOffer.status eq 'hidden' }">
 			    <spring:url value="{nuOfferId}/edit" var="editUrl">
@@ -130,7 +131,6 @@
 	    </div>
 	    
 	    </sec:authorize>
-	    <button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 15px;">Volver</button>
     </div>
 	
 

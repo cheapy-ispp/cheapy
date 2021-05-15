@@ -33,7 +33,9 @@
 	                        <button class="btn btn-default" type="button"  style="font-family: 'Lobster'; font-size: 20px;">
 	                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true" style="padding: 5px"> </span>
 	                        Cambiar contraseña</button></a>
+	                        
                 </div>
+                <button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>
             </div>
         </div>
     </form:form>

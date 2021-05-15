@@ -105,7 +105,7 @@
 			Valóranos</button>
 		</div>
 	</sec:authorize>
-	    
+	   <button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>
 	
 	</div>
 </cheapy:layout>

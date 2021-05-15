@@ -113,6 +113,6 @@
    <br>
   
         
-   <button id='btns-edit' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 15px; align: center;">Volver</button>
+   <button id='btns-edit' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';  align: center;">Volver</button>
     </div>
 </cheapy:layout>	
