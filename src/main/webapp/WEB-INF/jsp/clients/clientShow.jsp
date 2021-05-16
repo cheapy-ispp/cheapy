@@ -80,7 +80,7 @@
     
     <c:if test="${!(client.image eq null)}">
 	    <div style="text-align: center;padding:20px">
-	    	<img src="${client.image}" alt="La imagen no es válida"  class="clientShowImage">
+	    	<img src="${fn:escapeXml(client.image)}" alt="La imagen no es válida"  class="clientShowImage">
 		</div>
 	</c:if>
 

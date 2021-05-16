@@ -21,7 +21,7 @@
 	
 	</script>
 
-    <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%; padding:10px">Ofertas ${clientName}</h2>
+    <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%; padding:10px">Ofertas ${fn:escapeXml(clientName)}</h2>
 	<c:if test="${empty datos }">
 		<p id="vacio" >No hay ninguna oferta creada.</p>
 	</c:if>

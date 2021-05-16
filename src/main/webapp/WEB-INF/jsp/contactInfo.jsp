@@ -104,12 +104,6 @@
 	    	<p><b>cheapy-ispp</b></p>
 	    	​
 	    </div>
-	    <!--
-	    <div class="column">
-	    	<a href="https://cheapy-ispp.github.io/landing-page/" class=""><img src="/resources/images/Logo Cheapy LP.png" class = "landingPage"></a>
-	    	<p><b>Landing Page</b></p>
-	    </div>
-	    -->
 	</div>
 	</section>
 	

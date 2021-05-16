@@ -33,7 +33,7 @@
             <cheapy:inputField label="Descuento" placeholder="XX% (Ej.15)" name="discount"/>
             <c:set var="cssGroup" value="form-group ${status.error ? 'has-error' : '' }"/>
 		    <c:set var="valid" value="${not status.error and not empty status.actualValue}"/>
-		    <div class="${cssGroup}">
+		    <div class="${fn:escapeXml(cssGroup)}">
 		        <label class="col-sm-2 control-label">Imagen
 			        <a title="Ayuda" data-toggle="desplegable" data-trigger="hover" data-placement="bottom" data-content="Para copiar la url de una imagen en internet debe hacer click derecho sobre esta y seleccionar la opción 'Copiar dirección de la imagen'">
 	    			<span class="glyphicon glyphicon-question-sign" aria-hidden="true" style="padding: 5px; color:#325a80 "> </span></a>
@@ -46,7 +46,7 @@
 		            </c:if>
 		            <c:if test="${status.error}">
 		                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-		                <span class="help-inline">${status.errorMessage}</span>
+		                <span class="help-inline">${fn:escapeXml(status.errorMessage)}</span>
 		            </c:if>
 		        </div>
 		    </div>
