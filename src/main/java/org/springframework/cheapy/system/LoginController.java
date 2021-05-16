@@ -87,8 +87,7 @@ class LoginController {
 				this.clientService.saveClient(client);
 				return "redirect:/";
 			} else {
-				
-				return "error";
+				return "contrasenaOlvidada";
 			}
 			
 		} else if (usuario != null) {
@@ -99,11 +98,11 @@ class LoginController {
 				return "redirect:/";
 			} else {
 				
-				return "error";
+				return "contrasenaOlvidada";
 			}
 			
 		} else {
-			 return "error";
+			return "contrasenaOlvidada";
 		}
 		
 	}

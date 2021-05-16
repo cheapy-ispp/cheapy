@@ -178,7 +178,7 @@ public class UsuarioController {
 			return UsuarioController.VIEWS_USUARIO_CREATE_OR_UPDATE_FORM;
 		}
 
-		BeanUtils.copyProperties(usuario, usuarioEdit, "nombre", "apellidos", "municipio", "direccion", "email", "preguntaSegura1", "preguntaSegura2");
+		BeanUtils.copyProperties(usuario, usuarioEdit, "nombre", "apellidos", "email");
 		usuarioEdit.getUsuar().setUsername(usuario.getUsuar().getUsername());
 		usuarioEdit.getUsuar().setEnabled(true);
 		this.usuarioService.saveUsuario(usuarioEdit);

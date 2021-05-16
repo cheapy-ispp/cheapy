@@ -22,8 +22,8 @@
 	    <div class="fadeIn first">
 	      <img src="/resources/images/Logo Cheapy.png" id="icon" />
 	      <c:if test= "${not empty param}" > 
-	      	<p class="text-danger"> El usuario y/o la contraseña son incorrectos </p> 
-	      
+	      	<p class="text-danger"> Los datos introducidos no son correctos </p> 
+	      	
 	      </c:if>
 	    </div>
 
