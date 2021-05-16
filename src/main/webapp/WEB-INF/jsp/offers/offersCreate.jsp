@@ -32,7 +32,7 @@
 	                <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
 	                <fmt:message key="createTimeOffers"/> </button>
 	   	</div>
-		   	
+		 <button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>  	
    	</div>
    	
 </cheapy:layout>

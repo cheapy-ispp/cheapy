@@ -90,10 +90,11 @@
 	</c:if>
 	
     <div class="btn-menu">
-	    
+	  
 	<sec:authorize access="hasAnyAuthority('client')">
 	<sec:authentication var="principal" property="principal" />
       <div class="btns-edit">
+      <button  type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 23.5px;">Volver</button>
       	<c:if test="${ principal.username eq foodOffer.client.usuar.username}">
       		<c:if test="${foodOffer.status eq 'active' || foodOffer.status eq 'hidden' }">
       		
@@ -137,7 +138,6 @@
          </c:if>
       </div>
       </sec:authorize>
-      <button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 15px;">Volver</button>
     </div>
   	
 

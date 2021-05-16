@@ -15,6 +15,10 @@
     
     <form:form modelAttribute="client" class="form-horizontal" enctype="multipart/form-data" id="add-client-form">
         <div class="form-group has-feedback">
+        	<form:hidden path="expiration"/>
+            <form:hidden path="preguntaSegura1"/>
+            <form:hidden path="preguntaSegura2"/>
+        
 			<cheapy:inputField label="Nombre" placeholder="Restaurante pepito" name="name"/>                
             <cheapy:inputField label="Dirección" placeholder="" name="address"/>
             <cheapy:inputField label="¿Posee fácil aparcamiento?" placeholder="" name="parking"/>		
@@ -25,11 +29,7 @@
             <cheapy:inputField label="Teléfono" placeholder="" name="telephone"/>
             <cheapy:inputField label="Descripción" placeholder="" name="description"/>
             <cheapy:inputField label="Comida" placeholder="food" name="food"/>
-            <cheapy:inputField label="Pregunta segura 1: ¿Cuál es su plato de comida favorito?" placeholder="preguntaSegura1" name="preguntaSegura1"/>
-            <cheapy:inputField label="Pregunta segura 2: ¿Cuál es su ciudad de nacimiento?" placeholder="preguntaSegura2" name="preguntaSegura2"/>
-            <cheapy:inputField label="Imagen" placeholder="Copiar la url de una imagen aquí" name="image"/>
-            <input type="hidden" readonly name="expiration" value="${fn:escapeXml(client.expiration)}" />
-            
+          	<cheapy:inputField label="Imagen" placeholder="Copiar la url de una imagen aquí" name="image"/>
             
 					<script>
 
@@ -77,9 +77,11 @@
 	                        <button class="btn btn-default" type="button"  style="font-family: 'Lobster'; font-size: 20px;">
 	                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true" style="padding: 5px"> </span>
 	                        Cambiar contraseña</button></a>
+	                       
 	                        
 	                        
                 </div>
+                 <button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>
             </div>
         </div>
     </form:form>

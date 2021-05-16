@@ -17,7 +17,7 @@
 			<h2>${fn:escapeXml(order.description)}</h2>		
 		</c:if>
 		
-		<form:form commandName="order" modelAttribute="order" method="post" action="/pay/month">
+		<form:form commandName="order" modelAttribute="order" method="post" action="/pay/${tipo}">
 			<div>
 				<form:input type="hidden" path="price" />
 				<form:input type="hidden" path="currency" />
@@ -26,6 +26,10 @@
 				<form:input type="hidden" path="description" />
 
 				<div class="form-group">
+					<div class="infoPago">
+						<p> Fecha de expiración de suscripción: </p>
+						<p><br><strong>${expira}</strong></p>
+					</div>
 					<div class="infoPago">
 						<p> Precio de la suscripción: </p>
 						<p><br><strong>${fn:escapeXml(order.price)} €</strong></p>
@@ -39,6 +43,7 @@
 						<p><em> (Puede pagar usando Paypal o su tarjeta de crédito o débito)</em></p>
 						
 					</div>
+					<button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>
 				</div>
 			</div>
 		</form:form>

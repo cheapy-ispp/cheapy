@@ -15,7 +15,7 @@
 <cheapy:layout pageName="singUpUser">
 <div class="text-center">
     <h2 class="titulo" style="font-family: 'Lobster'; text-align:center; font-size:200%;  padding:10px">
-        <fmt:message key="new"/><fmt:message key="usuario"/>
+        <fmt:message key="googleForm"/>
     </h2>
 </div>
 	<form:form modelAttribute="usuario" class="form-horizontal"
@@ -25,16 +25,14 @@
 				name="nombre" />
 			<cheapy:inputField label="Apellidos" placeholder="Ponga aqui sus apellidos"
 				name="apellidos" />
-			<cheapy:inputField label="Email" placeholder="Ponga aqui su email"
-				name="email" />
 			<cheapy:inputField label="Pregunta segura 1: ¿Cuál es su plato de comida favorito?" placeholder="Estas preguntas le permitiran recuperar su contraseña en caso de olvido"
 				name="preguntaSegura1" />
 			<cheapy:inputField label="Pregunta segura 2: ¿Cuál es su ciudad de nacimiento?" placeholder="Estas preguntas le permitiran recuperar su contraseña en caso de olvido"
 				name="preguntaSegura2" />
-			<cheapy:inputField label="Nombre de usuario" placeholder="Ponga aqui su nombre de usuario"
-				name="usuar.username" />
 			<cheapy:passwordField label="Contraseña" placeholder="Ponga aqui su contraseña" 
 				name="usuar.password" />
+			<form:hidden path="usuar.username"/>
+			<form:hidden path="email"/>
 			
 	        <div class="text-center">
 	        <label id="terminos"  class="">Acepto los <a href="/termAndCondition"  target="_blank" >términos y condiciones</a></label>
@@ -42,10 +40,8 @@
 			</div>
 		</div>
 			<div class="text-center">
-				<input type="submit"  value="Registrarse">
-				<button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>
+				<input type="submit" class="fadeIn fourth"  value="Registrarse">
 			</div>
-			
 	</form:form>
 
 </cheapy:layout>

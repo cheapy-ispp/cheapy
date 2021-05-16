@@ -21,7 +21,6 @@
             <div class="btn-home-max">
 	            <div class="btn-home">
 	                <button  class="btn-block" type="button" role="link" onclick="window.location='/offers'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" >
-	                <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
 	                <fmt:message key="listOffers"/> </button>
 	            </div>
 	            
@@ -44,7 +43,6 @@
               <sec:authorize access="hasAnyAuthority('usuario')">
               <div class="btn-home">
                       <button class="btn-block" type="button" role="link" onclick="window.location='/usuarios/favoritos/0'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
-                      <span class="glyphicon glyphicon-heart" aria-hidden="true" style="padding: 5px"></span>
                       Mis Favoritos </button>
                   </div>
                     
@@ -53,17 +51,14 @@
               <sec:authorize access="hasAnyAuthority('client')">
               <div class="btn-home">
                       <button class="btn-block" type="button" role="link" onclick="window.location='/myOffers'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
-                      <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
                       <fmt:message key="myOffers"/> </button>
                   </div>
                 <div class="btn-home">
                       <button class="btn-block" type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" >
-                      <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
                       <fmt:message key="createOffers"/> </button>
                   </div>
                    <div class="btn-home">
                       <button class="btn-block" type="button" role="link" onclick="window.location='/myClientReviews'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" >
-                      <span class="glyphicon glyphicon-star" aria-hidden="true" style="padding: 5px"></span>
                       Mis Reseñas </button>
                   </div>
                     
@@ -72,12 +67,10 @@
               <sec:authorize access="hasAnyAuthority('notsubscribed', 'client')">
               	  <div class="btn-home">
                       <button class="btn-block" type="button" role="link" onclick="window.location='/pay/month'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
-                      <span class="glyphicon glyphicon-euro " aria-hidden="true"></span>
                       Renovar suscripción mensual</button>
                   </div>
                   <div class="btn-home">
                       <button class="btn-block" type="button" role="link" onclick="window.location='/pay/year'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
-                      <span class="glyphicon glyphicon-euro " aria-hidden="true"></span>
                       Renovar suscripción anual</button>
                   </div>
                     

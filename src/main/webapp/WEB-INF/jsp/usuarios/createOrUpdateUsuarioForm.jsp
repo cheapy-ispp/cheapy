@@ -15,12 +15,13 @@
     
     <form:form modelAttribute="usuario" class="form-horizontal" id="add-usuario-form">
         <div class="form-group has-feedback">
+        	<form:hidden path="preguntaSegura1"/>
+            <form:hidden path="preguntaSegura2"/>
+        
             <cheapy:inputField label="Nombre" name="nombre"/>
             <cheapy:inputField label="Apellidos" name="apellidos"/>
             <cheapy:inputField label="Email" name="email"/>
-            <cheapy:inputField label="Pregunta segura 1: ¿Cuál es su plato de comida favorito?" placeholder="preguntaSegura1" name="preguntaSegura1"/>
-            <cheapy:inputField label="Pregunta segura 2: ¿Cuál es su ciudad de nacimiento" placeholder="preguntaSegura2" name="preguntaSegura2"/>
-
+            
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
@@ -33,7 +34,9 @@
 	                        <button class="btn btn-default" type="button"  style="font-family: 'Lobster'; font-size: 20px;">
 	                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true" style="padding: 5px"> </span>
 	                        Cambiar contraseña</button></a>
+	                        
                 </div>
+                <button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>
             </div>
         </div>
     </form:form>

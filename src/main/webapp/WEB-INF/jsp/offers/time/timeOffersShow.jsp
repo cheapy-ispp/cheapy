@@ -58,7 +58,7 @@
         <sec:authorize access="isAuthenticated()">
         <tr>
             <th><fmt:message key="offerCode"/></th>
-            <td><b><c:out value="${speedOffer.code}"/></b></td>
+            <td><b><c:out value="${timeOffer.code}"/></b></td>
         </tr>
         </sec:authorize>
         <sec:authorize access="!isAuthenticated()">
@@ -76,6 +76,7 @@
 	<sec:authorize access="hasAnyAuthority('client')">
 	<sec:authentication var="principal" property="principal" />
 		<div class="btns-edit">
+		<button  type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 23.5px;">Volver</button>
 		<c:if test="${ principal.username eq timeOffer.client.usuar.username}">
 			<c:if test="${timeOffer.status eq 'active' || timeOffer.status eq 'hidden' }">
 			    <spring:url value="{timeOfferId}/edit" var="editUrl">
@@ -105,7 +106,6 @@
 	    </c:if>    
 	    </div>
 	    </sec:authorize>
-	    <button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 15px;">Volver</button>
     </div>
 	
   

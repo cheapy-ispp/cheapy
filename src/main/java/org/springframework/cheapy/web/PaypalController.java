@@ -36,6 +36,7 @@ public class PaypalController {
 
 	public static final String SUCCESS_URL_MONTH = "pay/successMonth";
 	public static final String SUCCESS_URL_YEAR = "pay/successYear";
+	public static final String SUCCESS_URL = "pay/successPayment";
 	public static final String CANCEL_URL = "pay/cancel";
 	
 	@GetMapping("/pay/month")
@@ -46,8 +47,13 @@ public class PaypalController {
 		order.setMethod("paypal");
 		order.setPrice(30);
 		order.setDescription("Suscripción a Cheapy para bares o restaurantes de 1 mes.");
-
+		
+		LocalDate expira = this.clientservice.getCurrentClient().getExpiration();
+		
 		model.put("order", order);
+		model.put("tipo", "month");
+		model.put("expira", expira);
+		
 		return "pay/createPaymentForm";
 	}
 	
@@ -60,16 +66,24 @@ public class PaypalController {
 		order.setPrice(320);
 		order.setDescription("Suscripción a Cheapy para bares o restaurantes de 1 año.");
 
+		LocalDate expira = this.clientservice.getCurrentClient().getExpiration();
+		
 		model.put("order", order);
+		model.put("tipo", "year");
+		model.put("expira", expira);
+		
 		return "pay/createPaymentForm";
 	}
 
 	@PostMapping("/pay/month")
-	public String paymentMonth(@ModelAttribute("order") Order order) {
+	public String paymentMonth(@ModelAttribute("order") Order order, HttpServletRequest request) {
 		try {
+			String path = request.getContextPath();
+			String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+			
 			Payment payment = payPalService.createPayment(Double.valueOf(order.getPrice()), order.getCurrency(),
-					order.getMethod(), order.getIntent(), order.getDescription(), "http://localhost:8080/" + CANCEL_URL,
-					"http://localhost:8080/" + SUCCESS_URL_MONTH);
+					order.getMethod(), order.getIntent(), order.getDescription(), basePath + CANCEL_URL,
+					basePath + SUCCESS_URL_MONTH);
 			for (Links link : payment.getLinks()) {
 				if (link.getRel().equals("approval_url")) {
 					
@@ -84,11 +98,14 @@ public class PaypalController {
 	}
 	
 	@PostMapping("/pay/year")
-	public String paymentYear(@ModelAttribute("order") Order order) {
+	public String paymentYear(@ModelAttribute("order") Order order, HttpServletRequest request) {
 		try {
+			String path = request.getContextPath();
+			String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+			 
 			Payment payment = payPalService.createPayment(Double.valueOf(order.getPrice()), order.getCurrency(),
-					order.getMethod(), order.getIntent(), order.getDescription(), "http://localhost:8080/" + CANCEL_URL,
-					"http://localhost:8080/" + SUCCESS_URL_YEAR);
+					order.getMethod(), order.getIntent(), order.getDescription(), basePath + CANCEL_URL,
+					basePath + SUCCESS_URL_YEAR);
 			for (Links link : payment.getLinks()) {
 				if (link.getRel().equals("approval_url")) {
 					
@@ -118,7 +135,7 @@ public class PaypalController {
 				LocalDate expiration = client.getExpiration().isAfter(LocalDate.now()) ? client.getExpiration() : LocalDate.now();
 				client.setExpiration(expiration.plusMonths(1));
 				this.clientservice.saveClient(client);
-				//return SUCCESS_URL;
+				return SUCCESS_URL;
 			}
 		} catch (PayPalRESTException e) {
 		}
@@ -137,7 +154,7 @@ public class PaypalController {
 				LocalDate expiration = client.getExpiration().isAfter(LocalDate.now()) ? client.getExpiration() : LocalDate.now();
 				client.setExpiration(expiration.plusYears(1));
 				this.clientservice.saveClient(client);
-				//return SUCCESS_URL;
+				return SUCCESS_URL;
 			}
 		} catch (PayPalRESTException e) {
 		}

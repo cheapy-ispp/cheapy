@@ -28,17 +28,17 @@
 	    </div>
 
 	    <!-- ContrasenaOlvidada Form -->
-	    <form class='form-signin' action="/contrasenaOlvidada" method='POST'>
+	    <form class='form-signin' action="/forgottenPassword" method='POST'>
 	      <input type="text" id="username" class="fadeIn second" name="username" placeholder="Usuario" required autofocus>
 	      <input type="text" id="preguntaSegura1" class="fadeIn third" name="preguntaSegura1" placeholder="Pregunta segura 1: ¿Cuál es su plato de comida favorito?" required>
 	      <input type="text" id="preguntaSegura2" class="fadeIn third" name="preguntaSegura2" placeholder="Pregunta segura 2: ¿Cuál es su ciudad de nacimiento?" required>
-	      <input type="text" id="nuevaContrasena" class="fadeIn third" name="nuevaContrasena"" placeholder="Nueva Contrasena" required autofocus>
+	      <input type="password" id="nuevaContrasena" class="fadeIn third" name="nuevaContrasena"" placeholder="Nueva Contrasena" required autofocus>
 	      <sec:csrfInput />  
 	      <div style="text-align: center;">
 		  	<input type="submit" class="fadeIn fourth"  value="Iniciar sesión">
 		  </div>
 	    </form>
-	    
+	    <button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>
 	  </div>
 	</div>    
 

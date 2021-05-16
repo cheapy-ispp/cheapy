@@ -26,7 +26,9 @@
 	      
 	      </c:if>
 	    </div>
-
+		<a class="btn btn-block btn-social btn-google customBtn" href="/oauth2/authorization/google">
+    							<span class="fa fa-google width42px"></span> Iniciar sesión con google
+  							</a>
 	    <!-- Login Form -->
 	    <form class='form-signin' action="/login" method='POST'>
 	      <input type="text" id="username" class="fadeIn second" name="username" placeholder="Usuario" required autofocus>
@@ -35,6 +37,7 @@
 	      <div style="text-align: center;">
 		  	<input type="submit" class="fadeIn fourth"  value="Iniciar sesión">
 		  </div>
+		  <a href="/forgottenPassword"><c:out value="Contraseña olvidada"/></a>
 	    </form>
 	    
 	
@@ -42,7 +45,7 @@
 	    <div id="formFooter">
 	      <a class="underlineHover fadeIn fourth" href="/forgottenPassword"><fmt:message key="forgottenPassword"/></a>
 	    </div>
-
+	<button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>
 	  </div>
 	</div>    
 

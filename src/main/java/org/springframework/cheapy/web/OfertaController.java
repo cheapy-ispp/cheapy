@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.cheapy.model.Client;
 import org.springframework.cheapy.model.FoodOffer;
 import org.springframework.cheapy.model.Municipio;
 import org.springframework.cheapy.model.NuOffer;
@@ -344,11 +345,13 @@ public class OfertaController {
 
 		Pageable elements = PageRequest.of(page, 2);
         Pageable nextPage = PageRequest.of(page+1, 2);
+        String clientName=this.clientService.findById(clientId).getName();
 
         List<Object[]> datos = ofertasPag(elements, clientId);
         List<Object[]> datosNext = ofertasPag(nextPage, clientId);
 
         Integer next = datosNext.size();
+        model.put("clientName", clientName);
         model.put("clientId", clientId);
         model.put("nextPage", next);
         model.put("datos", datos);

@@ -14,5 +14,5 @@
     <img class="img-responsive" src="${fn:escapeXml(cheapyImage)}"/>
 
     <p>${fn:escapeXml(exception.message)}</p>
-	
+	<button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>
 </cheapy:layout>

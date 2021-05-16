@@ -14,6 +14,8 @@ import org.springframework.cheapy.service.ReviewClientService;
 import org.springframework.cheapy.service.UserService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -56,6 +58,13 @@ public class ReviewClientController {
 	
 	@GetMapping("/reviewsClient/new/{idClient}")
 	public String initCreationForm(final Map<String, Object> model, @PathVariable("idClient") final String idClient) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+
+		if(!this.userService.duplicateUsername(username)) {
+			return "redirect:/googleForm";
+		}
+		
 		if(!checkClient(idClient)) {
 			return "error";
 		}
@@ -68,6 +77,13 @@ public class ReviewClientController {
 
 	@PostMapping("/reviewsClient/new/{idClient}")
 	public String processCreationForm(@PathVariable("idClient") final String idClient ,@Valid final ReviewClient reviewClient ,final BindingResult result) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+
+		if(!this.userService.duplicateUsername(username)) {
+			return "redirect:/googleForm";
+		}
+		
 		if (result.hasErrors()) {
 			return ReviewClientController.VIEWS_REVIEWS_CREATE_OR_UPDATE_FORM;
 		} else {
@@ -84,15 +100,30 @@ public class ReviewClientController {
 	
 	@GetMapping("/reviewsClient/{reviewId}")
 	public String processShowForm(@PathVariable("reviewId") final int reviewId, final Map<String, Object> model) {
-		ReviewClient review = this.reviewService.findReviewById(reviewId);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
 
+		if(!this.userService.duplicateUsername(username)) {
+			return "redirect:/googleForm";
+		}
+		
+		ReviewClient review = this.reviewService.findReviewById(reviewId);
+		
 		model.put("review", review);
+		model.put("username", username);
 
 		return "reviewsClient/reviewsShow";
 
 	}
 	@GetMapping("/reviewsClientList/{idClient}/{page}")
 	public String processFindForm(@PathVariable("page") final int page, @PathVariable("idClient") final String idClient, final Map<String, Object> model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+
+		if(!this.userService.duplicateUsername(username)) {
+			return "redirect:/googleForm";
+		}
+		
 		Pageable elements = PageRequest.of(page, 6);
 		Pageable nextPage = PageRequest.of(page+1, 6);
 		Client client = this.clientService.findByUsername(idClient);
@@ -116,7 +147,12 @@ public class ReviewClientController {
 	
 	@GetMapping("/myClientReviews")
 	public String processFindMyReviewsForm(final Map<String, Object> model) {
-		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+
+		if(!this.userService.duplicateUsername(username)) {
+			return "redirect:/googleForm";
+		}
 		Client client = this.clientService.getCurrentClient();
 		model.put("page", 0);
 
@@ -126,6 +162,12 @@ public class ReviewClientController {
 	
 	@GetMapping("/reviewsClient/{reviewId}/edit")
 	public String updateReviewInit(@PathVariable("reviewId") final int reviewId, final ModelMap model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+
+		if(!this.userService.duplicateUsername(username)) {
+			return "redirect:/googleForm";
+		}
 		if (!this.checkIdentity(reviewId)) {
 			return "error";
 		}
@@ -137,6 +179,12 @@ public class ReviewClientController {
 	
 	@PostMapping("/reviewsClient/{reviewId}/edit")
 	public String updateReviewPost(@Valid final ReviewClient reviewEdit, final BindingResult result, final ModelMap model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+
+		if(!this.userService.duplicateUsername(username)) {
+			return "redirect:/googleForm";
+		}
 		if (!this.checkIdentity(reviewEdit.getId())) {
 			return "error";
 		}
@@ -159,7 +207,12 @@ public class ReviewClientController {
 	
 	@GetMapping(value = "/reviewsClient/{reviewId}/delete")
 	public String deleteReview(@PathVariable("reviewId") final int reviewId , final ModelMap model) {
-		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+
+		if(!this.userService.duplicateUsername(username)) {
+			return "redirect:/googleForm";
+		}
 		User logeado = this.userService.getCurrentUser();
 		ReviewClient rc = this.reviewService.findReviewById(reviewId);
 		String clientId=rc.getBar().getUsuar().getUsername();

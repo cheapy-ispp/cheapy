@@ -20,6 +20,7 @@
         			<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
         			Eliminar Imagen</button>
         		</div>
+        		<button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>
         	</form:form>
         
     </jsp:body>
