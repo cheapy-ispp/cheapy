@@ -61,9 +61,11 @@
 	height: 80px;
 }
 
-.barImage {
-	width: 30%;
+.profileImage {
+	width: 305px; 
+	height: 347px;
 }
+
 </style>
 
 <cheapy:layout pageName="contactInfo">
@@ -76,7 +78,7 @@
      <p style="font-family: 'Lobster'; text-align:center; font-size:150%;  color: #325a80; padding:10px; margin-bottom:20px;">
     	Cuentas oficiales de Cheapy</p>
      	<div class="card">
-	    	<img src="/resources/images/Logo Cheapy.png" class="card-img-top" alt="Cheapy" style="width: 350px; height: 350px;">
+	    	<img src="/resources/images/Logo Cheapy.png" class="card-img-top profileImage" alt="Cheapy">
 		    <div class="card-body">
 		    <h5 class="card-title">Eat fast, eat Cheapy</h5>
 		    </div>
@@ -118,7 +120,7 @@
             <div class="row-card">
 	    		<div class="column-card">
 	                <div class="card">
-	                    <img src="/resources/images/pablo.jpeg" class="card-img-top" alt="Pablo" style="width: 350px; height: 350px;">
+	                    <img src="/resources/images/pablo.jpeg" class="card-img-top profileImage" alt="Pablo" >
 	                    <div class="card-body">
 	                    <h5 class="card-title">Pablo</h5>
 	                    <h6 class="card-subtitle mb-2 text-muted">Franco Sánchez</h6>
@@ -130,7 +132,7 @@
 	            </div>
 	            <div class="column-card">
 	                <div class="card">
-	                    <img src="/resources/images/abraham.jpeg" class="card-img-top"  alt="Abraham" style="width: 350px; height: 350px;">
+	                    <img src="/resources/images/abraham.jpeg" class="card-img-top profileImage"  alt="Abraham">
 	                    <div class="card-body">
 	                    <h5 class="card-title">Abraham</h5>
 	                    <h6 class="card-subtitle mb-2 text-muted">García Villalobos</h6>
@@ -142,7 +144,7 @@
 	            </div>
 	            <div class="column-card">
 	                <div class="card">
-	                    <img src="/resources/images/martin.jpeg" class="card-img-top" alt="Martin" style="width: 350px; height: 350px;">
+	                    <img src="/resources/images/martin.jpeg" class="card-img-top profileImage" alt="Martin" >
 	                    <div class="card-body">
 	                    <h5 class="card-title">Martín Arturo</h5>
 	                    <h6 class="card-subtitle mb-2 text-muted">Guerrero Romero</h6>
@@ -155,7 +157,7 @@
 				<div class="column-card">
             
 	                <div class="columna col card">
-	                    <img src="/resources/images/gabo.jpeg" class="card-img-top" alt="Gabriel" style="width: 350px; height: 350px;">
+	                    <img src="/resources/images/gabo.jpeg" class="card-img-top profileImage" alt="Gabriel">
 	                    <div class="card-body">
 	                    <h5 class="card-title">Gabriel</h5>
 	                    <h6 class="card-subtitle mb-2 text-muted">Gutiérrez Prieto</h6>
@@ -167,7 +169,7 @@
 	            </div>
 	            <div class="column-card">
 	                <div class="columna col card">
-	                    <img src="/resources/images/thibout.jpeg" class="card-img-top" alt="Thibaut" style="width: 350px; height: 350px;">
+	                    <img src="/resources/images/thibout.jpeg" class="card-img-top profileImage" alt="Thibaut">
 	                    <div class="card-body">
 	                    <h5 class="card-title">Thibaut</h5>
 	                    <h6 class="card-subtitle mb-2 text-muted">Lopez</h6>
@@ -179,7 +181,7 @@
 	            </div>
 	            <div class="column-card">
 	                <div class="columna col card">
-	                    <img src="/resources/images/soto.jpeg" class="card-img-top" alt="David" style="width: 350px; height: 350px;">
+	                    <img src="/resources/images/soto.jpeg" class="card-img-top profileImage" alt="David">
 	                    <div class="card-body">
 	                    <h5 class="card-title">David</h5>
 	                    <h6 class="card-subtitle mb-2 text-muted">Soto Ponce</h6>
@@ -192,7 +194,7 @@
 				<div class="column-card">
             
 	                <div class="columna col card">
-	                    <img src="/resources/images/javi.jpeg" class="card-img-top" alt="Javier" style="width: 350px; height: 350px;">
+	                    <img src="/resources/images/javi.jpeg" class="card-img-top profileImage" alt="Javier">
 	                    <div class="card-body">
 	                    <h5 class="card-title">Javier</h5>
 	                    <h6 class="card-subtitle mb-2 text-muted">Granja Naranjo</h6>
@@ -204,7 +206,7 @@
 	            </div>
 	            <div class="column-card">
 	                <div class="columna col card">
-	                    <img src="/resources/images/flor.jpeg" class="card-img-top" alt="Florentina" style="width: 350px; height: 350px;">
+	                    <img src="/resources/images/flor.jpeg" class="card-img-top profileImage" alt="Florentina">
 	                    <div class="card-body">
 	                    <h5 class="card-title">Florentina</h5>
 	                    <h6 class="card-subtitle mb-2 text-muted">Correa López</h6>
@@ -216,7 +218,7 @@
 	            </div>
 	            <div class="column-card">
 	                <div class="columna col card">
-	                    <img src="/resources/images/antonio.jpeg" class="card-img-top" alt="Antonio" style="width: 350px; height: 350px;">
+	                    <img src="/resources/images/antonio.jpeg" class="card-img-top profileImage" alt="Antonio">
 	                    <div class="card-body">
 	                    <h5 class="card-title">Antonio</h5>
 	                    <h6 class="card-subtitle mb-2 text-muted">Vidal Pérez</h6>
@@ -229,7 +231,7 @@
 				<div class="column-card">
 			
 	                <div class="columna col card">
-	                    <img src="/resources/images/angel.jpeg" class="card-img-top" alt="Angel" style="width: 350px; height: 350px;">
+	                    <img src="/resources/images/angel.jpeg" class="card-img-top profileImage" alt="Angel">
 	                    <div class="card-body">
 	                    <h5 class="card-title">Angel</h5>
 	                    <h6 class="card-subtitle mb-2 text-muted">Caballero Domínguez</h6>
@@ -241,7 +243,7 @@
 	            </div>
 	            <div class="column-card">
 	                <div class="columna col card">
-	                    <img src="/resources/images/abel.jpeg" class="card-img-top" alt="Abel" style="width: 350px; height: 350px;">
+	                    <img src="/resources/images/abel.jpeg" class="card-img-top profileImage" alt="Abel">
 	                    <div class="card-body">
 	                    <h5 class="card-title">Abel</h5>
 	                    <h6 class="card-subtitle mb-2 text-muted">Morante Caraballo</h6>

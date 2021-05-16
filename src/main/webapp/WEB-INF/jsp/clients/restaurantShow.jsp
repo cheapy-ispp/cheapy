@@ -8,6 +8,13 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
+<style>
+.restaurantShowImage {
+	border-radius: 8px;
+	width:500px
+}
+</style>
+
 <cheapy:layout pageName="client">
 
     <h2 class="titulo" style="font-family: 'Lobster'; text-align:center; font-size:200%; padding:10px; text-transform: uppercase;"><c:out value="${client.name}"/></h2>
@@ -58,16 +65,17 @@
             <td><c:out value="${client.municipio}"/> </td>
         </tr><tr>
             <th><fmt:message key="foodClient"/></th>
-            <td><c:out value="${client.food}"/> </td>
-        <c:if test="${!(client.image eq null)}">
-        <tr>
-            <th><fmt:message key="image"/></th>
-            <td><img src="${client.image}" alt ="La imagen no es válida" height="400px" style="border-radius: 8px;"></td>
-        </tr>
-         </c:if>      
+            <td><c:out value="${client.food}"/> </td>     
         
         </thead>
     </table>
+    
+    <c:if test="${!(client.image eq null)}">
+	    <div style="text-align: center;padding:20px">
+	    	<img src="${client.image}" alt="La imagen no es válida" class="restaurantShowImage">
+		</div>
+	</c:if>
+    
     <div style="font-size: 150%" >
 	    <sec:authorize access="hasAnyAuthority('usuario')">
 		    <fmt:message key="reviews"/>

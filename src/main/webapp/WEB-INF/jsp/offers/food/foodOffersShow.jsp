@@ -7,10 +7,18 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
+
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<style>
+.foodOfferImage {
+	border-radius: 8px;
+	width:500px
+}
+</style>
 
 <cheapy:layout pageName="foodOffer">
 	<script>
@@ -72,15 +80,15 @@
             <td><b>Para acceder al código debe iniciar sesión</b></td>
         </tr>
         </sec:authorize>
-       <c:if test="${!(foodOffer.image eq null)}">
-        <tr>
-            <th><fmt:message key="image"/></th>
-            <td><img src="${foodOffer.image}" alt="La imagen no es válida" height="400px" style="border-radius: 8px;"></td>
-        </tr>
-         </c:if>
         </thead>
     </table>
-
+    
+    <c:if test="${!(foodOffer.image eq null)}">
+	    <div style="text-align: center;padding:20px">
+	    	<img src="${foodOffer.image}" alt="La imagen no es válida" class="foodOfferImage">
+		</div>
+	</c:if>
+	
     <div class="btn-menu">
 	  
 	<sec:authorize access="hasAnyAuthority('client')">
