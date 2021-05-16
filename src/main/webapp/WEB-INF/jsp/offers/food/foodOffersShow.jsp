@@ -85,7 +85,7 @@
     
     <c:if test="${!(foodOffer.image eq null)}">
 	    <div style="text-align: center;padding:20px">
-	    	<img src="${foodOffer.image}" alt="La imagen no es válida" class="foodOfferImage">
+	    	<img src="${fn:escapeXml(foodOffer.image)}" alt="La imagen no es válida" class="foodOfferImage">
 		</div>
 	</c:if>
 	

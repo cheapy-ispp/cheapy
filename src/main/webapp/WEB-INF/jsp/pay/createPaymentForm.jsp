@@ -28,7 +28,7 @@
 				<div class="form-group">
 					<div class="infoPago">
 						<p> Fecha de expiración de suscripción: </p>
-						<p><br><strong>${expira}</strong></p>
+						<p><br><strong>${fn:escapeXml(expira)}</strong></p>
 					</div>
 					<div class="infoPago">
 						<p> Precio de la suscripción: </p>

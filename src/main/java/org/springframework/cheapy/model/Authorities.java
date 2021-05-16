@@ -8,8 +8,6 @@ import javax.persistence.Table;
 @Table(name = "authorities")
 public class Authorities {
 	
-
-	//@NotNull
 	@Id
 	String username;
 	

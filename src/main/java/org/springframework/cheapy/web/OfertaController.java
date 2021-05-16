@@ -10,7 +10,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.cheapy.model.Client;
 import org.springframework.cheapy.model.FoodOffer;
 import org.springframework.cheapy.model.Municipio;
 import org.springframework.cheapy.model.NuOffer;

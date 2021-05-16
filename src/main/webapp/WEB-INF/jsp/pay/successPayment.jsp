@@ -9,12 +9,11 @@
 
 <cheapy:layout pageName="payment">
 		<div class="text-center">
-			<p class="infoPago"> ¡Enhorabuena! Ronovación realizada con exito para poder utilizar cheapy como bar o restaurante. Puede empezar a crear una oferta pinchando en el siguiente botón:</p>
+			<p class="infoPago"> ¡Enhorabuena! Renovación realizada con éxito. Si es un nuevo cliente o su cuenta ya expiró, deberá volver a iniciar sesión para acceder a toda la funcionalidad.</p>
 			<div class="btn-home">
-                <button type="button" role="link" onclick="window.location='/offersCreate'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
-                <span class="glyphicon glyphicon-cutlery" aria-hidden="true" style="padding: 5px"> </span>
-                <fmt:message key="createOffers"/> </button>
-                <button id='btns-edit' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; ">Volver</button>
+                <button type="button" role="link" onclick="window.location='/'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
+                <span class="" aria-hidden="true" style="padding: 5px"> </span>
+                <fmt:message key="inicio"/> </button>
             </div>
  				
 			
