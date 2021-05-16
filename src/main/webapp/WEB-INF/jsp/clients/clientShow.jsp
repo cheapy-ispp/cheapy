@@ -8,6 +8,13 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
+<style>
+.clientShowImage {
+	border-radius: 8px;
+	width:500px
+}
+</style>
+
 <cheapy:layout pageName="miPerfil">
 
     <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px; text-transform: uppercase;"><c:out value="${client.name}"/></h2>
@@ -67,26 +74,15 @@
             <th><fmt:message key="expiration"/></th>
             <td><c:out value="${client.expiration}"/> </td>
         </tr>
-
-        <c:if test="${!(client.image eq null)}">
-        <tr>
-            <th><fmt:message key="image"/></th>
-            <td><img src="${client.image}" alt="La imagen no es válida" height="400px" style="border-radius: 8px;"></td>
-        </tr>
-         </c:if>
-        
-        <tr>
-            <th><fmt:message key="preguntaSegura1"/></th>
-            <td><c:out value="${client.preguntaSegura1}"/> </td>
-        </tr>
-        
-        <tr>
-            <th><fmt:message key="preguntaSegura2"/></th>
-            <td><c:out value="${client.preguntaSegura2}"/> </td>
-        </tr>
         
         </thead>
     </table>
+    
+    <c:if test="${!(client.image eq null)}">
+	    <div style="text-align: center;padding:20px">
+	    	<img src="${client.image}" alt="La imagen no es válida"  class="clientShowImage">
+		</div>
+	</c:if>
 
     <div class="btn-menu" style="float:right">
 	    

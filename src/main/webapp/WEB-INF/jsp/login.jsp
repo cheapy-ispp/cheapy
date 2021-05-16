@@ -36,12 +36,13 @@
 		  	<input type="submit" class="fadeIn fourth"  value="Iniciar sesión">
 		  </div>
 	    </form>
+	    
 	
-	    <!-- Remind Passowrd 
+
 	    <div id="formFooter">
-	      <a class="underlineHover" href="#">¿Olvidó su contraseña?</a>
+	      <a class="underlineHover fadeIn fourth" href="/forgottenPassword"><fmt:message key="forgottenPassword"/></a>
 	    </div>
-	-->
+
 	  </div>
 	</div>    
 
