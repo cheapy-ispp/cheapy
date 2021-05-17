@@ -61,8 +61,12 @@
 	        <span class="glyphicon glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
 		        Borrar reseña</button>
     	</c:if>
-    	<button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>
     </div>
+    <div class="btn-return">
+		    <button type="button" role="link" onclick="history.back()" style="font-family: 'Lobster'; font-size: 20px;"> 
+		    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true" style="padding: 5px"> </span> 
+		    <fmt:message key="return"/> </button>
+	</div>
     </sec:authorize>
   
 </cheapy:layout>
