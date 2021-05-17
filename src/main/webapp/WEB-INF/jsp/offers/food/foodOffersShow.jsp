@@ -71,7 +71,13 @@
 		<sec:authorize access="isAuthenticated()">
         <tr>
             <th><fmt:message key="offerCode"/></th>
-            <td><b><c:out value="${foodOffer.code}"/></b></td>
+            
+            <c:if test="${!(foodOffer.code eq null)}">
+	    		<td><b><c:out value="${foodOffer.code}"/></b></td>
+			</c:if>
+			<c:if test="${(foodOffer.code eq null)}">
+	    		<td><b>Oferta no activa</b></td>
+			</c:if>
         </tr>
         </sec:authorize>
         <sec:authorize access="!isAuthenticated()">
@@ -128,7 +134,7 @@
         
       </div>
      <div class="eliminar">
-      <c:if test="${!(foodOffer.image eq null)}">
+      <c:if test="${!(foodOffer.image eq null) and (principal.username eq foodOffer.client.usuar.username)}">
 	        <spring:url value="{foodOfferId}/delete/image" var="deleteImageUrl">
 	        <spring:param name="foodOfferId" value="${foodOffer.id}"/>
 	        </spring:url>

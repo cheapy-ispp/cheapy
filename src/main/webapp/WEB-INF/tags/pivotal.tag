@@ -17,7 +17,7 @@
 		</div>	
 		<div class="text-center">
         	<label id="terminos"  class=""><a href="/termAndCondition"  target="_blank"><fmt:message key="termAndConditions"/></a></label>
-        	<p><small>&copy; Copyright 2021 Cheapy. All Rights Reserved</small></p>
+        	<h5><small>&copy; Copyright 2021 Cheapy. All Rights Reserved</small></h5>
         	
 	        	
 		</div>
