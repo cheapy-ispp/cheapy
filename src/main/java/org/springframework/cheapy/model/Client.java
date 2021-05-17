@@ -13,10 +13,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -28,6 +31,7 @@ public class Client extends BaseEntity {
 	// (id, name, email, address, init, finish, telephone, description, code, food,
 	// usuar)
 
+	@Pattern(message = "La primera letra debe estar en mayúscula", regexp = "^[A-Z][a-zA-ZÀ-ÿ\\u00f1\\u00d1]+(\\s*[a-zA-Z0-9À-ÿ\\u00f1\\u00d1]*)*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+$")
 	@NotEmpty(message = "No debe estar vacío")
 	private String				name;
 
@@ -35,8 +39,11 @@ public class Client extends BaseEntity {
 	@NotEmpty(message = "No debe estar vacío")
 	private String				email;
 
-	@NotEmpty(message = "No debe estar vacío")
+	@NotBlank(message = "No debe estar vacío")
 	private String				address;
+	
+	@NotNull(message = "No debe estar vacío")
+	private Boolean				parking;
 
 	@NotNull(message = "No debe estar vacío")
 	@Enumerated(value = EnumType.STRING)
@@ -56,15 +63,27 @@ public class Client extends BaseEntity {
 	@Pattern(regexp = "\\d{9}", message = "Debe tener 9 dígitos")
 	private String				telephone;
 
-	@NotEmpty(message = "No debe estar vacía")
+	@NotBlank(message = "No debe estar vacía")
 	private String				description;
 
-	@NotEmpty(message = "No debe estar vacío")
+	@NotBlank(message = "No debe estar vacío")
 	private String				food;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull
 	private LocalDate			expiration;
+	
+	@URL(message="Debe introducir una url")
+	@Size(max=2000, message="La url es demasiado grande")
+	private String 				image;
+
+	@NotBlank(message = "No debe estar vacío")
+	@JoinColumn(name = "pregunta_segura1")
+	private String				preguntaSegura1;
+	
+	@NotBlank(message = "No debe estar vacío")
+	@JoinColumn(name = "pregunta_segura2")
+	private String				preguntaSegura2;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "username", referencedColumnName = "username")
@@ -105,6 +124,14 @@ public class Client extends BaseEntity {
 
 	public void setAddress(final String address) {
 		this.address = address;
+	}
+	
+	public Boolean getParking() {
+		return parking;
+	}
+
+	public void setParking(Boolean parking) {
+		this.parking = parking;
 	}
 
 	public Municipio getMunicipio() {
@@ -154,6 +181,22 @@ public class Client extends BaseEntity {
 	public void setFood(final String food) {
 		this.food = food;
 	}
+	
+	public String getPreguntaSegura1() {
+		return preguntaSegura1;
+	}
+
+	public void setPreguntaSegura1(String preguntaSegura1) {
+		this.preguntaSegura1 = preguntaSegura1;
+	}
+
+	public String getPreguntaSegura2() {
+		return preguntaSegura2;
+	}
+
+	public void setPreguntaSegura2(String preguntaSegura2) {
+		this.preguntaSegura2 = preguntaSegura2;
+	}
 
 	public User getUsuar() {
 		return this.usuar;
@@ -202,5 +245,15 @@ public class Client extends BaseEntity {
 	public void setExpiration(final LocalDate expiration) {
 		this.expiration = expiration;
 	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
+	
 
 }

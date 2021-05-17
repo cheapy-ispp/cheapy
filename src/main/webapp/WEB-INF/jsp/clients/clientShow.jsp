@@ -8,6 +8,13 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
+<style>
+.clientShowImage {
+	border-radius: 8px;
+	width:500px
+}
+</style>
+
 <cheapy:layout pageName="miPerfil">
 
     <h2 style="font-family: 'Lobster'; text-align:center; font-size:200%;  color: rgb(0, 64, 128); padding:10px; text-transform: uppercase;"><c:out value="${client.name}"/></h2>
@@ -37,6 +44,19 @@
             <th><fmt:message key="addressClient"/></th>
             <td><c:out value="${client.address}"/> </td>
         </tr><tr>
+        
+        <tr>
+            <th><fmt:message key="parking"/></th>
+            <td>
+            <c:if test="${client.parking == 'true'}">
+				<c:out value="Si"/>
+			</c:if>	
+			<c:if test="${client.parking == 'false'}">
+				<c:out value="No"/>
+			</c:if>
+            </td>
+        </tr>
+        
         <tr>
             <th><fmt:message key="municipio"/></th>
             <td><c:out value="${client.municipio}"/> </td>
@@ -50,15 +70,23 @@
             <th><fmt:message key="foodClient"/></th>
             <td><c:out value="${client.food}"/> </td>
         </tr>
-        
-        
+        <tr>
+            <th><fmt:message key="expiration"/></th>
+            <td><c:out value="${client.expiration}"/> </td>
+        </tr>
         
         </thead>
     </table>
+    
+    <c:if test="${!(client.image eq null)}">
+	    <div style="text-align: center;padding:20px">
+	    	<img src="${fn:escapeXml(client.image)}" alt="La imagen no es válida"  class="clientShowImage">
+		</div>
+	</c:if>
 
     <div class="btn-menu" style="float:right">
-	    
-	<sec:authorize access="hasAnyAuthority('client')">
+	   
+	<sec:authorize access="hasAnyAuthority('client','notsubscribed')">
 	<sec:authentication var="principal" property="principal" />
       <div class="btns-edit" style="float:left">
       		
@@ -72,19 +100,29 @@
 	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(disableUrl)}'" style="font-family: 'Lobster'; font-size: 20px;width: auto;">
 	            <span class="glyphicon 	glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
 	          Desactivar cuenta</button>
+	        	    
+	        <c:if test="${!(client.image eq null)}">
+	     	<spring:url value="delete/image" var="deleteImageUrl"/>
+	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deleteImageUrl)}'" style="font-family: 'Lobster'; font-size: 20px;width: auto;">
+	            <span class="glyphicon 	glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
+	          Eliminar Imagen actual</button>
+	       </c:if>
+	     <button  type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 23.5px;">Volver</button>
 	     </div>  
 	     
-	     <div class="eliminar">   
+	     <div class="eliminar"> 
 	        <spring:url value="delete" var="deleteUrl"/>
 	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deleteUrl)}'" >
 	            <span class="glyphicon 	glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
 	          Eliminar cuenta</button>
+	          
+
       	</div>
       </sec:authorize>
       <sec:authorize access="hasAnyAuthority('admin')">
 		<sec:authentication var="principal" property="principal" />
     	<div class="btns-edit">
-		
+			
 	        <c:if test="${ client.usuar.enabled eq true}">
 	        <spring:url value="/administrators/clients/{username}/disable" var="deactivateUrl">
 	        	<spring:param name="username" value="${client.usuar.username}"/>
@@ -112,6 +150,7 @@
 	          Eliminar cuenta</button>
       	</div>
     </sec:authorize>
+    
     </div>
   	
 

@@ -20,6 +20,7 @@
         			<button type="submit" style="font-family: 'Lobster'; font-size: 20px;">
         			<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
         			Dar de baja</button>
+        			<button  type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 23.5px; margin-left: 10px">Volver</button>
         		</div>
         	</form:form>
         

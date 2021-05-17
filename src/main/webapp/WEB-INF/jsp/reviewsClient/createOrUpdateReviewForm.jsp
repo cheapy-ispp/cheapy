@@ -16,7 +16,7 @@
         <div class="form-group has-feedback">
         	<form:hidden path="id"/>
             <cheapy:textAreaField label="Opinión" name="opinion"/>
-            <cheapy:ratingStar label="Servicio" name="service" disabled="false"></cheapy:ratingStar>
+            <cheapy:ratingStar label="Servicio" name="service" disabled="false" ></cheapy:ratingStar>
             <cheapy:ratingStar label="Comida" name="food" disabled="false"></cheapy:ratingStar>
             <cheapy:ratingStar label="Calidad/Precio" name="qualityPrice" disabled="false"></cheapy:ratingStar>
         </div>
@@ -28,11 +28,13 @@
                         <button class="btn btn-default" type="submit" style="font-family: 'Lobster'; font-size: 20px;">
 	                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true" style="padding: 5px"> </span>
 	                        Crear reseña</button>
+	                        <button  class="btn btn-default" type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 23.5px; margin: 0px; margin-top: 10px; float: left;">Volver</button>
                     </c:when>
                     <c:otherwise>
                         <button class="btn btn-default" type="submit" style="font-family: 'Lobster'; font-size: 20px;">
                         <span class="glyphicon glyphicon-floppy-save" aria-hidden="true" style="padding: 5px"> </span>
                         Modificar Reseña</button>
+                        <button class="btn btn-default" type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 23.5px; margin: 0px; margin-top: 10px; float: left;">Volver</button>
                     </c:otherwise>
                 </c:choose>
                 </div>

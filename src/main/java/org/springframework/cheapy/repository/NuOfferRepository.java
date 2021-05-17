@@ -30,7 +30,11 @@ public interface NuOfferRepository extends PagingAndSortingRepository<NuOffer, I
 	@Query("SELECT nuOffer FROM NuOffer nuOffer WHERE nuOffer.client.id =:id")
 	@Transactional(readOnly = true)
 	List<NuOffer> findByUserId(@Param("id") Integer id);
-
+	
+	@Query("SELECT nuOffer FROM NuOffer nuOffer WHERE nuOffer.client.id =:id AND nuOffer.status = 'active'")
+	@Transactional(readOnly = true)
+	List<NuOffer> findNuOfferActByUserId(@Param("id") Integer id, Pageable pag);
+	
 	@Query("SELECT nuOffer FROM NuOffer nuOffer WHERE nuOffer.client.id =:id AND nuOffer.status!= 'inactive'")
 	@Transactional(readOnly = true)
 	List<NuOffer> findNuOfferActOclByUserId(@Param("id") Integer id);

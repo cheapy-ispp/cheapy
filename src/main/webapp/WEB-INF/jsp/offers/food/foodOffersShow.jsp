@@ -7,10 +7,18 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
+
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<style>
+.foodOfferImage {
+	border-radius: 8px;
+	width:500px
+}
+</style>
 
 <cheapy:layout pageName="foodOffer">
 	<script>
@@ -60,19 +68,39 @@
             <th><fmt:message key="municipio"/></th>
             <td><c:out value="${foodOffer.client.municipio}"/> </td>
         </tr>
-
+		<sec:authorize access="isAuthenticated()">
         <tr>
             <th><fmt:message key="offerCode"/></th>
-            <td><c:out value="${foodOffer.code}"/></td>
+            
+            <c:if test="${!(foodOffer.code eq null)}">
+	    		<td><b><c:out value="${foodOffer.code}"/></b></td>
+			</c:if>
+			<c:if test="${(foodOffer.code eq null)}">
+	    		<td><b>Oferta no activa</b></td>
+			</c:if>
         </tr>
+        </sec:authorize>
+        <sec:authorize access="!isAuthenticated()">
+        <tr>
+            <th><fmt:message key="offerCode"/></th>
+            <td><b>Para acceder al código debe iniciar sesión</b></td>
+        </tr>
+        </sec:authorize>
         </thead>
     </table>
-
+    
+    <c:if test="${!(foodOffer.image eq null)}">
+	    <div style="text-align: center;padding:20px">
+	    	<img src="${fn:escapeXml(foodOffer.image)}" alt="La imagen no es válida" class="foodOfferImage">
+		</div>
+	</c:if>
+	
     <div class="btn-menu">
-	    
+	  
 	<sec:authorize access="hasAnyAuthority('client')">
 	<sec:authentication var="principal" property="principal" />
       <div class="btns-edit">
+      <button  type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 23.5px;">Volver</button>
       	<c:if test="${ principal.username eq foodOffer.client.usuar.username}">
       		<c:if test="${foodOffer.status eq 'active' || foodOffer.status eq 'hidden' }">
       		
@@ -100,8 +128,20 @@
 	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deactivateUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 	            <span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
 	          Desactivar oferta</button>
+	        
          </c:if>
         </c:if>
+        
+      </div>
+     <div class="eliminar">
+      <c:if test="${!(foodOffer.image eq null) and (principal.username eq foodOffer.client.usuar.username)}">
+	        <spring:url value="{foodOfferId}/delete/image" var="deleteImageUrl">
+	        <spring:param name="foodOfferId" value="${foodOffer.id}"/>
+	        </spring:url>
+	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deleteImageUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+	            <span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
+	          Eliminar imagen</button>
+         </c:if>
       </div>
       </sec:authorize>
     </div>

@@ -23,6 +23,7 @@ import org.springframework.cheapy.model.Usuario;
 import org.springframework.cheapy.service.ClientService;
 import org.springframework.cheapy.service.FoodOfferService;
 import org.springframework.cheapy.service.NuOfferService;
+import org.springframework.cheapy.service.ReviewService;
 import org.springframework.cheapy.service.SpeedOfferService;
 import org.springframework.cheapy.service.TimeOfferService;
 import org.springframework.cheapy.service.UserService;
@@ -42,6 +43,8 @@ public class AdministratorController {
 	private final UsuarioService	usuarioService;
 	private final ClientService		clientService;
 	private final UserService		userService;
+	
+	private final ReviewService		reviewService;
 
 	private final FoodOfferService	foodOfferService;
 	private final SpeedOfferService	speedOfferService;
@@ -50,7 +53,7 @@ public class AdministratorController {
 
 
 	public AdministratorController(final UsuarioService usuarioService, final ClientService clientService, final FoodOfferService foodOfferService, final SpeedOfferService speedOfferService, final NuOfferService nuOfferService,
-		final TimeOfferService timeOfferService, final UserService userService) {
+		final TimeOfferService timeOfferService, final UserService userService, final ReviewService reviewService) {
 		this.usuarioService = usuarioService;
 		this.clientService = clientService;
 		this.foodOfferService = foodOfferService;
@@ -58,6 +61,7 @@ public class AdministratorController {
 		this.nuOfferService = nuOfferService;
 		this.timeOfferService = timeOfferService;
 		this.userService = userService;
+		this.reviewService=reviewService;
 	}
 
 	@GetMapping("/administrators/usuarios/page/{page}")
@@ -103,23 +107,6 @@ public class AdministratorController {
 		}
 		model.put("client", client);
 		return "clients/clientShow";
-	}
-
-	@GetMapping(value = "/administrators/usuarios/{username}/disable")
-	public String disableUsuario(@PathVariable("username") final String username, final ModelMap model) {
-
-		Usuario usuario = this.usuarioService.findByUsername(username);
-		model.put("usuario", usuario);
-		return "usuarios/usuariosDisable";
-	}
-
-	@PostMapping(value = "/administrators/usuarios/{username}/disable")
-	public String disableUsuarioForm(@PathVariable("username") final String username, final ModelMap model, final HttpServletRequest request) {
-
-		Usuario usuario = this.usuarioService.findByUsername(username);
-		usuario.getUsuar().setEnabled(false);
-		this.usuarioService.saveUsuario(usuario);
-		return "redirect:/administrators/usuarios/page/0";
 	}
 
 	@GetMapping(value = "/administrators/clients/{username}/disable")
@@ -299,6 +286,8 @@ public class AdministratorController {
 		List<NuOffer> nuOffers = this.nuOfferService.findNuOfferByUserId(client.getId());
 		List<TimeOffer> timeOffers = this.timeOfferService.findTimeOfferByUserId(client.getId());
 
+		this.reviewService.deleteReviewsByUser(client.getUsuar());
+		
 		foodOffers.stream().forEach(f -> f.setStatus(StatusOffer.inactive));
 
 		speedOffers.stream().forEach(s -> s.setStatus(StatusOffer.inactive));
@@ -308,14 +297,18 @@ public class AdministratorController {
 		timeOffers.stream().forEach(t -> t.setStatus(StatusOffer.inactive));
 
 		client.setAddress("Eliminado");
+		client.setParking(false);
 		client.setDescription("Eliminado");
 		client.setEmail("eliminado@gmail.com");
 		client.setExpiration(LocalDate.now());
 		client.setFinish(LocalTime.of(00, 00));
 		client.setFood("Eliminado");
+		client.setPreguntaSegura1("Eliminado");
+		client.setPreguntaSegura2("Eliminado");
 		client.setInit(LocalTime.of(00, 00));
 		client.setMunicipio(Municipio.Sevilla);
 		client.setTelephone("000000000");
+		client.setImage(null);
 		User elim = client.getUsuar();
 		client.setUsuar(null);
 		this.clientService.saveClient(client);	

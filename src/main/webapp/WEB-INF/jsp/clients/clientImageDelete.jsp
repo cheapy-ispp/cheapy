@@ -6,25 +6,23 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
-<cheapy:layout pageName="usuario">
+<cheapy:layout pageName="client">
 
 	<jsp:body>
-        <h2 class="titulo" style="font-family: 'Lobster'; font-size: 25px; padding:30px">¿Está seguro de que quiere desactivar su cuenta? 
-        Si desea reactivarla tendrá que ponerse en contacto con nosotros.</h2>
+        <h2 class="titulo" style="font-family: 'Lobster'; font-size: 25px;  padding:30px">¿Está seguro de que quiere eliminar su imagen? </h2>
       		
-      		 <form:form modelAttribute="usuario" class="form-horizontal">
-
-        		<div class="btns-edit2">
-
-        			<button type="submit" style="font-family: 'Lobster'; font-size: 20px;">
+      		<form:form modelAttribute="client" class="form-horizontal">
+            
+				      <div class="eliminar" style="float:none">
+        			<button type="submit" >
         			<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
-        			Dar de baja</button>
+        			Eliminar Imagen</button>
         		</div>
+        		<button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>
         	</form:form>
         
-           
     </jsp:body>
+    
 </cheapy:layout>

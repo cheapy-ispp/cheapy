@@ -56,6 +56,7 @@ class ReviewClientControllerTest {
 	@MockBean
 	private ReviewClientService reviewClientService;
 	
+	
 	private User user;
 	private Client client;
 
@@ -73,12 +74,15 @@ class ReviewClientControllerTest {
 		client.setName("client1");
 		client.setEmail("client1");
 		client.setAddress("client1");
+		client.setParking(true);
 		client.setInit(LocalTime.of(01, 00));
 		client.setFinish(LocalTime.of(01, 01));
 		client.setExpiration(LocalDate.of(3000,12,30));
 		client.setTelephone("123456789");
 		client.setDescription("client1");
 		client.setFood("client1");
+		client.setPreguntaSegura1("client1");
+		client.setPreguntaSegura2("client1");
 		client.setUsuar(userClient);
 		BDDMockito.given(this.clientService.getCurrentClient()).willReturn(client);
 		BDDMockito.given(this.clientService.findByUsername("client")).willReturn(client);
@@ -95,6 +99,8 @@ class ReviewClientControllerTest {
 		List<ReviewClient> reviewClientLs = new ArrayList<>();
 		reviewClientLs.add(reviewClient);
 		BDDMockito.given(this.reviewClientService.findAllReviewsByBar(PageRequest.of(0, 6), client)).willReturn(reviewClientLs);
+		
+		BDDMockito.given(this.userService.duplicateUsername("spring")).willReturn(true);
 	}
 	
 	@WithMockUser(value = "spring", authorities = "usuario")

@@ -24,7 +24,9 @@
 			<cheapy:inputField label="Nombre" placeholder="Ponga aqui su nombre"
 				name="name" />
 			<cheapy:inputField label="Direccion" placeholder="Ponga aqui su dirección"
-				name="address" />			
+				name="address" />
+			<cheapy:inputField label="¿Posee fácil aparcamiento?" placeholder="true / false"
+				name="parking" />			
 			<cheapy:timeField label="Hora de apertura" placeholder="Ponga aqui su hora de apertura (formato HH:mm)"
 				name="init" />
 			<cheapy:timeField label="Hora de cierre" placeholder="Ponga aqui su hora de cierre (formato HH:mm)"
@@ -41,6 +43,10 @@
 				name="usuar.username" />
 			<cheapy:passwordField label="Contraseña" placeholder="Ponga aqui su contraseña"
 				name="usuar.password" />
+			<cheapy:inputField label="Pregunta segura 1: ¿Cuál es su plato de comida favorito?" placeholder="Estas preguntas le permitiran recuperar su contraseña en caso de olvido"
+				name="preguntaSegura1" />
+			<cheapy:inputField label="Pregunta segura 2: ¿Cuál es su ciudad de nacimiento?" placeholder="Estas preguntas le permitiran recuperar su contraseña en caso de olvido"
+				name="preguntaSegura2" />
 			<cheapy:selectMunicipio label="Municipio" name="municipio" size="1" items="${municipios}" ></cheapy:selectMunicipio>
 			<form:hidden path="expiration"/>
 			<div class="text-center">
@@ -48,8 +54,10 @@
 	        	<input id="terminos"   name="terminos" type="checkbox" required="required">
 			</div>	
 			<div class="text-center">
-				<input type="submit" class="fadeIn fourth"  value="Registrarse">
+				<input type="submit" class="registrar"  value="Registrarse">
+				<button id='volver' class="registrar" type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>
 			</div>
+			
 		</div>
 	</form:form>
 

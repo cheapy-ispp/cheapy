@@ -8,6 +8,13 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
+<style>
+.restaurantShowImage {
+	border-radius: 8px;
+	width:500px
+}
+</style>
+
 <cheapy:layout pageName="client">
 
     <h2 class="titulo" style="font-family: 'Lobster'; text-align:center; font-size:200%; padding:10px; text-transform: uppercase;"><c:out value="${client.name}"/></h2>
@@ -36,6 +43,17 @@
         <tr>
             <th><fmt:message key="addressClient"/></th>
             <td><c:out value="${client.address}"/> </td>
+        </tr>
+        <tr>
+            <th><fmt:message key="parking"/></th>
+            <td>
+            <c:if test="${client.parking == 'true'}">
+				<c:out value="Si"/>
+			</c:if>	
+			<c:if test="${client.parking == 'false'}">
+				<c:out value="No"/>
+			</c:if>
+            </td>
         </tr><tr>
             <th><fmt:message key="telephone"/></th>
             <td><c:out value="${client.telephone}"/> </td>
@@ -47,10 +65,17 @@
             <td><c:out value="${client.municipio}"/> </td>
         </tr><tr>
             <th><fmt:message key="foodClient"/></th>
-            <td><c:out value="${client.food}"/> </td>      
+            <td><c:out value="${client.food}"/> </td>     
         
         </thead>
     </table>
+    
+    <c:if test="${!(client.image eq null)}">
+	    <div style="text-align: center;padding:20px">
+	    	<img src="${fn:escapeXml(client.image)}" alt="La imagen no es válida" class="restaurantShowImage">
+		</div>
+	</c:if>
+    
     <div style="font-size: 150%" >
 	    <sec:authorize access="hasAnyAuthority('usuario')">
 		    <fmt:message key="reviews"/>
@@ -58,7 +83,7 @@
 		</sec:authorize>
 	</div>
     <div class="btn-menu">
-    
+    <button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; margin: 0px; margin-top: 10px;">Volver</button>
     <div class="text-left">
     <c:if test="${client.usuar.username != null}">
     	<spring:url value="/reviewsClientList/{client}/0" var="reviewsListUrl">
@@ -93,6 +118,7 @@
 		Añadir a favoritos</button>
  		</c:if>
  	</sec:authorize>
+ 	
   	</div>
   	</div>
 

@@ -1,4 +1,5 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <br/>
@@ -15,7 +16,9 @@
 			<a href="https://github.com/cheapy-ispp/cheapy" target="_blank" class="fa fa-github"></a>	
 		</div>	
 		<div class="text-center">
-        	<label id="terminos"  class=""><a href="/termAndCondition"  target="_blank">Términos y condiciones</a></label>
+        	<label id="terminos"  class=""><a href="/termAndCondition"  target="_blank"><fmt:message key="termAndConditions"/></a></label>
+        	<h5><small>&copy; Copyright 2021 Cheapy. All Rights Reserved</small></h5>
+        	
 	        	
 		</div>
 		</div>  	

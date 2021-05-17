@@ -24,8 +24,10 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Table(name = "food_offers")
@@ -45,6 +47,10 @@ public class FoodOffer extends Offer {
 	@Min(1)
 	@Max(500000)
 	private Double price;
+	
+	@URL(message = "La URL introducida no es válida. Pruebe la URL en una pestaña nueva y comprueba que se muestra la imagen")
+	@Size(max=2000, message= "La URL es demasiado larga, sube la imagen a Google Fotos o similar y obten la URL desde ahí.")
+	private String image;
 	
 	public Double getNewPrice() {
 		Double cuenta = this.price - (this.price*this.discount)/100;
@@ -87,5 +93,15 @@ public class FoodOffer extends Offer {
 	public void setDiscount(Integer discount) {
 		this.discount = discount;
 	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
+	
 
 }

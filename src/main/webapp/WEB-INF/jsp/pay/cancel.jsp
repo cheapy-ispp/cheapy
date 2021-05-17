@@ -14,6 +14,7 @@
                  <button type="button" role="link" onclick="window.location='/pay'" style="font-family: 'Lobster'; font-size: 20px;margin:5px;" class="btn-block">
                  <span class="fa fa-paypal" aria-hidden="true" style="padding: 5px"> </span>
                  <fmt:message key="pay"/> </button>
+                 <button id='btns-edit' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; ">Volver</button>
             </div>
 		
 		</div>

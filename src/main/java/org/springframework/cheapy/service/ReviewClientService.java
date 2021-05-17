@@ -32,7 +32,12 @@ public class ReviewClientService {
 	public List<ReviewClient> findByClient(final String idClient) {
 		return this.repo.findByBar(idClient);
 	}
-
+	
+	@Transactional
+	public void deleteReviewClient(ReviewClient rc) {
+		this.repo.delete(rc);
+	}
+	
 	@Transactional
 	public void deleteReviewsByUser(final User user) {
 		List<ReviewClient> reviews = this.repo.findByEscritor(user);

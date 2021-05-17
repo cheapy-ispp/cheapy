@@ -52,13 +52,27 @@
             <td><c:out value="${timeOffer.discount}%"/></td>
         </tr>
         <tr>
-            <th><fmt:message key="offerCode"/></th>
-            <td><c:out value="${timeOffer.code}"/></td>
-        </tr>
-        <tr>
             <th><fmt:message key="municipio"/></th>
             <td><c:out value="${timeOffer.client.municipio}"/> </td>
         </tr>
+        <sec:authorize access="isAuthenticated()">
+        <tr>
+            <th><fmt:message key="offerCode"/></th>
+            <c:if test="${!(timeOffer.code eq null)}">
+	    		<td><b><c:out value="${timeOffer.code}"/></b></td>
+			</c:if>
+			<c:if test="${(timeOffer.code eq null)}">
+	    		<td><b>Oferta no activa</b></td>
+			</c:if>
+        </tr>
+        </sec:authorize>
+        <sec:authorize access="!isAuthenticated()">
+        <tr>
+            <th><fmt:message key="offerCode"/></th>
+            <td><b>Para acceder al código debe iniciar sesión</b></td>
+        </tr>
+        </sec:authorize>
+        
         </thead>
     </table>
 
@@ -67,6 +81,7 @@
 	<sec:authorize access="hasAnyAuthority('client')">
 	<sec:authentication var="principal" property="principal" />
 		<div class="btns-edit">
+		<button  type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 23.5px;">Volver</button>
 		<c:if test="${ principal.username eq timeOffer.client.usuar.username}">
 			<c:if test="${timeOffer.status eq 'active' || timeOffer.status eq 'hidden' }">
 			    <spring:url value="{timeOfferId}/edit" var="editUrl">

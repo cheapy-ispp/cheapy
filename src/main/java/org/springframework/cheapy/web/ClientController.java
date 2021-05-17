@@ -4,8 +4,10 @@ package org.springframework.cheapy.web;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +26,7 @@ import org.springframework.cheapy.model.Usuario;
 import org.springframework.cheapy.service.ClientService;
 import org.springframework.cheapy.service.FoodOfferService;
 import org.springframework.cheapy.service.NuOfferService;
+import org.springframework.cheapy.service.ReviewService;
 import org.springframework.cheapy.service.SpeedOfferService;
 import org.springframework.cheapy.service.TimeOfferService;
 import org.springframework.cheapy.service.UserService;
@@ -44,6 +47,8 @@ public class ClientController {
 	private final ClientService		clientService;
 
 	private final UserService		userService;
+	
+	private final ReviewService		reviewService;
 
 	private final FoodOfferService	foodOfferService;
 
@@ -57,7 +62,7 @@ public class ClientController {
 
 
 	public ClientController(final ClientService clientService, final UserService userService, final FoodOfferService foodOfferService, final SpeedOfferService speedOfferService, final NuOfferService nuOfferService, final TimeOfferService timeOfferService,
-		final UsuarioService usuarioService) {
+		final UsuarioService usuarioService,final ReviewService reviewService) {
 		this.clientService = clientService;
 		this.userService = userService;
 		this.foodOfferService = foodOfferService;
@@ -65,6 +70,7 @@ public class ClientController {
 		this.nuOfferService = nuOfferService;
 		this.timeOfferService = timeOfferService;
 		this.usuarioService = usuarioService;
+		this.reviewService=reviewService;
 	}
 
 	private boolean checkTimes(final Client client) {
@@ -97,7 +103,14 @@ public class ClientController {
 		}
 		Client client = this.clientService.getCurrentClient();
 
-		model.put("municipios", municipios);
+		Map<Object, String> municipiosOrdenados = municipios.entrySet()
+				  .stream()
+				  .sorted(Map.Entry.comparingByValue())
+				  .collect(Collectors.toMap(
+				    Map.Entry::getKey, 
+				    Map.Entry::getValue, 
+				    (viejo, nuevo) -> viejo, LinkedHashMap::new));
+		model.put("municipios", municipiosOrdenados);
 		model.addAttribute("client", client);
 		model.addAttribute("municipio", client.getMunicipio());
 
@@ -107,7 +120,9 @@ public class ClientController {
 	@PostMapping(value = "/clients/edit")
 	public String updateClient(@Valid final Client clientEdit, final BindingResult result, final ModelMap model, final HttpServletRequest request) {
 		Client clienteSesion = this.clientService.getCurrentClient();
-		BeanUtils.copyProperties(clienteSesion, clientEdit, "name", "email", "address", "init", "municipio", "finish", "telephone", "description", "food");
+
+		BeanUtils.copyProperties(clienteSesion, clientEdit, "name", "email", "address", "parking", "init", "municipio", "finish", "telephone", "description", "food", "image");
+
 		if (!this.checkTimes(clientEdit)) {
 			result.rejectValue("finish", "", "La hora de cierre debe ser posterior a la hora de apertura");
 
@@ -122,8 +137,19 @@ public class ClientController {
 				municipios.put(a[cont], i.toString());
 				cont++;
 			}
-			model.put("municipios", municipios);
+			
+			Map<Object, String> municipiosOrdenados = municipios.entrySet()
+					  .stream()
+					  .sorted(Map.Entry.comparingByValue())
+					  .collect(Collectors.toMap(
+					    Map.Entry::getKey, 
+					    Map.Entry::getValue, 
+					    (viejo, nuevo) -> viejo, LinkedHashMap::new));
+			model.put("municipios", municipiosOrdenados);
 			return ClientController.VIEWS_CREATE_OR_UPDATE_CLIENT;
+		}
+		if(clientEdit.getImage().isEmpty()) {
+			clientEdit.setImage(null);
 		}
 
 		this.clientService.saveClient(clientEdit);
@@ -222,6 +248,31 @@ public class ClientController {
 		this.clientService.saveClient(clientEdit);
 		return "redirect:/clients/show";
 	}
+	
+	@GetMapping(value = "/clients/delete/image")
+	public String deleteImageClient(final ModelMap model) {
+
+		Client clienteSesion = this.clientService.getCurrentClient();
+		
+		model.addAttribute("client", clienteSesion);
+		return "clients/clientImageDelete";
+	}
+
+	@PostMapping(value = "/clients/delete/image")
+	public String deleteImageClient(final ModelMap model, final HttpServletRequest request) {
+
+		Client cliente = this.clientService.getCurrentClient();
+		
+			if(cliente.getImage() != null ) {
+			cliente.setImage(null);
+			this.clientService.saveClient(cliente);
+			
+			}
+		
+		
+
+		return "redirect:/clients/show";
+	}
 
 	@GetMapping(value = "/clients/delete")
 	public String deleteClient(final ModelMap model) {
@@ -240,6 +291,8 @@ public class ClientController {
 		List<SpeedOffer> speedOffers = this.speedOfferService.findSpeedOfferByUserId(client.getId());
 		List<NuOffer> nuOffers = this.nuOfferService.findNuOfferByUserId(client.getId());
 		List<TimeOffer> timeOffers = this.timeOfferService.findTimeOfferByUserId(client.getId());
+		
+		this.reviewService.deleteReviewsByUser(client.getUsuar());
 
 		foodOffers.stream().forEach(f -> f.setStatus(StatusOffer.inactive));
 
@@ -250,14 +303,18 @@ public class ClientController {
 		timeOffers.stream().forEach(t -> t.setStatus(StatusOffer.inactive));
 
 		client.setAddress("Eliminado");
+		client.setParking(false);
 		client.setDescription("Eliminado");
 		client.setEmail("eliminado@gmail.com");
 		client.setExpiration(LocalDate.now());
 		client.setFinish(LocalTime.of(00, 00));
 		client.setFood("Eliminado");
+		client.setPreguntaSegura1("Eliminado");
+		client.setPreguntaSegura2("Eliminado");
 		client.setInit(LocalTime.of(00, 00));
 		client.setMunicipio(Municipio.Sevilla);
 		client.setTelephone("000000000");
+		client.setImage(null);
 		User elim = client.getUsuar();
 		client.setUsuar(null);
 

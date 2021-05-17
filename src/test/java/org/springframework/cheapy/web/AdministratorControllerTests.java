@@ -32,6 +32,7 @@ import org.springframework.cheapy.model.Usuario;
 import org.springframework.cheapy.service.ClientService;
 import org.springframework.cheapy.service.FoodOfferService;
 import org.springframework.cheapy.service.NuOfferService;
+import org.springframework.cheapy.service.ReviewService;
 import org.springframework.cheapy.service.SpeedOfferService;
 import org.springframework.cheapy.service.TimeOfferService;
 import org.springframework.cheapy.service.UserService;
@@ -79,6 +80,9 @@ class AdministratorControllerTest {
 	
 	@MockBean
 	private UserService userService;
+	
+	@MockBean
+	private ReviewService	reviewOfferService;
 
 	@BeforeEach
 	void setup() {
@@ -90,6 +94,8 @@ class AdministratorControllerTest {
 		usuario.setNombre("usuario");
 		usuario.setApellidos("usuario");
 		usuario.setEmail("usuario@gmail.com");
+		usuario.setPreguntaSegura1("usuario");
+		usuario.setPreguntaSegura2("usuario");
 		usuario.setUsuar(user1);
 		BDDMockito.given(this.usuarioService.findByUsername("user1")).willReturn(usuario);
 		BDDMockito.given(this.usuarioService.findById(1)).willReturn(usuario);
@@ -103,11 +109,14 @@ class AdministratorControllerTest {
 		client1.setName("client1");
 		client1.setEmail("client1");
 		client1.setAddress("client1");
+		client1.setParking(true);
 		client1.setInit(LocalTime.of(01, 00));
 		client1.setFinish(LocalTime.of(01, 01));
 		client1.setTelephone("123456789");
 		client1.setDescription("client1");
 		client1.setFood("client1");
+		client1.setPreguntaSegura1("client1");
+		client1.setPreguntaSegura2("client1");
 		client1.setUsuar(user2);
 		
 		BDDMockito.given(this.clientService.getCurrentClient()).willReturn(client1);
@@ -229,25 +238,6 @@ class AdministratorControllerTest {
 				.andExpect(status().is3xxRedirection())
 				.andExpect(view().name("redirect:/administrators/clients/page/0"));
 	}
-
-	@WithMockUser(value = "spring", authorities = "administrator")
-	@Test
-  void testInitDisableUsuario() throws Exception {
-		mockMvc.perform(get("/administrators/usuarios/{username}/disable", TEST_USUARIO_USERNAME))
-			.andExpect(status().isOk())
-			.andExpect(model().attributeExists("usuario"))
-			.andExpect(view().name("usuarios/usuariosDisable"));
-
-	}
-  
-  @WithMockUser(value = "spring", authorities = "administrator")
-	@Test
-  void testProcessDisableUsuarioSuccess() throws Exception {
-		mockMvc.perform(post("/administrators/usuarios/{username}/disable", TEST_USUARIO_USERNAME)
-				.with(csrf()))
-				.andExpect(status().is3xxRedirection())
-				.andExpect(view().name("redirect:/administrators/usuarios/page/0"));
-	}
   
   @WithMockUser(value = "spring", authorities = "administrator")
 	@Test
@@ -332,11 +322,14 @@ class AdministratorControllerTest {
 		Client cliente = clientService.findById(1);
 		Assertions.assertTrue(cliente.getAddress().equals("Eliminado"));
 		Assertions.assertTrue(cliente.getDescription().equals("Eliminado"));
+		Assertions.assertTrue(cliente.getParking().equals(false));
 		Assertions.assertTrue(cliente.getEmail().equals("eliminado@gmail.com"));
 		Assertions.assertTrue(cliente.getExpiration().equals(LocalDate.now()));
 		Assertions.assertTrue(cliente.getFinish().equals(LocalTime.of(00, 00)));
 		Assertions.assertTrue(cliente.getInit().equals(LocalTime.of(00, 00)));
 		Assertions.assertTrue(cliente.getFood().equals("Eliminado"));
+		Assertions.assertTrue(cliente.getPreguntaSegura1().equals("Eliminado"));
+		Assertions.assertTrue(cliente.getPreguntaSegura2().equals("Eliminado"));
 		Assertions.assertTrue(cliente.getTelephone().equals("000000000"));	
 		Assertions.assertTrue(cliente.getMunicipio().equals(Municipio.Sevilla));
 		Assertions.assertTrue(cliente.getUsuar()==null);

@@ -68,11 +68,14 @@ class TimeOfferControllerTest {
 		client1.setName("client1");
 		client1.setEmail("client1");
 		client1.setAddress("client1");
+		client1.setParking(true);
 		client1.setInit(LocalTime.of(12, 00));
 		client1.setFinish(LocalTime.of(01, 01));
 		client1.setTelephone("123456789");
 		client1.setDescription("client1");
 		client1.setFood("client1");
+		client1.setPreguntaSegura1("client1");
+		client1.setPreguntaSegura2("client1");
 		client1.setUsuar(user1);
 		clientTest = client1;
 		BDDMockito.given(this.clientService.getCurrentClient()).willReturn(client1);
@@ -85,11 +88,14 @@ class TimeOfferControllerTest {
 		client2.setName("client2");
 		client2.setEmail("client2");
 		client2.setAddress("client2");
+		client2.setParking(true);
 		client2.setInit(LocalTime.of(01, 00));
 		client2.setFinish(LocalTime.of(01, 01));
 		client2.setTelephone("123456789");
 		client2.setDescription("client2");
 		client2.setFood("client2");
+		client1.setPreguntaSegura1("client2");
+		client1.setPreguntaSegura2("client2");
 		client2.setUsuar(user2);
 		this.clientTest2 = client2;
 		

@@ -23,8 +23,11 @@
 	        <form:hidden path="email"/>
 	        <form:hidden path="telephone"/>
 	        <form:hidden path="description"/>
-	       	<form:hidden path="food"/>	
-            <input hidden="true" readonly name="expiration" value="${fn:escapeXml(client.expiration)}" />	  	       	      
+	       	<form:hidden path="food"/>
+	       	<form:hidden path="preguntaSegura1"/>	
+	       	<form:hidden path="preguntaSegura2"/>	
+            <form:hidden path="expiration"/>
+            <form:hidden path="parking"/>
             <cheapy:passwordEditField label="Nueva contraseña"  name="usuar.password"/>
 					        
             
@@ -35,6 +38,7 @@
 	                        <button class="btn btn-default" type="submit" style="font-family: 'Lobster'; font-size: 20px;">
 	                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true" style="padding: 5px"> </span>
 	                        Modificar</button>
+	                        <button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>
                 </div>
             </div>
         </div>

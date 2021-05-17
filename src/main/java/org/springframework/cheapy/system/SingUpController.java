@@ -2,7 +2,9 @@ package org.springframework.cheapy.system;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -17,6 +19,8 @@ import org.springframework.cheapy.service.ClientService;
 import org.springframework.cheapy.service.UserService;
 import org.springframework.cheapy.service.UsuarioService;
 import org.springframework.cheapy.utils.MD5;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -28,7 +32,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class SingUpController {
 
-	//private static final String VIEWS_OWNER_CREATE_OR_UPDATE_FORM = "owners/createOrUpdateOwnerForm";
+
 
 	@Autowired
 	private final ClientService clientService;
@@ -38,6 +42,7 @@ public class SingUpController {
 	private final UsuarioService usuarioService;
 	@Autowired
 	private final AuthoritiesService authoritiesService;
+	
 
 	public SingUpController(final ClientService clientService, UserService userService, AuthoritiesService authoritiesService,
 			UsuarioService usuarioService) {
@@ -127,6 +132,85 @@ public class SingUpController {
 			return "redirect:/";
 		}
 	}
+	
+	@GetMapping("/googleForm")
+	public String singUpGoogleUserForm(Map<String, Object> model) {
+	
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		
+		if(this.userService.duplicateUsername(username)) {
+			return "welcome";
+		}
+		
+		Usuario usuario = new Usuario();
+		
+		User user=new User();
+		
+		usuario.setUsuar(user);
+		usuario.setEmail(username);
+		model.put("usuario", usuario);
+		
+		return "singup/singUpGoogleUser";
+	}
+
+	@PostMapping("/googleForm")
+	public String singUpGoogleUserForm(@Valid Usuario usuario, BindingResult result, Map<String, Object> model) {
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		
+		if(this.userService.duplicateUsername(username)) {
+			return "error";
+		}
+		Authorities auth=new Authorities();
+		
+
+		User user= usuario.getUsuar();
+		user.setUsername(username);
+		user.setEnabled(true);
+		usuario.setUsuar(user);
+		usuario.setEmail(username);
+		
+		auth.setUsername(user.getUsername());
+		auth.setAuthority("usuario");
+		
+		Boolean duplicate=this.userService.duplicateUsername(usuario.getUsuar().getUsername());
+		
+		if(duplicate) {
+			result.rejectValue("usuar.username","" ,"El nombre de usuario ya esta registrado");
+		}
+		if(!usuario.getUsuar().getPassword().matches("^[A-Za-z0-9]{4,}+") ) {
+            result.rejectValue("usuar.password","" ,"La contraseña debe contener al menos cuatro caracteres (letras y números)");
+        }
+		
+		if (result.hasErrors()) {
+			
+			if(usuario.getUsuar().getPassword().equals("")) {
+				result.rejectValue("usuar.password","" ,"La contraseña no puede estar vacía");
+			}
+			
+			
+			return "singup/singUpGoogleUser";
+		 }else if(usuario.getUsuar().getPassword().equals("")||usuario.getUsuar().getUsername().equals("")) {
+			 
+			 if(usuario.getUsuar().getPassword().equals("")) {
+					result.rejectValue("usuar.password","" ,"La contraseña no puede estar vacía");
+				}
+				
+				return "singup/singUpGoogleUser";
+		 }else {
+			
+			usuario.getUsuar().setPassword(MD5.md5(usuario.getUsuar().getPassword())); //MD5 a la contraseña para que no circule en claro por la red
+			this.usuarioService.saveUsuario(usuario);
+			this.userService.saveUser(user);
+			this.authoritiesService.saveAuthorities(usuario.getUsuar().getUsername(), "usuario");
+			
+			return "redirect:/";
+		}
+	}
+	
+	
 
 	@GetMapping("/sign-up-client/new")
 	public String singUpClientForm(Map<String, Object> model) {
@@ -146,7 +230,15 @@ public class SingUpController {
 		cliente.setUsuar(user);
 		LocalDate ayer= LocalDate.now().minusDays(2);
 		cliente.setExpiration(ayer);
-		model.put("municipios", municipios);
+		
+		Map<Object, String> municipiosOrdenados = municipios.entrySet()
+				  .stream()
+				  .sorted(Map.Entry.comparingByValue())
+				  .collect(Collectors.toMap(
+				    Map.Entry::getKey, 
+				    Map.Entry::getValue, 
+				    (viejo, nuevo) -> viejo, LinkedHashMap::new));
+		model.put("municipios", municipiosOrdenados);
 		model.put("cliente", cliente);
 		
 		return "singup/singUpClient";
@@ -190,8 +282,14 @@ public class SingUpController {
 			    municipios.put(a[cont], i.toString());
 			    cont++;
 			}
-			
-			model.put("municipios", municipios);
+			Map<Object, String> municipiosOrdenados = municipios.entrySet()
+					  .stream()
+					  .sorted(Map.Entry.comparingByValue())
+					  .collect(Collectors.toMap(
+					    Map.Entry::getKey, 
+					    Map.Entry::getValue, 
+					    (viejo, nuevo) -> viejo, LinkedHashMap::new));
+			model.put("municipios", municipiosOrdenados);
 			model.put("cliente", cliente);
 			
 			if(cliente.getUsuar().getPassword().equals("")) {
@@ -215,7 +313,14 @@ public class SingUpController {
 			    cont++;
 			}
 			
-			model.put("municipios", municipios);
+			Map<Object, String> municipiosOrdenados = municipios.entrySet()
+					  .stream()
+					  .sorted(Map.Entry.comparingByValue())
+					  .collect(Collectors.toMap(
+					    Map.Entry::getKey, 
+					    Map.Entry::getValue, 
+					    (viejo, nuevo) -> viejo, LinkedHashMap::new));
+			model.put("municipios", municipiosOrdenados);
 			model.put("cliente", cliente);
 			
 			 if(cliente.getUsuar().getPassword().equals("")) {

@@ -12,6 +12,59 @@
 
 <!-- %@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %-->  
 
+<style>
+.btn-social {
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  margin: 5px 0;
+  opacity: 0.85;
+  display: inline-block;
+  font-size: 17px;
+  line-height: 20px;
+  text-decoration: none
+}
+
+.btn-social:hover {
+  opacity: 1;
+  color: black;
+  text-decoration: none
+}
+
+.google {
+  background-color: #dd4b39;
+  color: white;
+}
+
+p:before, p:after {
+     content: "";
+     flex: 1 1;
+     border-bottom: 2px solid #000;
+     margin: auto;
+}
+
+p {
+            display: flex;
+            flex-direction: row;
+        }
+        
+.fa-login {
+	font-size: 30px;
+    text-align: center;
+    text-decoration: none!important;
+    margin: 5px 2px;
+    border-radius: 50%;
+    
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+        
+</style>
+
 <cheapy:layout pageName="login">
   
 	<div class="wrapper fadeInDown">
@@ -21,12 +74,15 @@
 	    <!-- Icon -->
 	    <div class="fadeIn first">
 	      <img src="/resources/images/Logo Cheapy.png" id="icon" />
-	      <c:if test= "${not empty param}" > 
-	      	<p class="text-danger"> El usuario y/o la contraseña son incorrectos </p> 
 	      
-	      </c:if>
 	    </div>
-
+	    
+  		<a href="/oauth2/authorization/google" class="google btn-social"><i class="fa-login fa-google fa-fw">
+          </i> Login with Google
+        </a>
+        
+        <p>o</p>
+        
 	    <!-- Login Form -->
 	    <form class='form-signin' action="/login" method='POST'>
 	      <input type="text" id="username" class="fadeIn second" name="username" placeholder="Usuario" required autofocus>
@@ -35,13 +91,16 @@
 	      <div style="text-align: center;">
 		  	<input type="submit" class="fadeIn fourth"  value="Iniciar sesión">
 		  </div>
+		  <c:if test= "${not empty param}" > 
+	      	<h5 class="text-danger"> El usuario y/o la contraseña son incorrectos </h5> 
+	      
+	      </c:if>
+		  
 	    </form>
-	
-	    <!-- Remind Passowrd 
-	    <div id="formFooter">
-	      <a class="underlineHover" href="#">¿Olvidó su contraseña?</a>
-	    </div>
-	-->
+	    
+	    <a class="underlineHover fadeIn fourth" href="/forgottenPassword"><fmt:message key="forgottenPassword"/></a>
+
+		<button class="fadeIn fourth" id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>
 	  </div>
 	</div>    
 

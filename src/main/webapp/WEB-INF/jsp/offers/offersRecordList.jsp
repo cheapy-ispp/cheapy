@@ -7,10 +7,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
 
-<style>
-
-
-</style>
 
 <cheapy:layout pageName="registro">
 	<script>
@@ -31,7 +27,6 @@
 		        <thead>
 		        <tr>
 		        	<th>Restaurante</th>
-		        	<th>ID</th>
 		        	<th>Tipo de oferta</th>
 		            <th><fmt:message key="startDate"/></th>
 		            <th><fmt:message key="endDate"/></th>
@@ -40,14 +35,20 @@
 		        </tr>
 		        </thead>
 		        <tbody>
-		        <c:forEach items="${datos}" var="datos">
+		       <c:forEach items="${datos}" var="datos">
 		            <tr>
+		            	
+		               	<c:if test="${empty datos[0].client.usuar.username }">
+		               		<td>
+							<c:out value="${datos[0].client.name}"/>
+							</td>
+						</c:if>
+						
+						<c:if test="${not empty datos[0].client.usuar.username }">
 		                <td>
-		                    <a href="/restaurant/${fn:escapeXml(datos[0].client.id)}"><c:out value="${datos[0].client.name}"/></a>
+		                    <a href="/administrators/clients/${fn:escapeXml(datos[0].client.usuar.username)}"><c:out value="${datos[0].client.name}"/></a>
 		                </td>
-		                <td>
-		                    <c:out value="${datos[0].id}"/>
-		                </td>
+		                </c:if>
 		                <td>
 		                	<c:if test="${datos[1] == 'time'}">
 		                    	<c:out value="Por franja horaria"/>
@@ -132,4 +133,5 @@
 	</div>
 		
     </c:if>
+    <button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>
 </cheapy:layout>

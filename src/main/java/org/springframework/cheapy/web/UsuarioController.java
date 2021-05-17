@@ -17,8 +17,11 @@ import org.springframework.cheapy.model.Client;
 import org.springframework.cheapy.model.Municipio;
 import org.springframework.cheapy.model.Usuario;
 import org.springframework.cheapy.service.ClientService;
+import org.springframework.cheapy.service.UserService;
 import org.springframework.cheapy.service.UsuarioService;
 import org.springframework.cheapy.utils.MD5;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -33,22 +36,38 @@ public class UsuarioController {
 
 	private final UsuarioService	usuarioService;
 	private final ClientService		clientService;
+	private final UserService		userService;
 
 
-	public UsuarioController(final UsuarioService usuarioService, final ClientService clientService) {
+	public UsuarioController(final UsuarioService usuarioService, final ClientService clientService, final UserService userService) {
 		this.usuarioService = usuarioService;
 		this.clientService = clientService;
+		this.userService = userService;
 	}
 
 	@GetMapping("/usuarios/show")
 	public String processShowForm(final Map<String, Object> model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
 		Usuario usuario = this.usuarioService.getCurrentUsuario();
+		if(!this.userService.duplicateUsername(username)) {
+			return "redirect:/googleForm";
+		}
 		model.put("usuario", usuario);
 		return "usuarios/usuariosShow";
 	}
 
 	@GetMapping("/usuarios/favoritos/{page}")
 	public String listFavorite(@PathVariable("page") final int page, final Map<String, Object> model) {
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		
+		if(!this.userService.duplicateUsername(username)) {
+			return "redirect:/googleForm";
+		}
+		
+		
 		List<Client> client = this.usuarioService.getCurrentUsuario().getFavoritos();
 		List<Client> res = new ArrayList<>();
 		List<Client> lista = new ArrayList<Client>();
@@ -82,6 +101,13 @@ public class UsuarioController {
 
 	@GetMapping(value = "/usuarios/favoritos/{clientId}/add")
 	public String addFavorite(@PathVariable("clientId") final int clientId, final ModelMap modelMap) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+
+		if(!this.userService.duplicateUsername(username)) {
+			return "redirect:/googleForm";
+		}
+		
 		Client client = this.clientService.findById(clientId);
 		Usuario usuario = this.usuarioService.getCurrentUsuario();
 		if (usuario == null || usuario.getFavoritos().contains(client) || client.getUsuar()==null) {
@@ -95,6 +121,13 @@ public class UsuarioController {
 
 	@GetMapping(value = "/usuarios/favoritos/{clientId}/remove")
 	public String removeFavorite(@PathVariable("clientId") final int clientId, final ModelMap modelMap) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+
+		if(!this.userService.duplicateUsername(username)) {
+			return "redirect:/googleForm";
+		}
+		
 		Client client = this.clientService.findById(clientId);
 		Usuario usuario = this.usuarioService.getCurrentUsuario();
 		if (usuario == null || !usuario.getFavoritos().contains(client) || client.getUsuar()==null) {
@@ -108,6 +141,12 @@ public class UsuarioController {
 
 	@GetMapping(value = "/usuarios/edit")
 	public String updateUsuario(final ModelMap model, final HttpServletRequest request) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+
+		if(!this.userService.duplicateUsername(username)) {
+			return "redirect:/googleForm";
+		}
 		
 		Usuario usuario = this.usuarioService.getCurrentUsuario();
 		model.addAttribute("usuario", usuario);
@@ -117,7 +156,13 @@ public class UsuarioController {
 
 	@PostMapping(value = "/usuarios/edit")
 	public String updateUsuario(@Valid final Usuario usuarioEdit, final BindingResult result, final ModelMap model, final HttpServletRequest request) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
 
+		if(!this.userService.duplicateUsername(username)) {
+			return "redirect:/googleForm";
+		}
+		
 		Usuario usuario = this.usuarioService.getCurrentUsuario();
 
 		if (result.hasErrors()) {
@@ -133,44 +178,22 @@ public class UsuarioController {
 			return UsuarioController.VIEWS_USUARIO_CREATE_OR_UPDATE_FORM;
 		}
 
-		BeanUtils.copyProperties(usuario, usuarioEdit, "nombre", "apellidos", "municipio", "direccion", "email");
+		BeanUtils.copyProperties(usuario, usuarioEdit, "nombre", "apellidos", "email");
 		usuarioEdit.getUsuar().setUsername(usuario.getUsuar().getUsername());
 		usuarioEdit.getUsuar().setEnabled(true);
 		this.usuarioService.saveUsuario(usuarioEdit);
 		return "redirect:/usuarios/show";
 	}
 
-	@GetMapping(value = "/usuarios/disable")
-	public String disableUsuario(final ModelMap model) {
-
-		Usuario usuario = this.usuarioService.getCurrentUsuario();
-		model.put("usuario", usuario);
-		return "usuarios/usuariosDisable";
-	}
-
-	@PostMapping(value = "/usuarios/disable")
-	public String disableUsuarioForm(final ModelMap model, final HttpServletRequest request) {
-
-		Usuario usuario = this.usuarioService.getCurrentUsuario();
-		usuario.getUsuar().setEnabled(false);
-		this.usuarioService.saveUsuario(usuario);
-
-		try {
-
-			request.logout();
-
-		} catch (ServletException e) {
-
-			e.printStackTrace();
-
-		}
-
-		return "redirect:/login";
-
-	}
-
 	@GetMapping(value = "/usuarios/delete")
 	public String deleteUsuario(final ModelMap model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+
+		if(!this.userService.duplicateUsername(username)) {
+			return "redirect:/googleForm";
+		}
+		
 		Usuario usuario = this.usuarioService.getCurrentUsuario();
 		model.put("usuario", usuario);
 		return "usuarios/usuariosDelete";
@@ -178,6 +201,13 @@ public class UsuarioController {
 
 	@PostMapping(value = "/usuarios/delete")
 	public String deleteUsuarioForm(final ModelMap model, final HttpServletRequest request) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+
+		if(!this.userService.duplicateUsername(username)) {
+			return "redirect:/googleForm";
+		}
+		
 		Usuario usuario = this.usuarioService.getCurrentUsuario();
 		this.usuarioService.deleteUsuario(usuario);
 
@@ -193,6 +223,13 @@ public class UsuarioController {
 	@GetMapping(value = "/usuarios/edit/password")
 	public String updatePassUsuario(final ModelMap model, final HttpServletRequest request) {
 
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+
+		if(!this.userService.duplicateUsername(username)) {
+			return "redirect:/googleForm";
+		}
+		
 		Usuario usuario = this.usuarioService.getCurrentUsuario();
 		usuario.getUsuar().setPassword("");
 		model.addAttribute("usuario", usuario);
@@ -202,6 +239,14 @@ public class UsuarioController {
 	@PostMapping(value = "/usuarios/edit/password")
 	public String updatePassUsuario(@Valid final Usuario usuarioEdit, final BindingResult result, final ModelMap model, final HttpServletRequest request) {
 
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+
+		if(!this.userService.duplicateUsername(username)) {
+			return "redirect:/googleForm";
+		}
+		
 		Usuario usuario = this.usuarioService.getCurrentUsuario();
 
 		if (usuarioEdit.getUsuar().getPassword().equals("")) {
