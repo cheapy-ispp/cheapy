@@ -134,7 +134,7 @@
         
       </div>
      <div class="eliminar">
-      <c:if test="${!(foodOffer.image eq null)}">
+      <c:if test="${!(foodOffer.image eq null) and (principal.username eq foodOffer.client.usuar.username)}">
 	        <spring:url value="{foodOfferId}/delete/image" var="deleteImageUrl">
 	        <spring:param name="foodOfferId" value="${foodOffer.id}"/>
 	        </spring:url>
