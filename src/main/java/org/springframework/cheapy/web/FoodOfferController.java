@@ -102,25 +102,27 @@ public class FoodOfferController {
 	}
 
 	@PostMapping("/offers/food/new")
-	public String processCreationForm(@Valid final FoodOffer foodOffer, final BindingResult result) {
+	public String processCreationForm(@Valid final FoodOffer foodOffer, BindingResult result) {
 
 		if (!this.checkDates(foodOffer)) {
 			result.rejectValue("end", "", "La fecha de fin debe ser posterior a la fecha de inicio");
-
 		}
 
 		if (foodOffer.getStart() == null || foodOffer.getStart().isBefore(LocalDateTime.now())) {
 			result.rejectValue("start", "", "La fecha de inicio debe ser futura");
-
-		}
-
-		if (result.hasErrors()) {
-			return FoodOfferController.VIEWS_FOOD_OFFER_CREATE_OR_UPDATE_FORM;
 		}
 		
 		if(foodOffer.getImage().isEmpty()) {
 			foodOffer.setImage(null);
+		}else if(result.hasFieldErrors("image")) {
+			result.getModel().put("imageError", true);
+			result.getModel().put("imageErrorMessage", "La URL instroducida no es valida");
 		}
+		
+		if (result.hasErrors()) {
+			return FoodOfferController.VIEWS_FOOD_OFFER_CREATE_OR_UPDATE_FORM;
+		}
+		
 		Client client = this.clientService.getCurrentClient();
 		foodOffer.setClient(client);
 		foodOffer.setStatus(StatusOffer.hidden);

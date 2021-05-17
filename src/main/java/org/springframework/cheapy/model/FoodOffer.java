@@ -48,8 +48,8 @@ public class FoodOffer extends Offer {
 	@Max(500000)
 	private Double price;
 	
-	@URL
-	@Size(max=2000)
+	@URL(message = "La URL introducida no es válida. Pruebe la URL en una pestaña nueva y comprueba que se muestra la imagen")
+	@Size(max=2000, message= "La URL es demasiado larga, sube la imagen a Google Fotos o similar y obten la URL desde ahí.")
 	private String image;
 	
 	public Double getNewPrice() {
