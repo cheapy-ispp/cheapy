@@ -80,7 +80,7 @@
      	<div class="card">
 	    	<img src="/resources/images/Logo Cheapy.png" class="card-img-top profileImage" alt="Cheapy">
 		    <div class="card-body">
-		    <h5 class="card-title">Eat fast, eat Cheapy</h5>
+		    <h2 class="titulo" style="font-family: 'Lobster'; font-size:200%; padding:10px; margin:80px;">Eat fast, eat Cheapy</h2>
 		    </div>
 	    </div>
 	</div>
@@ -118,9 +118,9 @@
 	                    <div class="card-body">
 	                    <h5 class="card-title">Pablo</h5>
 	                    <h6 class="card-subtitle mb-2 text-muted">Franco Sánchez</h6>
-	                    <p class="card-text">Computer Engineering student in Software Engineering</p>
+	                    <p class="card-text">Estudiante en Ingeniería del Software</p>
 	                    <a href="https://github.com/pabfrasan" target="_blank" class="btn btn-outline-dark">
-	                        <i class="fa fa-github-alt"></i> GitHub Profile</a>
+	                        <i class="fa fa-github-alt"></i> Perfil de GitHub</a>
 	                	</div>
 	                </div>
 	            </div>
@@ -130,9 +130,9 @@
 	                    <div class="card-body">
 	                    <h5 class="card-title">Abraham</h5>
 	                    <h6 class="card-subtitle mb-2 text-muted">García Villalobos</h6>
-	                    <p class="card-text">Computer Engineering student in Software Engineering</p>
+	                    <p class="card-text">Estudiante en Ingeniería del Software</p>
 	                    <a href="https://github.com/AbrahamSFC" target="_blank" class="btn btn-outline-dark">
-	                        <i class="fa fa-github-alt"></i> GitHub Profile</a>
+	                        <i class="fa fa-github-alt"></i> Perfil de GitHub</a>
 	                	</div>
 	                </div>
 	            </div>
@@ -142,7 +142,7 @@
 	                    <div class="card-body">
 	                    <h5 class="card-title">Martín Arturo</h5>
 	                    <h6 class="card-subtitle mb-2 text-muted">Guerrero Romero</h6>
-	                    <p class="card-text">Computer Engineering student in Software Engineering</p>
+	                    <p class="card-text">Estudiante en Ingeniería del Software</p>
 	                    <a href="https://github.com/Martinagr32" target="_blank" class="btn btn-outline-dark">
 	                        <i class="fa fa-github-alt"></i> GitHub Profile</a>
 	                	</div>
@@ -155,9 +155,9 @@
 	                    <div class="card-body">
 	                    <h5 class="card-title">Gabriel</h5>
 	                    <h6 class="card-subtitle mb-2 text-muted">Gutiérrez Prieto</h6>
-	                    <p class="card-text">Computer Engineering student in Software Engineering</p>
+	                    <p class="card-text">Estudiante en Ingeniería del Software</p>
 	                    <a href="https://github.com/gabgutpri" target="_blank" class="btn btn-outline-dark">
-	                        <i class="fa fa-github-alt"></i> GitHub Profile</a>
+	                        <i class="fa fa-github-alt"></i> Perfil de GitHub</a>
 	                	</div>
 	                </div> 
 	            </div>
@@ -166,10 +166,10 @@
 	                    <img src="/resources/images/thibout.jpeg" class="card-img-top profileImage" alt="Thibaut">
 	                    <div class="card-body">
 	                    <h5 class="card-title">Thibaut</h5>
-	                    <h6 class="card-subtitle mb-2 text-muted">Lopez</h6>
-	                    <p class="card-text">Computer Engineering student in Software Engineering</p>
+	                    <h6 class="card-subtitle mb-2 text-muted">López</h6>
+	                    <p class="card-text">Estudiante en Ingeniería del Software</p>
 	                    <a href="https://github.com/Thiloparn" target="_blank" class="btn btn-outline-dark">
-	                        <i class="fa fa-github-alt"></i> GitHub Profile</a>
+	                        <i class="fa fa-github-alt"></i> Perfil de GitHub</a>
 	                	</div>
 	                </div>
 	            </div>
@@ -179,9 +179,9 @@
 	                    <div class="card-body">
 	                    <h5 class="card-title">David</h5>
 	                    <h6 class="card-subtitle mb-2 text-muted">Soto Ponce</h6>
-	                    <p class="card-text">Computer Engineering student in Software Engineering</p>
+	                    <p class="card-text">Estudiante en Ingeniería del Software</p>
 	                    <a href="https://github.com/davsotpon" target="_blank" class="btn btn-outline-dark">
-	                        <i class="fa fa-github-alt"></i> GitHub Profile</a>
+	                        <i class="fa fa-github-alt"></i> Perfil de GitHub</a>
 	                	</div>
 	                </div>
 				</div>
@@ -192,9 +192,9 @@
 	                    <div class="card-body">
 	                    <h5 class="card-title">Javier</h5>
 	                    <h6 class="card-subtitle mb-2 text-muted">Granja Naranjo</h6>
-	                    <p class="card-text">Computer Engineering student in Software Engineering</p>
+	                    <p class="card-text">Estudiante en Ingeniería del Software</p>
 	                    <a href="https://github.com/javgranar" target="_blank" class="btn btn-outline-dark">
-	                        <i class="fa fa-github-alt"></i> GitHub Profile</a>
+	                        <i class="fa fa-github-alt"></i> Perfil de GitHub</a>
 	                	</div>
 	                </div>
 	            </div>
@@ -204,9 +204,9 @@
 	                    <div class="card-body">
 	                    <h5 class="card-title">Florentina</h5>
 	                    <h6 class="card-subtitle mb-2 text-muted">Correa López</h6>
-	                    <p class="card-text">Computer Engineering student in Software Engineering</p>
+	                    <p class="card-text">Estudiante en Ingeniería del Software</p>
 	                    <a href="https://github.com/flocorlop" target="_blank" class="btn btn-outline-dark">
-	                        <i class="fa fa-github-alt"></i> GitHub Profile</a>
+	                        <i class="fa fa-github-alt"></i> Perfil de GitHub</a>
 	                	</div>
 	                </div>
 	            </div>
@@ -216,9 +216,9 @@
 	                    <div class="card-body">
 	                    <h5 class="card-title">Antonio</h5>
 	                    <h6 class="card-subtitle mb-2 text-muted">Vidal Pérez</h6>
-	                    <p class="card-text">Computer Engineering student in Software Engineering</p>
+	                    <p class="card-text">Estudiante en Ingeniería del Software</p>
 	                    <a href="https://github.com/davsotpon" target="_blank" class="btn btn-outline-dark">
-	                        <i class="fa fa-github-alt"></i> GitHub Profile</a>
+	                        <i class="fa fa-github-alt"></i> Perfil de GitHub</a>
 	                	</div>
 	                </div>
 				</div>
@@ -227,11 +227,11 @@
 	                <div class="columna col card">
 	                    <img src="/resources/images/angel.jpeg" class="card-img-top profileImage" alt="Angel">
 	                    <div class="card-body">
-	                    <h5 class="card-title">Angel</h5>
+	                    <h5 class="card-title">Ángel</h5>
 	                    <h6 class="card-subtitle mb-2 text-muted">Caballero Domínguez</h6>
-	                    <p class="card-text">Computer Engineering student in Software Engineering</p>
+	                    <p class="card-text">Estudiante en Ingeniería del Software</p>
 	                    <a href="https://github.com/angcabdom" target="_blank" class="btn btn-outline-dark">
-	                        <i class="fa fa-github-alt"></i> GitHub Profile</a>
+	                        <i class="fa fa-github-alt"></i> Perfil de GitHub</a>
 	                	</div>
 	                </div>
 	            </div>
@@ -241,9 +241,9 @@
 	                    <div class="card-body">
 	                    <h5 class="card-title">Abel</h5>
 	                    <h6 class="card-subtitle mb-2 text-muted">Morante Caraballo</h6>
-	                    <p class="card-text">Computer Engineering student in Software Engineering</p>
+	                    <p class="card-text">Estudiante en Ingeniería del Software</p>
 	                    <a href="https://github.com/abemorcardc" target="_blank" class="btn btn-outline-dark">
-	                        <i class="fa fa-github-alt"></i> GitHub Profile</a>
+	                        <i class="fa fa-github-alt"></i> Perfil de GitHub</a>
 	                	</div>
 	                </div>
 	            </div>
