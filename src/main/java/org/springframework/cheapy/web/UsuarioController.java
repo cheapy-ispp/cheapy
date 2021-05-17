@@ -185,48 +185,6 @@ public class UsuarioController {
 		return "redirect:/usuarios/show";
 	}
 
-	@GetMapping(value = "/usuarios/disable")
-	public String disableUsuario(final ModelMap model) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String username = authentication.getName();
-
-		if(!this.userService.duplicateUsername(username)) {
-			return "redirect:/googleForm";
-		}
-		
-		Usuario usuario = this.usuarioService.getCurrentUsuario();
-		model.put("usuario", usuario);
-		return "usuarios/usuariosDisable";
-	}
-
-	@PostMapping(value = "/usuarios/disable")
-	public String disableUsuarioForm(final ModelMap model, final HttpServletRequest request) {
-
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String username = authentication.getName();
-
-		if(!this.userService.duplicateUsername(username)) {
-			return "redirect:/googleForm";
-		}
-		
-		Usuario usuario = this.usuarioService.getCurrentUsuario();
-		usuario.getUsuar().setEnabled(false);
-		this.usuarioService.saveUsuario(usuario);
-
-		try {
-
-			request.logout();
-
-		} catch (ServletException e) {
-
-			e.printStackTrace();
-
-		}
-
-		return "redirect:/login";
-
-	}
-
 	@GetMapping(value = "/usuarios/delete")
 	public String deleteUsuario(final ModelMap model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

@@ -140,24 +140,6 @@ class UsuarioControllerTest {
 	
 	@WithMockUser(value = "spring", authorities = "usuario")
 	@Test
-	void testInitDisable() throws Exception {
-		mockMvc.perform(get("/usuarios/disable"))
-			.andExpect(status().isOk())
-			.andExpect(model().attributeExists("usuario"))
-			.andExpect(view().name("usuarios/usuariosDisable"));
-	}
-	
-	@WithMockUser(value = "spring", authorities = "usuario")
-	@Test
-	void testProcessDisableSuccess() throws Exception {
-		mockMvc.perform(post("/usuarios/disable")
-				.with(csrf()))
-				.andExpect(status().is3xxRedirection())
-				.andExpect(view().name("redirect:/login"));
-	}
-	
-	@WithMockUser(value = "spring", authorities = "usuario")
-	@Test
 	void testInitDelete() throws Exception {
 		mockMvc.perform(get("/usuarios/delete"))
 			.andExpect(status().isOk())

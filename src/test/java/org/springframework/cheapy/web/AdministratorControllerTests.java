@@ -238,25 +238,6 @@ class AdministratorControllerTest {
 				.andExpect(status().is3xxRedirection())
 				.andExpect(view().name("redirect:/administrators/clients/page/0"));
 	}
-
-	@WithMockUser(value = "spring", authorities = "administrator")
-	@Test
-  void testInitDisableUsuario() throws Exception {
-		mockMvc.perform(get("/administrators/usuarios/{username}/disable", TEST_USUARIO_USERNAME))
-			.andExpect(status().isOk())
-			.andExpect(model().attributeExists("usuario"))
-			.andExpect(view().name("usuarios/usuariosDisable"));
-
-	}
-  
-  @WithMockUser(value = "spring", authorities = "administrator")
-	@Test
-  void testProcessDisableUsuarioSuccess() throws Exception {
-		mockMvc.perform(post("/administrators/usuarios/{username}/disable", TEST_USUARIO_USERNAME)
-				.with(csrf()))
-				.andExpect(status().is3xxRedirection())
-				.andExpect(view().name("redirect:/administrators/usuarios/page/0"));
-	}
   
   @WithMockUser(value = "spring", authorities = "administrator")
 	@Test
