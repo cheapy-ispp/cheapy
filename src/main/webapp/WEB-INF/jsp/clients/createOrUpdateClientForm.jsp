@@ -28,7 +28,7 @@
             <cheapy:inputField label="Email" placeholder="" name="email"/>                 
             <cheapy:inputField label="Teléfono" placeholder="" name="telephone"/>
             <cheapy:inputField label="Descripción" placeholder="" name="description"/>
-            <cheapy:inputField label="Comida" placeholder="food" name="food"/>
+            <cheapy:inputField label="Comida" placeholder="" name="food"/>
           	<cheapy:inputField label="Imagen" placeholder="Copiar la url de una imagen aquí" name="image"/>
             
 					<script>
