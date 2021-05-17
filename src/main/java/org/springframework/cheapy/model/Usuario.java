@@ -36,11 +36,11 @@ public class Usuario extends BaseEntity {
 	@NotBlank(message = "No debe estar vacío")
 	private String				email;
 	
-	@NotEmpty(message = "No debe estar vacío")
+	@NotBlank(message = "No debe estar vacío")
 	@JoinColumn(name = "pregunta_segura1")
 	private String				preguntaSegura1;
 	
-	@NotEmpty(message = "No debe estar vacío")
+	@NotBlank(message = "No debe estar vacío")
 	@JoinColumn(name = "pregunta_segura2")
 	private String				preguntaSegura2;
 

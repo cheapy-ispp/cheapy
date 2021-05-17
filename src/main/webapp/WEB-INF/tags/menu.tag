@@ -55,7 +55,7 @@
 				</sec:authorize>
 				
 				<sec:authorize access="hasAnyAuthority('admin')">
-				<cheapy:menuItem active="${name eq 'clientes'}" url="/administrators/clients/page/0" title="Historial Clientes">
+				<cheapy:menuItem active="${name eq 'clients'}" url="/administrators/clients/page/0" title="Historial Clientes">
 					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
 					<span>Clientes</span>
 				</cheapy:menuItem>

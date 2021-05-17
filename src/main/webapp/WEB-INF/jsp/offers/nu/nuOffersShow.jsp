@@ -80,7 +80,12 @@
         <sec:authorize access="isAuthenticated()">
         <tr>
             <th><fmt:message key="offerCode"/></th>
-            <td><b><c:out value="${nuOffer.code}"/></b></td>
+             <c:if test="${!(nuOffer.code eq null)}">
+	    		<td><b><c:out value="${nuOffer.code}"/></b></td>
+			</c:if>
+			<c:if test="${(nuOffer.code eq null)}">
+	    		<td><b>Oferta no activa</b></td>
+			</c:if>
         </tr>
         </sec:authorize>
         <sec:authorize access="!isAuthenticated()">

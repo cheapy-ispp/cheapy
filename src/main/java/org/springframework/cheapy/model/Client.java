@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -30,7 +31,7 @@ public class Client extends BaseEntity {
 	// (id, name, email, address, init, finish, telephone, description, code, food,
 	// usuar)
 
-	@Pattern(message = "La primera letra debe estar en mayúscula", regexp = "^[A-Z][a-zA-Z0-9 ]+$")
+	@Pattern(message = "La primera letra debe estar en mayúscula", regexp = "^[A-Z][a-zA-ZÀ-ÿ\\u00f1\\u00d1]+(\\s*[a-zA-Z0-9À-ÿ\\u00f1\\u00d1]*)*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+$")
 	@NotEmpty(message = "No debe estar vacío")
 	private String				name;
 
@@ -38,7 +39,7 @@ public class Client extends BaseEntity {
 	@NotEmpty(message = "No debe estar vacío")
 	private String				email;
 
-	@NotEmpty(message = "No debe estar vacío")
+	@NotBlank(message = "No debe estar vacío")
 	private String				address;
 	
 	@NotNull(message = "No debe estar vacío")
@@ -62,10 +63,10 @@ public class Client extends BaseEntity {
 	@Pattern(regexp = "\\d{9}", message = "Debe tener 9 dígitos")
 	private String				telephone;
 
-	@NotEmpty(message = "No debe estar vacía")
+	@NotBlank(message = "No debe estar vacía")
 	private String				description;
 
-	@NotEmpty(message = "No debe estar vacío")
+	@NotBlank(message = "No debe estar vacío")
 	private String				food;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -76,11 +77,11 @@ public class Client extends BaseEntity {
 	@Size(max=2000, message="La url es demasiado grande")
 	private String 				image;
 
-	@NotEmpty(message = "No debe estar vacío")
+	@NotBlank(message = "No debe estar vacío")
 	@JoinColumn(name = "pregunta_segura1")
 	private String				preguntaSegura1;
 	
-	@NotEmpty(message = "No debe estar vacío")
+	@NotBlank(message = "No debe estar vacío")
 	@JoinColumn(name = "pregunta_segura2")
 	private String				preguntaSegura2;
 
