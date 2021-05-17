@@ -109,23 +109,6 @@ public class AdministratorController {
 		return "clients/clientShow";
 	}
 
-	@GetMapping(value = "/administrators/usuarios/{username}/disable")
-	public String disableUsuario(@PathVariable("username") final String username, final ModelMap model) {
-
-		Usuario usuario = this.usuarioService.findByUsername(username);
-		model.put("usuario", usuario);
-		return "usuarios/usuariosDisable";
-	}
-
-	@PostMapping(value = "/administrators/usuarios/{username}/disable")
-	public String disableUsuarioForm(@PathVariable("username") final String username, final ModelMap model, final HttpServletRequest request) {
-
-		Usuario usuario = this.usuarioService.findByUsername(username);
-		usuario.getUsuar().setEnabled(false);
-		this.usuarioService.saveUsuario(usuario);
-		return "redirect:/administrators/usuarios/page/0";
-	}
-
 	@GetMapping(value = "/administrators/clients/{username}/disable")
 	public String disableClient(@PathVariable("username") final String username, final ModelMap model) {
 

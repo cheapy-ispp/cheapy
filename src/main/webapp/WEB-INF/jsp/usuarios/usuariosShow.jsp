@@ -40,11 +40,7 @@
 		    <button type="button" role="link" onclick="window.location='${fn:escapeXml(editUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 		    	<span class="glyphicon 	glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
 		    Editar usuario</button>
-		
-	        <%-- <spring:url value="disable" var="deactivateUrl"/>
-	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deactivateUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-	        	<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
-	         Desactivar usuario</button> --%>
+
 	     </div>   
 	     
 	     <div class="eliminar">
@@ -56,16 +52,6 @@
     </sec:authorize>
     <sec:authorize access="hasAnyAuthority('admin')">
 		<sec:authentication var="principal" property="principal" />
-    	<c:if test="${usuario.usuar.enabled == 'true'}">
-    		<div class="btns-edit">
-		        <spring:url value="/administrators/usuarios/{username}/disable" var="deactivateUrl">
-		        	<spring:param name="username" value="${usuario.usuar.username}"/>
-		        </spring:url>
-		        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deactivateUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-		        	<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
-		         Desactivar usuario</button>  
-    		</div>
-    	</c:if>
     		<div class="eliminar">
 		        <spring:url value="/administrators/usuarios/{usuarioId}/delete" var="eliminateUrl">
 		        	<spring:param name="usuarioId" value="${usuario.id}"/>
