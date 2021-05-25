@@ -86,13 +86,13 @@
 	</div>
 	<div class="row-info">
 	    <div class="column-info">
-	    	<a href="https://twitter.com/cheapyispp" target="_blank" class="fa fa-twitter"></a>
-	    	<p><b>@cheapyispp</b></p>
+	    	<a href="https://twitter.com/cheapy_web" target="_blank" class="fa fa-twitter"></a>
+	    	<p><b>@cheapy_web</b></p>
 	    	​
 	    </div>
 	    <div class="column-info">
-	    	<a href="https://www.instagram.com/cheapyispp/" target="_blank" class="fa fa-instagram"></a>
-	    	<p><b>@cheapyispp</b></p>​
+	    	<a href="https://www.instagram.com/cheapy_web" target="_blank" class="fa fa-instagram"></a>
+	    	<p><b>@cheapy_web</b></p>​
 	    </div>
 	    <div class="column-info">
 	    	<a href="mailto:cheapy.ispp@gmail.com" target="_blank" class="fa fa-envelope"></a>
@@ -100,8 +100,8 @@
 	    	​
 	    </div>
 	    <div class="column-info">
-	    	<a href="https://github.com/cheapy-ispp" target="_blank" class="fa fa-github"></a>
-	    	<p><b>cheapy-ispp</b></p>
+	    	<a href="https://github.com/cheapy-ofertas" target="_blank" class="fa fa-github"></a>
+	    	<p><b>cheapy-ofertas</b></p>
 	    	​
 	    </div>
 	</div>

@@ -10,10 +10,10 @@
         <div class="col-12 titulo"><h2 class="titulo" style="font-family: 'Lobster'; font-size:200%; padding:10px; margin:80px;">Eat fast, eat Cheapy</h2>
 	    	    
 		<div style="margin-bottom:10px; text-align:center">
-			<a href="https://twitter.com/cheapyispp" target="_blank" class="fa fa-twitter"></a>
-			<a href="https://www.instagram.com/cheapyispp/" target="_blank" class="fa fa-instagram"></a>		
+			<a href="https://twitter.com/cheapy_web" target="_blank" class="fa fa-twitter"></a>
+			<a href="https://www.instagram.com/cheapy_web/" target="_blank" class="fa fa-instagram"></a>		
 			<a href="mailto:cheapy.ispp@gmail.com"  target="_blank" class="fa fa-envelope"></a>	
-			<a href="https://github.com/cheapy-ispp/cheapy" target="_blank" class="fa fa-github"></a>	
+			<a href="https://github.com/cheapy-ofertas" target="_blank" class="fa fa-github"></a>	
 		</div>	
 		<div class="text-center">
         	<label id="terminos"  class=""><a href="/termAndCondition"  target="_blank"><fmt:message key="termAndConditions"/></a></label>
