@@ -5,19 +5,18 @@
               description="Name of corresponding property in bean object" %>
 <%@ attribute name="label" required="true" rtexprvalue="true"
               description="Label appears in red color if input is considered as invalid after submission" %>
-<%@ attribute name="placeholder" required="false" rtexprvalue="true"
-              description="Placeholder para los campos en los input fields" %>      
-<%@ attribute name="value" required="false" rtexprvalue="true"
-              description="Valor por defecto del selector" %>                       
 
 <spring:bind path="${name}">
-    <c:set var="cssGroup" value="form-group ${status.error ? 'has-error' : '' }"/>
+    <c:set var="cssGroup" value="form-group ${status.error ? 'error' : '' }"/>
     <c:set var="valid" value="${not status.error and not empty status.actualValue}"/>
     <div class="${cssGroup}">
         <label class="col-sm-2 control-label">${label}</label>
-		
+
         <div class="col-sm-10">
-        	<form:input type="time" step='1' value="${value }" class="form-control" max="02:00:00"  path="${name}" style="width:70%" />
+            <form:select id="selectMunicipio" class="form-control select-municipio" path="${name}" style="width:70%;text-align-last:center;height: fit-content;">
+            	<option value=true>Si</option>
+            	<option value=false>No</option>
+            </form:select>
             <c:if test="${valid}">
                 <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
             </c:if>

@@ -98,22 +98,22 @@
 
 	        <spring:url value="disable" var="disableUrl"/>
 	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(disableUrl)}'" style="font-family: 'Lobster'; font-size: 20px;width: auto;">
-	            <span class="glyphicon 	glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
+	            <span class="glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
 	          Desactivar cuenta</button>
 	        	    
 	        <c:if test="${!(client.image eq null)}">
 	     	<spring:url value="delete/image" var="deleteImageUrl"/>
 	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deleteImageUrl)}'" style="font-family: 'Lobster'; font-size: 20px;width: auto;">
-	            <span class="glyphicon 	glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
+	            <span class="glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
 	          Eliminar Imagen actual</button>
 	       </c:if>
-	     <button  type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 23.5px;">Volver</button>
+	     
 	     </div>  
 	     
 	     <div class="eliminar"> 
 	        <spring:url value="delete" var="deleteUrl"/>
 	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deleteUrl)}'" >
-	            <span class="glyphicon 	glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
+	            <span class="glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
 	          Eliminar cuenta</button>
 	          
 
@@ -122,22 +122,23 @@
       <sec:authorize access="hasAnyAuthority('admin')">
 		<sec:authentication var="principal" property="principal" />
     	<div class="btns-edit">
-			
-	        <c:if test="${ client.usuar.enabled eq true}">
-	        <spring:url value="/administrators/clients/{username}/disable" var="deactivateUrl">
-	        	<spring:param name="username" value="${client.usuar.username}"/>
-	        </spring:url>
-	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deactivateUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-	        	<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
-	         Desactivar cliente</button>
-    	 </c:if>
+			<div class="eliminar"> 
+		     <c:if test="${ client.usuar.enabled eq true}">
+		        <spring:url value="/administrators/clients/{username}/disable" var="deactivateUrl">
+		        	<spring:param name="username" value="${client.usuar.username}"/>
+		        </spring:url>
+		        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deactivateUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+		        	<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
+		         Desactivar cliente</button>
+	    	 </c:if>
+	    	 </div>
 
-    	 		<c:if test="${ client.usuar.enabled eq false}">
+    	 <c:if test="${ client.usuar.enabled eq false}">
 	        <spring:url value="/administrators/clients/{username}/activate" var="activateUrl">
 	        	<spring:param name="username" value="${client.usuar.username}"/>
 	        </spring:url>
 	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(activateUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-	        	<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
+	        	<span class="glyphicon glyphicon-check" aria-hidden="true" style="padding: 5px"> </span>
 	         Activar cliente</button>
     	 </c:if>
     	</div>
@@ -146,11 +147,11 @@
 	        	<spring:param name="clientId" value="${client.id}"/>
 	        </spring:url>
 	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deleteUrl)}'" >
-	            <span class="glyphicon 	glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
+	            <span class="glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
 	          Eliminar cuenta</button>
       	</div>
     </sec:authorize>
-    
+    	<button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>
     </div>
   	
 

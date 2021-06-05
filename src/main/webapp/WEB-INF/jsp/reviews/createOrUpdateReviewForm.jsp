@@ -18,26 +18,25 @@
             <cheapy:textAreaField label="Opinión" name="opinion"/>
             <cheapy:ratingStar label="Valoración" name="stars" disabled="false"></cheapy:ratingStar>
         </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-            	<div class="btn-mod">
+        <div class="btn-menu">
+        	<div class="btns-edit">
                 <c:choose>
                     <c:when test="${review['new']}">
                         <button class="btn btn-default" type="submit" style="font-family: 'Lobster'; font-size: 20px;">
 	                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true" style="padding: 5px"> </span>
 	                        Crear reseña</button>
-	                        <button class="btn btn-default" type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 23.5px; margin: 0px; margin-top: 10px; float: left;">Volver</button>
+	                        
                     </c:when>
                     <c:otherwise>
                         <button class="btn btn-default" type="submit" style="font-family: 'Lobster'; font-size: 20px;">
                         <span class="glyphicon glyphicon-floppy-save" aria-hidden="true" style="padding: 5px"> </span>
                         Modificar Reseña</button>
-                        <button class="btn btn-default" type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 23.5px; margin: 0px; margin-top: 10px; float: left;">Volver</button>
+                        
                     </c:otherwise>
                 </c:choose>
                 
-                </div>
-            </div>
+        	</div>
+        	<button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>
         </div>
         
         

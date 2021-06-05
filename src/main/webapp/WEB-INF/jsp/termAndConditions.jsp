@@ -29,7 +29,7 @@
 	   mientras que los usuarios son aquellos que usan la aplicación como individuos únicos
 	y no como empresas, para obtener las ofertas ofrecidas por los clientes. </p>
    <br>     
-   <h2 class="titulo" style="font-family: 'Lobster'; font-size: 200%; color: rgb(0, 64, 128); padding:30px"><fmt:message key="termAndConditions1.1"/></h2>  
+   <h2 class="titulo" style="font-family: 'Lobster'; font-size: 200%; padding:30px"><fmt:message key="termAndConditions1.1"/></h2>  
 	<p>Siempre que se usen los términos “Cheapy”, “nosotros”, “nos” o “nuestro/a” se hace referencia al equipo de desarrollo de Cheapy. </p>
 	<p>Cheapy es una aplicación nacida de un grupo de estudiantes de la Universidad de Sevilla determinados a apoyar a los pequeños locales que tan extendidos están en España,
 	 ofreciéndoles un sistema sencillo con el que crear ofertas variadas y novedosas para atraer al público. </p>
@@ -52,7 +52,7 @@
 	<p>En Cheapy creemos que mantener un contacto cercano con nuestros clientes y usuarios es la clave para ofrecer el mejor producto posible. Por ello animamos a todo interesado en trabajar con nosotros a contactarnos a través de nuestro correo electrónico 
 	(cheapy.ispp@gmail.com) para discutir cualquier tema o realizar mejoras en la aplicación. </p>
 	<br>
-	<h2 class="titulo" style="font-family: 'Lobster'; font-size: 200%; color: rgb(0, 64, 128); padding:30px"><fmt:message key="termAndConditions1.2"/></h2>
+	<h2 class="titulo" style="font-family: 'Lobster'; font-size: 200%; padding:30px"><fmt:message key="termAndConditions1.2"/></h2>
 	<p>Comenzamos recordando que clientes son aquellos establecimientos o locales que a través de una suscripción pueden acceder a Cheapy para crear y modificar ofertas para sus negocios. </p>  
 	<p>Lo que se esperamos por parte de los clientes es que sigan los siguientes términos: </p>
 	<br>
@@ -87,7 +87,7 @@
 	 por favor póngase en contacto con nosotros por correo con el asunto “Pago” más su nombre de cuenta. </p>
    
    <br>     
-   <h2 class="titulo" style="font-family: 'Lobster'; font-size: 200%; color: rgb(0, 64, 128); padding:30px"><fmt:message key="termAndConditions1.3"/></h2>
+   <h2 class="titulo" style="font-family: 'Lobster'; font-size: 200%; padding:30px"><fmt:message key="termAndConditions1.3"/></h2>
    <p>Comenzamos recordando que usuarios son aquellos que usan la aplicación de forma gratuita y como individuos únicos que la usan para acceder a las ofertas creadas por los clientes.</p>
    <p>Esperamos de nuestros usuarios que sigan los siguientes términos: </p>
    	<ul>
@@ -104,7 +104,7 @@
 		<br>
 		<li type="circle"><p>Si decides eliminar tu cuenta de Cheapy por completo, todas las reseñas realizadas desaparecerán con tu cuenta.  </p></li>			
 	</ul>
-   <h2 class="titulo" style="font-family: 'Lobster'; font-size: 200%; color: rgb(0, 64, 128); padding:30px"><fmt:message key="termAndConditions1.4"/></h2>
+   <h2 class="titulo" style="font-family: 'Lobster'; font-size: 200%; padding:30px"><fmt:message key="termAndConditions1.4"/></h2>
    <p>En caso de cualquier problema, ponemos a su disposición nuestro correo corporativo (cheapy.ispp@gmail.com) donde responderemos al correo con el que se nos haya escrito.  </p>
    <p>Si se detectan campos rellenados con palabras ofensivas o contenido inapropiado, se sancionará dicha cuenta de la forma que se vea apropiada.</p>
    <p>Si su cuenta se viese comprometida por favor póngase en contacto con nosotros de inmediato y procederemos a bloquear la cuenta mientras estudiamos su caso. Se tomarán las medidas necesarias y si el usuario desease que se elimine así se hará.</p>
@@ -112,7 +112,7 @@
    <p>Si desea apelar a cualquiera de los casos descritos en los apartados anteriores, por favor lea con detenimiento las cláusulas y use los asuntos que se describen para una mayor agilidad de nuestro equipo. </p>
    <br>
   
-        
-   <button id='btns-edit' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';  align: center;">Volver</button>
-    </div>
+
+   
+</div>
 </cheapy:layout>	

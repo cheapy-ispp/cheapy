@@ -15,7 +15,7 @@
       		
       		<form:form modelAttribute="client" class="form-horizontal">
             
-				      <div class="btns-edit2">
+				 <div class="eliminar" style="float:none">
         			<button type="submit" style="font-family: 'Lobster'; font-size: 20px;">
         			<span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
         			Dar de baja</button>
