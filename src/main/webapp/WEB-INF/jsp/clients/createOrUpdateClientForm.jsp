@@ -75,7 +75,7 @@
 	                        Modificar</button>
 	                        <a href="/clients/edit/password">
 	                        <button class="btn btn-default" type="button"  style="font-family: 'Lobster'; font-size: 20px;">
-	                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true" style="padding: 5px"> </span>
+	                        <span class="glyphicon 	glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
 	                        Cambiar contraseña</button></a>
 	                       
 	                        

@@ -1,6 +1,7 @@
 package org.springframework.cheapy.web;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -50,9 +51,13 @@ public class PaypalController {
 		
 		LocalDate expira = this.clientservice.getCurrentClient().getExpiration();
 		
+		Boolean activo = expira.isAfter(LocalDate.now());
+		
 		model.put("order", order);
 		model.put("tipo", "month");
 		model.put("expira", expira);
+		model.put("activo", activo);
+		model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		
 		return "pay/createPaymentForm";
 	}
@@ -68,9 +73,13 @@ public class PaypalController {
 
 		LocalDate expira = this.clientservice.getCurrentClient().getExpiration();
 		
+		Boolean activo = expira.isAfter(LocalDate.now());
+		
 		model.put("order", order);
 		model.put("tipo", "year");
 		model.put("expira", expira);
+		model.put("activo", activo);
+		model.put("localDateTimeFormat", DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		
 		return "pay/createPaymentForm";
 	}

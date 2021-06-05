@@ -28,7 +28,13 @@
 				<div class="form-group">
 					<div class="infoPago">
 						<p> Fecha de expiración de suscripción: </p>
-						<p><br><strong>${fn:escapeXml(expira)}</strong></p>
+						<c:if test="${activo}">
+			                <p><br><strong><c:out value="${localDateTimeFormat.format(expira)}"/></strong></p>
+			            </c:if>
+			            <c:if test="${activo == false}">
+			                <p><br><strong>Suscripción no activa</strong></p>
+			            </c:if>
+						
 					</div>
 					<div class="infoPago">
 						<p> Precio de la suscripción: </p>

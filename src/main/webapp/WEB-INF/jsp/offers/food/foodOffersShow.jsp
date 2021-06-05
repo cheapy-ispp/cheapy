@@ -96,11 +96,9 @@
 	</c:if>
 	
     <div class="btn-menu">
-	  
 	<sec:authorize access="hasAnyAuthority('client')">
 	<sec:authentication var="principal" property="principal" />
       <div class="btns-edit">
-      <button  type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 23.5px;">Volver</button>
       	<c:if test="${ principal.username eq foodOffer.client.usuar.username}">
       		<c:if test="${foodOffer.status eq 'active' || foodOffer.status eq 'hidden' }">
       		
@@ -117,19 +115,23 @@
 	        <spring:param name="foodOfferId" value="${foodOffer.id}"/>
 	        </spring:url>
 	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(activateUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-	            <span class="glyphicon 	glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
+	            <span class="glyphicon glyphicon-check" aria-hidden="true" style="padding: 5px"> </span>
 	          Activar oferta</button>
 		</c:if>
 		
-		<c:if test="${foodOffer.status eq 'active' }">
-	        <spring:url value="{foodOfferId}/disable" var="deactivateUrl">
-	        <spring:param name="foodOfferId" value="${foodOffer.id}"/>
-	        </spring:url>
-	        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deactivateUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-	            <span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
-	          Desactivar oferta</button>
+		<div class="eliminar"> 
+		     <c:if test="${foodOffer.status eq 'active' }">
+		        <spring:url value="{foodOfferId}/disable" var="deactivateUrl">
+		        <spring:param name="foodOfferId" value="${foodOffer.id}"/>
+		        </spring:url>
+		        <button type="button" role="link" onclick="window.location='${fn:escapeXml(deactivateUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+		            <span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
+		          Desactivar oferta</button>
 	        
-         </c:if>
+         	</c:if>
+	    </div>
+	    	 
+		
         </c:if>
         
       </div>
@@ -144,6 +146,7 @@
          </c:if>
       </div>
       </sec:authorize>
+      <button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>
     </div>
   	
 

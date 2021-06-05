@@ -81,7 +81,6 @@
 	<sec:authorize access="hasAnyAuthority('client')">
 	<sec:authentication var="principal" property="principal" />
 		<div class="btns-edit">
-		<button  type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 23.5px;">Volver</button>
 		<c:if test="${ principal.username eq timeOffer.client.usuar.username}">
 			<c:if test="${timeOffer.status eq 'active' || timeOffer.status eq 'hidden' }">
 			    <spring:url value="{timeOfferId}/edit" var="editUrl">
@@ -96,11 +95,12 @@
 		        <spring:param name="timeOfferId" value="${timeOffer.id}"/>
 		        </spring:url>
 		        <button type="button" role="link" onclick="window.location='${fn:escapeXml(activateUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-		            <span class="glyphicon 	glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
+		            <span class="glyphicon glyphicon-check" aria-hidden="true" style="padding: 5px"> </span>
 			        Activar oferta</button>
 			</c:if>
 			
-			<c:if test="${timeOffer.status eq 'active' }">
+		<div class="eliminar">   
+	        <c:if test="${timeOffer.status eq 'active' }">
 			   	<spring:url value="{timeOfferId}/disable" var="deactivateUrl">
 			    <spring:param name="timeOfferId" value="${timeOffer.id}"/>
 			    </spring:url>
@@ -108,9 +108,13 @@
 	            <span class="glyphicon glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
 		        Desactivar oferta</button>
 	        </c:if>
+      	</div>
+      	
+			
 	    </c:if>    
 	    </div>
 	    </sec:authorize>
+	    <button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>
     </div>
 	
   

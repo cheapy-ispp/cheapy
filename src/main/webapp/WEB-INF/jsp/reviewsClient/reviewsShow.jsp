@@ -43,23 +43,28 @@
 
 	<sec:authorize access="isAuthenticated()">
 	<sec:authentication var="principal" property="principal"  />
+	<div class="eliminar-op">
+   		<c:if test="${username eq review.escritor.username}">
+		    
+		    <spring:url value="{reviewId}/delete" var="deleteUrl">
+		    <spring:param name="reviewId" value="${review.id}"/>
+		    </spring:url>
+		        
+		    <button type="button" role="link" onclick="window.location='${fn:escapeXml(deleteUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
+	        <span class="glyphicon glyphicon-trash" aria-hidden="true" style="padding: 5px"> </span>
+		        Borrar reseña</button>
+    	</c:if>
+    </div>
+    
 	<div class="btns-edit">
 		<c:if test="${username eq review.escritor.username}">
 	    	<spring:url value="{reviewId}/edit" var="editUrl">
 		    <spring:param name="reviewId" value="${review.id}"/>
 		    </spring:url>
 		    
-		    <spring:url value="{reviewId}/delete" var="deleteUrl">
-		    <spring:param name="reviewId" value="${review.id}"/>
-		    </spring:url>
-		    
 			<button type="button" role="link" onclick="window.location='${fn:escapeXml(editUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 	        <span class="glyphicon glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
 		        Editar reseña</button>
-		        
-		    <button type="button" role="link" onclick="window.location='${fn:escapeXml(deleteUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
-	        <span class="glyphicon glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
-		        Borrar reseña</button>
     	</c:if>
     </div>
     <div class="btn-return">

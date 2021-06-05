@@ -35,7 +35,6 @@
 	<sec:authorize access="hasAnyAuthority('usuario')">
 		<sec:authentication var="principal" property="principal" />
     	<div class="btns-edit" style="float:left">
-			<button  type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster'; font-size: 23.5px; ">Volver</button>
 			<spring:url value="edit" var="editUrl"/>
 		    <button type="button" role="link" onclick="window.location='${fn:escapeXml(editUrl)}'" style="font-family: 'Lobster'; font-size: 20px;">
 		    	<span class="glyphicon 	glyphicon glyphicon-edit" aria-hidden="true" style="padding: 5px"> </span>
@@ -61,6 +60,7 @@
 		         Eliminar usuario</button>  
     		</div>
     </sec:authorize>
+    	<button id='volver' type="button" onclick="history.back()" name="volver atrás" value="volver atrás" style="font-family: 'Lobster';">Volver</button>
     </div>
   	
 

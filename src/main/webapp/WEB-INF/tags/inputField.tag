@@ -21,6 +21,7 @@
             </c:if>
             <c:if test="${status.error}">
                 <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                <br>
                 <span class="help-inline">${status.errorMessage}</span>
             </c:if>
         </div>
