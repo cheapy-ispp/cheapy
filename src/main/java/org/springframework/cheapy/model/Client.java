@@ -31,7 +31,7 @@ public class Client extends BaseEntity {
 	// (id, name, email, address, init, finish, telephone, description, code, food,
 	// usuar)
 
-	@Pattern(message = "La primera letra debe estar en mayúscula", regexp = "^[A-Z]['a-zA-ZÀ-ÿ\\\\u00f1\\\\u00d1]?+(\\\\s*['a-zA-Z0-9À-ÿ\\\\u00f1\\\\u00d1]*)*['a-zA-ZÀ-ÿ\\\\u00f1\\\\u00d1]*$")
+	@Pattern(message = "La primera letra debe estar en mayúscula", regexp = "^[A-Z]['a-zA-ZÀ-ÿ\\u00f1\\u00d1]?+(\\s*['a-zA-Z0-9À-ÿ\\u00f1\\u00d1]*)*['a-zA-ZÀ-ÿ\\u00f1\\u00d1]*$")
 	@NotEmpty(message = "No debe estar vacío")
 	private String				name;
 
